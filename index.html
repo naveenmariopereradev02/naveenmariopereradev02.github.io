@@ -618,6 +618,414 @@
     }
 
     /* ==========================================================================
+       2026 FEATURE #5: CURSOR-TRACKING SPOTLIGHT GLOW ON CARDS
+       ========================================================================== */
+    .bento-card,
+    .project-card,
+    .glass-card,
+    .highlight-card,
+    .skill-cat-card,
+    .cert-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-card::before,
+    .project-card::before,
+    .glass-card::before,
+    .highlight-card::before,
+    .skill-cat-card::before,
+    .cert-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      z-index: 3;
+      background: radial-gradient(
+        420px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+        rgba(249, 115, 22, 0.13),
+        rgba(255, 255, 255, 0.04) 40%,
+        transparent 75%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .bento-card:hover::before,
+    .project-card:hover::before,
+    .glass-card:hover::before,
+    .highlight-card:hover::before,
+    .skill-cat-card:hover::before,
+    .cert-card:hover::before {
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       2026 FEATURE #1 & #3: COMMAND PALETTE (Cmd+K) & ARCHITECTURE MODAL
+       ========================================================================== */
+    .cmd-k-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 2px 6px rgba(0, 0, 0, 0.12);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cmd-k-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.38);
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2), 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    .cmd-k-btn:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    .cmd-k-kbd {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--text-primary);
+    }
+
+    html[data-theme="light"] .cmd-k-btn {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.05);
+      color: var(--text-secondary);
+    }
+
+    html[data-theme="light"] .cmd-k-btn:hover {
+      background: rgba(0, 0, 0, 0.09);
+      border-color: rgba(0, 0, 0, 0.22);
+      color: var(--text-primary);
+    }
+
+    html[data-theme="light"] .cmd-k-kbd {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.14);
+    }
+
+    .glass-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 5, 8, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 80px 18px 24px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
+    }
+
+    .glass-modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .cmd-modal {
+      width: 100%;
+      max-width: 560px;
+      border-radius: 16px;
+      background: rgba(18, 18, 24, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 24px 60px rgba(0, 0, 0, 0.65);
+      overflow: hidden;
+      transform: translateY(-10px) scale(0.97);
+      transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .glass-modal-backdrop.open .cmd-modal,
+    .glass-modal-backdrop.open .arch-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    html[data-theme="light"] .cmd-modal,
+    html[data-theme="light"] .arch-modal {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.14);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .cmd-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .cmd-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-primary);
+      font-size: 0.92rem;
+      font-family: var(--font-sans);
+    }
+
+    .cmd-list {
+      max-height: 340px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .cmd-group-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 8px 10px 4px;
+    }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.83rem;
+      font-family: var(--font-sans);
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .cmd-item:hover,
+    .cmd-item.active {
+      background: rgba(249, 115, 22, 0.16);
+      color: var(--text-primary);
+    }
+
+    .cmd-item-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-muted);
+    }
+
+    .arch-modal {
+      width: 100%;
+      max-width: 680px;
+      max-height: 82vh;
+      overflow-y: auto;
+      border-radius: 18px;
+      background: rgba(18, 18, 24, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 24px 60px rgba(0, 0, 0, 0.65);
+      padding: 24px;
+      transform: translateY(-10px) scale(0.97);
+      transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .arch-flow-diagram {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .arch-node {
+      flex: 1;
+      min-width: 110px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      text-align: center;
+    }
+
+    .arch-node-title {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .arch-node-sub {
+      font-size: 0.66rem;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    .arch-arrow {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+
+    /* ==========================================================================
+       2026 FEATURE #2 & #6: INTERACTIVE AI ASSISTANT & DEVELOPER CLI MODAL
+       ========================================================================== */
+    .ai-cli-modal {
+      width: 100%;
+      max-width: 640px;
+      border-radius: 18px;
+      background: rgba(14, 14, 20, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 24px 60px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      transform: translateY(-10px) scale(0.97);
+      transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .glass-modal-backdrop.open .ai-cli-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    html[data-theme="light"] .ai-cli-modal {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(0, 0, 0, 0.14);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .ai-cli-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .ai-cli-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-cli-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .ai-cli-prompts {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .ai-prompt-chip {
+      font-size: 0.71rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .ai-prompt-chip:hover {
+      background: rgba(249, 115, 22, 0.18);
+      border-color: rgba(249, 115, 22, 0.45);
+      color: var(--text-primary);
+      transform: translateY(-1px);
+    }
+
+    html[data-theme="light"] .ai-prompt-chip {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    .ai-cli-log {
+      height: 290px;
+      overflow-y: auto;
+      padding: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.65;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .ai-msg-user {
+      align-self: flex-end;
+      background: rgba(249, 115, 22, 0.16);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      color: var(--text-primary);
+      padding: 8px 12px;
+      border-radius: 10px 10px 2px 10px;
+      max-width: 85%;
+    }
+
+    .ai-msg-bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 10px 14px;
+      border-radius: 10px 10px 10px 2px;
+      max-width: 92%;
+    }
+
+    html[data-theme="light"] .ai-msg-bot {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .ai-cli-input-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .ai-cli-prefix {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* ==========================================================================
        RIGHT FLOATING SOCIAL DOCK (Exact Sample UI Match)
        ========================================================================== */
     .right-social-dock {
@@ -2421,13 +2829,27 @@
 
 <body>
 
-  <!-- TOP RIGHT CONTROLS (Auto-Sync Status + Dark/Light Mode Toggle) -->
+  <!-- TOP RIGHT CONTROLS (Auto-Sync Status + Cmd+K Launcher + Dark/Light Mode Toggle) -->
   <div class="top-controls">
     <a href="#github" class="sync-pill" id="syncStatusPill"
       title="Synced with GitHub Repositories • Click to view GitHub Stats" aria-label="Synced with GitHub Repositories">
       <span class="sync-dot"></span>
       <span id="syncStatusText">GitHub Auto-Sync</span>
     </a>
+    <button class="cmd-k-btn" id="cmdPaletteBtn" aria-label="Open Command Palette" title="Quick Search & Actions (Cmd+K / Ctrl+K)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <span class="cmd-k-kbd">⌘K</span>
+    </button>
+    <button class="cmd-k-btn" id="aiCliBtn" aria-label="Open Ask Naveen's AI & CLI Terminal" title="Ask Naveen's AI / Developer CLI (~)">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 17 10 11 4 5"/>
+        <line x1="12" x2="20" y1="19" y2="19"/>
+      </svg>
+      <span>AI · CLI</span>
+    </button>
     <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark or Light Mode" title="Toggle Theme">
       <svg id="themeIconDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path
@@ -2531,6 +2953,87 @@
       </svg>
     </span>
     <span id="portfolioToastText">Copied to clipboard!</span>
+  </div>
+
+  <!-- 2026 FEATURE #1: COMMAND PALETTE MODAL (Cmd+K / Ctrl+K) -->
+  <div class="glass-modal-backdrop" id="cmdPaletteBackdrop" aria-hidden="true">
+    <div class="cmd-modal" role="dialog" aria-label="Command Palette">
+      <div class="cmd-input-wrap">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="text" class="cmd-input" id="cmdSearchInput" placeholder="Search projects, jump to sections, or run actions..." autocomplete="off" />
+        <span class="cmd-k-kbd">ESC</span>
+      </div>
+      <div class="cmd-list" id="cmdPaletteList"></div>
+    </div>
+  </div>
+
+  <!-- 2026 FEATURE #3: INTERACTIVE ARCHITECTURE & CASE-STUDY MODAL -->
+  <div class="glass-modal-backdrop" id="archModalBackdrop" aria-hidden="true">
+    <div class="arch-modal" role="dialog" aria-label="Project Architecture Case Study">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:12px;">
+        <div>
+          <span id="archModalBadge" class="project-date-badge" style="color:var(--accent);">System Architecture</span>
+          <h3 id="archModalTitle" style="font-size:1.25rem; font-weight:800; margin-top:4px;">Project Title</h3>
+          <div id="archModalRole" style="font-size:0.78rem; color:var(--text-secondary);"></div>
+        </div>
+        <button type="button" id="archModalCloseBtn" class="theme-toggle" aria-label="Close Architecture Modal" title="Close (ESC)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <p id="archModalDesc" style="font-size:0.84rem; color:var(--text-secondary); line-height:1.6;"></p>
+      <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin-top:16px;">
+        End-to-End Architecture Flow
+      </div>
+      <div class="arch-flow-diagram" id="archModalFlow"></div>
+      <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-top:14px; margin-bottom:8px;">
+        Key Engineering Decisions &amp; Impact
+      </div>
+      <ul class="project-highlights" id="archModalHighlights" style="margin-bottom:16px;"></ul>
+      <div class="project-tech-wrap" id="archModalTech"></div>
+    </div>
+  </div>
+
+  <!-- 2026 FEATURE #2 & #6: ASK NAVEEN'S AI & DEVELOPER CLI MODAL -->
+  <div class="glass-modal-backdrop" id="aiCliBackdrop" aria-hidden="true">
+    <div class="ai-cli-modal" role="dialog" aria-label="Ask Naveen's AI & Developer Terminal">
+      <div class="ai-cli-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="ai-cli-dots">
+            <span class="ai-cli-dot" style="background:#ef4444;"></span>
+            <span class="ai-cli-dot" style="background:#f59e0b;"></span>
+            <span class="ai-cli-dot" style="background:#22c55e;"></span>
+          </div>
+          <span style="font-family:var(--font-mono); font-size:0.76rem; font-weight:700; color:var(--text-primary);">
+            naveen@portfolio:~ (AI Assistant &amp; CLI)
+          </span>
+        </div>
+        <button type="button" id="aiCliCloseBtn" class="theme-toggle" style="width:30px; height:30px;" aria-label="Close Terminal" title="Close (ESC)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="ai-cli-prompts">
+        <button type="button" class="ai-prompt-chip" data-query="Tell me about TrustLink SSO (SLT)">🔒 TrustLink SSO (SLT)</button>
+        <button type="button" class="ai-prompt-chip" data-query="skills">💻 Tech Stack (skills)</button>
+        <button type="button" class="ai-prompt-chip" data-query="projects">🚀 All Projects</button>
+        <button type="button" class="ai-prompt-chip" data-query="certs">🛡️ Cybersecurity Certs</button>
+        <button type="button" class="ai-prompt-chip" data-query="availability">💼 Internship Status</button>
+        <button type="button" class="ai-prompt-chip" data-query="help">⌨️ CLI Commands</button>
+      </div>
+      <div class="ai-cli-log" id="aiCliLog">
+        <div class="ai-msg-bot">
+          <strong style="color:var(--accent);">⚡ Ayubowan! I'm Naveen's Portfolio AI &amp; CLI Assistant.</strong><br/>
+          Ask me anything about Naveen's projects (<em>TrustLink, TrustPass, ZenData, ML, SpotIT</em>), skills, or type CLI commands like <code>whoami</code>, <code>projects</code>, <code>skills</code>, <code>certs</code>, <code>contact</code>, or <code>clear</code>.
+        </div>
+      </div>
+      <form class="ai-cli-input-bar" id="aiCliForm">
+        <span class="ai-cli-prefix">naveen:~$</span>
+        <input type="text" class="cmd-input" id="aiCliInput" placeholder="Ask a question or type 'help', 'whoami', 'projects'..." autocomplete="off" />
+        <button type="submit" class="ai-prompt-chip" style="color:var(--accent); border-color:rgba(249,115,22,0.4);">Run ↵</button>
+      </form>
+    </div>
   </div>
 
   <main class="main-container">
@@ -3668,6 +4171,10 @@
                 ${escapeHtml(p.primaryLanguage || 'Full-Stack')}
               </span>
               <div class="project-links">
+                <button type="button" class="proj-link" onclick="openArchitectureModal('${escapeHtml(p.id)}')" title="View System Architecture & Engineering Case Study">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+                  <span>Architecture</span>
+                </button>
                 ${p.homepage ? `
                   <a href="${escapeHtml(p.homepage)}" target="_blank" rel="noopener" class="proj-link">
                     <span>Live Demo</span>
@@ -4179,6 +4686,387 @@
       }
     }
 
+    // 2026 Feature #5: Cursor-Tracking Spotlight Border Glow
+    function initSpotlightCards() {
+      document.addEventListener('mousemove', (e) => {
+        const card = e.target.closest('.bento-card, .project-card, .glass-card, .highlight-card, .skill-cat-card, .cert-card');
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      }, { passive: true });
+    }
+
+    // 2026 Feature #3: Interactive Architecture & Case-Study Modal
+    const PROJECT_ARCHITECTURES = {
+      'trustlink': [
+        { title: 'Client / RP', sub: 'OAuth 2.0 + PKCE' },
+        { title: 'FIDO2 / WebAuthn', sub: 'Passkey Hardware Auth' },
+        { title: 'Risk Engine', sub: 'Contextual Scoring' },
+        { title: 'OIDC Token Core', sub: 'Signed JWT / JWKS' }
+      ],
+      'trust-pass': [
+        { title: 'React + Vite UI', sub: 'Seat & Cabin Picker' },
+        { title: 'Booking Engine', sub: 'Multi-Flight State' },
+        { title: 'Pass Generator', sub: 'Barcode Boarding Pass' },
+        { title: 'Cloud Persistence', sub: 'Real-Time Sync' }
+      ],
+      'zendata': [
+        { title: 'Raw Ingestion', sub: 'CSV / JSON / SQL' },
+        { title: '4-Pillar Profiler', sub: 'Schema & Outliers' },
+        { title: 'Auto-Remediation', sub: 'Imputation & Dedup' },
+        { title: 'Clean Export', sub: 'Audit Report + Data' }
+      ],
+      'heart-disease-ml': [
+        { title: 'Clinical Dataset', sub: 'Feature Engineering' },
+        { title: 'Ensemble Pipeline', sub: 'RF / XGBoost / SVM' },
+        { title: 'Hyperparameter CV', sub: 'GridSearch + ROC-AUC' },
+        { title: 'Diagnostic Output', sub: 'Risk Probability' }
+      ],
+      'spotit-lk': [
+        { title: 'Flutter Mobile', sub: 'Camera + GPS Capture' },
+        { title: 'Image Compression', sub: 'Low-Bandwidth Opt' },
+        { title: 'Firebase Cloud', sub: 'Firestore + Storage' },
+        { title: 'Civic Dashboard', sub: 'SDG 11 Governance' }
+      ]
+    };
+
+    function openArchitectureModal(projectId) {
+      const backdrop = document.getElementById('archModalBackdrop');
+      if (!backdrop) return;
+      const projects = (currentProjectsData && currentProjectsData.projects) || [];
+      const p = projects.find((item) => item.id === projectId) || projects[0];
+      if (!p) return;
+
+      document.getElementById('archModalBadge').textContent = `${p.dateLabel || 'Project'} · ${p.isPrivate ? '🔒 Private Enterprise NDA' : '🌐 Public Repository'}`;
+      document.getElementById('archModalTitle').textContent = p.title || p.name;
+      document.getElementById('archModalRole').textContent = p.role || '';
+      document.getElementById('archModalDesc').textContent = p.description || '';
+
+      const nodes = PROJECT_ARCHITECTURES[p.id] || [
+        { title: 'Client Layer', sub: p.primaryLanguage || 'Frontend' },
+        { title: 'Core Service', sub: 'Business Logic' },
+        { title: 'Security & Validation', sub: 'Auth / Checks' },
+        { title: 'Data Store', sub: 'Persistence' }
+      ];
+
+      document.getElementById('archModalFlow').innerHTML = nodes.map((n, idx) => `
+        <div class="arch-node">
+          <div class="arch-node-title">${escapeHtml(n.title)}</div>
+          <div class="arch-node-sub">${escapeHtml(n.sub)}</div>
+        </div>
+        ${idx < nodes.length - 1 ? '<span class="arch-arrow">→</span>' : ''}
+      `).join('');
+
+      document.getElementById('archModalHighlights').innerHTML = (p.highlights || []).map((h) => `<li>${escapeHtml(h)}</li>`).join('');
+      document.getElementById('archModalTech').innerHTML = (p.techStack || []).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('');
+
+      backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden', 'false');
+    }
+
+    function initArchitectureModal() {
+      const backdrop = document.getElementById('archModalBackdrop');
+      const closeBtn = document.getElementById('archModalCloseBtn');
+      if (!backdrop) return;
+      const close = () => {
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      };
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) close();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && backdrop.classList.contains('open')) close();
+      });
+    }
+
+    // 2026 Feature #1: Command Palette (Cmd+K / Ctrl+K)
+    function initCommandPalette() {
+      const backdrop = document.getElementById('cmdPaletteBackdrop');
+      const openBtn = document.getElementById('cmdPaletteBtn');
+      const input = document.getElementById('cmdSearchInput');
+      const listEl = document.getElementById('cmdPaletteList');
+      if (!backdrop || !input || !listEl) return;
+
+      let activeIdx = 0;
+      let currentItems = [];
+
+      function getCommandItems(query) {
+        const q = (query || '').toLowerCase().trim();
+        const projects = ((currentProjectsData && currentProjectsData.projects) || []).map((p) => ({
+          group: 'Projects & Architecture',
+          label: `${p.title}`,
+          badge: p.isPrivate ? '🔒 Architecture' : 'Project',
+          action: () => openArchitectureModal(p.id)
+        }));
+
+        const actions = [
+          {
+            group: 'Quick Actions',
+            label: "Open Ask Naveen's AI & Developer CLI Terminal",
+            badge: 'AI · CLI',
+            action: () => document.getElementById('aiCliBtn').click()
+          },
+          {
+            group: 'Quick Actions',
+            label: 'Toggle Dark / Light Theme',
+            badge: 'Theme',
+            action: () => document.getElementById('themeToggleBtn').click()
+          },
+          {
+            group: 'Quick Actions',
+            label: 'Copy Email Address (naveenmarioperera04@gmail.com)',
+            badge: 'Copy',
+            action: () => {
+              const email = (currentProfile && currentProfile.contact && currentProfile.contact.email) || 'naveenmarioperera04@gmail.com';
+              if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(email).catch(() => {});
+              showPortfolioToast(`Email copied to clipboard: ${email}`);
+            }
+          },
+          {
+            group: 'Quick Actions',
+            label: 'Open GitHub Profile (@naveenmariopereradev02)',
+            badge: 'GitHub ↗',
+            action: () => window.open('https://github.com/naveenmariopereradev02', '_blank')
+          }
+        ];
+
+        const sections = ['hero', 'about', 'github', 'skills', 'projects', 'timeline', 'certifications', 'queries', 'contact'].map((sec) => ({
+          group: 'Navigate to Section',
+          label: `Go to ${sec.charAt(0).toUpperCase() + sec.slice(1)}`,
+          badge: `#${sec}`,
+          action: () => {
+            const el = document.getElementById(sec);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }));
+
+        const all = [...projects, ...actions, ...sections];
+        if (!q) return all;
+        return all.filter((item) => item.label.toLowerCase().includes(q) || item.badge.toLowerCase().includes(q) || item.group.toLowerCase().includes(q));
+      }
+
+      function renderList() {
+        currentItems = getCommandItems(input.value);
+        if (activeIdx >= currentItems.length) activeIdx = 0;
+        if (currentItems.length === 0) {
+          listEl.innerHTML = `<div style="padding:18px; text-align:center; color:var(--text-muted); font-size:0.82rem;">No matching projects or commands found.</div>`;
+          return;
+        }
+        let lastGroup = '';
+        listEl.innerHTML = currentItems.map((item, idx) => {
+          const groupHeader = item.group !== lastGroup ? `<div class="cmd-group-label">${escapeHtml(item.group)}</div>` : '';
+          lastGroup = item.group;
+          return `
+            ${groupHeader}
+            <button type="button" class="cmd-item ${idx === activeIdx ? 'active' : ''}" data-idx="${idx}">
+              <span>${escapeHtml(item.label)}</span>
+              <span class="cmd-item-badge">${escapeHtml(item.badge)}</span>
+            </button>
+          `;
+        }).join('');
+
+        listEl.querySelectorAll('.cmd-item').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const i = Number(btn.getAttribute('data-idx'));
+            if (currentItems[i]) {
+              closePalette();
+              currentItems[i].action();
+            }
+          });
+        });
+      }
+
+      function openPalette() {
+        backdrop.classList.add('open');
+        backdrop.setAttribute('aria-hidden', 'false');
+        input.value = '';
+        activeIdx = 0;
+        renderList();
+        setTimeout(() => input.focus(), 20);
+      }
+
+      function closePalette() {
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openPalette);
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closePalette();
+      });
+
+      input.addEventListener('input', () => {
+        activeIdx = 0;
+        renderList();
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          if (backdrop.classList.contains('open')) closePalette();
+          else openPalette();
+          return;
+        }
+        if (!backdrop.classList.contains('open')) return;
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closePalette();
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          activeIdx = (activeIdx + 1) % Math.max(1, currentItems.length);
+          renderList();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          activeIdx = (activeIdx - 1 + Math.max(1, currentItems.length)) % Math.max(1, currentItems.length);
+          renderList();
+        } else if (e.key === 'Enter' && currentItems[activeIdx]) {
+          e.preventDefault();
+          const chosen = currentItems[activeIdx];
+          closePalette();
+          chosen.action();
+        }
+      });
+    }
+
+    // 2026 Feature #2 & #6: Ask Naveen's AI & Interactive CLI Terminal
+    function initAiCliTerminal() {
+      const backdrop = document.getElementById('aiCliBackdrop');
+      const openBtn = document.getElementById('aiCliBtn');
+      const closeBtn = document.getElementById('aiCliCloseBtn');
+      const form = document.getElementById('aiCliForm');
+      const input = document.getElementById('aiCliInput');
+      const log = document.getElementById('aiCliLog');
+      if (!backdrop || !form || !input || !log) return;
+
+      function generateResponse(rawQuery) {
+        const q = String(rawQuery || '').toLowerCase().trim();
+        const projects = (currentProjectsData && currentProjectsData.projects) || [];
+        const profile = currentProfile || {};
+
+        if (q === 'clear' || q === 'cls') {
+          log.innerHTML = '';
+          return null;
+        }
+        if (q === 'help') {
+          return `<strong>Available CLI Commands &amp; AI Topics:</strong><br/>
+          • <code>whoami</code> — Engineering profile &amp; university background<br/>
+          • <code>projects</code> — Summary of all ${projects.length} featured engineering projects<br/>
+          • <code>trustlink</code> / <code>trustpass</code> / <code>zendata</code> / <code>spotit</code> — Deep-dive on specific project<br/>
+          • <code>skills</code> — Programming languages, frameworks &amp; security tools<br/>
+          • <code>certs</code> — Cybersecurity &amp; networking certifications<br/>
+          • <code>availability</code> — Internship &amp; software engineering availability<br/>
+          • <code>contact</code> — Email, GitHub &amp; LinkedIn links<br/>
+          • <code>clear</code> — Clear terminal output`;
+        }
+        if (q === 'whoami' || q.includes('who is') || q.includes('about') || q.includes('university') || q.includes('education')) {
+          return `<strong>Naveen Perera</strong> — Second-Year BSc (Hons) Computer Science Undergraduate at the <strong>University of Westminster (IIT Sri Lanka)</strong>.<br/>
+          Specializes in Full-Stack Engineering, Identity &amp; Access Management (OAuth 2.0 / OIDC / FIDO2), Automated Data Quality Engines, and Machine Learning.`;
+        }
+        if (q.includes('trustlink') || q.includes('slt') || q.includes('oauth') || q.includes('sso')) {
+          return `<strong>🔒 TrustLink — Identity Platform (OAuth 2.0 &amp; OIDC SSO)</strong><br/>
+          Built for <strong>SLT Mobitel</strong> (Private Enterprise Repo under NDA). Full-stack Single Sign-On provider featuring passwordless FIDO2/WebAuthn passkeys, PKCE, RS256 signed JWTs, and contextual risk scoring.<br/>
+          <em>Tip: Click "Architecture" on the TrustLink project card to view the interactive system flow!</em>`;
+        }
+        if (q.includes('trustpass') || q.includes('trust-pass') || q.includes('flight')) {
+          return `<strong>✈️ TrustPass — Smart Multi-Flight Booking &amp; Boarding Pass Platform</strong><br/>
+          Full-stack React + Vite + Tailwind CSS platform with interactive cabin/seat selection, multi-leg itinerary state management, and barcode boarding pass generation.<br/>
+          Repo: <a href="https://github.com/naveenmariopereradev02/trust-pass" target="_blank" style="color:var(--accent);">github.com/naveenmariopereradev02/trust-pass ↗</a>`;
+        }
+        if (q.includes('zendata') || q.includes('data quality') || q.includes('hygiene')) {
+          return `<strong>📊 ZenData — Automated 4-Pillar Data Quality &amp; Hygiene Engine</strong><br/>
+          Python + Streamlit + Pandas automated pipeline evaluating Completeness, Uniqueness, Validity, and Consistency with one-click remediation and audit exports.`;
+        }
+        if (q.includes('heart') || q.includes('ml') || q.includes('machine learning')) {
+          return `<strong>🧠 Heart Disease Risk Prediction System (99% Accuracy)</strong><br/>
+          Supervised ML pipeline built with Python &amp; Scikit-Learn comparing Random Forest, XGBoost, and SVM with cross-validated ROC-AUC evaluation.`;
+        }
+        if (q.includes('spotit') || q.includes('flutter')) {
+          return `<strong>📱 SpotIT LK — Civic Issue Reporting Mobile App (SDG Goal 11)</strong><br/>
+          Built with Flutter, Dart &amp; Firebase Firestore/Storage enabling citizens to report infrastructure issues with GPS tagging and compressed photo uploads.`;
+        }
+        if (q === 'projects' || q.includes('project')) {
+          return `<strong>🚀 Naveen's Portfolio Projects (${projects.length}):</strong><br/>` +
+            projects.map((p) => `• <strong>${escapeHtml(p.title)}</strong> (${p.isPrivate ? '🔒 Private NDA' : '🌐 Public'}) — <em>${escapeHtml(p.primaryLanguage)}</em>`).join('<br/>');
+        }
+        if (q === 'skills' || q.includes('skill') || q.includes('stack') || q.includes('language') || q.includes('python') || q.includes('react')) {
+          const skills = (profile.skills || []).map((s) => `• <strong>${escapeHtml(s.category)}:</strong> ${(s.items || []).map(escapeHtml).join(', ')}`).join('<br/>');
+          return skills || 'Java, Python, JavaScript, TypeScript, Dart, React, Node.js, Express, Flutter, PostgreSQL, Firebase, OAuth 2.0/OIDC.';
+        }
+        if (q === 'certs' || q.includes('cert') || q.includes('security') || q.includes('cyber')) {
+          const certs = (profile.certifications || []).map((c) => `• <strong>${escapeHtml(c.title)}</strong> — ${escapeHtml(c.issuer)} (${escapeHtml(c.date)})`).join('<br/>');
+          return `<strong>🛡️ Verified Certifications:</strong><br/>${certs}`;
+        }
+        if (q === 'availability' || q.includes('intern') || q.includes('hire') || q.includes('available') || q.includes('job')) {
+          return `<strong>🟢 Internship &amp; Collaboration Status:</strong><br/>
+          Naveen is actively seeking <strong>Software Engineering / Full-Stack / Cybersecurity / AI-ML Internship opportunities</strong>. Reach out directly at <strong style="color:var(--accent);">naveenmarioperera04@gmail.com</strong>!`;
+        }
+        if (q === 'contact' || q.includes('email') || q.includes('reach')) {
+          return `<strong>📬 Contact Naveen Perera:</strong><br/>
+          • Email: <strong style="color:var(--accent);">naveenmarioperera04@gmail.com</strong><br/>
+          • GitHub: <a href="https://github.com/naveenmariopereradev02" target="_blank" style="color:var(--accent);">@naveenmariopereradev02 ↗</a><br/>
+          • WhatsApp: +94 78 870 0322`;
+        }
+        return `I found relevant details in Naveen's portfolio: he is a CS Undergraduate at University of Westminster (IIT) experienced in <strong>React, Node.js, Python, Java, Flutter, OAuth 2.0/OIDC SSO, and Machine Learning</strong>.<br/>Try typing <code>projects</code>, <code>skills</code>, <code>certs</code>, <code>trustlink</code>, or <code>contact</code>!`;
+      }
+
+      function handleQuery(queryText) {
+        const trimmed = String(queryText || '').trim();
+        if (!trimmed) return;
+        const userDiv = document.createElement('div');
+        userDiv.className = 'ai-msg-user';
+        userDiv.textContent = trimmed;
+        log.appendChild(userDiv);
+
+        const replyHtml = generateResponse(trimmed);
+        if (replyHtml !== null) {
+          const botDiv = document.createElement('div');
+          botDiv.className = 'ai-msg-bot';
+          botDiv.innerHTML = replyHtml;
+          log.appendChild(botDiv);
+        }
+        log.scrollTop = log.scrollHeight;
+      }
+
+      function openModal() {
+        backdrop.classList.add('open');
+        backdrop.setAttribute('aria-hidden', 'false');
+        setTimeout(() => input.focus(), 20);
+      }
+
+      function closeModal() {
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) closeModal();
+      });
+
+      backdrop.querySelectorAll('.ai-prompt-chip[data-query]').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          handleQuery(chip.getAttribute('data-query'));
+        });
+      });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const val = input.value;
+        input.value = '';
+        handleQuery(val);
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && backdrop.classList.contains('open')) {
+          closeModal();
+        }
+      });
+    }
+
     async function bootstrap() {
       initTheme();
       initHeatmap();
@@ -4186,6 +5074,10 @@
       initScrollTop();
       initContactForm();
       initEmailCopyToast();
+      initSpotlightCards();
+      initArchitectureModal();
+      initCommandPalette();
+      initAiCliTerminal();
 
       currentProfile = await loadJsonWithFallback('./profile.json', FALLBACK_PROFILE);
       currentProjectsData = await loadJsonWithFallback('./projects.json', FALLBACK_PROJECTS);
