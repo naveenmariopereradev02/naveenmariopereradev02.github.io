@@ -1,65 +1,128 @@
 {
-  "generatedAt": "2026-11-10T12:30:00.000Z",
+  "generatedAt": "2026-11-10T10:21:50.751Z",
   "username": "naveenmariopereradev02",
-  "totalRepos": 6,
-  "ongoingCount": 2,
-  "completedCount": 4,
+  "totalRepos": 11,
+  "ongoingCount": 6,
+  "completedCount": 5,
   "languagesSummary": [
     {
       "name": "Dart",
-      "bytes": 252800,
-      "percentage": 34.2,
+      "bytes": 750104,
+      "percentage": 40.4,
       "repoCount": 2,
       "color": "#00B4AB"
     },
     {
-      "name": "Python",
-      "bytes": 184500,
-      "percentage": 25.0,
-      "repoCount": 3,
-      "color": "#3572A5"
-    },
-    {
       "name": "JavaScript",
-      "bytes": 128400,
-      "percentage": 17.4,
-      "repoCount": 2,
+      "bytes": 296550,
+      "percentage": 16,
+      "repoCount": 6,
       "color": "#f1e05a"
     },
     {
+      "name": "Jupyter Notebook",
+      "bytes": 232298,
+      "percentage": 12.5,
+      "repoCount": 1,
+      "color": "#DA5B0B"
+    },
+    {
+      "name": "Python",
+      "bytes": 204357,
+      "percentage": 11,
+      "repoCount": 4,
+      "color": "#3572A5"
+    },
+    {
       "name": "TypeScript",
-      "bytes": 78400,
-      "percentage": 10.6,
+      "bytes": 129534,
+      "percentage": 7,
       "repoCount": 2,
       "color": "#3178c6"
     },
     {
-      "name": "Java",
-      "bytes": 31200,
-      "percentage": 4.2,
-      "repoCount": 1,
-      "color": "#b07219"
+      "name": "CSS",
+      "bytes": 76736,
+      "percentage": 4.1,
+      "repoCount": 4,
+      "color": "#563d7c"
+    },
+    {
+      "name": "Shell",
+      "bytes": 59988,
+      "percentage": 3.2,
+      "repoCount": 2,
+      "color": "#89e051"
+    },
+    {
+      "name": "HTML",
+      "bytes": 39661,
+      "percentage": 2.1,
+      "repoCount": 5,
+      "color": "#e34c26"
     },
     {
       "name": "C++",
       "bytes": 25176,
-      "percentage": 3.4,
+      "percentage": 1.4,
       "repoCount": 1,
       "color": "#f34b7d"
     },
     {
+      "name": "CMake",
+      "bytes": 19745,
+      "percentage": 1.1,
+      "repoCount": 1,
+      "color": "hsl(329, 75%, 55%)"
+    },
+    {
       "name": "SQL",
-      "bytes": 24000,
-      "percentage": 3.2,
-      "repoCount": 3,
+      "bytes": 9500,
+      "percentage": 0.5,
+      "repoCount": 1,
       "color": "#e38c00"
     },
     {
       "name": "HTML/CSS",
-      "bytes": 14953,
-      "percentage": 2.0,
-      "repoCount": 2,
+      "bytes": 6200,
+      "percentage": 0.3,
+      "repoCount": 1,
       "color": "#e34c26"
+    },
+    {
+      "name": "Swift",
+      "bytes": 3353,
+      "percentage": 0.2,
+      "repoCount": 2,
+      "color": "#F05138"
+    },
+    {
+      "name": "C",
+      "bytes": 1488,
+      "percentage": 0.1,
+      "repoCount": 1,
+      "color": "#555555"
+    },
+    {
+      "name": "Kotlin",
+      "bytes": 250,
+      "percentage": 0,
+      "repoCount": 2,
+      "color": "#A97BFF"
+    },
+    {
+      "name": "Objective-C",
+      "bytes": 76,
+      "percentage": 0,
+      "repoCount": 2,
+      "color": "hsl(287, 75%, 55%)"
+    },
+    {
+      "name": "Procfile",
+      "bytes": 63,
+      "percentage": 0,
+      "repoCount": 1,
+      "color": "hsl(62, 75%, 55%)"
     }
   ],
   "projects": [
@@ -82,12 +145,32 @@
       "dateLabel": "Jul 2026 — Nov 2026",
       "isOngoing": true,
       "isPrivate": true,
-      "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship (Access Restricted / NDA).",
+      "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
       "featured": true,
       "htmlUrl": "https://github.com/Nuwini2430/trustlink.git",
       "homepage": "",
-      "topics": ["portfolio", "oauth2", "oidc", "webauthn", "fido2", "nodejs", "react", "docker", "security"],
-      "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
+      "topics": [
+        "portfolio",
+        "oauth2",
+        "oidc",
+        "webauthn",
+        "fido2",
+        "nodejs",
+        "react",
+        "docker",
+        "security"
+      ],
+      "techStack": [
+        "Node.js",
+        "Express",
+        "React",
+        "Redux Toolkit",
+        "Tailwind CSS",
+        "PostgreSQL",
+        "WebAuthn (FIDO2)",
+        "Docker",
+        "Nginx"
+      ],
       "stars": 16,
       "forks": 3,
       "primaryLanguage": "JavaScript",
@@ -104,7 +187,7 @@
       "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
       "role": "Lead Mobile Architect & Developer",
       "description": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
-      "readmeExcerpt": "Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation & QR Boarding Pass App built with Flutter, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and GitHub Actions Cloud APK CI/CD.",
+      "readmeExcerpt": "A modern, cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE).",
       "highlights": [
         "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
         "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
@@ -115,51 +198,297 @@
       "pushedAt": "2026-11-05T05:49:03Z",
       "dateLabel": "Nov 2026",
       "isOngoing": true,
-      "isPrivate": false,
       "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
       "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
       "homepage": "",
-      "topics": ["portfolio", "flutter", "dart", "oauth2", "oidc", "pkce", "mobile-app", "ci-cd"],
-      "techStack": ["Flutter", "Dart", "OAuth 2.0 / OIDC", "PKCE", "Airbus A380 Seat Maps", "QR Boarding Pass", "GitHub Actions CI/CD"],
-      "stars": 12,
-      "forks": 1,
+      "topics": [],
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "OAuth 2.0 / OIDC",
+        "PKCE",
+        "Airbus A380 Seat Maps",
+        "QR Boarding Pass",
+        "GitHub Actions CI/CD"
+      ],
+      "stars": 0,
+      "forks": 0,
       "primaryLanguage": "Dart",
       "languages": {
         "Dart": 188058,
         "C++": 25176,
-        "HTML/CSS": 3753
+        "CMake": 19745,
+        "HTML": 3753,
+        "Swift": 2298,
+        "C": 1488,
+        "Kotlin": 130,
+        "Objective-C": 38
       }
     },
     {
-      "id": "zendata",
-      "name": "zendata",
-      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
-      "role": "Lead Architect & Developer",
-      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates tabular datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
-      "readmeExcerpt": "Automated Data Quality & Semantic Hygiene Platform built with FastAPI, Pandas, NumPy, and Next.js. Evaluates Completeness, Uniqueness, Validity, and Statistical Consistency with 1.5x IQR outlier detection.",
+      "id": "ZenData",
+      "name": "ZenData",
+      "title": "ZenData",
+      "role": "Active Development",
+      "description": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
+      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
       "highlights": [
-        "Engineered a 4-Pillar Data Health Audit Engine evaluating tabular datasets across Completeness, Uniqueness, Validity, and Statistical Consistency (using 1.5x IQR outlier detection) to generate real-time 0–100% quality scores.",
-        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders (?, not given) and cluster categorical typos (Diary -> Dairy) without fabricating values for missing PII or transaction IDs.",
-        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals, outlier quantities, and inverted unit prices.",
-        "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks with full transformation changelogs."
+        "Live Web Application: https://zendata-frontend.onrender.com",
+        "Live FastAPI Documentation (Swagger UI): https://zendata-backend.onrender.com/docs",
+        "No Fabricated Data (Anti-Poisoning): Strict integrity rules that never blindly impute PII (Customer Names, Emails, Phones), Unique Transaction IDs, or subjective user ratings with fake mode values.",
+        "Canonical Categorical Normalization: Fuzzy string matching and taxonomy clustering (Diary → Dairy, Bakary → Bakery, Groceries → Groceries).",
+        "Location & Cashier Standardizer: Unifies variations like colombo 07, Colombo-07, and Colombo7 to canonical Colombo 07, collapses whitespace anomalies, and preserves well-known acronyms (QR, POS, LKR, VISA)."
       ],
-      "createdAt": "2026-08-01T00:00:00Z",
-      "pushedAt": "2026-09-28T18:00:00Z",
-      "dateLabel": "Aug 2026 — Sep 2026",
-      "isOngoing": false,
-      "isPrivate": false,
+      "createdAt": "2026-10-28T10:17:05Z",
+      "pushedAt": "2026-10-30T08:48:10Z",
+      "dateLabel": "Oct 2026 — Present",
+      "isOngoing": true,
       "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
       "homepage": "",
-      "topics": ["portfolio", "fastapi", "pandas", "numpy", "nextjs", "data-quality", "python"],
-      "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
-      "stars": 18,
-      "forks": 3,
-      "primaryLanguage": "Python",
+      "topics": [],
+      "techStack": [
+        "TypeScript",
+        "Python",
+        "CSS",
+        "JavaScript",
+        "Procfile"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "TypeScript",
       "languages": {
-        "Python": 94500,
-        "TypeScript": 50000,
-        "HTML/CSS": 5000
+        "TypeScript": 101134,
+        "Python": 94780,
+        "CSS": 7420,
+        "JavaScript": 465,
+        "Procfile": 63
+      }
+    },
+    {
+      "id": "naveenmariopereradev02",
+      "name": "naveenmariopereradev02",
+      "title": "Naveenmariopereradev02",
+      "role": "Active Development",
+      "description": "Software engineering project hosted on GitHub.",
+      "readmeExcerpt": "Software engineering project hosted on GitHub.",
+      "highlights": [
+        "🔭 I’m currently working on SLT-IDP",
+        "🌱 I’m currently learning Advanced AI integration, Cloud Security, and Modern DevOps practices",
+        "👯 I’m looking to collaborate on SPOTIT-LK",
+        "🤝 I’m looking for help with SHOPPIG CART APPLICATION",
+        "👨💻 All of my projects are available at https://portfolionaveenperera.lovable.app/"
+      ],
+      "createdAt": "2026-10-02T07:20:54Z",
+      "pushedAt": "2026-10-02T07:31:12Z",
+      "dateLabel": "Oct 2026 — Present",
+      "isOngoing": true,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/naveenmariopereradev02",
+      "homepage": "",
+      "topics": [],
+      "techStack": [],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "Code",
+      "languages": {}
+    },
+    {
+      "id": "SpotIT-LK",
+      "name": "SpotIT-LK",
+      "title": "SpotIT LK",
+      "role": "Active Development",
+      "description": "Report, Track, Solve SpotIT LK is a comprehensive civic reporting platform designed to empower citizens to report local issues, track their progress, and facilitate quick resolutions by relevant authorities.",
+      "readmeExcerpt": "Report, Track, Solve SpotIT LK is a comprehensive civic reporting platform designed to empower citizens to report local issues, track their progress, and facilitate quick resolutions by relevant authorities.",
+      "highlights": [
+        "Location-Based Reporting: Drop a pin exactly where the issue is located using integrated Google Maps.",
+        "Real-Time Tracking: Keep track of the status of your reported issues.",
+        "Secure Authentication: User accounts are secured using Firebase Authentication and Google Sign-In.",
+        "Cloud Storage: Attach images and media to your reports seamlessly.",
+        "Interactive Dashboard: View, manage, and filter reported issues in your area."
+      ],
+      "createdAt": "2026-09-30T06:13:57Z",
+      "pushedAt": "2026-09-30T06:32:43Z",
+      "dateLabel": "Sep 2026 — Present",
+      "isOngoing": true,
+      "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/SpotIT-LK",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "Dart",
+        "JavaScript",
+        "HTML",
+        "Swift",
+        "Kotlin",
+        "Objective-C"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "Dart",
+      "languages": {
+        "Dart": 562046,
+        "JavaScript": 17892,
+        "HTML": 1517,
+        "Swift": 1055,
+        "Kotlin": 120,
+        "Objective-C": 38
+      }
+    },
+    {
+      "id": "ML-Predictive-Modeling-Project",
+      "name": "ML-Predictive-Modeling-Project",
+      "title": "ML Predictive Modeling Project",
+      "role": "Active Development",
+      "description": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
+      "readmeExcerpt": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
+      "highlights": [
+        "01DataExplorationandPreprocessing.ipynb: Contains initial data loading, exploratory data analysis (EDA), handling of missing values, and feature scaling/encoding using pandas and scikit-learn.",
+        "02ModelTrainingandSelection.ipynb: Covers the training of baseline models including K-Nearest Neighbors (KNN), Naive Bayes, and Logistic Regression.",
+        "03ModelEvaluationandPipelines.ipynb: Focuses on robust model evaluation, hyperparameter tuning using GridSearchCV, building deployment-ready scikit-learn Pipelines, and final metric analysis.",
+        "ProjectReport.pdf: A detailed academic report documenting the methodology, statistical analysis, and conclusions of the models.",
+        "Data Manipulation: Pandas, NumPy"
+      ],
+      "createdAt": "2026-09-14T07:03:16Z",
+      "pushedAt": "2026-09-14T07:03:39Z",
+      "dateLabel": "Sep 2026 — Present",
+      "isOngoing": true,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "Jupyter Notebook"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "Jupyter Notebook",
+      "languages": {
+        "Jupyter Notebook": 232298
+      }
+    },
+    {
+      "id": "Easy-Apply-Digital-Onboarding",
+      "name": "Easy-Apply-Digital-Onboarding",
+      "title": "Easy Apply Digital Onboarding",
+      "role": "Creator & Maintainer",
+      "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "readmeExcerpt": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "highlights": [
+        "Appointment Booking — Select a date and time slot (Morning / Afternoon / Evening)",
+        "Live Slot Availability — Real-time capacity tracking (max 10 per slot)",
+        "48-Hour Lead Time — Earliest bookable date is 48 hours from now",
+        "Sunday Blackout — Sundays are disabled on the calendar",
+        "Admin Dashboard — View all booked appointments in a data table"
+      ],
+      "createdAt": "2026-07-25T08:50:06Z",
+      "pushedAt": "2026-07-25T08:56:40Z",
+      "dateLabel": "Jul 2026",
+      "isOngoing": false,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/Easy-Apply-Digital-Onboarding",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "JavaScript",
+        "CSS",
+        "HTML"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "JavaScript",
+      "languages": {
+        "JavaScript": 27070,
+        "CSS": 16714,
+        "HTML": 520
+      }
+    },
+    {
+      "id": "Slt-shopping-cart-application--E-commerce",
+      "name": "Slt-shopping-cart-application--E-commerce",
+      "title": "Slt Shopping Cart Application  E Commerce",
+      "role": "Creator & Maintainer",
+      "description": "Software engineering project hosted on GitHub.",
+      "readmeExcerpt": "Software engineering project hosted on GitHub.",
+      "highlights": [],
+      "createdAt": "2026-07-25T08:43:24Z",
+      "pushedAt": "2026-07-25T08:47:48Z",
+      "dateLabel": "Jul 2026",
+      "isOngoing": false,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/Slt-shopping-cart-application--E-commerce",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "JavaScript",
+        "CSS",
+        "HTML",
+        "Python",
+        "Shell"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "JavaScript",
+      "languages": {
+        "JavaScript": 145853,
+        "CSS": 35888,
+        "HTML": 33351,
+        "Python": 19577,
+        "Shell": 14952
+      }
+    },
+    {
+      "id": "EzAppldigi-Onboarding",
+      "name": "EzAppldigi-Onboarding",
+      "title": "EzAppldigi Onboarding",
+      "role": "Creator & Maintainer",
+      "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "readmeExcerpt": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "highlights": [
+        "Appointment Booking — Select a date and time slot (Morning / Afternoon / Evening)",
+        "Live Slot Availability — Real-time capacity tracking (max 10 per slot)",
+        "48-Hour Lead Time — Earliest bookable date is 48 hours from now",
+        "Sunday Blackout — Sundays are disabled on the calendar",
+        "Admin Dashboard — View all booked appointments in a data table"
+      ],
+      "createdAt": "2026-07-23T02:54:40Z",
+      "pushedAt": "2026-07-23T03:14:17Z",
+      "dateLabel": "Jul 2026",
+      "isOngoing": false,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/EzAppldigi-Onboarding",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "Shell",
+        "JavaScript",
+        "CSS",
+        "HTML"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "Shell",
+      "languages": {
+        "Shell": 45036,
+        "JavaScript": 27070,
+        "CSS": 16714,
+        "HTML": 520
       }
     },
     {
@@ -183,14 +512,29 @@
       "featured": true,
       "htmlUrl": "https://github.com/naveenmariopereradev02",
       "homepage": "",
-      "topics": ["portfolio", "machine-learning", "scikit-learn", "pandas", "python", "data-mining"],
-      "techStack": ["Python", "Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV"],
+      "topics": [
+        "portfolio",
+        "machine-learning",
+        "scikit-learn",
+        "pandas",
+        "python",
+        "data-mining"
+      ],
+      "techStack": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "Plotly Express",
+        "GridSearchCV"
+      ],
       "stars": 11,
       "forks": 1,
       "primaryLanguage": "Python",
       "languages": {
         "Python": 62000
-      }
+      },
+      "privateMessage": ""
     },
     {
       "id": "suspicious-log-analyzer",
@@ -212,46 +556,26 @@
       "featured": false,
       "htmlUrl": "https://github.com/naveenmariopereradev02",
       "homepage": "",
-      "topics": ["portfolio", "cybersecurity", "python", "log-analysis", "incident-response"],
-      "techStack": ["Python", "Data Mining", "Security Analytics", "Firewall Automation"],
+      "topics": [
+        "portfolio",
+        "cybersecurity",
+        "python",
+        "log-analysis",
+        "incident-response"
+      ],
+      "techStack": [
+        "Python",
+        "Data Mining",
+        "Security Analytics",
+        "Firewall Automation"
+      ],
       "stars": 8,
       "forks": 1,
       "primaryLanguage": "Python",
       "languages": {
         "Python": 28000
-      }
-    },
-    {
-      "id": "spotit-lk",
-      "name": "spotit-lk",
-      "title": "Civic Engagement and Feedback Platform — SpotIT LK",
-      "role": "Backend & Multimedia Integration Lead",
-      "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
-      "readmeExcerpt": "Mobile civic engagement platform built with Flutter, Dart, Firebase Firestore, and Firebase Cloud Storage, supporting UN SDG Goal 11 for transparent, community-driven urban governance.",
-      "highlights": [
-        "Architected and implemented the multimedia storage infrastructure for a civic engagement mobile app, enabling citizens to upload and attach photo evidence to public issue reports.",
-        "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media, ensuring scalable and efficient data delivery to government dashboards.",
-        "Developed seamless image capture and upload workflows within the Flutter frontend with low-bandwidth compression.",
-        "Supported SDG Goal 11 by building robust digital infrastructure for transparent, community-driven governance solutions."
-      ],
-      "createdAt": "2025-03-01T00:00:00Z",
-      "pushedAt": "2025-06-30T15:00:00Z",
-      "dateLabel": "Mar 2025 — Jun 2025",
-      "isOngoing": false,
-      "isPrivate": false,
-      "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02",
-      "homepage": "",
-      "topics": ["portfolio", "flutter", "dart", "firebase", "sdg11", "mobile-app"],
-      "techStack": ["Flutter", "Dart", "Firebase Firestore", "Firebase Cloud Storage", "Java"],
-      "stars": 15,
-      "forks": 2,
-      "primaryLanguage": "Dart",
-      "languages": {
-        "Dart": 64800,
-        "Java": 31200,
-        "SQL": 5000
-      }
+      },
+      "privateMessage": ""
     }
   ]
 }
