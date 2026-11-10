@@ -1,42 +1,42 @@
 {
-  "generatedAt": "2026-11-10T13:18:00.000Z",
+  "generatedAt": "2026-11-10T13:50:16.533Z",
   "username": "naveenmariopereradev02",
-  "totalRepos": 9,
+  "totalRepos": 10,
   "ongoingCount": 4,
-  "completedCount": 5,
+  "completedCount": 6,
   "languagesSummary": [
     {
       "name": "Dart",
       "bytes": 750104,
-      "percentage": 40.4,
+      "percentage": 40,
       "repoCount": 2,
       "color": "#00B4AB"
     },
     {
       "name": "JavaScript",
       "bytes": 296550,
-      "percentage": 16,
+      "percentage": 15.8,
       "repoCount": 6,
       "color": "#f1e05a"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 232298,
-      "percentage": 12.5,
+      "percentage": 12.4,
       "repoCount": 1,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
-      "bytes": 204357,
-      "percentage": 11,
+      "bytes": 212214,
+      "percentage": 11.3,
       "repoCount": 4,
       "color": "#3572A5"
     },
     {
       "name": "TypeScript",
-      "bytes": 129534,
-      "percentage": 7,
+      "bytes": 142819,
+      "percentage": 7.6,
       "repoCount": 2,
       "color": "#3178c6"
     },
@@ -64,7 +64,7 @@
     {
       "name": "C++",
       "bytes": 25176,
-      "percentage": 1.4,
+      "percentage": 1.3,
       "repoCount": 1,
       "color": "#f34b7d"
     },
@@ -126,6 +126,50 @@
     }
   ],
   "projects": [
+    {
+      "id": "ZenData",
+      "name": "ZenData",
+      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+      "role": "Lead Architect & Developer",
+      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
+      "highlights": [
+        "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
+        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
+        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
+        "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
+      ],
+      "createdAt": "2026-10-28T10:17:05Z",
+      "pushedAt": "2026-11-10T13:11:15Z",
+      "dateLabel": "Oct 2026 — Present",
+      "isOngoing": true,
+      "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
+      "homepage": "https://zendata-frontend.onrender.com",
+      "topics": [],
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "Pandas",
+        "NumPy",
+        "Next.js",
+        "TypeScript",
+        "ReportLab",
+        "OpenPyXL"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "TypeScript",
+      "languages": {
+        "TypeScript": 114419,
+        "Python": 102637,
+        "CSS": 7420,
+        "JavaScript": 465,
+        "Procfile": 63
+      }
+    },
     {
       "id": "trustlink",
       "name": "trustlink",
@@ -228,101 +272,6 @@
       }
     },
     {
-      "id": "ZenData",
-      "name": "ZenData",
-      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
-      "role": "Lead Architect & Developer",
-      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates tabular datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
-      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and export executive scorecards.",
-      "highlights": [
-        "Engineered a 4-Pillar Data Health Audit Engine evaluating tabular datasets across Completeness, Uniqueness, Validity, and Statistical Consistency (using 1.5x IQR outlier detection) to generate real-time 0–100% quality scores.",
-        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders (?, not given) and cluster categorical typos (Diary -> Dairy) without fabricating values for missing PII or transaction IDs.",
-        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals, outlier quantities, and inverted unit prices.",
-        "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks with full transformation changelogs."
-      ],
-      "createdAt": "2026-08-01T00:00:00Z",
-      "pushedAt": "2026-11-10T13:15:00Z",
-      "dateLabel": "Aug 2026 — Present",
-      "isOngoing": true,
-      "isPrivate": false,
-      "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
-      "homepage": "https://zendata-frontend.onrender.com",
-      "topics": [
-        "portfolio",
-        "fastapi",
-        "pandas",
-        "numpy",
-        "nextjs",
-        "data-quality",
-        "python"
-      ],
-      "techStack": [
-        "Python",
-        "FastAPI",
-        "Pandas",
-        "NumPy",
-        "Next.js",
-        "TypeScript",
-        "ReportLab",
-        "OpenPyXL"
-      ],
-      "stars": 1,
-      "forks": 0,
-      "primaryLanguage": "Python",
-      "languages": {
-        "TypeScript": 101134,
-        "Python": 94780,
-        "CSS": 7420,
-        "JavaScript": 465,
-        "Procfile": 63
-      }
-    },
-    {
-      "id": "SpotIT-LK",
-      "name": "SpotIT-LK",
-      "title": "SpotIT LK",
-      "role": "Active Development",
-      "description": "Report, Track, Solve SpotIT LK is a comprehensive civic reporting platform designed to empower citizens to report local issues, track their progress, and facilitate quick resolutions by relevant authorities.",
-      "readmeExcerpt": "Report, Track, Solve SpotIT LK is a comprehensive civic reporting platform designed to empower citizens to report local issues, track their progress, and facilitate quick resolutions by relevant authorities.",
-      "highlights": [
-        "Location-Based Reporting: Drop a pin exactly where the issue is located using integrated Google Maps.",
-        "Real-Time Tracking: Keep track of the status of your reported issues.",
-        "Secure Authentication: User accounts are secured using Firebase Authentication and Google Sign-In.",
-        "Cloud Storage: Attach images and media to your reports seamlessly.",
-        "Interactive Dashboard: View, manage, and filter reported issues in your area."
-      ],
-      "createdAt": "2026-09-30T06:13:57Z",
-      "pushedAt": "2026-09-30T06:32:43Z",
-      "dateLabel": "Sep 2026 — Present",
-      "isOngoing": true,
-      "featured": true,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/SpotIT-LK",
-      "homepage": "",
-      "topics": [],
-      "techStack": [
-        "Dart",
-        "JavaScript",
-        "HTML",
-        "Swift",
-        "Kotlin",
-        "Objective-C"
-      ],
-      "stars": 1,
-      "forks": 0,
-      "primaryLanguage": "Dart",
-      "languages": {
-        "Dart": 562046,
-        "JavaScript": 17892,
-        "HTML": 1517,
-        "Swift": 1055,
-        "Kotlin": 120,
-        "Objective-C": 38
-      }
-    },
-    {
       "id": "ML-Predictive-Modeling-Project",
       "name": "ML-Predictive-Modeling-Project",
       "title": "ML Predictive Modeling Project",
@@ -354,6 +303,48 @@
       "primaryLanguage": "Jupyter Notebook",
       "languages": {
         "Jupyter Notebook": 232298
+      }
+    },
+    {
+      "id": "SpotIT-LK",
+      "name": "SpotIT-LK",
+      "title": "Civic Engagement & Feedback Platform — SpotIT LK",
+      "role": "Backend & Multimedia Integration Lead",
+      "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
+      "readmeExcerpt": "Report, Track, Solve SpotIT LK is a comprehensive civic reporting platform designed to empower citizens to report local issues, track their progress, and facilitate quick resolutions by relevant authorities.",
+      "highlights": [
+        "Architected and implemented the multimedia storage infrastructure enabling citizens to attach photo evidence to public issue reports.",
+        "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media for government dashboards.",
+        "Developed seamless image capture, compression, and upload workflows in Flutter optimized for low-bandwidth networks.",
+        "Collaborated on client-server synchronization across Flutter, Firebase Firestore, and cloud storage services supporting SDG Goal 11."
+      ],
+      "createdAt": "2026-09-30T06:13:57Z",
+      "pushedAt": "2026-09-30T06:32:43Z",
+      "dateLabel": "Mar 2025 — Jun 2025",
+      "isOngoing": false,
+      "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/SpotIT-LK",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Firebase Cloud Storage",
+        "Firebase Firestore",
+        "SDG Goal 11"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "Dart",
+      "languages": {
+        "Dart": 562046,
+        "JavaScript": 17892,
+        "HTML": 1517,
+        "Swift": 1055,
+        "Kotlin": 120,
+        "Objective-C": 38
       }
     },
     {
