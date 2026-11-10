@@ -3058,12 +3058,17 @@
       }
 
       /* 3. Hero Titles Responsive කිරීම */
-      .hero-tagline {
-        font-size: 1.9rem;
-        line-height: 1.25;
+      .hero-greeting {
+        font-size: 2.3rem;
+        line-height: 1.15;
       }
-      .hero-subtitle {
-        font-size: 0.95rem;
+      .hero-tagline, #heroTagline, .hero-role {
+        font-size: 1.05rem;
+        line-height: 1.35;
+      }
+      .hero-subtitle, #heroSubtitle, .hero-bio {
+        font-size: 0.88rem;
+        line-height: 1.6;
       }
 
       /* 4. Live Commit Bar එක Mobile එකට wrap වීම වැළැක්වීම */
@@ -3083,6 +3088,18 @@
       }
       .highlights-grid {
         grid-template-columns: 1fr; /* Metrics කාඩ් 1 බැගින් තිරස්ව පෙළගැසීම */
+      }
+
+      /* 6. Mobile Cards & Section Watermarks Polish */
+      .project-card, .glass-card {
+        padding: 18px;
+      }
+      .section-watermark {
+        font-size: 3.5rem;
+        line-height: 1;
+      }
+      section {
+        padding: 48px 0;
       }
     }
   </style>
