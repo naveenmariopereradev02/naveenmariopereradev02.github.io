@@ -289,6 +289,17 @@
       animation: pulseDot 2s infinite;
     }
 
+    .admin-badge-eye {
+      opacity: 0.85;
+      flex-shrink: 0;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    }
+
+    .admin-visitor-badge:hover .admin-badge-eye {
+      opacity: 1;
+      transform: scale(1.12);
+    }
+
     html[data-theme="light"] .admin-visitor-badge {
       background: rgba(0, 0, 0, 0.04);
       border-color: rgba(0, 0, 0, 0.1);
@@ -1098,7 +1109,7 @@
 
     .ai-cli-prompts {
       display: flex;
-      gap: 6px;
+      gap: 7px;
       flex-wrap: wrap;
       padding: 10px 16px;
       border-bottom: 1px solid var(--border-subtle);
@@ -1106,27 +1117,53 @@
     }
 
     .ai-prompt-chip {
-      font-size: 0.71rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
       font-weight: 600;
-      padding: 5px 10px;
+      padding: 4px 10px 4px 4px;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--text-secondary);
       cursor: pointer;
-      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .ai-chip-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: inline-grid;
+      place-items: center;
+      flex-shrink: 0;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
     }
 
     .ai-prompt-chip:hover {
-      background: rgba(249, 115, 22, 0.18);
-      border-color: rgba(249, 115, 22, 0.45);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
       color: var(--text-primary);
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .ai-prompt-chip:hover .ai-chip-icon {
+      transform: scale(1.1);
     }
 
     html[data-theme="light"] .ai-prompt-chip {
       background: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.12);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: var(--text-secondary);
+    }
+
+    html[data-theme="light"] .ai-prompt-chip:hover {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.2);
+      color: var(--text-primary);
     }
 
     .ai-cli-log {
@@ -2256,6 +2293,17 @@
       box-shadow: 0 6px 20px var(--accent-glow);
     }
 
+    .filter-dot-ongoing {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -3046,7 +3094,10 @@
   <div class="top-left-controls">
     <div id="adminVisitorBadge" class="admin-visitor-badge" style="display:none;" title="Admin Telemetry • Profile Visits (Visible only to you)">
       <span class="admin-badge-dot"></span>
-      <span style="font-size: 0.85rem; line-height: 1;">👁️</span>
+      <svg class="admin-badge-eye" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
       <span id="adminVisitorCount">...</span>
       <span style="opacity: 0.75; font-size: 0.7rem; font-weight: 500;">visits</span>
     </div>
@@ -3238,12 +3289,62 @@
         </button>
       </div>
       <div class="ai-cli-prompts">
-        <button type="button" class="ai-prompt-chip" data-query="Tell me about TrustLink SSO (SLT)">🔒 TrustLink SSO (SLT)</button>
-        <button type="button" class="ai-prompt-chip" data-query="skills">💻 Tech Stack (skills)</button>
-        <button type="button" class="ai-prompt-chip" data-query="projects">🚀 All Projects</button>
-        <button type="button" class="ai-prompt-chip" data-query="certs">🛡️ Cybersecurity Certs</button>
-        <button type="button" class="ai-prompt-chip" data-query="availability">💼 Internship Status</button>
-        <button type="button" class="ai-prompt-chip" data-query="help">⌨️ CLI Commands</button>
+        <button type="button" class="ai-prompt-chip" data-query="Tell me about TrustLink SSO (SLT)">
+          <span class="ai-chip-icon" style="color:#fbbf24; background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.25);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </span>
+          <span>TrustLink SSO (SLT)</span>
+        </button>
+        <button type="button" class="ai-prompt-chip" data-query="skills">
+          <span class="ai-chip-icon" style="color:#38bdf8; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.25);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </span>
+          <span>Tech Stack (skills)</span>
+        </button>
+        <button type="button" class="ai-prompt-chip" data-query="projects">
+          <span class="ai-chip-icon" style="color:#f97316; background:rgba(249,115,22,0.12); border:1px solid rgba(249,115,22,0.25);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+              <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+            </svg>
+          </span>
+          <span>All Projects</span>
+        </button>
+        <button type="button" class="ai-prompt-chip" data-query="certs">
+          <span class="ai-chip-icon" style="color:#c084fc; background:rgba(192,132,252,0.12); border:1px solid rgba(192,132,252,0.25);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+          </span>
+          <span>Cybersecurity Certs</span>
+        </button>
+        <button type="button" class="ai-prompt-chip" data-query="availability">
+          <span class="ai-chip-icon" style="color:#34d399; background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.25);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="14" x="2" y="6" rx="2"/>
+              <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </span>
+          <span>Internship Status</span>
+        </button>
+        <button type="button" class="ai-prompt-chip" data-query="help">
+          <span class="ai-chip-icon" style="color:#60a5fa; background:rgba(96,165,250,0.12); border:1px solid rgba(96,165,250,0.25);">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="4 17 10 11 4 5"/>
+              <line x1="12" x2="20" y1="19" y2="19"/>
+            </svg>
+          </span>
+          <span>CLI Commands</span>
+        </button>
       </div>
       <div class="ai-cli-log" id="aiCliLog">
         <div class="ai-msg-bot">
@@ -3456,7 +3557,7 @@
             <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
           </div>
           <div class="chart-footer">
-            <span>📅 2025 - 2026</span>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>2025 - 2026</span>
             <span>Trending up across active repositories ↗</span>
           </div>
         </div>
@@ -3661,8 +3762,8 @@
 
       <div class="filter-bar" id="projectFilters">
         <button class="filter-btn active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="ongoing">🟢 Ongoing</button>
-        <button class="filter-btn" data-filter="featured">⭐ Featured</button>
+        <button class="filter-btn" data-filter="ongoing"><span class="filter-dot-ongoing"></span>Ongoing</button>
+        <button class="filter-btn" data-filter="featured"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Featured</button>
         <button class="filter-btn" data-filter="completed">Completed</button>
       </div>
 
@@ -4367,8 +4468,8 @@
       const uniqueLangs = Array.from(new Set(projects.map((p) => p.primaryLanguage).filter(Boolean)));
       const baseFiltersHtml = `
         <button class="filter-btn ${activeProjectFilter === 'all' ? 'active' : ''}" data-filter="all">All (${projects.length})</button>
-        <button class="filter-btn ${activeProjectFilter === 'ongoing' ? 'active' : ''}" data-filter="ongoing">🟢 Ongoing (${ongoingCount})</button>
-        <button class="filter-btn ${activeProjectFilter === 'featured' ? 'active' : ''}" data-filter="featured">⭐ Featured</button>
+        <button class="filter-btn ${activeProjectFilter === 'ongoing' ? 'active' : ''}" data-filter="ongoing"><span class="filter-dot-ongoing"></span>Ongoing (${ongoingCount})</button>
+        <button class="filter-btn ${activeProjectFilter === 'featured' ? 'active' : ''}" data-filter="featured"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="vertical-align:-1px; margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Featured</button>
         <button class="filter-btn ${activeProjectFilter === 'completed' ? 'active' : ''}" data-filter="completed">Completed</button>
         ${uniqueLangs.map((lang) => `
           <button class="filter-btn ${activeProjectFilter === 'lang:' + lang ? 'active' : ''}" data-filter="lang:${escapeHtml(lang)}">${escapeHtml(lang)}</button>
@@ -4449,7 +4550,7 @@
                 ${p.isPrivate ? `
                   <button type="button" class="proj-link proj-link-private" title="${escapeHtml(p.privateMessage || 'Private Enterprise Repository — Access restricted under organizational NDA')}" onclick="alert('${escapeHtml(p.privateMessage || 'This repository is private and proprietary under organizational access control (SLT / Enterprise NDA). Direct source code access is restricted.')}')">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                    <span>Private Repo 🔒</span>
+                    <span>Private Repo</span>
                   </button>
                 ` : `
                   <a href="${escapeHtml(p.htmlUrl || 'https://github.com/naveenmariopereradev02')}" target="_blank" rel="noopener" class="proj-link">
@@ -4475,7 +4576,7 @@
               ${p.isPrivate ? `
                 <span class="repo-visibility-pill private-pill" title="${escapeHtml(p.privateMessage || 'Private Enterprise Repository')}">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Private 🔒
+                  Private
                 </span>
               ` : `
                 <span class="repo-visibility-pill public-pill">
@@ -4484,7 +4585,8 @@
                 </span>
               `}
               <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
-                ${p.isOngoing ? '🟢 Ongoing — Active Development' : '✓ Completed Milestone'}
+                <span style="width:6px;height:6px;border-radius:50%;background:${p.isOngoing ? '#4ade80' : 'var(--text-muted)'};"></span>
+                ${p.isOngoing ? 'Ongoing — Active Development' : 'Completed Milestone'}
               </span>
             </div>
           </div>
@@ -4914,7 +5016,7 @@
           window.history.replaceState({}, document.title, cleanUrl);
         } catch (e) {}
         setTimeout(() => {
-          showPortfolioToast('👑 Admin Mode Unlocked: Profile visitor counter is now visible to you.');
+          showPortfolioToast('Admin Mode Unlocked: Profile visitor counter is now visible to you.');
         }, 700);
       } else if (adminParam === 'false' || adminParam === 'off' || adminParam === '0' || adminParam === 'clear') {
         localStorage.removeItem('naveen_admin_mode');
@@ -4937,7 +5039,7 @@
 
       badge.addEventListener('click', () => {
         const count = window.currentPortfolioVisits || countEl.textContent || 'Live';
-        showPortfolioToast(`👑 Admin Telemetry: ${count} Total Profile Visits recorded. (Visible only on this device)`);
+        showPortfolioToast(`Admin Telemetry: ${count} Total Profile Visits recorded. (Visible only on this device)`);
       });
 
       // 2. Fetch live hits from visitorbadge.io (CORS enabled: Access-Control-Allow-Origin: *)
@@ -5231,7 +5333,7 @@
         projects[0];
       if (!p) return;
 
-      document.getElementById('archModalBadge').textContent = `${p.dateLabel || 'Project'} · ${p.isPrivate ? '🔒 Private Enterprise NDA' : '🌐 Public Repository'}`;
+      document.getElementById('archModalBadge').textContent = `${p.dateLabel || 'Project'} · ${p.isPrivate ? 'Private Enterprise NDA' : 'Public Repository'}`;
       document.getElementById('archModalTitle').textContent = p.title || p.name;
       document.getElementById('archModalRole').textContent = p.role || '';
       document.getElementById('archModalDesc').textContent = p.description || '';
@@ -5291,7 +5393,7 @@
         const projects = ((currentProjectsData && currentProjectsData.projects) || []).map((p) => ({
           group: 'Projects & Architecture',
           label: `${p.title}`,
-          badge: p.isPrivate ? '🔒 Architecture' : 'Project',
+          badge: p.isPrivate ? 'Architecture' : 'Project',
           action: () => openArchitectureModal(p.id)
         }));
 
@@ -5299,7 +5401,7 @@
           ...(localStorage.getItem('naveen_admin_mode') === 'true' ? [{
             group: 'Admin Telemetry',
             label: `Total Profile Views: ${window.currentPortfolioVisits || 'Live'} (Click to hide badge)`,
-            badge: '👑 Admin',
+            badge: 'Admin',
             action: () => {
               localStorage.removeItem('naveen_admin_mode');
               const badge = document.getElementById('adminVisitorBadge');
@@ -5310,7 +5412,7 @@
           {
             group: 'Quick Actions',
             label: 'Preview / Download CV (Naveen Perera Resume PDF)',
-            badge: '📄 CV / PDF',
+            badge: 'CV / PDF',
             action: () => openCvModal()
           },
           {
@@ -5475,7 +5577,7 @@
         if (q === 'views' || q === 'visits' || q === 'visitors' || q === 'admin' || q === 'stats') {
           const count = window.currentPortfolioVisits || 'Live Tracking...';
           const isAdmin = localStorage.getItem('naveen_admin_mode') === 'true';
-          return `<strong>👁️ Total Profile Visits:</strong> ${count} views recorded.<br/>
+          return `<strong style="color:#38bdf8;">[Admin Telemetry] Total Profile Visits:</strong> ${count} views recorded.<br/>
           <strong>Admin Status:</strong> ${isAdmin ? '<span style="color:#38bdf8; font-weight:700;">Active (Visitor Badge visible)</span>' : '<span style="color:var(--text-muted);">Deactivated (Hidden)</span>'}<br/>
           <em>Commands: Type <code>admin on</code> to reveal the counter badge, or <code>admin off</code> to hide it.</em>`;
         }
@@ -5483,45 +5585,45 @@
           localStorage.setItem('naveen_admin_mode', 'true');
           const badge = document.getElementById('adminVisitorBadge');
           if (badge) badge.style.display = 'inline-flex';
-          showPortfolioToast('👑 Admin Mode Activated: Visitor Badge is now visible.');
-          return `<strong>👑 Admin Mode:</strong> <span style="color:#4ade80; font-weight:700;">ACTIVATED</span>. The Visitor Counter badge is now visible in your top-right control bar!`;
+          showPortfolioToast('Admin Mode Activated: Visitor Badge is now visible.');
+          return `<strong>[Admin Mode]:</strong> <span style="color:#4ade80; font-weight:700;">ACTIVATED</span>. The Visitor Counter badge is now visible in your top-left control bar!`;
         }
         if (q === 'admin off' || q === 'admin disable') {
           localStorage.removeItem('naveen_admin_mode');
           const badge = document.getElementById('adminVisitorBadge');
           if (badge) badge.style.display = 'none';
           showPortfolioToast('Admin Mode Deactivated: Visitor Badge hidden.');
-          return `<strong>Admin Mode:</strong> <span style="color:var(--accent); font-weight:700;">DEACTIVATED</span>. The Visitor Counter badge is now hidden from the UI.`;
+          return `<strong>[Admin Mode]:</strong> <span style="color:var(--accent); font-weight:700;">DEACTIVATED</span>. The Visitor Counter badge is now hidden from the UI.`;
         }
         if (q === 'whoami' || q.includes('who is') || q.includes('about') || q.includes('university') || q.includes('education')) {
           return `<strong>Naveen Perera</strong> — Second-Year BSc (Hons) Computer Science Undergraduate at the <strong>University of Westminster (IIT Sri Lanka)</strong>.<br/>
           Specializes in Full-Stack Engineering, Identity &amp; Access Management (OAuth 2.0 / OIDC / FIDO2), Automated Data Quality Engines, and Machine Learning.`;
         }
         if (q.includes('trustlink') || q.includes('slt') || q.includes('oauth') || q.includes('sso')) {
-          return `<strong>🔒 TrustLink — Identity Platform (OAuth 2.0 &amp; OIDC SSO)</strong><br/>
+          return `<strong style="color:#fbbf24;">[Identity Core] TrustLink — Identity Platform (OAuth 2.0 &amp; OIDC SSO)</strong><br/>
           Built for <strong>SLT Mobitel</strong> (Private Enterprise Repo under NDA). Full-stack Single Sign-On provider featuring passwordless FIDO2/WebAuthn passkeys, PKCE, RS256 signed JWTs, and contextual risk scoring.<br/>
           <em>Tip: Click "Architecture" on the TrustLink project card to view the interactive system flow!</em>`;
         }
         if (q.includes('trustpass') || q.includes('trust-pass') || q.includes('flight')) {
-          return `<strong>✈️ TrustPass — Smart Multi-Flight Booking &amp; Boarding Pass Platform</strong><br/>
+          return `<strong style="color:#38bdf8;">[Air Platform] TrustPass — Smart Multi-Flight Booking Platform</strong><br/>
           Full-stack React + Vite + Tailwind CSS platform with interactive cabin/seat selection, multi-leg itinerary state management, and barcode boarding pass generation.<br/>
           Repo: <a href="https://github.com/naveenmariopereradev02/trust-pass" target="_blank" style="color:var(--accent);">github.com/naveenmariopereradev02/trust-pass ↗</a>`;
         }
         if (q.includes('zendata') || q.includes('data quality') || q.includes('hygiene')) {
-          return `<strong>📊 ZenData — Automated 4-Pillar Data Quality &amp; Hygiene Engine</strong><br/>
+          return `<strong style="color:#34d399;">[Data Engine] ZenData — Automated 4-Pillar Data Quality &amp; Hygiene Engine</strong><br/>
           Python + Streamlit + Pandas automated pipeline evaluating Completeness, Uniqueness, Validity, and Consistency with one-click remediation and audit exports.`;
         }
         if (q.includes('heart') || q.includes('ml') || q.includes('machine learning')) {
-          return `<strong>🧠 Heart Disease Risk Prediction System (99% Accuracy)</strong><br/>
+          return `<strong style="color:#ec4899;">[ML Engine] Heart Disease Risk Prediction System (99% Accuracy)</strong><br/>
           Supervised ML pipeline built with Python &amp; Scikit-Learn comparing Random Forest, XGBoost, and SVM with cross-validated ROC-AUC evaluation.`;
         }
         if (q.includes('spotit') || q.includes('flutter')) {
-          return `<strong>📱 SpotIT LK — Civic Issue Reporting Mobile App (SDG Goal 11)</strong><br/>
+          return `<strong style="color:#60a5fa;">[Mobile App] SpotIT LK — Civic Issue Reporting Mobile App (SDG Goal 11)</strong><br/>
           Built with Flutter, Dart &amp; Firebase Firestore/Storage enabling citizens to report infrastructure issues with GPS tagging and compressed photo uploads.`;
         }
         if (q === 'projects' || q.includes('project')) {
-          return `<strong>🚀 Naveen's Portfolio Projects (${projects.length}):</strong><br/>` +
-            projects.map((p) => `• <strong>${escapeHtml(p.title)}</strong> (${p.isPrivate ? '🔒 Private NDA' : '🌐 Public'}) — <em>${escapeHtml(p.primaryLanguage)}</em>`).join('<br/>');
+          return `<strong style="color:var(--accent);">Portfolio Projects (${projects.length}):</strong><br/>` +
+            projects.map((p) => `• <strong>${escapeHtml(p.title)}</strong> (${p.isPrivate ? '[Private NDA]' : '[Public]'}) — <em>${escapeHtml(p.primaryLanguage)}</em>`).join('<br/>');
         }
         if (q === 'skills' || q.includes('skill') || q.includes('stack') || q.includes('language') || q.includes('python') || q.includes('react')) {
           const skills = (profile.skills || []).map((s) => `• <strong>${escapeHtml(s.category)}:</strong> ${(s.items || []).map(escapeHtml).join(', ')}`).join('<br/>');
@@ -5529,18 +5631,18 @@
         }
         if (q === 'certs' || q.includes('cert') || q.includes('security') || q.includes('cyber')) {
           const certs = (profile.certifications || []).map((c) => `• <strong>${escapeHtml(c.title)}</strong> — ${escapeHtml(c.issuer)} (${escapeHtml(c.date)})`).join('<br/>');
-          return `<strong>🛡️ Verified Certifications:</strong><br/>${certs}`;
+          return `<strong style="color:#c084fc;">[Security Certifications] Verified Credentials:</strong><br/>${certs}`;
         }
         if (q === 'availability' || q.includes('intern') || q.includes('hire') || q.includes('available') || q.includes('job')) {
-          return `<strong>🟢 Internship &amp; Collaboration Status:</strong><br/>
+          return `<strong style="color:#4ade80;">[Availability] Internship &amp; Collaboration Status:</strong><br/>
           Naveen is actively seeking <strong>Software Engineering / Full-Stack / Cybersecurity / AI-ML Internship opportunities</strong>. Reach out directly at <strong style="color:var(--accent);">naveenmarioperera04@gmail.com</strong>!`;
         }
         if (q === 'cv' || q === 'resume' || q.includes('download cv')) {
-          return `<strong>📄 Naveen Perera — Curriculum Vitae (PDF):</strong><br/>
+          return `<strong style="color:#38bdf8;">[Resume] Naveen Perera — Curriculum Vitae (PDF):</strong><br/>
           You can <a href="./cv/Naveen_Perera_CV.pdf" download="Naveen_Perera_CV.pdf" style="color:var(--accent); font-weight:700;">Download the CV (PDF) directly here ↓</a> or click the <strong>Preview / Download CV</strong> button in the Hero section!`;
         }
         if (q === 'contact' || q.includes('email') || q.includes('reach')) {
-          return `<strong>📬 Contact Naveen Perera:</strong><br/>
+          return `<strong style="color:var(--accent);">[Contact Channels] Reach Naveen Perera:</strong><br/>
           • Email: <strong style="color:var(--accent);">naveenmarioperera04@gmail.com</strong><br/>
           • GitHub: <a href="https://github.com/naveenmariopereradev02" target="_blank" style="color:var(--accent);">@naveenmariopereradev02 ↗</a><br/>
           • WhatsApp: +94 78 870 0322`;
