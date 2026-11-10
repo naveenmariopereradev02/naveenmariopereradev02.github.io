@@ -327,7 +327,7 @@ async function main() {
       dateLabel: override.dateLabel || buildDateLabel(repo.created_at, repo.pushed_at, isOngoing),
       isOngoing,
       featured: typeof override.featured === 'boolean' ? override.featured : repo.stargazers_count > 0,
-      htmlUrl: repo.html_url,
+      htmlUrl: override.htmlUrl || repo.html_url || `https://github.com/${username}/${repo.name}`,
       homepage: override.demoUrl || repo.homepage || '',
       topics: repo.topics || [],
       techStack,

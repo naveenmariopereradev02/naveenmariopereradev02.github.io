@@ -7,6 +7,7 @@
       "dateLabel": "Jul 2026 — Nov 2026",
       "featured": true,
       "ongoing": true,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
       "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "highlights": [
