@@ -223,12 +223,20 @@
       mix-blend-mode: normal;
     }
 
-    ::view-transition-old(root) {
+    /* When switching to Dark: new view (dark) is on top and expands outwards */
+    html[data-theme="dark"]::view-transition-old(root) {
       z-index: 1;
     }
-
-    ::view-transition-new(root) {
+    html[data-theme="dark"]::view-transition-new(root) {
       z-index: 99999;
+    }
+
+    /* When switching to Light: old view (dark) is on top and shrinks in reverse */
+    html[data-theme="light"]::view-transition-old(root) {
+      z-index: 99999;
+    }
+    html[data-theme="light"]::view-transition-new(root) {
+      z-index: 1;
     }
 
     /* Prevent CSS transition flash/lag during View Transition snapshots */
@@ -3318,6 +3326,8 @@
           Math.max(y, window.innerHeight - y)
         );
 
+        const isGoingToDark = newTheme === 'dark';
+
         // Modern browsers with View Transition API (Chrome 111+, Safari 18+, Edge 111+)
         if (document.startViewTransition) {
           isThemeTransitioning = true;
@@ -3328,17 +3338,25 @@
           });
 
           transition.ready.then(() => {
+            const forwardClip = [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ];
+            const reverseClip = [
+              `circle(${endRadius}px at ${x}px ${y}px)`,
+              `circle(0px at ${x}px ${y}px)`
+            ];
+
+            // If switching to Dark: new view (dark) expands outwards
+            // If switching to Light: old view (dark) shrinks back into corner in reverse!
             document.documentElement.animate(
               {
-                clipPath: [
-                  `circle(0px at ${x}px ${y}px)`,
-                  `circle(${endRadius}px at ${x}px ${y}px)`
-                ]
+                clipPath: isGoingToDark ? forwardClip : reverseClip
               },
               {
                 duration: 650,
                 easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
-                pseudoElement: '::view-transition-new(root)'
+                pseudoElement: isGoingToDark ? '::view-transition-new(root)' : '::view-transition-old(root)'
               }
             );
           });
@@ -3350,39 +3368,62 @@
           return;
         }
 
-        // Circular expanding ripple fallback for browsers without View Transition API
+        // Circular expanding / contracting ripple fallback for browsers without View Transition API
         isThemeTransitioning = true;
         const ripple = document.createElement('div');
         ripple.className = 'theme-circle-ripple';
-        const targetBg = newTheme === 'dark' ? '#070709' : '#f6f6f7';
-        ripple.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: ${targetBg};
-          z-index: 999999;
-          pointer-events: none;
-          clip-path: circle(0px at ${x}px ${y}px);
-          transition: clip-path 550ms cubic-bezier(0.25, 1, 0.5, 1);
-        `;
-        document.body.appendChild(ripple);
 
-        // Trigger reflow
-        ripple.offsetHeight;
+        if (isGoingToDark) {
+          // Dark circle expands outwards from corner over light page
+          ripple.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #070709;
+            z-index: 999999;
+            pointer-events: none;
+            clip-path: circle(0px at ${x}px ${y}px);
+            transition: clip-path 550ms cubic-bezier(0.25, 1, 0.5, 1);
+          `;
+          document.body.appendChild(ripple);
+          ripple.offsetHeight; // trigger reflow
+          ripple.style.clipPath = `circle(${endRadius}px at ${x}px ${y}px)`;
 
-        ripple.style.clipPath = `circle(${endRadius}px at ${x}px ${y}px)`;
+          setTimeout(() => {
+            setTheme('dark');
+            ripple.style.transition = 'opacity 200ms ease';
+            ripple.style.opacity = '0';
+            setTimeout(() => {
+              ripple.remove();
+              isThemeTransitioning = false;
+            }, 220);
+          }, 450);
+        } else {
+          // Reversing: dark circle shrinks into the button corner, revealing light page underneath
+          setTheme('light');
+          ripple.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #070709;
+            z-index: 999999;
+            pointer-events: none;
+            clip-path: circle(${endRadius}px at ${x}px ${y}px);
+            transition: clip-path 550ms cubic-bezier(0.25, 1, 0.5, 1);
+          `;
+          document.body.appendChild(ripple);
+          ripple.offsetHeight; // trigger reflow
+          ripple.style.clipPath = `circle(0px at ${x}px ${y}px)`;
 
-        setTimeout(() => {
-          setTheme(newTheme);
-          ripple.style.transition = 'opacity 220ms ease';
-          ripple.style.opacity = '0';
           setTimeout(() => {
             ripple.remove();
             isThemeTransitioning = false;
-          }, 240);
-        }, 450);
+          }, 560);
+        }
       }
 
       document.getElementById('themeToggleBtn').addEventListener('click', toggleThemeWithAnimation);
