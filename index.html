@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Naveen Perera — Computer Science Undergraduate & Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Naveen Perera — Computer Science Undergraduate at University of Westminster (IIT Sri Lanka), Full-Stack Developer, Cybersecurity & Machine Learning Engineer." />
+  <meta name="description"
+    content="Portfolio of Naveen Perera — Computer Science Undergraduate at University of Westminster (IIT Sri Lanka), Full-Stack Developer, Cybersecurity & Machine Learning Engineer." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       color-scheme: dark light;
@@ -152,8 +156,17 @@
     }
 
     @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(1.25); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.45;
+        transform: scale(1.25);
+      }
     }
 
     .sync-pill:hover {
@@ -258,6 +271,7 @@
     html[data-theme="dark"]::view-transition-old(root) {
       z-index: 1;
     }
+
     html[data-theme="dark"]::view-transition-new(root) {
       z-index: 99999;
       animation: vt-circle-expand 520ms cubic-bezier(0.25, 1, 0.5, 1) both;
@@ -268,6 +282,7 @@
       z-index: 99999;
       animation: vt-circle-shrink 520ms cubic-bezier(0.25, 1, 0.5, 1) both;
     }
+
     html[data-theme="light"]::view-transition-new(root) {
       z-index: 1;
     }
@@ -484,6 +499,125 @@
     }
 
     /* ==========================================================================
+       LIVE GITHUB COMMIT FEED BAR & LIQUID GLASS TOAST NOTIFICATION
+       ========================================================================== */
+    .live-commit-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 8px 14px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.16);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .live-commit-bar:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.34);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.18), 0 6px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    html[data-theme="light"] .live-commit-bar {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.05);
+      color: var(--text-secondary);
+    }
+
+    html[data-theme="light"] .live-commit-bar:hover {
+      background: rgba(0, 0, 0, 0.08);
+      border-color: rgba(0, 0, 0, 0.22);
+      color: var(--text-primary);
+    }
+
+    .live-commit-repo {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(249, 115, 22, 0.14);
+      border: 1px solid rgba(249, 115, 22, 0.32);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.71rem;
+    }
+
+    .live-commit-msg {
+      color: var(--text-primary);
+      font-weight: 500;
+      max-width: 360px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .live-commit-time {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .portfolio-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px) scale(0.95);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 12px;
+      background: rgba(20, 20, 26, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.14), 0 12px 32px rgba(0, 0, 0, 0.45);
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1), transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.25s ease;
+    }
+
+    .portfolio-toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    html[data-theme="light"] .portfolio-toast {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(0, 0, 0, 0.14);
+      color: #09090b;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 10px 28px rgba(0, 0, 0, 0.14);
+    }
+
+    .toast-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      background: rgba(34, 197, 94, 0.2);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      color: #4ade80;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
        RIGHT FLOATING SOCIAL DOCK (Exact Sample UI Match)
        ========================================================================== */
     .right-social-dock {
@@ -532,7 +666,7 @@
       pointer-events: none;
       transform: translateX(6px);
       transition: opacity 0.18s ease, transform 0.18s ease;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
     .social-badge:hover[data-tooltip]::after {
@@ -540,18 +674,73 @@
       transform: translateX(0);
     }
 
-    .sb-github { background: #18181b; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); }
-    .sb-x { background: #0f0f12; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); }
-    .sb-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: #fff; }
-    .sb-youtube { background: #ff0000; color: #ffffff; }
-    .sb-portfolio { background: #22c55e; color: #052e16; }
-    .sb-linkedin { background: #0a66c2; color: #ffffff; }
-    .sb-facebook { background: #1877f2; color: #ffffff; }
-    .sb-whatsapp { background: #22c55e; color: #ffffff; }
-    .sb-phone { background: #141418; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); }
-    .sb-cv { background: #18181b; color: #ffffff; font-weight: 800; font-size: 0.7rem; letter-spacing: -0.03em; border: 1px solid rgba(255,255,255,0.15); }
-    .sb-dribbble { background: #ea4c89; color: #ffffff; }
-    .sb-gmail { background: #ffffff; color: #ea4335; border: 1px solid rgba(0,0,0,0.1); }
+    .sb-github {
+      background: #18181b;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .sb-x {
+      background: #0f0f12;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .sb-insta {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      color: #fff;
+    }
+
+    .sb-youtube {
+      background: #ff0000;
+      color: #ffffff;
+    }
+
+    .sb-portfolio {
+      background: #22c55e;
+      color: #052e16;
+    }
+
+    .sb-linkedin {
+      background: #0a66c2;
+      color: #ffffff;
+    }
+
+    .sb-facebook {
+      background: #1877f2;
+      color: #ffffff;
+    }
+
+    .sb-whatsapp {
+      background: #22c55e;
+      color: #ffffff;
+    }
+
+    .sb-phone {
+      background: #141418;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .sb-cv {
+      background: #18181b;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: -0.03em;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .sb-dribbble {
+      background: #ea4c89;
+      color: #ffffff;
+    }
+
+    .sb-gmail {
+      background: #ffffff;
+      color: #ea4335;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
 
     /* ==========================================================================
        MAIN LAYOUT & SECTION WATERMARK HEADINGS
@@ -604,7 +793,7 @@
     .hero-section {
       min-height: 94vh;
       display: flex;
-       flex-direction: column;
+      flex-direction: column;
       justify-content: center;
       position: relative;
       padding-top: 40px;
@@ -715,8 +904,15 @@
     }
 
     @keyframes floatBolt {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-5px) rotate(6deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-5px) rotate(6deg);
+      }
     }
 
     .hero-role {
@@ -806,8 +1002,8 @@
       object-position: bottom center;
       display: block;
       filter: grayscale(100%) contrast(1.04);
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 82%, rgba(0, 0, 0, 0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 82%, rgba(0, 0, 0, 0) 100%);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -1055,7 +1251,7 @@
       line-height: 1.05;
       text-align: right;
       color: #ffffff;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     /* Card 5: Repositories Count Card */
@@ -1153,10 +1349,22 @@
       cursor: pointer;
     }
 
-    .heatmap-cell[data-level="1"] { background: #1d4ed8; }
-    .heatmap-cell[data-level="2"] { background: #2563eb; }
-    .heatmap-cell[data-level="3"] { background: #3b82f6; }
-    .heatmap-cell[data-level="4"] { background: #60a5fa; box-shadow: 0 0 6px rgba(96, 165, 250, 0.7); }
+    .heatmap-cell[data-level="1"] {
+      background: #1d4ed8;
+    }
+
+    .heatmap-cell[data-level="2"] {
+      background: #2563eb;
+    }
+
+    .heatmap-cell[data-level="3"] {
+      background: #3b82f6;
+    }
+
+    .heatmap-cell[data-level="4"] {
+      background: #60a5fa;
+      box-shadow: 0 0 6px rgba(96, 165, 250, 0.7);
+    }
 
     .heatmap-cell:hover {
       transform: scale(1.35);
@@ -1225,7 +1433,7 @@
       font-size: 0.96rem;
       font-weight: 700;
       z-index: 2;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
     }
 
     /* Card 10: Auto-Detected Languages Card (Exact Match to Screenshot 3!) */
@@ -1233,7 +1441,7 @@
       grid-column: span 6;
       min-height: 165px;
       background:
-        radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
         linear-gradient(135deg, #141418 0%, #0c0c0f 100%);
       background-size: 8px 8px, 100% 100%;
       padding: 20px 44px 20px 22px;
@@ -1755,20 +1963,23 @@
 
     .timeline-item.is-ongoing .timeline-progress-bar {
       width: 100%;
-      background: repeating-linear-gradient(
-        -45deg,
-        #22c55e,
-        #22c55e 10px,
-        #f97316 10px,
-        #f97316 20px
-      );
+      background: repeating-linear-gradient(-45deg,
+          #22c55e,
+          #22c55e 10px,
+          #f97316 10px,
+          #f97316 20px);
       background-size: 28px 28px;
       animation: moveStripes 1.2s linear infinite;
     }
 
     @keyframes moveStripes {
-      0% { background-position: 0 0; }
-      100% { background-position: 28px 0; }
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 28px 0;
+      }
     }
 
     /* ==========================================================================
@@ -1977,7 +2188,7 @@
       color: #ffffff;
       font-size: 0.84rem;
       font-weight: 600;
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       cursor: pointer;
       transition: transform 0.2s ease, background 0.2s ease;
     }
@@ -2075,8 +2286,8 @@
       background: #0d0d11;
       border-radius: 14px;
       padding: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
       color: #fff;
     }
 
@@ -2116,21 +2327,25 @@
       .main-container {
         padding: 0 28px;
       }
+
       .left-nav-rail {
         display: none;
       }
+
       .bento-globe,
       .bento-social,
       .bento-streak-current,
       .bento-repos {
         grid-column: span 6;
       }
+
       .bento-chart,
       .bento-streak-longest,
       .bento-heatmap,
       .bento-languages {
         grid-column: span 12;
       }
+
       .bento-contributions,
       .bento-workspace,
       .bento-commits,
@@ -2145,6 +2360,7 @@
       .main-container {
         padding: 0 18px;
       }
+
       .right-social-dock {
         flex-direction: row;
         bottom: 12px;
@@ -2158,6 +2374,7 @@
         max-width: 94vw;
         overflow-x: auto;
       }
+
       .scroll-top-btn {
         right: 18px;
         bottom: 74px;
@@ -2170,18 +2387,23 @@
       .cta-orange-banner {
         grid-template-columns: 1fr;
       }
+
       .highlights-grid {
         grid-template-columns: 1fr 1fr;
       }
+
       .form-grid {
         grid-template-columns: 1fr;
       }
+
       .form-group.full {
         grid-column: span 1;
       }
+
       .cta-mockups {
         display: none;
       }
+
       .bento-globe,
       .bento-social,
       .bento-streak-current,
@@ -2196,20 +2418,24 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- TOP RIGHT CONTROLS (Auto-Sync Status + Dark/Light Mode Toggle) -->
   <div class="top-controls">
-    <a href="#github" class="sync-pill" id="syncStatusPill" title="Synced with GitHub Repositories • Click to view GitHub Stats" aria-label="Synced with GitHub Repositories">
+    <a href="#github" class="sync-pill" id="syncStatusPill"
+      title="Synced with GitHub Repositories • Click to view GitHub Stats" aria-label="Synced with GitHub Repositories">
       <span class="sync-dot"></span>
       <span id="syncStatusText">GitHub Auto-Sync</span>
     </a>
     <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark or Light Mode" title="Toggle Theme">
       <svg id="themeIconDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9l1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9l1.41-1.41M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+        <path
+          d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9l1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9l1.41-1.41M12 8a4 4 0 100 8 4 4 0 000-8z" />
       </svg>
-      <svg id="themeIconLight" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      <svg id="themeIconLight" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
       </svg>
     </button>
   </div>
@@ -2230,30 +2456,62 @@
 
   <!-- FLOATING RIGHT SOCIAL DOCK (Matches Sample UI) -->
   <aside class="right-social-dock" aria-label="Social Links">
-    <a id="dockGithub" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener" class="social-badge sb-github" data-tooltip="GitHub">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+    <a id="dockGithub" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener"
+      class="social-badge sb-github" data-tooltip="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+      </svg>
     </a>
-    <a id="dockInsta" href="https://www.instagram.com/naveen__mario_perera?obrf=MXB3MW5jNmt6NXQ4Zg==" target="_blank" rel="noopener" class="social-badge sb-insta" data-tooltip="Instagram">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+    <a id="dockInsta" href="https://www.instagram.com/naveen__mario_perera?obrf=MXB3MW5jNmt6NXQ4Zg==" target="_blank"
+      rel="noopener" class="social-badge sb-insta" data-tooltip="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" />
+      </svg>
     </a>
-    <a id="dockLinkedin" href="https://www.linkedin.com/in/naveen-perera-7b5a1623a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener" class="social-badge sb-linkedin" data-tooltip="LinkedIn">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+    <a id="dockLinkedin"
+      href="https://www.linkedin.com/in/naveen-perera-7b5a1623a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+      target="_blank" rel="noopener" class="social-badge sb-linkedin" data-tooltip="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+      </svg>
     </a>
-    <a id="dockFacebook" href="https://www.facebook.com/share/18s2m3ur8c/" target="_blank" rel="noopener" class="social-badge sb-facebook" data-tooltip="Facebook">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    <a id="dockFacebook" href="https://www.facebook.com/share/18s2m3ur8c/" target="_blank" rel="noopener"
+      class="social-badge sb-facebook" data-tooltip="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+      </svg>
     </a>
-    <a id="dockWhatsapp" href="https://wa.me/94788700322" target="_blank" rel="noopener" class="social-badge sb-whatsapp" data-tooltip="WhatsApp">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+    <a id="dockWhatsapp" href="https://wa.me/94788700322" target="_blank" rel="noopener"
+      class="social-badge sb-whatsapp" data-tooltip="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z" />
+      </svg>
     </a>
     <a href="#projects" class="social-badge sb-portfolio" data-tooltip="Featured Projects">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07" />
+      </svg>
     </a>
     <a href="#timeline" class="social-badge sb-cv" data-tooltip="Project Timeline">CV</a>
     <a href="#skills" class="social-badge sb-dribbble" data-tooltip="Tech Skills">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" />
+        <path
+          d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" />
+      </svg>
     </a>
-    <a id="dockEmail" href="mailto:naveenmarioperera04@gmail.com" class="social-badge sb-gmail" data-tooltip="Email Naveen">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    <a id="dockEmail" href="mailto:naveenmarioperera04@gmail.com" class="social-badge sb-gmail"
+      data-tooltip="Email Naveen">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" />
+      </svg>
     </a>
   </aside>
 
@@ -2264,6 +2522,16 @@
       <path d="m5 12 7-7 7 7"/>
     </svg>
   </button>
+
+  <!-- LIQUID GLASS TOAST NOTIFICATION -->
+  <div class="portfolio-toast" id="portfolioToast" role="status" aria-live="polite">
+    <span class="toast-check">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5"/>
+      </svg>
+    </span>
+    <span id="portfolioToastText">Copied to clipboard!</span>
+  </div>
 
   <main class="main-container">
 
@@ -2299,16 +2567,23 @@
             Computer Science Undergraduate &amp; Full-Stack Developer
           </h2>
           <p class="hero-bio" id="heroSubtitle">
-            Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning systems. Passionate about clean architecture, cybersecurity, and minimal design systems.
+            Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning
+            systems. Passionate about clean architecture, cybersecurity, and minimal design systems.
           </p>
 
           <div class="hero-actions">
             <a href="#projects" class="btn-primary">
               <span>View Projects</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </a>
-            <a id="heroGithubBtn" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener" class="btn-secondary">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            <a id="heroGithubBtn" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener"
+              class="btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+              </svg>
               <span>GitHub</span>
             </a>
           </div>
@@ -2339,7 +2614,10 @@
       <div class="about-two-col">
         <div class="glass-card">
           <h3 class="card-heading">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
             <span>Engineering Profile &amp; Leadership</span>
           </h3>
           <div id="aboutBioContainer"></div>
@@ -2347,7 +2625,10 @@
 
         <div class="glass-card">
           <h3 class="card-heading">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
             <span>Education &amp; Academic Background</span>
           </h3>
           <div id="educationContainer"></div>
@@ -2366,15 +2647,25 @@
         Live open-source metrics, repository streaks, contribution heatmap, and auto-detected languages.
       </p>
 
+      <!-- Live GitHub Commit Ticker Pill -->
+      <a id="liveCommitBar" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener" class="live-commit-bar" title="View latest repository activity on GitHub">
+        <span class="sync-dot"></span>
+        <span style="font-weight: 600;">Latest Push:</span>
+        <span class="live-commit-repo" id="liveCommitRepo">trust-pass</span>
+        <span class="live-commit-msg" id="liveCommitMsg">Synced latest repository commits &amp; architecture updates</span>
+        <span class="live-commit-time" id="liveCommitTime">· Active</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+
       <div class="bento-grid">
         <!-- 1. Globe Domain Card -->
         <a href="#hero" class="bento-card bento-globe">
           <span class="bento-domain-pill" id="bentoDomain">naveenperera.dev</span>
           <svg class="globe-svg-wrap" viewBox="0 0 200 100" fill="none">
-            <circle cx="100" cy="110" r="85" fill="#e5e7eb" stroke="#fb923c" stroke-width="3"/>
-            <path d="M35 85 Q100 45 165 85" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
-            <path d="M55 60 Q100 35 145 60" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
-            <ellipse cx="100" cy="110" rx="45" ry="85" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+            <circle cx="100" cy="110" r="85" fill="#e5e7eb" stroke="#fb923c" stroke-width="3" />
+            <path d="M35 85 Q100 45 165 85" stroke="#9ca3af" stroke-width="1.5" fill="none" />
+            <path d="M55 60 Q100 35 145 60" stroke="#9ca3af" stroke-width="1.5" fill="none" />
+            <ellipse cx="100" cy="110" rx="45" ry="85" stroke="#9ca3af" stroke-width="1.5" fill="none" />
           </svg>
         </a>
 
@@ -2383,12 +2674,16 @@
           <svg viewBox="0 0 420 110" width="100%" height="105" preserveAspectRatio="none">
             <defs>
               <linearGradient id="crimsonArea" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.5"/>
-                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0"/>
+                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.5" />
+                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0" />
               </linearGradient>
             </defs>
-            <path d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12 L420 110 L0 110 Z" fill="url(#crimsonArea)"/>
-            <path d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12" fill="none" stroke="#fb7185" stroke-width="2.5"/>
+            <path
+              d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12 L420 110 L0 110 Z"
+              fill="url(#crimsonArea)" />
+            <path
+              d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12"
+              fill="none" stroke="#fb7185" stroke-width="2.5" />
           </svg>
           <div class="chart-months">
             <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
@@ -2400,43 +2695,49 @@
         </div>
 
         <!-- 3. GitHub / Social Handle Card -->
-        <a id="bentoHandleLink" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener" class="bento-card bento-social">
-          <svg viewBox="0 0 180 140" width="110%" style="position:absolute; top:-8px; right:-10px; opacity:0.9; pointer-events:none;">
+        <a id="bentoHandleLink" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener"
+          class="bento-card bento-social">
+          <svg viewBox="0 0 180 140" width="110%"
+            style="position:absolute; top:-8px; right:-10px; opacity:0.9; pointer-events:none;">
             <defs>
               <linearGradient id="skyBirdGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#60a5fa"/>
-                <stop offset="100%" stop-color="#1d4ed8"/>
+                <stop offset="0%" stop-color="#60a5fa" />
+                <stop offset="100%" stop-color="#1d4ed8" />
               </linearGradient>
             </defs>
-            <path d="M165 25c-6 3-13 5-20 6 7-4 13-11 15-19-7 4-14 7-22 8-6-7-16-11-26-11-20 0-35 18-31 38-27-1-51-14-67-34-9 16-5 36 10 46-6 0-11-2-16-4 0 17 12 31 28 34-5 1-10 2-16 1 5 14 18 24 33 24-15 12-34 17-53 15 16 10 35 16 55 16 67 0 104-57 102-108 7-5 13-11 18-18z" fill="url(#skyBirdGrad)"/>
+            <path
+              d="M165 25c-6 3-13 5-20 6 7-4 13-11 15-19-7 4-14 7-22 8-6-7-16-11-26-11-20 0-35 18-31 38-27-1-51-14-67-34-9 16-5 36 10 46-6 0-11-2-16-4 0 17 12 31 28 34-5 1-10 2-16 1 5 14 18 24 33 24-15 12-34 17-53 15 16 10 35 16 55 16 67 0 104-57 102-108 7-5 13-11 18-18z"
+              fill="url(#skyBirdGrad)" />
           </svg>
           <span class="bento-handle-pill" id="bentoHandle">@naveenmariopereradev02</span>
         </a>
 
         <!-- 4. Current Streak Card -->
         <div class="bento-card bento-streak-current">
-          <svg viewBox="0 0 220 190" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
-            <path d="M0 155 L58 105 L115 138 L178 96 L220 120 L220 190 L0 190 Z" fill="#1e293b" opacity="0.65"/>
-            <path d="M0 190 L78 122 L145 168 L220 135 L220 190 Z" fill="#0f172a" opacity="0.92"/>
+          <svg viewBox="0 0 220 190" width="100%" height="100%" preserveAspectRatio="none"
+            style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+            <path d="M0 155 L58 105 L115 138 L178 96 L220 120 L220 190 L0 190 Z" fill="#1e293b" opacity="0.65" />
+            <path d="M0 190 L78 122 L145 168 L220 135 L220 190 Z" fill="#0f172a" opacity="0.92" />
             <!-- Hiker Silhouette on Peak -->
-            <circle cx="62" cy="64" r="5.5" fill="#1e293b"/>
-            <rect x="55" y="71" width="14" height="24" rx="5" fill="#f97316"/>
-            <path d="M58 95 L54 118 M66 95 L68 118" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="62" cy="64" r="5.5" fill="#1e293b" />
+            <rect x="55" y="71" width="14" height="24" rx="5" fill="#f97316" />
+            <path d="M58 95 L54 118 M66 95 L68 118" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />
           </svg>
           <div class="streak-big-num" id="bentoCurrentStreak" style="position:relative; z-index:2;">48</div>
-          <div class="streak-label" style="position:relative; z-index:2;">Current<br/>Streak</div>
+          <div class="streak-label" style="position:relative; z-index:2;">Current<br />Streak</div>
         </div>
 
         <!-- 5. Repositories Count Card (Auto-Updated from projects.json) -->
         <a href="#projects" class="bento-card bento-repos">
-          <svg viewBox="0 0 220 180" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.85;">
+          <svg viewBox="0 0 220 180" width="100%" height="100%"
+            style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.85;">
             <g transform="translate(58, 16) rotate(-8)">
-              <rect x="10" y="18" width="110" height="82" rx="10" fill="#115e59" stroke="#2dd4bf" stroke-width="1.5"/>
-              <rect x="18" y="6" width="94" height="65" rx="6" fill="#ecfeff" opacity="0.9"/>
-              <line x1="28" y1="22" x2="86" y2="22" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
-              <line x1="28" y1="34" x2="98" y2="34" stroke="#99f6e4" stroke-width="3" stroke-linecap="round"/>
-              <path d="M6 42 H124 L114 112 H16 Z" fill="#0d9488"/>
-              <circle cx="65" cy="77" r="14" fill="#134e4a"/>
+              <rect x="10" y="18" width="110" height="82" rx="10" fill="#115e59" stroke="#2dd4bf" stroke-width="1.5" />
+              <rect x="18" y="6" width="94" height="65" rx="6" fill="#ecfeff" opacity="0.9" />
+              <line x1="28" y1="22" x2="86" y2="22" stroke="#0f766e" stroke-width="3" stroke-linecap="round" />
+              <line x1="28" y1="34" x2="98" y2="34" stroke="#99f6e4" stroke-width="3" stroke-linecap="round" />
+              <path d="M6 42 H124 L114 112 H16 Z" fill="#0d9488" />
+              <circle cx="65" cy="77" r="14" fill="#134e4a" />
             </g>
           </svg>
           <div class="repos-big-num" id="bentoTotalRepos" style="position:relative; z-index:2;">05</div>
@@ -2445,16 +2746,18 @@
 
         <!-- 6. Longest Streak Card -->
         <div class="bento-card bento-streak-longest">
-          <svg viewBox="0 0 420 190" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
-            <path d="M0 190 L75 125 L150 165 L245 110 L335 155 L420 118 L420 190 Z" fill="#1e0538" opacity="0.85"/>
+          <svg viewBox="0 0 420 190" width="100%" height="100%" preserveAspectRatio="none"
+            style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+            <path d="M0 190 L75 125 L150 165 L245 110 L335 155 L420 118 L420 190 Z" fill="#1e0538" opacity="0.85" />
             <!-- Neon Glowing Trophy Pedestal on Left -->
-            <circle cx="95" cy="88" r="36" fill="#a855f7" opacity="0.28"/>
-            <circle cx="95" cy="88" r="20" fill="#e9d5ff" opacity="0.9"/>
-            <path d="M72 130 H118 L126 168 H64 Z" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+            <circle cx="95" cy="88" r="36" fill="#a855f7" opacity="0.28" />
+            <circle cx="95" cy="88" r="20" fill="#e9d5ff" opacity="0.9" />
+            <path d="M72 130 H118 L126 168 H64 Z" fill="#3b0764" stroke="#a855f7" stroke-width="1.5" />
           </svg>
           <div class="longest-title" style="position:relative; z-index:2;">Longest Streak</div>
           <div class="longest-big-num" id="bentoLongestStreak" style="position:relative; z-index:2;">107</div>
-          <div style="font-size:0.72rem; color:#d8b4fe; position:relative; z-index:2;">Consistent Engineering &amp; Commits</div>
+          <div style="font-size:0.72rem; color:#d8b4fe; position:relative; z-index:2;">Consistent Engineering &amp;
+            Commits</div>
         </div>
 
         <!-- 7. Interactive Contribution Heatmap Card -->
@@ -2468,21 +2771,22 @@
 
         <!-- 8. Contributions Tall Right Card -->
         <div class="bento-card bento-contributions">
-          <svg viewBox="0 0 220 280" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+          <svg viewBox="0 0 220 280" width="100%" height="100%"
+            style="position:absolute; inset:0; pointer-events:none; z-index:0;">
             <!-- Hanging Desk Lamp & Green Light Cone -->
-            <line x1="156" y1="0" x2="156" y2="42" stroke="#52525b" stroke-width="3"/>
-            <path d="M134 56 C134 42, 178 42, 178 56 Z" fill="#18181b"/>
-            <ellipse cx="156" cy="56" rx="22" ry="4" fill="#86efac"/>
-            <polygon points="134,56 178,56 215,210 95,210" fill="url(#lampGlow)" opacity="0.32"/>
+            <line x1="156" y1="0" x2="156" y2="42" stroke="#52525b" stroke-width="3" />
+            <path d="M134 56 C134 42, 178 42, 178 56 Z" fill="#18181b" />
+            <ellipse cx="156" cy="56" rx="22" ry="4" fill="#86efac" />
+            <polygon points="134,56 178,56 215,210 95,210" fill="url(#lampGlow)" opacity="0.32" />
             <defs>
               <linearGradient id="lampGlow" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#4ade80"/>
-                <stop offset="100%" stop-color="transparent"/>
+                <stop offset="0%" stop-color="#4ade80" />
+                <stop offset="100%" stop-color="transparent" />
               </linearGradient>
             </defs>
             <!-- Coder Silhouette -->
-            <circle cx="132" cy="145" r="22" fill="#18181b"/>
-            <path d="M90 220 C95 178, 168 178, 175 220 Z" fill="#09090b"/>
+            <circle cx="132" cy="145" r="22" fill="#18181b" />
+            <path d="M90 220 C95 178, 168 178, 175 220 Z" fill="#09090b" />
           </svg>
           <div class="contrib-big-num" id="bentoContributions" style="position:relative; z-index:2;">1.2K</div>
           <div class="contrib-label" style="position:relative; z-index:2;">Contributions</div>
@@ -2490,12 +2794,13 @@
 
         <!-- 9. Developer Workspace Tall Left Card -->
         <div class="bento-card bento-workspace">
-          <svg viewBox="0 0 220 280" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+          <svg viewBox="0 0 220 280" width="100%" height="100%"
+            style="position:absolute; inset:0; pointer-events:none; z-index:0;">
             <!-- Desk & Glowing Monitor Setup -->
-            <path d="M0 215 L220 175 L220 280 L0 280 Z" fill="#78350f" opacity="0.55"/>
-            <rect x="82" y="88" width="96" height="64" rx="6" fill="#f97316" stroke="#27272a" stroke-width="4"/>
-            <circle cx="118" cy="122" r="22" fill="#38bdf8" opacity="0.85"/>
-            <rect x="124" y="152" width="12" height="22" fill="#52525b"/>
+            <path d="M0 215 L220 175 L220 280 L0 280 Z" fill="#78350f" opacity="0.55" />
+            <rect x="82" y="88" width="96" height="64" rx="6" fill="#f97316" stroke="#27272a" stroke-width="4" />
+            <circle cx="118" cy="122" r="22" fill="#38bdf8" opacity="0.85" />
+            <rect x="124" y="152" width="12" height="22" fill="#52525b" />
           </svg>
           <span class="workspace-pill" id="bentoWorkspaceName">Naveen Perera</span>
         </div>
@@ -2508,8 +2813,10 @@
 
         <!-- 11. Commits Card -->
         <div class="bento-card bento-commits">
-          <svg viewBox="0 0 200 150" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; opacity:0.45;">
-            <path d="M-10 20 Q 60 60, 40 150 M10 10 Q 80 55, 60 150 M30 0 Q 100 50, 80 150 M50 -10 Q 120 45, 100 150" fill="none" stroke="#4ade80" stroke-width="2"/>
+          <svg viewBox="0 0 200 150" width="100%" height="100%"
+            style="position:absolute; inset:0; pointer-events:none; opacity:0.45;">
+            <path d="M-10 20 Q 60 60, 40 150 M10 10 Q 80 55, 60 150 M30 0 Q 100 50, 80 150 M50 -10 Q 120 45, 100 150"
+              fill="none" stroke="#4ade80" stroke-width="2" />
           </svg>
           <div class="repos-big-num" id="bentoCommits" style="position:relative; z-index:2;">850+</div>
           <div class="repos-label" style="position:relative; z-index:2;">Commits</div>
@@ -2517,20 +2824,23 @@
 
         <!-- 12. Forks Card -->
         <div class="bento-card bento-forks">
-          <svg viewBox="0 0 200 150" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; opacity:0.35;">
-            <circle cx="52" cy="52" r="28" fill="#1e1b4b"/>
-            <circle cx="148" cy="52" r="28" fill="#1e1b4b"/>
-            <path d="M52 80 V110 H148 V80 M100 110 V145" stroke="#1e1b4b" stroke-width="14" fill="none"/>
+          <svg viewBox="0 0 200 150" width="100%" height="100%"
+            style="position:absolute; inset:0; pointer-events:none; opacity:0.35;">
+            <circle cx="52" cy="52" r="28" fill="#1e1b4b" />
+            <circle cx="148" cy="52" r="28" fill="#1e1b4b" />
+            <path d="M52 80 V110 H148 V80 M100 110 V145" stroke="#1e1b4b" stroke-width="14" fill="none" />
           </svg>
           <div style="font-size:0.95rem; font-weight:700; position:relative; z-index:2;">Forks</div>
-          <div style="font-size:3.5rem; font-weight:900; line-height:0.95; position:relative; z-index:2;" id="bentoForks">09</div>
+          <div style="font-size:3.5rem; font-weight:900; line-height:0.95; position:relative; z-index:2;"
+            id="bentoForks">09</div>
         </div>
 
         <!-- 13. Ongoing Projects / Open Issues Card -->
         <div class="bento-card bento-issues">
-          <svg viewBox="0 0 200 150" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; opacity:0.55;">
-            <rect x="22" y="48" width="64" height="82" rx="10" transform="rotate(-10 22 48)" fill="#f472b6"/>
-            <circle cx="58" cy="86" r="12" fill="#831843"/>
+          <svg viewBox="0 0 200 150" width="100%" height="100%"
+            style="position:absolute; inset:0; pointer-events:none; opacity:0.55;">
+            <rect x="22" y="48" width="64" height="82" rx="10" transform="rotate(-10 22 48)" fill="#f472b6" />
+            <circle cx="58" cy="86" r="12" fill="#831843" />
           </svg>
           <div class="repos-big-num" id="bentoOngoingCount" style="position:relative; z-index:2;">01</div>
           <div class="repos-label" style="position:relative; z-index:2;">Ongoing</div>
@@ -2546,7 +2856,8 @@
         <h2 class="section-watermark">Skills</h2>
       </div>
       <p class="section-subtitle">
-        Automatically calculated language distribution from public GitHub repositories alongside core engineering competencies.
+        Automatically calculated language distribution from public GitHub repositories alongside core engineering
+        competencies.
       </p>
 
       <!-- Auto-Updated Repository Languages Breakdown -->
@@ -2555,7 +2866,8 @@
           <div>
             <h3 style="font-size:1rem; font-weight:700;">Auto-Detected Repository Languages</h3>
             <p style="font-size:0.78rem; color:var(--text-secondary);">
-              Updated automatically from GitHub code byte counts across your public repositories. Start a project in a new language and it appears here automatically.
+              Updated automatically from GitHub code byte counts across your public repositories. Start a project in a
+              new language and it appears here automatically.
             </p>
           </div>
           <span class="auto-badge">⚡ Live from projects.json</span>
@@ -2576,7 +2888,8 @@
         <h2 class="section-watermark">Projects</h2>
       </div>
       <p class="section-subtitle">
-        Synced with GitHub repository READMEs and curated project highlights from my work in SSO Security, Data Hygiene, Machine Learning, and Civic Tech.
+        Synced with GitHub repository READMEs and curated project highlights from my work in SSO Security, Data Hygiene,
+        Machine Learning, and Civic Tech.
       </p>
 
       <div class="filter-bar" id="projectFilters">
@@ -2597,7 +2910,8 @@
         <h2 class="section-watermark">Timeline</h2>
       </div>
       <p class="section-subtitle">
-        Chronological journey of projects. Active repositories remain marked as <strong>Ongoing</strong> and continue progressing along the timeline.
+        Chronological journey of projects. Active repositories remain marked as <strong>Ongoing</strong> and continue
+        progressing along the timeline.
       </p>
 
       <div class="timeline-container" id="timelineContainer"></div>
@@ -2652,16 +2966,21 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="senderEmail">Email Address</label>
-              <input class="form-input" id="senderEmail" name="email" type="email" placeholder="Naveen@company.com" required />
+              <input class="form-input" id="senderEmail" name="email" type="email" placeholder="Naveen@company.com"
+                required />
             </div>
             <div class="form-group full">
               <label class="form-label" for="senderMessage">Project or Opportunity Details</label>
-              <textarea class="form-textarea" id="senderMessage" name="message" placeholder="Tell me what you are building, what stage you are at, and how we can collaborate..." required></textarea>
+              <textarea class="form-textarea" id="senderMessage" name="message"
+                placeholder="Tell me what you are building, what stage you are at, and how we can collaborate..."
+                required></textarea>
             </div>
           </div>
           <button type="submit" class="btn-submit">
             <span>Submit Message</span>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
           </button>
         </form>
       </div>
@@ -2674,20 +2993,25 @@
       <div class="cta-orange-banner">
         <div>
           <h2 class="cta-title">
-            Ready to Build<br/>
+            Ready to Build<br />
             Something
             <span class="cta-title-italic">Amazing?</span>
           </h2>
           <p class="cta-sub">
-            Let's collaborate on your next project. I'm always open to exciting software engineering opportunities and interesting conversations.
+            Let's collaborate on your next project. I'm always open to exciting software engineering opportunities and
+            interesting conversations.
           </p>
           <div class="cta-btn-row">
             <a id="ctaEmailBtn" href="mailto:naveenmarioperera04@gmail.com" class="btn-cta-glass">
               <span>Let's Get Developing</span>
               <span>▶</span>
             </a>
-            <a id="ctaGithubBtn" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener" class="btn-cta-glass">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            <a id="ctaGithubBtn" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener"
+              class="btn-cta-glass">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+              </svg>
               <span>Contribute</span>
               <span>▶</span>
             </a>
@@ -2699,28 +3023,29 @@
             <div class="mockup-tile">
               <div class="mockup-tile-title">TrustLink — OAuth 2.0 / OIDC (SLT)</div>
               <svg viewBox="0 0 160 65" width="100%" height="60">
-                <path d="M5 50 Q 40 10, 80 35 T 155 18" fill="none" stroke="#60a5fa" stroke-width="2.5"/>
-                <circle cx="80" cy="35" r="3.5" fill="#f97316"/>
+                <path d="M5 50 Q 40 10, 80 35 T 155 18" fill="none" stroke="#60a5fa" stroke-width="2.5" />
+                <circle cx="80" cy="35" r="3.5" fill="#f97316" />
               </svg>
             </div>
             <div class="mockup-tile">
               <div class="mockup-tile-title">TrustPass — Flight Booking &amp; Passes</div>
               <svg viewBox="0 0 160 65" width="100%" height="60">
-                <path d="M5 55 C 35 15, 70 12, 155 8" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+                <path d="M5 55 C 35 15, 70 12, 155 8" fill="none" stroke="#4ade80" stroke-width="2.5" />
               </svg>
             </div>
             <div class="mockup-tile">
               <div class="mockup-tile-title">ZenData 4-Pillar Quality</div>
               <svg viewBox="0 0 160 75" width="100%" height="68">
-                <circle cx="80" cy="38" r="26" fill="#3b82f6"/>
-                <path d="M80 38 L80 12 A26 26 0 0 1 104 48 Z" fill="#f97316"/>
-                <path d="M80 38 L104 48 A26 26 0 0 1 62 58 Z" fill="#22c55e"/>
+                <circle cx="80" cy="38" r="26" fill="#3b82f6" />
+                <path d="M80 38 L80 12 A26 26 0 0 1 104 48 Z" fill="#f97316" />
+                <path d="M80 38 L104 48 A26 26 0 0 1 62 58 Z" fill="#22c55e" />
               </svg>
             </div>
             <div class="mockup-tile">
               <div class="mockup-tile-title">SpotIT LK — Cloud Sync</div>
               <svg viewBox="0 0 160 75" width="100%" height="68">
-                <polygon points="80,10 108,35 95,65 65,65 52,35" fill="rgba(168,85,247,0.35)" stroke="#a855f7" stroke-width="2"/>
+                <polygon points="80,10 108,35 95,65 65,65 52,35" fill="rgba(168,85,247,0.35)" stroke="#a855f7"
+                  stroke-width="2" />
               </svg>
             </div>
           </div>
@@ -2729,10 +3054,12 @@
 
       <footer class="footer-pill">
         <div>
-          © <span id="footerYear">2026</span> <strong id="footerName">Naveen Perera</strong> &nbsp;|&nbsp; All rights reserved
+          © <span id="footerYear">2026</span> <strong id="footerName">Naveen Perera</strong> &nbsp;|&nbsp; All rights
+          reserved
         </div>
         <div>
-          Building in public at <a id="footerHandle" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener">@naveenmariopereradev02</a>
+          Building in public at <a id="footerHandle" href="https://github.com/naveenmariopereradev02" target="_blank"
+            rel="noopener">@naveenmariopereradev02</a>
         </div>
       </footer>
     </section>
@@ -3759,22 +4086,117 @@
       });
     }
 
+    // Liquid Glass Toast Notification Helper
+    let toastTimer = null;
+    function showPortfolioToast(message) {
+      const toast = document.getElementById('portfolioToast');
+      const textEl = document.getElementById('portfolioToastText');
+      if (!toast || !textEl) return;
+      textEl.textContent = message;
+      toast.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    // Copy-Email Toast & Live GitHub Commit Feed (Feature #7)
+    function initEmailCopyToast() {
+      const emailLinks = [
+        document.getElementById('dockEmail'),
+        document.getElementById('ctaEmailBtn')
+      ].filter(Boolean);
+
+      emailLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          const email = (currentProfile && currentProfile.contact && currentProfile.contact.email) || 'naveenmarioperera04@gmail.com';
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).catch(() => {});
+          }
+          showPortfolioToast(`Email copied to clipboard: ${email}`);
+        });
+      });
+    }
+
+    function formatRelativeTime(isoDate) {
+      if (!isoDate) return 'Recently';
+      const diffMs = Date.now() - new Date(isoDate).getTime();
+      if (isNaN(diffMs) || diffMs < 0) return 'Recently';
+      const mins = Math.floor(diffMs / 60000);
+      if (mins < 1) return 'Just now';
+      if (mins < 60) return `${mins}m ago`;
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return `${hours}h ago`;
+      const days = Math.floor(hours / 24);
+      if (days < 30) return `${days}d ago`;
+      const months = Math.floor(days / 30);
+      return `${months}mo ago`;
+    }
+
+    async function initLiveCommitFeed(username, projectsData) {
+      const repoEl = document.getElementById('liveCommitRepo');
+      const msgEl = document.getElementById('liveCommitMsg');
+      const timeEl = document.getElementById('liveCommitTime');
+      const barEl = document.getElementById('liveCommitBar');
+      if (!repoEl || !msgEl || !timeEl || !barEl) return;
+
+      // First populate from local projects.json most recent public repo as instant fallback
+      const projects = (projectsData && projectsData.projects) || [];
+      const publicProjects = projects.filter((p) => !p.isPrivate);
+      if (publicProjects.length > 0) {
+        const sorted = [...publicProjects].sort((a, b) => new Date(b.pushedAt || 0) - new Date(a.pushedAt || 0));
+        const latest = sorted[0];
+        if (latest) {
+          repoEl.textContent = latest.name || latest.id;
+          msgEl.textContent = latest.description || 'Updated repository';
+          timeEl.textContent = `· ${formatRelativeTime(latest.pushedAt)}`;
+          if (latest.htmlUrl) barEl.href = latest.htmlUrl;
+        }
+      }
+
+      // Then fetch live public push events from GitHub API
+      const ghUser = username || 'naveenmariopereradev02';
+      try {
+        const res = await fetch(`https://api.github.com/users/${encodeURIComponent(ghUser)}/events/public?per_page=15`);
+        if (!res.ok) return;
+        const events = await res.json();
+        if (!Array.isArray(events)) return;
+        const pushEvent = events.find((ev) => ev.type === 'PushEvent' && ev.repo);
+        if (pushEvent) {
+          const shortRepo = String(pushEvent.repo.name || '').replace(`${ghUser}/`, '');
+          const commits = (pushEvent.payload && pushEvent.payload.commits) || [];
+          const lastCommit = commits.length > 0 ? commits[commits.length - 1] : null;
+          const commitMsg = lastCommit && lastCommit.message
+            ? String(lastCommit.message).split('\n')[0]
+            : `Pushed to ${(pushEvent.payload && pushEvent.payload.ref || 'main').replace('refs/heads/', '')}`;
+          repoEl.textContent = shortRepo || pushEvent.repo.name;
+          msgEl.textContent = commitMsg;
+          timeEl.textContent = `· ${formatRelativeTime(pushEvent.created_at)}`;
+          barEl.href = `https://github.com/${pushEvent.repo.name}`;
+        }
+      } catch (err) {
+        // Keep projects.json fallback silently
+      }
+    }
+
     async function bootstrap() {
       initTheme();
       initHeatmap();
       initScrollSpy();
       initScrollTop();
       initContactForm();
+      initEmailCopyToast();
 
       currentProfile = await loadJsonWithFallback('./profile.json', FALLBACK_PROFILE);
       currentProjectsData = await loadJsonWithFallback('./projects.json', FALLBACK_PROJECTS);
 
       renderProfile(currentProfile);
       renderProjectsAndLanguages(currentProjectsData);
+      initLiveCommitFeed(currentProfile.githubUsername, currentProjectsData);
     }
 
     bootstrap();
   </script>
 </body>
-</html>
 
+</html>
