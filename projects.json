@@ -57,9 +57,9 @@
   ],
   "projects": [
     {
-      "id": "identity-platform-sso",
-      "name": "identity-platform-sso",
-      "title": "Identity Platform (OAuth 2.0 & OIDC SSO)",
+      "id": "trust-pass",
+      "name": "trust-pass",
+      "title": "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
       "role": "SLT Internship",
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "readmeExcerpt": "Enterprise-grade Identity Provider (IdP) supporting Authorization Code Flow + PKCE, FIDO2/WebAuthn hardware & platform passkeys, and real-time suspicious login risk scoring with a React + Redux Toolkit admin console.",
@@ -75,7 +75,7 @@
       "dateLabel": "Jul 2026 — Nov 2026",
       "isOngoing": true,
       "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
       "homepage": "",
       "topics": ["portfolio", "oauth2", "oidc", "webauthn", "fido2", "nodejs", "react", "docker", "security"],
       "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],

@@ -1,14 +1,30 @@
 {
   "_comment": "Use 'repos' to override specific GitHub repositories by their exact repo name. Set 'hide: true' to exclude a repo, 'featured: true' to highlight it, or 'ongoing: true/false' to override its timeline status.",
   "repos": {
-    "identity-platform-sso": {
-      "title": "Identity Platform (OAuth 2.0 & OIDC SSO)",
+    "trust-pass": {
+      "title": "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
       "role": "SLT Internship",
       "dateLabel": "Jul 2026 — Nov 2026",
       "featured": true,
       "ongoing": true,
       "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
-      "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, and automated risk scoring.",
+      "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
+      "highlights": [
+        "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
+        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+        "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
+        "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards, and light/dark theming.",
+        "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
+      ]
+    },
+    "identity-platform-sso": {
+      "title": "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
+      "role": "SLT Internship",
+      "dateLabel": "Jul 2026 — Nov 2026",
+      "featured": true,
+      "ongoing": true,
+      "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
+      "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "highlights": [
         "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
         "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
