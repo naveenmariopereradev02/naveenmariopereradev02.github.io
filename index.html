@@ -2986,6 +2986,61 @@
         grid-column: span 12;
       }
     }
+
+    /* Mobile Optimization (< 480px Screens - iPhone / Android) */
+    @media (max-width: 480px) {
+      /* 1. Main padding අඩු කර සම්පූර්ණ screen space එක ලබා ගැනීම */
+      .main-container {
+        padding: 0 14px;
+        padding-bottom: 90px; /* Bottom dock එක සඳහා ඉඩ තැබීම */
+      }
+
+      /* 2. Top-Right & Top-Left Controls compact කිරීම */
+      .top-controls {
+        top: 14px;
+        right: 14px;
+        gap: 6px;
+      }
+      .top-left-controls {
+        top: 14px;
+        left: 14px;
+      }
+      #syncStatusText, .cmd-k-kbd, #aiCliBtn span {
+        display: none; /* Mobile එකේදී දිග text සඟවා icons පමණක් පෙන්වයි */
+      }
+      .sync-pill, .cmd-k-btn, .theme-toggle, .admin-visitor-badge {
+        padding: 0 10px;
+        height: 34px;
+      }
+
+      /* 3. Hero Titles Responsive කිරීම */
+      .hero-tagline {
+        font-size: 1.9rem;
+        line-height: 1.25;
+      }
+      .hero-subtitle {
+        font-size: 0.95rem;
+      }
+
+      /* 4. Live Commit Bar එක Mobile එකට wrap වීම වැළැක්වීම */
+      .live-commit-bar {
+        width: 100%;
+        font-size: 0.7rem;
+        padding: 6px 10px;
+      }
+      .live-commit-msg {
+        max-width: 160px; /* Long commit messages truncate කිරීම */
+      }
+
+      /* 5. Bento Grid සහ Cards තනි Column එකකට (1fr) හැරවීම */
+      .bento-card {
+        min-height: auto;
+        padding: 16px;
+      }
+      .highlights-grid {
+        grid-template-columns: 1fr; /* Metrics කාඩ් 1 බැගින් තිරස්ව පෙළගැසීම */
+      }
+    }
   </style>
 </head>
 
