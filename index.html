@@ -4,9 +4,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Naveen Perera — Computer Science Undergraduate & Full-Stack Developer</title>
+  <title>Naveen Perera — Computer Science Undergraduate &amp; Full-Stack Developer</title>
   <meta name="description"
-    content="Portfolio of Naveen Perera — Computer Science Undergraduate at University of Westminster (IIT Sri Lanka), Full-Stack Developer, Cybersecurity & Machine Learning Engineer." />
+    content="Portfolio of Naveen Perera — BSc (Hons) Computer Science Undergraduate at University of Westminster (IIT Sri Lanka), Full-Stack Developer, OAuth 2.0/OIDC Security &amp; Machine Learning Engineer." />
+  <meta name="author" content="Naveen Mario Perera" />
+  <meta name="keywords"
+    content="Naveen Perera, Naveen Mario Perera, Computer Science Undergraduate, University of Westminster, IIT Sri Lanka, Full-Stack Developer, Cybersecurity, OAuth 2.0, OIDC, FIDO2, Machine Learning, Software Engineer Sri Lanka" />
+  <meta name="theme-color" content="#070709" />
+
+  <!-- OpenGraph / LinkedIn / WhatsApp Share Preview Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Naveen Perera — Developer Portfolio" />
+  <meta property="og:title" content="Naveen Perera — Computer Science Undergraduate &amp; Full-Stack Developer" />
+  <meta property="og:description"
+    content="Building secure full-stack platforms (OAuth 2.0/OIDC SSO), automated data quality engines (ZenData), and 99%-accurate ML systems. Explore live GitHub stats, system architectures &amp; CV." />
+  <meta property="og:image" content="./avatar.png" />
+  <meta property="og:url" content="https://naveenmariopereradev02.github.io/portfolio/" />
+
+  <!-- Twitter / X Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Naveen Perera — CS Undergraduate &amp; Full-Stack Developer" />
+  <meta name="twitter:description"
+    content="Full-Stack Engineering, OAuth 2.0/OIDC Security, Automated Data Quality &amp; Machine Learning Portfolio." />
+  <meta name="twitter:image" content="./avatar.png" />
+
+  <!-- Custom SVG Monogram Favicon & Apple Touch Icon -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230d0d12' stroke='%23f97316' stroke-width='3'/%3E%3Ctext x='50%25' y='56%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='900' font-size='24' fill='%23ffffff'%3ENP%3C/text%3E%3Ccircle cx='51' cy='14' r='5' fill='%23f97316'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="./avatar.png" />
+
+  <!-- Structured Data (JSON-LD) for Google & Recruiter Search -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Naveen Mario Perera",
+    "jobTitle": "Computer Science Undergraduate & Full-Stack Developer",
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Westminster (IIT Sri Lanka)"
+    },
+    "email": "mailto:naveenmarioperera04@gmail.com",
+    "url": "https://github.com/naveenmariopereradev02",
+    "sameAs": [
+      "https://github.com/naveenmariopereradev02",
+      "https://www.linkedin.com/in/naveen-perera-7b5a1623a"
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -760,15 +806,56 @@
     }
 
     .glass-modal-backdrop.open .cmd-modal,
-    .glass-modal-backdrop.open .arch-modal {
+    .glass-modal-backdrop.open .arch-modal,
+    .glass-modal-backdrop.open .cv-modal {
       transform: translateY(0) scale(1);
     }
 
     html[data-theme="light"] .cmd-modal,
-    html[data-theme="light"] .arch-modal {
+    html[data-theme="light"] .arch-modal,
+    html[data-theme="light"] .cv-modal {
       background: rgba(255, 255, 255, 0.95);
       border-color: rgba(0, 0, 0, 0.14);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .cv-modal {
+      width: 100%;
+      max-width: 860px;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      border-radius: 18px;
+      background: rgba(18, 18, 24, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12), 0 24px 60px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      transform: translateY(-10px) scale(0.97);
+      transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .cv-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .cv-iframe-wrap {
+      flex: 1;
+      width: 100%;
+      background: #121217;
+      position: relative;
+    }
+
+    .cv-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
 
     .cmd-input-wrap {
@@ -2920,7 +3007,7 @@
         <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07" />
       </svg>
     </a>
-    <a href="#timeline" class="social-badge sb-cv" data-tooltip="Project Timeline">CV</a>
+    <a href="./cv/Naveen_Perera_CV.pdf" id="dockCv" class="social-badge sb-cv" data-tooltip="Preview / Download CV">CV</a>
     <a href="#skills" class="social-badge sb-dribbble" data-tooltip="Tech Skills">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="10" />
@@ -3036,6 +3123,38 @@
     </div>
   </div>
 
+  <!-- STEP 3: INTERACTIVE CV / RESUME PREVIEW & ONE-CLICK DOWNLOAD MODAL -->
+  <div class="glass-modal-backdrop" id="cvModalBackdrop" aria-hidden="true" style="padding: 36px 18px;">
+    <div class="cv-modal" role="dialog" aria-label="Naveen Perera Resume & CV Preview">
+      <div class="cv-modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="toast-check" style="background:rgba(249,115,22,0.18); border-color:rgba(249,115,22,0.45); color:var(--accent);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </span>
+          <div>
+            <div style="font-size:0.9rem; font-weight:800; color:var(--text-primary);">Naveen Mario Perera — Curriculum Vitae (CV)</div>
+            <div style="font-size:0.72rem; color:var(--text-secondary); font-family:var(--font-mono);">BSc (Hons) Computer Science · University of Westminster (IIT)</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <a href="./cv/Naveen_Perera_CV.pdf" download="Naveen_Perera_CV.pdf" id="cvDownloadDirectBtn" class="btn-primary" style="padding:7px 14px; font-size:0.76rem; border-radius:9px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            <span>Download CV (PDF)</span>
+          </a>
+          <a href="./cv/Naveen_Perera_CV.pdf" target="_blank" rel="noopener" id="cvOpenNewTabBtn" class="cmd-k-btn" style="height:34px; text-decoration:none;">
+            <span>Open Fullscreen ↗</span>
+          </a>
+          <button type="button" id="cvModalCloseBtn" class="theme-toggle" style="width:34px; height:34px;" aria-label="Close CV Preview" title="Close (ESC)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cv-iframe-wrap">
+        <iframe id="cvPreviewIframe" src="./cv/Naveen_Perera_CV.pdf" title="Naveen Perera CV PDF Preview"></iframe>
+      </div>
+    </div>
+  </div>
+
   <main class="main-container">
 
     <!-- ========================================================================
@@ -3081,6 +3200,15 @@
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
+            <button type="button" id="heroCvBtn" class="btn-secondary" style="cursor:pointer;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <path d="M12 18v-6"/>
+                <path d="m9 15 3 3 3-3"/>
+              </svg>
+              <span>Preview / Download CV</span>
+            </button>
             <a id="heroGithubBtn" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener"
               class="btn-secondary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -4426,33 +4554,57 @@
       sections.forEach((sec) => observer.observe(sec));
     }
 
-    // Contact Form Handler (Formspree or Mailto Fallback)
+    // Contact Form Handler (Formspree / FormSubmit AJAX + Mailto Fallback with Liquid Glass Toast)
     function initContactForm() {
       const form = document.getElementById('contactForm');
+      if (!form) return;
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const name = document.getElementById('senderName').value.trim();
         const email = document.getElementById('senderEmail').value.trim();
         const message = document.getElementById('senderMessage').value.trim();
+        const submitBtn = form.querySelector('.btn-submit');
+        const origHtml = submitBtn ? submitBtn.innerHTML : '';
 
-        if (currentProfile.formspreeEndpoint && currentProfile.formspreeEndpoint.startsWith('http')) {
-          try {
-            const res = await fetch(currentProfile.formspreeEndpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-              body: JSON.stringify({ name, email, message })
-            });
-            if (res.ok) {
-              alert('Thank you! Your message has been sent.');
-              form.reset();
-              return;
-            }
-          } catch (err) {
-            // Fall through to mailto
-          }
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span>Sending Message...</span>';
         }
 
-        const recipient = (currentProfile.contact && currentProfile.contact.email) || 'naveenmarioperera04@gmail.com';
+        const recipient = (currentProfile && currentProfile.contact && currentProfile.contact.email) || 'naveenmarioperera04@gmail.com';
+        const endpoint = (currentProfile && currentProfile.formspreeEndpoint && currentProfile.formspreeEndpoint.startsWith('http'))
+          ? currentProfile.formspreeEndpoint
+          : `https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`;
+
+        try {
+          const res = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({
+              name,
+              email,
+              message,
+              _subject: `Portfolio Inquiry from ${name}`
+            })
+          });
+          if (res.ok) {
+            showPortfolioToast('Message sent successfully! Thank you for reaching out ✓');
+            form.reset();
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = origHtml;
+            }
+            return;
+          }
+        } catch (err) {
+          // Fall through to mailto fallback
+        }
+
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origHtml;
+        }
+        showPortfolioToast(`Opening email client to message ${recipient}...`);
         const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
         const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
         window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
@@ -4805,6 +4957,12 @@
         const actions = [
           {
             group: 'Quick Actions',
+            label: 'Preview / Download CV (Naveen Perera Resume PDF)',
+            badge: '📄 CV / PDF',
+            action: () => openCvModal()
+          },
+          {
+            group: 'Quick Actions',
             label: "Open Ask Naveen's AI & Developer CLI Terminal",
             badge: 'AI · CLI',
             action: () => document.getElementById('aiCliBtn').click()
@@ -5003,6 +5161,10 @@
           return `<strong>🟢 Internship &amp; Collaboration Status:</strong><br/>
           Naveen is actively seeking <strong>Software Engineering / Full-Stack / Cybersecurity / AI-ML Internship opportunities</strong>. Reach out directly at <strong style="color:var(--accent);">naveenmarioperera04@gmail.com</strong>!`;
         }
+        if (q === 'cv' || q === 'resume' || q.includes('download cv')) {
+          return `<strong>📄 Naveen Perera — Curriculum Vitae (PDF):</strong><br/>
+          You can <a href="./cv/Naveen_Perera_CV.pdf" download="Naveen_Perera_CV.pdf" style="color:var(--accent); font-weight:700;">Download the CV (PDF) directly here ↓</a> or click the <strong>Preview / Download CV</strong> button in the Hero section!`;
+        }
         if (q === 'contact' || q.includes('email') || q.includes('reach')) {
           return `<strong>📬 Contact Naveen Perera:</strong><br/>
           • Email: <strong style="color:var(--accent);">naveenmarioperera04@gmail.com</strong><br/>
@@ -5067,6 +5229,61 @@
       });
     }
 
+    // Step 3: Interactive CV Preview & One-Click Download Modal Controller
+    function getCvUrl() {
+      const raw = (currentProfile && currentProfile.cvFile) || './cv/Naveen_Perera_CV.pdf';
+      if (raw.startsWith('http') || raw.startsWith('./') || raw.startsWith('/')) return raw;
+      return `./cv/${raw}`;
+    }
+
+    function openCvModal() {
+      const backdrop = document.getElementById('cvModalBackdrop');
+      if (!backdrop) return;
+      const cvUrl = getCvUrl();
+      const iframe = document.getElementById('cvPreviewIframe');
+      const dlBtn = document.getElementById('cvDownloadDirectBtn');
+      const tabBtn = document.getElementById('cvOpenNewTabBtn');
+      if (iframe && iframe.getAttribute('src') !== cvUrl) iframe.setAttribute('src', cvUrl);
+      if (dlBtn) dlBtn.setAttribute('href', cvUrl);
+      if (tabBtn) tabBtn.setAttribute('href', cvUrl);
+      backdrop.classList.add('open');
+      backdrop.setAttribute('aria-hidden', 'false');
+    }
+
+    function initCvModal() {
+      const backdrop = document.getElementById('cvModalBackdrop');
+      const closeBtn = document.getElementById('cvModalCloseBtn');
+      const heroBtn = document.getElementById('heroCvBtn');
+      const dockBtn = document.getElementById('dockCv');
+      const dlBtn = document.getElementById('cvDownloadDirectBtn');
+      if (!backdrop) return;
+
+      const close = () => {
+        backdrop.classList.remove('open');
+        backdrop.setAttribute('aria-hidden', 'true');
+      };
+
+      if (heroBtn) heroBtn.addEventListener('click', openCvModal);
+      if (dockBtn) {
+        dockBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          openCvModal();
+        });
+      }
+      if (dlBtn) {
+        dlBtn.addEventListener('click', () => {
+          showPortfolioToast('Downloading Naveen_Perera_CV.pdf ✓');
+        });
+      }
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) close();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && backdrop.classList.contains('open')) close();
+      });
+    }
+
     async function bootstrap() {
       initTheme();
       initHeatmap();
@@ -5078,6 +5295,7 @@
       initArchitectureModal();
       initCommandPalette();
       initAiCliTerminal();
+      initCvModal();
 
       currentProfile = await loadJsonWithFallback('./profile.json', FALLBACK_PROFILE);
       currentProjectsData = await loadJsonWithFallback('./projects.json', FALLBACK_PROJECTS);
