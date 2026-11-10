@@ -1,9 +1,9 @@
 {
   "generatedAt": "2026-11-10T13:18:00.000Z",
   "username": "naveenmariopereradev02",
-  "totalRepos": 6,
-  "ongoingCount": 3,
-  "completedCount": 3,
+  "totalRepos": 9,
+  "ongoingCount": 4,
+  "completedCount": 5,
   "languagesSummary": [
     {
       "name": "Dart",
@@ -230,16 +230,15 @@
     {
       "id": "ZenData",
       "name": "ZenData",
-      "title": "ZenData",
-      "role": "Active Development",
-      "description": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
-      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
+      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+      "role": "Lead Architect & Developer",
+      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates tabular datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and export executive scorecards.",
       "highlights": [
-        "Live Web Application: https://zendata-frontend.onrender.com",
-        "Live FastAPI Documentation (Swagger UI): https://zendata-backend.onrender.com/docs",
-        "No Fabricated Data (Anti-Poisoning): Strict integrity rules that never blindly impute PII (Customer Names, Emails, Phones), Unique Transaction IDs, or subjective user ratings with fake mode values.",
-        "Canonical Categorical Normalization: Fuzzy string matching and taxonomy clustering (Diary → Dairy, Bakary → Bakery, Groceries → Groceries).",
-        "Location & Cashier Standardizer: Unifies variations like colombo 07, Colombo-07, and Colombo7 to canonical Colombo 07, collapses whitespace anomalies, and preserves well-known acronyms (QR, POS, LKR, VISA)."
+        "Engineered a 4-Pillar Data Health Audit Engine evaluating tabular datasets across Completeness, Uniqueness, Validity, and Statistical Consistency (using 1.5x IQR outlier detection) to generate real-time 0–100% quality scores.",
+        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders (?, not given) and cluster categorical typos (Diary -> Dairy) without fabricating values for missing PII or transaction IDs.",
+        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals, outlier quantities, and inverted unit prices.",
+        "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks with full transformation changelogs."
       ],
       "createdAt": "2026-08-01T00:00:00Z",
       "pushedAt": "2026-11-10T13:15:00Z",
@@ -248,18 +247,29 @@
       "isPrivate": false,
       "featured": true,
       "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
-      "homepage": "",
-      "topics": [],
+      "homepage": "https://zendata-frontend.onrender.com",
+      "topics": [
+        "portfolio",
+        "fastapi",
+        "pandas",
+        "numpy",
+        "nextjs",
+        "data-quality",
+        "python"
+      ],
       "techStack": [
-        "TypeScript",
         "Python",
-        "CSS",
-        "JavaScript",
-        "Procfile"
+        "FastAPI",
+        "Pandas",
+        "NumPy",
+        "Next.js",
+        "TypeScript",
+        "ReportLab",
+        "OpenPyXL"
       ],
       "stars": 1,
       "forks": 0,
-      "primaryLanguage": "TypeScript",
+      "primaryLanguage": "Python",
       "languages": {
         "TypeScript": 101134,
         "Python": 94780,
@@ -267,36 +277,6 @@
         "JavaScript": 465,
         "Procfile": 63
       }
-    },
-    {
-      "id": "naveenmariopereradev02",
-      "name": "naveenmariopereradev02",
-      "title": "Naveenmariopereradev02",
-      "role": "Active Development",
-      "description": "Software engineering project hosted on GitHub.",
-      "readmeExcerpt": "Software engineering project hosted on GitHub.",
-      "highlights": [
-        "🔭 I’m currently working on SLT-IDP",
-        "🌱 I’m currently learning Advanced AI integration, Cloud Security, and Modern DevOps practices",
-        "👯 I’m looking to collaborate on SPOTIT-LK",
-        "🤝 I’m looking for help with SHOPPIG CART APPLICATION",
-        "👨💻 All of my projects are available at https://portfolionaveenperera.lovable.app/"
-      ],
-      "createdAt": "2026-10-02T07:20:54Z",
-      "pushedAt": "2026-10-02T07:31:12Z",
-      "dateLabel": "Oct 2026 — Present",
-      "isOngoing": true,
-      "featured": false,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/naveenmariopereradev02",
-      "homepage": "",
-      "topics": [],
-      "techStack": [],
-      "stars": 0,
-      "forks": 0,
-      "primaryLanguage": "Code",
-      "languages": {}
     },
     {
       "id": "SpotIT-LK",

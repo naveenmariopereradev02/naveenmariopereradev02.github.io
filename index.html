@@ -4886,10 +4886,10 @@
               renderProjectsAndLanguages(currentProjectsData);
             }
 
-            // Pick the most recently pushed project repo (excluding the portfolio repo itself if other repos exist)
-            const selfRepoName = `${ghUser.toLowerCase()}.github.io`;
+            // Pick the most recently pushed project repo (excluding the portfolio / profile README repo itself)
+            const selfRepoNames = new Set([ghUser.toLowerCase(), `${ghUser.toLowerCase()}.github.io`]);
             const latestRepo =
-              liveRepos.find((r) => !r.fork && r.name.toLowerCase() !== selfRepoName) || liveRepos[0];
+              liveRepos.find((r) => !r.fork && !selfRepoNames.has(r.name.toLowerCase())) || liveRepos[0];
 
             if (latestRepo && latestRepo.name) {
               repoEl.textContent = latestRepo.name;

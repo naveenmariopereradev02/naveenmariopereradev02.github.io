@@ -62,6 +62,7 @@
       "featured": true,
       "isPrivate": false,
       "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
+      "demoUrl": "https://zendata-frontend.onrender.com",
       "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
       "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
       "highlights": [

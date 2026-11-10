@@ -233,8 +233,9 @@ async function main() {
     return;
   }
 
-  // Filter out forks, archived repos, hidden repos, and the portfolio repo itself
+  // Filter out forks, archived repos, hidden repos, and the portfolio / profile README repo itself
   const selfRepoNames = new Set([
+    username.toLowerCase(),
     `${username.toLowerCase()}.github.io`,
     'portfolio',
     'github-portfolio'
