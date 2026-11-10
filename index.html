@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naveen Perera — Computer Science Undergraduate & Full-Stack Developer</title>
+  <meta name="description" content="Portfolio of Naveen Perera — Computer Science Undergraduate at University of Westminster (IIT Sri Lanka), Full-Stack Developer, Cybersecurity & Machine Learning Engineer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark light;
+      --accent: #f97316;
+      --accent-light: #fb923c;
+      --accent-glow: rgba(249, 115, 22, 0.28);
+      --green: #22c55e;
+      --blue: #3b82f6;
+      --purple: #a855f7;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 30px;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition: 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html[data-theme="dark"] {
+      --bg-primary: #070709;
+      --bg-secondary: #0f0f13;
+      --bg-elevated: #15151b;
+      --bg-card: rgba(22, 22, 28, 0.85);
+      --bg-card-hover: rgba(30, 30, 38, 0.95);
+      --bg-glass: rgba(18, 18, 24, 0.72);
+      --text-primary: #f8fafc;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.18);
+      --watermark-hero: rgba(255, 255, 255, 0.085);
+      --watermark-section-top: rgba(255, 255, 255, 0.24);
+      --watermark-section-bottom: rgba(255, 255, 255, 0.02);
+      --btn-primary-bg: #ffffff;
+      --btn-primary-text: #09090b;
+      --btn-secondary-bg: rgba(255, 255, 255, 0.06);
+      --btn-secondary-text: #f4f4f5;
+      --accordion-header: #16161d;
+      --accordion-body: #0e0e13;
+      --input-bg: #121218;
+      --shadow-lg: 0 24px 60px -15px rgba(0, 0, 0, 0.75);
+      --nav-rail-bg: rgba(14, 14, 18, 0.65);
+    }
+
+    html[data-theme="light"] {
+      --bg-primary: #f6f6f7;
+      --bg-secondary: #ededf0;
+      --bg-elevated: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.92);
+      --bg-card-hover: #ffffff;
+      --bg-glass: rgba(255, 255, 255, 0.82);
+      --text-primary: #09090b;
+      --text-secondary: #52525b;
+      --text-muted: #71717a;
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(0, 0, 0, 0.18);
+      --watermark-hero: rgba(0, 0, 0, 0.065);
+      --watermark-section-top: rgba(0, 0, 0, 0.22);
+      --watermark-section-bottom: rgba(0, 0, 0, 0.03);
+      --btn-primary-bg: #0f0f12;
+      --btn-primary-text: #ffffff;
+      --btn-secondary-bg: #ffffff;
+      --btn-secondary-text: #18181b;
+      --accordion-header: #e2e2e6;
+      --accordion-body: #ffffff;
+      --input-bg: #ebebf0;
+      --shadow-lg: 0 20px 50px -15px rgba(0, 0, 0, 0.1);
+      --nav-rail-bg: rgba(255, 255, 255, 0.85);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color var(--transition), color var(--transition);
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: var(--bg-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ==========================================================================
+       TOP-RIGHT THEME TOGGLE & LIVE STATUS
+       ========================================================================== */
+    .top-controls {
+      position: fixed;
+      top: 22px;
+      right: 22px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sync-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+    }
+
+    .sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.25); }
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-glass);
+      backdrop-filter: blur(12px);
+      color: var(--text-primary);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ==========================================================================
+       LEFT FLOATING NAVIGATION RAIL (Exact Sample UI Match)
+       ========================================================================== */
+    .left-nav-rail {
+      position: fixed;
+      left: 18px;
+      bottom: 24px;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: var(--nav-rail-bg);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .left-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s ease, transform 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .left-nav-link::before {
+      content: "";
+      width: 10px;
+      height: 1.5px;
+      background: var(--text-muted);
+      transition: width 0.25s ease, background-color 0.25s ease;
+    }
+
+    .left-nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .left-nav-link.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .left-nav-link.active::before {
+      width: 14px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* ==========================================================================
+       RIGHT FLOATING SOCIAL DOCK (Exact Sample UI Match)
+       ========================================================================== */
+    .right-social-dock {
+      position: fixed;
+      right: 16px;
+      bottom: 24px;
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      align-items: center;
+    }
+
+    .social-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .social-badge:hover {
+      transform: scale(1.16) translateX(-3px);
+    }
+
+    .social-badge svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .social-badge[data-tooltip]::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: 42px;
+      background: #18181b;
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(6px);
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .social-badge:hover[data-tooltip]::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .sb-github { background: #18181b; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); }
+    .sb-x { background: #0f0f12; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); }
+    .sb-insta { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); color: #fff; }
+    .sb-youtube { background: #ff0000; color: #ffffff; }
+    .sb-portfolio { background: #22c55e; color: #052e16; }
+    .sb-linkedin { background: #0a66c2; color: #ffffff; }
+    .sb-facebook { background: #1877f2; color: #ffffff; }
+    .sb-whatsapp { background: #22c55e; color: #ffffff; }
+    .sb-phone { background: #141418; color: #ffffff; border: 1px solid rgba(255,255,255,0.15); }
+    .sb-cv { background: #18181b; color: #ffffff; font-weight: 800; font-size: 0.7rem; letter-spacing: -0.03em; border: 1px solid rgba(255,255,255,0.15); }
+    .sb-dribbble { background: #ea4c89; color: #ffffff; }
+    .sb-gmail { background: #ffffff; color: #ea4335; border: 1px solid rgba(0,0,0,0.1); }
+
+    /* ==========================================================================
+       MAIN LAYOUT & SECTION WATERMARK HEADINGS
+       ========================================================================== */
+    .main-container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 90px;
+    }
+
+    section {
+      padding: 72px 0;
+      position: relative;
+    }
+
+    .section-watermark-wrap {
+      text-align: center;
+      margin-bottom: -18px;
+      user-select: none;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .section-watermark {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(4.8rem, 11vw, 9.2rem);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      background: linear-gradient(180deg, var(--watermark-section-top) 0%, var(--watermark-section-bottom) 95%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      padding: 0 16px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 620px;
+      margin: 12px auto 38px;
+    }
+
+    /* ==========================================================================
+       1. HERO SECTION (Exact Match to Sample UI Screenshots 1 & 2)
+       ========================================================================== */
+    .hero-section {
+      min-height: 94vh;
+      display: flex;
+       flex-direction: column;
+      justify-content: center;
+      position: relative;
+      padding-top: 40px;
+      padding-bottom: 30px;
+      overflow: hidden;
+    }
+
+    /* Giant Geometric Monogram Watermark (TVG -> NMP) */
+    .hero-bg-monogram {
+      position: absolute;
+      top: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-sans);
+      font-weight: 900;
+      font-size: clamp(12rem, 29vw, 27rem);
+      line-height: 0.82;
+      letter-spacing: -0.055em;
+      color: var(--watermark-hero);
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: end;
+      gap: 32px;
+      margin-top: 36px;
+    }
+
+    .hero-left {
+      padding-bottom: 28px;
+    }
+
+    /* Quote Block */
+    .hero-quote-box {
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+
+    .hero-quote-main {
+      font-size: clamp(1.12rem, 1.65vw, 1.38rem);
+      font-weight: 600;
+      line-height: 1.42;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .hero-quote-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-quote-meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .quote-author {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text-primary);
+    }
+
+    .quote-sparkle {
+      color: #facc15;
+    }
+
+    .quote-tag {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    /* Greeting & Bio */
+    .hero-greeting {
+      font-size: clamp(3rem, 6vw, 4.75rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-bolt {
+      display: inline-block;
+      filter: drop-shadow(0 4px 16px rgba(250, 204, 21, 0.35));
+      animation: floatBolt 3s ease-in-out infinite;
+    }
+
+    @keyframes floatBolt {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(6deg); }
+    }
+
+    .hero-role {
+      font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      opacity: 0.92;
+    }
+
+    .hero-bio {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      max-width: 440px;
+      line-height: 1.65;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: var(--btn-secondary-bg);
+      color: var(--btn-secondary-text);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-hover);
+    }
+
+    /* Hero Right: Portrait Cutout (Monochrome Hoodie Developer Style) */
+    .hero-right {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+    }
+
+    .hero-portrait-frame {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-portrait-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: grayscale(100%) contrast(1.08);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%);
+    }
+
+    .hero-bottom-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border-hover) 20%, var(--border-hover) 80%, transparent 100%);
+      margin-top: -2px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ==========================================================================
+       2. ABOUT & EDUCATION SECTION
+       ========================================================================== */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .highlight-metric {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .highlight-label {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .highlight-detail {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    .about-two-col {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+    }
+
+    .glass-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      backdrop-filter: blur(12px);
+    }
+
+    .card-heading {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .about-paragraph {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .edu-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .edu-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .edu-period {
+      font-size: 0.73rem;
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .edu-degree {
+      font-size: 0.94rem;
+      font-weight: 700;
+      margin: 2px 0;
+    }
+
+    .edu-inst {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       3. GITHUB BENTO GRID SECTION (Exact Match to Screenshot 3!)
+       ========================================================================== */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(110px, auto);
+      gap: 14px;
+    }
+
+    .bento-card {
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 14px 34px -10px rgba(0, 0, 0, 0.45);
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 42px -12px rgba(0, 0, 0, 0.65);
+    }
+
+    /* Card 1: Top-Left Globe Domain Card */
+    .bento-globe {
+      grid-column: span 3;
+      min-height: 165px;
+      background: radial-gradient(circle at 50% 95%, #ffffff 0%, #fb923c 35%, #9a3412 68%, #1c1917 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      color: #fff;
+    }
+
+    .bento-domain-pill {
+      padding: 5px 14px;
+      border-radius: 999px;
+      background: rgba(124, 45, 18, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 0.76rem;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      z-index: 2;
+    }
+
+    .globe-svg-wrap {
+      width: 130%;
+      margin-bottom: -36px;
+      opacity: 0.92;
+    }
+
+    /* Card 2: Top-Center Activity Line Chart */
+    .bento-chart {
+      grid-column: span 6;
+      min-height: 165px;
+      background: linear-gradient(180deg, #1a080d 0%, #2d0b14 60%, #140609 100%);
+      padding: 16px 20px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fda4af;
+    }
+
+    .chart-months {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.66rem;
+      color: rgba(253, 164, 175, 0.65);
+      margin-top: 4px;
+    }
+
+    .chart-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      color: #fb7185;
+      margin-top: 6px;
+    }
+
+    /* Card 3: Top-Right Social / GitHub Handle Card */
+    .bento-social {
+      grid-column: span 3;
+      min-height: 165px;
+      background: radial-gradient(circle at 60% 35%, #38bdf8 0%, #0284c7 55%, #080d1a 90%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 18px;
+      color: #ffffff;
+    }
+
+    .bento-handle-pill {
+      padding: 5px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(8px);
+      font-size: 0.76rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    /* Card 4: Current Streak (Sunset Mountain Card) */
+    .bento-streak-current {
+      grid-column: span 3;
+      min-height: 195px;
+      background: linear-gradient(165deg, #fef3c7 0%, #fdba74 42%, #334155 78%, #0f172a 100%);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #0f172a;
+    }
+
+    .streak-big-num {
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-align: right;
+      color: #09090b;
+    }
+
+    .streak-label {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.05;
+      text-align: right;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    /* Card 5: Repositories Count Card */
+    .bento-repos {
+      grid-column: span 3;
+      min-height: 195px;
+      background: radial-gradient(circle at 75% 35%, #134e4a 0%, #0f292a 55%, #071114 100%);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #ffffff;
+    }
+
+    .repos-big-num {
+      font-size: 3.7rem;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .repos-label {
+      font-size: 1.2rem;
+      font-weight: 800;
+      opacity: 0.95;
+    }
+
+    /* Card 6: Longest Streak (Neon Purple Card) */
+    .bento-streak-longest {
+      grid-column: span 6;
+      min-height: 195px;
+      background: radial-gradient(circle at 50% 60%, #7e22ce 0%, #3b0764 55%, #090414 100%);
+      padding: 18px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .longest-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .longest-big-num {
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-shadow: 0 0 32px rgba(192, 132, 252, 0.7);
+    }
+
+    /* Card 7: Contribution Heatmap Card (Deep Blue) */
+    .bento-heatmap {
+      grid-column: span 9;
+      min-height: 180px;
+      background: linear-gradient(135deg, #0d255c 0%, #17377a 50%, #09193a 100%);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #ffffff;
+    }
+
+    .heatmap-header {
+      text-align: center;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: #e0f2fe;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(38, 1fr);
+      gap: 4px;
+      position: relative;
+    }
+
+    .heatmap-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .heatmap-cell {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: rgba(56, 189, 248, 0.14);
+      transition: transform 0.15s ease, background 0.15s ease;
+      cursor: pointer;
+    }
+
+    .heatmap-cell[data-level="1"] { background: #1d4ed8; }
+    .heatmap-cell[data-level="2"] { background: #2563eb; }
+    .heatmap-cell[data-level="3"] { background: #3b82f6; }
+    .heatmap-cell[data-level="4"] { background: #60a5fa; box-shadow: 0 0 6px rgba(96, 165, 250, 0.7); }
+
+    .heatmap-cell:hover {
+      transform: scale(1.35);
+      z-index: 5;
+      outline: 1.5px solid #fff;
+    }
+
+    .heatmap-tooltip {
+      position: absolute;
+      top: 22px;
+      right: 28px;
+      background: #ffffff;
+      color: #09090b;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      pointer-events: none;
+    }
+
+    /* Card 8: Contributions Tall Right Card */
+    .bento-contributions {
+      grid-column: span 3;
+      grid-row: span 2;
+      background: radial-gradient(circle at 70% 22%, rgba(74, 222, 128, 0.32) 0%, #07170d 55%, #050806 100%);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      color: #ffffff;
+    }
+
+    .contrib-big-num {
+      font-size: 3.4rem;
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .contrib-label {
+      font-size: 1.22rem;
+      font-weight: 800;
+    }
+
+    /* Card 9: Workspace Tall Left Card */
+    .bento-workspace {
+      grid-column: span 3;
+      grid-row: span 2;
+      background: linear-gradient(160deg, #27272a 0%, #18181b 50%, #09090b 100%);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .workspace-pill {
+      padding: 10px 26px;
+      border-radius: 999px;
+      background: rgba(24, 24, 27, 0.68);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      color: #ffffff;
+      font-size: 0.96rem;
+      font-weight: 700;
+      z-index: 2;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    /* Card 10: Auto-Detected Languages Card (Exact Match to Screenshot 3!) */
+    .bento-languages {
+      grid-column: span 6;
+      min-height: 165px;
+      background:
+        radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(135deg, #141418 0%, #0c0c0f 100%);
+      background-size: 8px 8px, 100% 100%;
+      padding: 20px 44px 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .bento-lang-pills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .bento-lang-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bento-lang-pill {
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffffff;
+      box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+        0 6px 16px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      white-space: nowrap;
+    }
+
+    .bento-lang-sub {
+      font-size: 0.74rem;
+      color: #a1a1aa;
+      font-weight: 500;
+    }
+
+    .bento-lang-vertical-label {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #71717a;
+      letter-spacing: 0.05em;
+    }
+
+    /* Card 11, 12, 13: Bottom Row Stats (Commits, Forks, Ongoing) */
+    .bento-commits {
+      grid-column: span 3;
+      min-height: 150px;
+      background: radial-gradient(circle at 20% 20%, #14532d 0%, #052e16 65%, #02140a 100%);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      color: #ffffff;
+    }
+
+    .bento-forks {
+      grid-column: span 3;
+      min-height: 150px;
+      background: linear-gradient(145deg, #818cf8 0%, #6366f1 55%, #3730a3 100%);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+    }
+
+    .bento-issues {
+      grid-column: span 3;
+      min-height: 150px;
+      background: radial-gradient(circle at 30% 70%, #831843 0%, #1f1224 65%, #0f0a14 100%);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       4. SKILLS & AUTO-LANGUAGE BAR SECTION
+       ========================================================================== */
+    .auto-lang-banner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .auto-lang-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .auto-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(249, 115, 22, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.3);
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    .multi-lang-bar {
+      height: 12px;
+      width: 100%;
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      gap: 2px;
+      background: var(--bg-secondary);
+      margin-bottom: 16px;
+    }
+
+    .multi-lang-segment {
+      height: 100%;
+      transition: width 0.5s ease;
+    }
+
+    .lang-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .lang-legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .lang-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .skills-categories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .skill-cat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .skill-cat-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+    }
+
+    .skill-cat-title {
+      font-size: 0.94rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-primary);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .skill-pill {
+      padding: 5px 11px;
+      border-radius: 8px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .skill-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       5. PROJECTS SECTION (Auto-Updated from GitHub READMEs)
+       ========================================================================== */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px var(--accent-glow);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card.featured-project {
+      border-top: 2px solid var(--accent);
+    }
+
+    .project-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-date-badge {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      color: var(--text-muted);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .status-pill.ongoing {
+      background: rgba(34, 197, 94, 0.14);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+    }
+
+    .status-pill.completed {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .project-role {
+      font-size: 0.79rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .project-desc {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .project-highlights {
+      list-style: none;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .project-highlights li {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .project-highlights li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .project-tech-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .tech-chip {
+      font-size: 0.71rem;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .proj-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ==========================================================================
+       6. TIMELINE SECTION (Ongoing vs Completed Interactive Timeline)
+       ========================================================================== */
+    .timeline-container {
+      position: relative;
+      padding-left: 32px;
+      margin-top: 20px;
+    }
+
+    .timeline-container::before {
+      content: "";
+      position: absolute;
+      left: 11px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(249, 115, 22, 0.2) 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(4px);
+      border-color: var(--border-hover);
+    }
+
+    .timeline-item.is-ongoing {
+      border-color: rgba(34, 197, 94, 0.45);
+      box-shadow: 0 0 28px -8px rgba(34, 197, 94, 0.25);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -27px;
+      top: 24px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 3px solid var(--accent);
+    }
+
+    .timeline-item.is-ongoing .timeline-dot {
+      background: var(--green);
+      border-color: #bbf7d0;
+      box-shadow: 0 0 12px var(--green);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    .timeline-progress-track {
+      height: 6px;
+      width: 100%;
+      background: var(--bg-secondary);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .timeline-progress-bar {
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .timeline-item.is-ongoing .timeline-progress-bar {
+      width: 100%;
+      background: repeating-linear-gradient(
+        -45deg,
+        #22c55e,
+        #22c55e 10px,
+        #f97316 10px,
+        #f97316 20px
+      );
+      background-size: 28px 28px;
+      animation: moveStripes 1.2s linear infinite;
+    }
+
+    @keyframes moveStripes {
+      0% { background-position: 0 0; }
+      100% { background-position: 28px 0; }
+    }
+
+    /* ==========================================================================
+       7. CERTIFICATIONS SECTION
+       ========================================================================== */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cert-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .cert-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(249, 115, 22, 0.14);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+    }
+
+    /* ==========================================================================
+       8. QUERIES / FAQ ACCORDION SECTION (Exact Match to Screenshot 4!)
+       ========================================================================== */
+    .queries-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details.query-accordion {
+      border-radius: 14px;
+      background: var(--accordion-header);
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    details.query-accordion:hover {
+      border-color: var(--border-hover);
+    }
+
+    details.query-accordion[open] {
+      border-color: rgba(249, 115, 22, 0.4);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.35);
+    }
+
+    summary.query-summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px 12px 12px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      transition: color 0.2s ease;
+    }
+
+    summary.query-summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.query-summary:hover {
+      color: var(--accent);
+    }
+
+    .query-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .query-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #09090b;
+      color: #ffffff;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    details.query-accordion:hover .query-icon-box {
+      border-color: rgba(249, 115, 22, 0.4);
+      transform: scale(1.05);
+    }
+
+    .query-chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), color 0.25s ease;
+    }
+
+    details.query-accordion[open] .query-chevron {
+      transform: rotate(180deg);
+      color: var(--accent);
+    }
+
+    .query-content-wrapper {
+      padding: 0 8px 10px 8px;
+      overflow: hidden;
+    }
+
+    .query-answer {
+      background: var(--accordion-body);
+      border-radius: 11px;
+      padding: 18px 20px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+      line-height: 1.68;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* ==========================================================================
+       9. CONTACT FORM & ORANGE "READY TO BUILD SOMETHING AMAZING?" BANNER
+          (Exact Match to Screenshot 5!)
+       ========================================================================== */
+    .contact-card {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--input-bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 10px;
+      background: #09090b;
+      color: #ffffff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.14);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      background: #18181b;
+    }
+
+    /* Orange CTA Banner (Screenshot 5) */
+    .cta-orange-banner {
+      max-width: 820px;
+      margin: 56px auto 28px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, #fb923c 0%, #f97316 45%, #ea580c 100%);
+      padding: 44px 42px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(234, 88, 12, 0.5);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .cta-title {
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+
+    .cta-title-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.18em;
+      display: block;
+    }
+
+    .cta-sub {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 24px;
+      max-width: 340px;
+    }
+
+    .cta-btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-cta-glass {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.38);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-cta-glass:hover {
+      background: rgba(255, 255, 255, 0.32);
+      transform: translateY(-2px);
+    }
+
+    /* Tilted Dark Preview Cards inside Orange CTA Banner */
+    .cta-mockups {
+      position: relative;
+      height: 250px;
+    }
+
+    .cta-mockup-grid {
+      position: absolute;
+      top: -36px;
+      right: -48px;
+      width: 390px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      transform: rotate(10deg);
+    }
+
+    .mockup-tile {
+      background: #0d0d11;
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.45);
+      color: #fff;
+    }
+
+    .mockup-tile-title {
+      font-size: 0.62rem;
+      font-weight: 700;
+      color: #a1a1aa;
+      margin-bottom: 8px;
+    }
+
+    /* Footer Pill Bar (Screenshot 5) */
+    .footer-pill {
+      max-width: 820px;
+      margin: 0 auto 42px;
+      padding: 16px 24px;
+      border-radius: 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-pill a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE DESIGN (Mobile & Tablet)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .main-container {
+        padding: 0 28px;
+      }
+      .left-nav-rail {
+        display: none;
+      }
+      .bento-globe,
+      .bento-social,
+      .bento-streak-current,
+      .bento-repos {
+        grid-column: span 6;
+      }
+      .bento-chart,
+      .bento-streak-longest,
+      .bento-heatmap,
+      .bento-languages {
+        grid-column: span 12;
+      }
+      .bento-contributions,
+      .bento-workspace,
+      .bento-commits,
+      .bento-forks,
+      .bento-issues {
+        grid-column: span 6;
+        grid-row: span 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 0 18px;
+      }
+      .right-social-dock {
+        flex-direction: row;
+        bottom: 12px;
+        right: 50%;
+        transform: translateX(50%);
+        background: var(--nav-rail-bg);
+        backdrop-filter: blur(14px);
+        padding: 8px 12px;
+        border-radius: 16px;
+        border: 1px solid var(--border-subtle);
+        max-width: 94vw;
+        overflow-x: auto;
+      }
+      .hero-grid,
+      .about-two-col,
+      .projects-grid,
+      .skills-categories-grid,
+      .certs-grid,
+      .cta-orange-banner {
+        grid-template-columns: 1fr;
+      }
+      .highlights-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full {
+        grid-column: span 1;
+      }
+      .cta-mockups {
+        display: none;
+      }
+      .bento-globe,
+      .bento-social,
+      .bento-streak-current,
+      .bento-repos,
+      .bento-contributions,
+      .bento-workspace,
+      .bento-commits,
+      .bento-forks,
+      .bento-issues {
+        grid-column: span 12;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP RIGHT CONTROLS (Auto-Sync Status + Dark/Light Mode Toggle) -->
+  <div class="top-controls">
+    <div class="sync-pill" id="syncStatusPill" title="Synced with GitHub Repositories">
+      <span class="sync-dot"></span>
+      <span id="syncStatusText">GitHub Auto-Sync</span>
+    </div>
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark or Light Mode" title="Toggle Theme">
+      <svg id="themeIconDark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 3v2m0 14v2M5.64 5.64l1.41 1.41m9.9 9.9l1.41 1.41M3 12h2m14 0h2M5.64 18.36l1.41-1.41m9.9-9.9l1.41-1.41M12 8a4 4 0 100 8 4 4 0 000-8z"/>
+      </svg>
+      <svg id="themeIconLight" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- FLOATING LEFT NAVIGATION RAIL (Matches Sample UI) -->
+  <nav class="left-nav-rail" aria-label="Section Navigation">
+    <a href="#hero" class="left-nav-link active" data-section="hero">Hero</a>
+    <a href="#about" class="left-nav-link" data-section="about">About</a>
+    <a href="#github" class="left-nav-link" data-section="github">GitHub</a>
+    <a href="#skills" class="left-nav-link" data-section="skills">Skills</a>
+    <a href="#projects" class="left-nav-link" data-section="projects">Projects</a>
+    <a href="#timeline" class="left-nav-link" data-section="timeline">Timeline</a>
+    <a href="#certifications" class="left-nav-link" data-section="certifications">Certifications</a>
+    <a href="#queries" class="left-nav-link" data-section="queries">Queries</a>
+    <a href="#contact" class="left-nav-link" data-section="contact">Contact</a>
+    <a href="#actions" class="left-nav-link" data-section="actions">Actions</a>
+  </nav>
+
+  <!-- FLOATING RIGHT SOCIAL DOCK (Matches Sample UI) -->
+  <aside class="right-social-dock" aria-label="Social Links">
+    <a id="dockGithub" href="https://github.com/naveenmariopereradev02dev02" target="_blank" rel="noopener" class="social-badge sb-github" data-tooltip="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+    </a>
+    <a id="dockInsta" href="https://www.instagram.com/naveen__mario_perera?obrf=MXB3MW5jNmt6NXQ4Zg==" target="_blank" rel="noopener" class="social-badge sb-insta" data-tooltip="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+    </a>
+    <a id="dockLinkedin" href="https://www.linkedin.com/in/naveen-perera-7b5a1623a?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener" class="social-badge sb-linkedin" data-tooltip="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+    </a>
+    <a id="dockFacebook" href="https://www.facebook.com/share/18s2m3ur8c/" target="_blank" rel="noopener" class="social-badge sb-facebook" data-tooltip="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a id="dockWhatsapp" href="https://wa.me/qr/77XXLJ4WHRJDO1" target="_blank" rel="noopener" class="social-badge sb-whatsapp" data-tooltip="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+    </a>
+    <a href="#projects" class="social-badge sb-portfolio" data-tooltip="Featured Projects">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/></svg>
+    </a>
+    <a href="#timeline" class="social-badge sb-cv" data-tooltip="Project Timeline">CV</a>
+    <a href="#skills" class="social-badge sb-dribbble" data-tooltip="Tech Skills">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+    </a>
+    <a id="dockEmail" href="mailto:naveenmarioperera04@gmail.com" class="social-badge sb-gmail" data-tooltip="Email Naveen">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </aside>
+
+  <main class="main-container">
+
+    <!-- ========================================================================
+         1. HERO SECTION (Sample UI Screenshots 1 & 2)
+         ======================================================================== -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-monogram" id="heroWatermark">NMP</div>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-quote-box">
+            <p class="hero-quote-main" id="quoteMain">
+              "Many of life's failures are people who did not realize how close they were to success when they gave up."
+            </p>
+            <p class="hero-quote-sub" id="quoteSub">
+              "Many people quit just before success."
+            </p>
+            <div class="hero-quote-meta">
+              <span class="quote-author">
+                <span class="quote-sparkle">✨</span>
+                <span id="quoteAuthor">Thomas A. Edison</span>
+              </span>
+              <span class="quote-tag" id="quoteTag">Perseverance</span>
+            </div>
+          </div>
+
+          <h1 class="hero-greeting">
+            <span id="heroGreetingText">Ayubowan</span>
+            <span class="hero-bolt">⚡</span>
+          </h1>
+          <h2 class="hero-role" id="heroTagline">
+            Computer Science Undergraduate &amp; Full-Stack Developer
+          </h2>
+          <p class="hero-bio" id="heroSubtitle">
+            Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning systems. Passionate about clean architecture, cybersecurity, and minimal design systems.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              <span>View Projects</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a id="heroGithubBtn" href="https://github.com/naveenmariopereradev02dev02" target="_blank" rel="noopener" class="btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="hero-portrait-frame" id="heroPortraitContainer">
+            <!-- Monochrome High-Contrast Developer Portrait SVG (Can be replaced via avatarUrl in profile.json) -->
+            <svg class="hero-portrait-img" viewBox="0 0 480 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Naveen Perera Portrait">
+              <defs>
+                <linearGradient id="hoodieGrad" x1="240" y1="290" x2="240" y2="540" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#1c1c20"/>
+                  <stop offset="65%" stop-color="#0d0d10"/>
+                  <stop offset="100%" stop-color="#050507"/>
+                </linearGradient>
+                <linearGradient id="skinGrad" x1="240" y1="110" x2="240" y2="320" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#d4d4d8"/>
+                  <stop offset="55%" stop-color="#a1a1aa"/>
+                  <stop offset="100%" stop-color="#52525b"/>
+                </linearGradient>
+                <linearGradient id="hairGrad" x1="240" y1="45" x2="240" y2="210" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#27272a"/>
+                  <stop offset="100%" stop-color="#09090b"/>
+                </linearGradient>
+              </defs>
+              <!-- Hoodie Shoulders & Torso -->
+              <path d="M35 535C44 415 95 362 156 342L240 330L324 342C385 362 436 415 445 535H35Z" fill="url(#hoodieGrad)"/>
+              <!-- Hoodie Collar / Hood -->
+              <path d="M132 345C130 295 162 272 240 272C318 272 350 295 348 345C322 378 282 396 240 396C198 396 158 378 132 345Z" fill="#141418" stroke="#27272a" stroke-width="2"/>
+              <!-- Neck -->
+              <rect x="202" y="258" width="76" height="86" rx="28" fill="url(#skinGrad)"/>
+              <!-- Ears -->
+              <rect x="145" y="176" width="22" height="48" rx="11" fill="#a1a1aa"/>
+              <rect x="313" y="176" width="22" height="48" rx="11" fill="#a1a1aa"/>
+              <!-- Head / Face -->
+              <rect x="158" y="96" width="164" height="196" rx="76" fill="url(#skinGrad)"/>
+              <!-- Beard / Jaw Shading -->
+              <path d="M160 202C160 256 194 294 240 294C286 294 320 256 320 202C312 232 286 254 240 254C194 254 168 232 160 202Z" fill="#18181b" fill-opacity="0.88"/>
+              <!-- Smile -->
+              <path d="M210 234C220 247 260 247 270 234Z" fill="#f4f4f5"/>
+              <!-- Glasses (Clear Modern Frames like Sample UI) -->
+              <rect x="172" y="160" width="60" height="42" rx="12" stroke="#e4e4e7" stroke-width="4" fill="rgba(255,255,255,0.06)"/>
+              <rect x="248" y="160" width="60" height="42" rx="12" stroke="#e4e4e7" stroke-width="4" fill="rgba(255,255,255,0.06)"/>
+              <path d="M232 176H248" stroke="#e4e4e7" stroke-width="4"/>
+              <!-- Eyes -->
+              <circle cx="202" cy="181" r="6" fill="#18181b"/>
+              <circle cx="278" cy="181" r="6" fill="#18181b"/>
+              <circle cx="204" cy="179" r="2" fill="#ffffff"/>
+              <circle cx="280" cy="179" r="2" fill="#ffffff"/>
+              <!-- Eyebrows -->
+              <path d="M182 152C194 146 212 147 222 152" stroke="#18181b" stroke-width="5" stroke-linecap="round"/>
+              <path d="M258 152C268 147 286 146 298 152" stroke="#18181b" stroke-width="5" stroke-linecap="round"/>
+              <!-- Styled Hair -->
+              <path d="M152 172C142 112 174 60 240 60C308 60 338 110 328 172C320 132 300 112 240 112C180 112 160 132 152 172Z" fill="url(#hairGrad)"/>
+              <path d="M162 96C184 56 284 52 316 96C290 82 200 82 162 96Z" fill="#27272a"/>
+              <!-- Hoodie Drawstrings -->
+              <circle cx="208" cy="378" r="5" stroke="#71717a" stroke-width="2" fill="#09090b"/>
+              <circle cx="272" cy="378" r="5" stroke="#71717a" stroke-width="2" fill="#09090b"/>
+              <path d="M208 380V492" stroke="#27272a" stroke-width="5" stroke-linecap="round"/>
+              <path d="M272 380V486" stroke="#27272a" stroke-width="5" stroke-linecap="round"/>
+              <!-- Geometric Hoodie Monogram Badge (Matches V logo on hoodie in Sample UI) -->
+              <g transform="translate(325, 435)">
+                <path d="M0 0L22 38L44 0H33L22 20L11 0H0Z" fill="#ffffff"/>
+                <path d="M14 0L22 14L30 0H14Z" fill="#a1a1aa"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="hero-bottom-divider"></div>
+    </section>
+
+    <!-- ========================================================================
+         2. ABOUT & EDUCATION SECTION (From CV)
+         ======================================================================== -->
+    <section id="about">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">About</h2>
+      </div>
+      <p class="section-subtitle" id="aboutHeadline">
+        Second-Year BSc (Hons) Computer Science Undergraduate at University of Westminster (IIT, Sri Lanka)
+      </p>
+
+      <div class="highlights-grid" id="highlightsGrid"></div>
+
+      <div class="about-two-col">
+        <div class="glass-card">
+          <h3 class="card-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Engineering Profile &amp; Leadership</span>
+          </h3>
+          <div id="aboutBioContainer"></div>
+        </div>
+
+        <div class="glass-card">
+          <h3 class="card-heading">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Education &amp; Academic Background</span>
+          </h3>
+          <div id="educationContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. GITHUB BENTO GRID SECTION (Exact Match to Screenshot 3!)
+         ======================================================================== -->
+    <section id="github">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">GitHub</h2>
+      </div>
+      <p class="section-subtitle">
+        Live open-source metrics, repository streaks, contribution heatmap, and auto-detected languages.
+      </p>
+
+      <div class="bento-grid">
+        <!-- 1. Globe Domain Card -->
+        <a href="#hero" class="bento-card bento-globe">
+          <span class="bento-domain-pill" id="bentoDomain">naveenperera.dev</span>
+          <svg class="globe-svg-wrap" viewBox="0 0 200 100" fill="none">
+            <circle cx="100" cy="110" r="85" fill="#e5e7eb" stroke="#fb923c" stroke-width="3"/>
+            <path d="M35 85 Q100 45 165 85" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+            <path d="M55 60 Q100 35 145 60" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+            <ellipse cx="100" cy="110" rx="45" ry="85" stroke="#9ca3af" stroke-width="1.5" fill="none"/>
+          </svg>
+        </a>
+
+        <!-- 2. Activity Spline Chart Card -->
+        <div class="bento-card bento-chart">
+          <svg viewBox="0 0 420 110" width="100%" height="105" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="crimsonArea" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12 L420 110 L0 110 Z" fill="url(#crimsonArea)"/>
+            <path d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12" fill="none" stroke="#fb7185" stroke-width="2.5"/>
+          </svg>
+          <div class="chart-months">
+            <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+          </div>
+          <div class="chart-footer">
+            <span>📅 2025 - 2026</span>
+            <span>Trending up across active repositories ↗</span>
+          </div>
+        </div>
+
+        <!-- 3. GitHub / Social Handle Card -->
+        <a id="bentoHandleLink" href="https://github.com/naveenmariopereradev02dev02" target="_blank" rel="noopener" class="bento-card bento-social">
+          <svg viewBox="0 0 180 140" width="110%" style="position:absolute; top:-8px; right:-10px; opacity:0.9; pointer-events:none;">
+            <defs>
+              <linearGradient id="skyBirdGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#60a5fa"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+            <path d="M165 25c-6 3-13 5-20 6 7-4 13-11 15-19-7 4-14 7-22 8-6-7-16-11-26-11-20 0-35 18-31 38-27-1-51-14-67-34-9 16-5 36 10 46-6 0-11-2-16-4 0 17 12 31 28 34-5 1-10 2-16 1 5 14 18 24 33 24-15 12-34 17-53 15 16 10 35 16 55 16 67 0 104-57 102-108 7-5 13-11 18-18z" fill="url(#skyBirdGrad)"/>
+          </svg>
+          <span class="bento-handle-pill" id="bentoHandle">@naveenmariopereradev02</span>
+        </a>
+
+        <!-- 4. Current Streak Card -->
+        <div class="bento-card bento-streak-current">
+          <svg viewBox="0 0 220 190" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+            <path d="M0 155 L58 105 L115 138 L178 96 L220 120 L220 190 L0 190 Z" fill="#1e293b" opacity="0.65"/>
+            <path d="M0 190 L78 122 L145 168 L220 135 L220 190 Z" fill="#0f172a" opacity="0.92"/>
+            <!-- Hiker Silhouette on Peak -->
+            <circle cx="62" cy="64" r="5.5" fill="#1e293b"/>
+            <rect x="55" y="71" width="14" height="24" rx="5" fill="#f97316"/>
+            <path d="M58 95 L54 118 M66 95 L68 118" stroke="#0f172a" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <div class="streak-big-num" id="bentoCurrentStreak" style="position:relative; z-index:2;">48</div>
+          <div class="streak-label" style="position:relative; z-index:2;">Current<br/>Streak</div>
+        </div>
+
+        <!-- 5. Repositories Count Card (Auto-Updated from projects.json) -->
+        <a href="#projects" class="bento-card bento-repos">
+          <svg viewBox="0 0 220 180" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; z-index:0; opacity:0.85;">
+            <g transform="translate(58, 16) rotate(-8)">
+              <rect x="10" y="18" width="110" height="82" rx="10" fill="#115e59" stroke="#2dd4bf" stroke-width="1.5"/>
+              <rect x="18" y="6" width="94" height="65" rx="6" fill="#ecfeff" opacity="0.9"/>
+              <line x1="28" y1="22" x2="86" y2="22" stroke="#0f766e" stroke-width="3" stroke-linecap="round"/>
+              <line x1="28" y1="34" x2="98" y2="34" stroke="#99f6e4" stroke-width="3" stroke-linecap="round"/>
+              <path d="M6 42 H124 L114 112 H16 Z" fill="#0d9488"/>
+              <circle cx="65" cy="77" r="14" fill="#134e4a"/>
+            </g>
+          </svg>
+          <div class="repos-big-num" id="bentoTotalRepos" style="position:relative; z-index:2;">05</div>
+          <div class="repos-label" style="position:relative; z-index:2;">Repositories</div>
+        </a>
+
+        <!-- 6. Longest Streak Card -->
+        <div class="bento-card bento-streak-longest">
+          <svg viewBox="0 0 420 190" width="100%" height="100%" preserveAspectRatio="none" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+            <path d="M0 190 L75 125 L150 165 L245 110 L335 155 L420 118 L420 190 Z" fill="#1e0538" opacity="0.85"/>
+            <!-- Neon Glowing Trophy Pedestal on Left -->
+            <circle cx="95" cy="88" r="36" fill="#a855f7" opacity="0.28"/>
+            <circle cx="95" cy="88" r="20" fill="#e9d5ff" opacity="0.9"/>
+            <path d="M72 130 H118 L126 168 H64 Z" fill="#3b0764" stroke="#a855f7" stroke-width="1.5"/>
+          </svg>
+          <div class="longest-title" style="position:relative; z-index:2;">Longest Streak</div>
+          <div class="longest-big-num" id="bentoLongestStreak" style="position:relative; z-index:2;">107</div>
+          <div style="font-size:0.72rem; color:#d8b4fe; position:relative; z-index:2;">Consistent Engineering &amp; Commits</div>
+        </div>
+
+        <!-- 7. Interactive Contribution Heatmap Card -->
+        <div class="bento-card bento-heatmap">
+          <div class="heatmap-header">
+            <span>Contribution Heatmap</span>
+          </div>
+          <div class="heatmap-tooltip" id="heatmapTooltip">21 Contributions · Aug 2026</div>
+          <div class="heatmap-grid" id="heatmapGrid"></div>
+        </div>
+
+        <!-- 8. Contributions Tall Right Card -->
+        <div class="bento-card bento-contributions">
+          <svg viewBox="0 0 220 280" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+            <!-- Hanging Desk Lamp & Green Light Cone -->
+            <line x1="156" y1="0" x2="156" y2="42" stroke="#52525b" stroke-width="3"/>
+            <path d="M134 56 C134 42, 178 42, 178 56 Z" fill="#18181b"/>
+            <ellipse cx="156" cy="56" rx="22" ry="4" fill="#86efac"/>
+            <polygon points="134,56 178,56 215,210 95,210" fill="url(#lampGlow)" opacity="0.32"/>
+            <defs>
+              <linearGradient id="lampGlow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4ade80"/>
+                <stop offset="100%" stop-color="transparent"/>
+              </linearGradient>
+            </defs>
+            <!-- Coder Silhouette -->
+            <circle cx="132" cy="145" r="22" fill="#18181b"/>
+            <path d="M90 220 C95 178, 168 178, 175 220 Z" fill="#09090b"/>
+          </svg>
+          <div class="contrib-big-num" id="bentoContributions" style="position:relative; z-index:2;">1.2K</div>
+          <div class="contrib-label" style="position:relative; z-index:2;">Contributions</div>
+        </div>
+
+        <!-- 9. Developer Workspace Tall Left Card -->
+        <div class="bento-card bento-workspace">
+          <svg viewBox="0 0 220 280" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; z-index:0;">
+            <!-- Desk & Glowing Monitor Setup -->
+            <path d="M0 215 L220 175 L220 280 L0 280 Z" fill="#78350f" opacity="0.55"/>
+            <rect x="82" y="88" width="96" height="64" rx="6" fill="#f97316" stroke="#27272a" stroke-width="4"/>
+            <circle cx="118" cy="122" r="22" fill="#38bdf8" opacity="0.85"/>
+            <rect x="124" y="152" width="12" height="22" fill="#52525b"/>
+          </svg>
+          <span class="workspace-pill" id="bentoWorkspaceName">Naveen Perera</span>
+        </div>
+
+        <!-- 10. Auto-Updating Languages Card (Populated from projects.json!) -->
+        <div class="bento-card bento-languages">
+          <div class="bento-lang-pills-wrap" id="bentoLanguagesWrap"></div>
+          <span class="bento-lang-vertical-label">Languages</span>
+        </div>
+
+        <!-- 11. Commits Card -->
+        <div class="bento-card bento-commits">
+          <svg viewBox="0 0 200 150" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; opacity:0.45;">
+            <path d="M-10 20 Q 60 60, 40 150 M10 10 Q 80 55, 60 150 M30 0 Q 100 50, 80 150 M50 -10 Q 120 45, 100 150" fill="none" stroke="#4ade80" stroke-width="2"/>
+          </svg>
+          <div class="repos-big-num" id="bentoCommits" style="position:relative; z-index:2;">850+</div>
+          <div class="repos-label" style="position:relative; z-index:2;">Commits</div>
+        </div>
+
+        <!-- 12. Forks Card -->
+        <div class="bento-card bento-forks">
+          <svg viewBox="0 0 200 150" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; opacity:0.35;">
+            <circle cx="52" cy="52" r="28" fill="#1e1b4b"/>
+            <circle cx="148" cy="52" r="28" fill="#1e1b4b"/>
+            <path d="M52 80 V110 H148 V80 M100 110 V145" stroke="#1e1b4b" stroke-width="14" fill="none"/>
+          </svg>
+          <div style="font-size:0.95rem; font-weight:700; position:relative; z-index:2;">Forks</div>
+          <div style="font-size:3.5rem; font-weight:900; line-height:0.95; position:relative; z-index:2;" id="bentoForks">09</div>
+        </div>
+
+        <!-- 13. Ongoing Projects / Open Issues Card -->
+        <div class="bento-card bento-issues">
+          <svg viewBox="0 0 200 150" width="100%" height="100%" style="position:absolute; inset:0; pointer-events:none; opacity:0.55;">
+            <rect x="22" y="48" width="64" height="82" rx="10" transform="rotate(-10 22 48)" fill="#f472b6"/>
+            <circle cx="58" cy="86" r="12" fill="#831843"/>
+          </svg>
+          <div class="repos-big-num" id="bentoOngoingCount" style="position:relative; z-index:2;">01</div>
+          <div class="repos-label" style="position:relative; z-index:2;">Ongoing</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. SKILLS & AUTO-DETECTED LANGUAGES SECTION
+         ======================================================================== -->
+    <section id="skills">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">Skills</h2>
+      </div>
+      <p class="section-subtitle">
+        Automatically calculated language distribution from public GitHub repositories alongside core engineering competencies.
+      </p>
+
+      <!-- Auto-Updated Repository Languages Breakdown -->
+      <div class="auto-lang-banner">
+        <div class="auto-lang-header">
+          <div>
+            <h3 style="font-size:1rem; font-weight:700;">Auto-Detected Repository Languages</h3>
+            <p style="font-size:0.78rem; color:var(--text-secondary);">
+              Updated automatically from GitHub code byte counts across your public repositories. Start a project in a new language and it appears here automatically.
+            </p>
+          </div>
+          <span class="auto-badge">⚡ Live from projects.json</span>
+        </div>
+        <div class="multi-lang-bar" id="multiLangBar"></div>
+        <div class="lang-legend" id="langLegend"></div>
+      </div>
+
+      <!-- Curated Technical Skills from CV (profile.json) -->
+      <div class="skills-categories-grid" id="skillsCategoriesGrid"></div>
+    </section>
+
+    <!-- ========================================================================
+         5. PROJECTS SECTION (Auto-Updated from GitHub READMEs + overrides.json)
+         ======================================================================== -->
+    <section id="projects">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">Projects</h2>
+      </div>
+      <p class="section-subtitle">
+        Synced with GitHub repository READMEs and curated project highlights from my work in SSO Security, Data Hygiene, Machine Learning, and Civic Tech.
+      </p>
+
+      <div class="filter-bar" id="projectFilters">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="ongoing">🟢 Ongoing</button>
+        <button class="filter-btn" data-filter="featured">⭐ Featured</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- ========================================================================
+         6. INTERACTIVE PROJECT TIMELINE SECTION (Ongoing vs Completed)
+         ======================================================================== -->
+    <section id="timeline">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">Timeline</h2>
+      </div>
+      <p class="section-subtitle">
+        Chronological journey of projects. Active repositories remain marked as <strong>Ongoing</strong> and continue progressing along the timeline.
+      </p>
+
+      <div class="timeline-container" id="timelineContainer"></div>
+    </section>
+
+    <!-- ========================================================================
+         7. CERTIFICATIONS SECTION (From CV)
+         ======================================================================== -->
+    <section id="certifications">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">Certifications</h2>
+      </div>
+      <p class="section-subtitle">
+        Professional credentials in Cyber Security, Networking, and System Administration.
+      </p>
+
+      <div class="certs-grid" id="certsGrid"></div>
+    </section>
+
+    <!-- ========================================================================
+         8. QUERIES / FAQ ACCORDION SECTION (Exact Match to Screenshot 4!)
+         ======================================================================== -->
+    <section id="queries">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">Queries</h2>
+      </div>
+      <p class="section-subtitle">
+        Frequently asked questions about my technical stack, availability, and how this portfolio works.
+      </p>
+
+      <div class="queries-list" id="queriesList"></div>
+    </section>
+
+    <!-- ========================================================================
+         9. CONTACT FORM & "READY TO BUILD SOMETHING AMAZING?" BANNER
+            (Exact Match to Screenshot 5!)
+         ======================================================================== -->
+    <section id="contact">
+      <div class="section-watermark-wrap">
+        <h2 class="section-watermark">Contact</h2>
+      </div>
+      <p class="section-subtitle">
+        Have an internship opportunity, project idea, or question? Send me a message below.
+      </p>
+
+      <div class="contact-card">
+        <form id="contactForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="senderName">Your Name</label>
+              <input class="form-input" id="senderName" name="name" type="text" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="senderEmail">Email Address</label>
+              <input class="form-input" id="senderEmail" name="email" type="email" placeholder="john@company.com" required />
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="senderMessage">Project or Opportunity Details</label>
+              <textarea class="form-textarea" id="senderMessage" name="message" placeholder="Tell me what you are building, what stage you are at, and how we can collaborate..." required></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit">
+            <span>Submit Message</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         10. ACTIONS / ORANGE CTA BANNER & FOOTER (Exact Match to Screenshot 5!)
+         ======================================================================== -->
+    <section id="actions" style="padding-top: 10px; padding-bottom: 30px;">
+      <div class="cta-orange-banner">
+        <div>
+          <h2 class="cta-title">
+            Ready to Build<br/>
+            Something
+            <span class="cta-title-italic">Amazing?</span>
+          </h2>
+          <p class="cta-sub">
+            Let's collaborate on your next project. I'm always open to exciting software engineering opportunities and interesting conversations.
+          </p>
+          <div class="cta-btn-row">
+            <a id="ctaEmailBtn" href="mailto:naveenmarioperera04@gmail.com" class="btn-cta-glass">
+              <span>Let's Get Developing</span>
+              <span>▶</span>
+            </a>
+            <a id="ctaGithubBtn" href="https://github.com/naveenmariopereradev02dev02" target="_blank" rel="noopener" class="btn-cta-glass">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+              <span>Contribute</span>
+              <span>▶</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="cta-mockups" aria-hidden="true">
+          <div class="cta-mockup-grid">
+            <div class="mockup-tile">
+              <div class="mockup-tile-title">OAuth 2.0 &amp; OIDC Telemetry</div>
+              <svg viewBox="0 0 160 65" width="100%" height="60">
+                <path d="M5 50 Q 40 10, 80 35 T 155 18" fill="none" stroke="#60a5fa" stroke-width="2.5"/>
+                <circle cx="80" cy="35" r="3.5" fill="#f97316"/>
+              </svg>
+            </div>
+            <div class="mockup-tile">
+              <div class="mockup-tile-title">Loan ML Classifier (99.97%)</div>
+              <svg viewBox="0 0 160 65" width="100%" height="60">
+                <path d="M5 55 C 35 15, 70 12, 155 8" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+              </svg>
+            </div>
+            <div class="mockup-tile">
+              <div class="mockup-tile-title">ZenData 4-Pillar Quality</div>
+              <svg viewBox="0 0 160 75" width="100%" height="68">
+                <circle cx="80" cy="38" r="26" fill="#3b82f6"/>
+                <path d="M80 38 L80 12 A26 26 0 0 1 104 48 Z" fill="#f97316"/>
+                <path d="M80 38 L104 48 A26 26 0 0 1 62 58 Z" fill="#22c55e"/>
+              </svg>
+            </div>
+            <div class="mockup-tile">
+              <div class="mockup-tile-title">SpotIT LK — Cloud Sync</div>
+              <svg viewBox="0 0 160 75" width="100%" height="68">
+                <polygon points="80,10 108,35 95,65 65,65 52,35" fill="rgba(168,85,247,0.35)" stroke="#a855f7" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer-pill">
+        <div>
+          © <span id="footerYear">2026</span> <strong id="footerName">Naveen Perera</strong> &nbsp;|&nbsp; All rights reserved
+        </div>
+        <div>
+          Building in public at <a id="footerHandle" href="https://github.com/naveenmariopereradev02dev02" target="_blank" rel="noopener">@naveenmariopereradev02</a>
+        </div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script>
+    /**
+     * Built-in fallback data (from Naveen's CV) so the portfolio previews cleanly
+     * even if opened directly via file:// without a local HTTP server.
+     * When hosted on GitHub Pages or Live Server, fetch('./profile.json') and
+     * fetch('./projects.json') automatically load the latest JSON files.
+     */
+    const FALLBACK_PROFILE = {
+      githubUsername: "naveenmariopereradev02",
+      watermark: "NMP",
+      greeting: "Ayubowan",
+      name: "Naveen Perera",
+      tagline: "Computer Science Undergraduate & Full-Stack Developer",
+      subtitle: "Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning systems. Passionate about clean architecture, cybersecurity, and impactful digital products.",
+      avatarUrl: "",
+      formspreeEndpoint: "",
+      quote: {
+        text: "Many of life's failures are people who did not realize how close they were to success when they gave up.",
+        subtext: "Many people quit just before success.",
+        author: "Thomas A. Edison",
+        tag: "Perseverance"
+      },
+      contact: {
+        email: "naveenmarioperera04@gmail.com",
+        phone: "+94 78 870 0322",
+        whatsapp: "https://wa.me/qr/77XXLJ4WHRJDO1",
+        github: "https://github.com/naveenmariopereradev02dev02",
+        linkedin: "https://www.linkedin.com/in/naveen-perera-7b5a1623a?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+        facebook: "https://www.facebook.com/share/18s2m3ur8c/",
+        instagram: "https://www.instagram.com/naveen__mario_perera?obrf=MXB3MW5jNmt6NXQ4Zg==",
+        portfolio: "https://naveenmariopereradev02.github.io/portfolio"
+      },
+      githubStats: {
+        domain: "naveenperera.dev",
+        handle: "@naveenmariopereradev02",
+        currentStreak: 48,
+        longestStreak: 107,
+        contributions: "1.2K",
+        commits: "850+",
+        forks: "09"
+      },
+      about: {
+        bio: [
+          "I am a Second-Year BSc (Hons) Computer Science undergraduate at the University of Westminster (studying at Informatics Institute of Technology — IIT, Sri Lanka), specializing in full-stack software engineering, identity & access security, and machine learning pipelines.",
+          "From architecting an enterprise OAuth 2.0 / OIDC Single Sign-On platform with FIDO2 WebAuthn passkeys during my SLT Internship, to engineering ZenData's 4-pillar automated data hygiene engine and a 99.97%-accurate Loan Approval ML classifier, I love turning complex real-world problems into resilient, user-centric systems.",
+          "Beyond code, I represented De Mazenod College in Badminton, Tennis, and Cricket, and bring strong creative skills in UI/UX planning, photography, and videography to every product I build."
+        ],
+        highlights: [
+          { metric: "99.97%", label: "ML Classification Accuracy", detail: "Loan Approval Prediction Model (AUC-ROC 1.0 on 58,645 records)" },
+          { metric: "OAuth 2.0", label: "OIDC & FIDO2 Passkeys", detail: "Full-stack Identity Provider engineered for SLT Internship" },
+          { metric: "SDG 11", label: "Civic Tech Impact", detail: "Backend & Multimedia Lead for SpotIT LK civic platform" },
+          { metric: "Full-Stack", label: "Web, Mobile & Data AI", detail: "React, Next.js, Node.js, FastAPI, Flutter & Python ML" }
+        ]
+      },
+      education: [
+        {
+          period: "2025 — Present",
+          degree: "BSc (Hons) Computer Science",
+          institution: "University of Westminster, UK (at IIT Sri Lanka)",
+          location: "Colombo, Sri Lanka",
+          description: "Focusing on Software Engineering, Algorithms, Full-Stack Development, Cybersecurity, and Machine Learning & Data Mining."
+        },
+        {
+          period: "2023",
+          degree: "G.C.E. Advanced Level & Ordinary Level",
+          institution: "De Mazenod College",
+          location: "Kandana, Sri Lanka",
+          description: "Physical Science Stream. Represented the college in Badminton, Tennis, and Cricket."
+        }
+      ],
+      skills: [
+        { category: "Programming Languages", items: ["Python", "Java", "JavaScript", "TypeScript", "Dart", "SQL", "HTML5/CSS3"] },
+        { category: "Frontend & Mobile", items: ["React", "Next.js", "Redux Toolkit", "Tailwind CSS", "Flutter", "Tkinter", "Figma", "UI/UX Planning"] },
+        { category: "Backend & Databases", items: ["Node.js", "Express", "FastAPI", "PostgreSQL", "MySQL", "Firebase (Firestore, Auth, Storage, Hosting)"] },
+        { category: "Machine Learning & Data Science", items: ["Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV", "ReportLab", "OpenPyXL", "Google Colab"] },
+        { category: "Security & DevOps", items: ["OAuth 2.0 / OIDC", "JWT", "WebAuthn (FIDO2)", "Docker", "Nginx", "Git", "GitHub"] },
+        { category: "Creative & Media", items: ["Graphic Design", "Photography & Videography", "Video Editing", "Loom"] }
+      ],
+      certifications: [
+        { title: "Professional Certificate in Cyber Security & Networking", issuer: "IIT School of Computing", date: "2025", badge: "Verified Certificate" },
+        { title: "Certificate in Networking and System Administration", issuer: "IIT School of Computing", date: "2025", badge: "Verified Certificate" },
+        { title: "Certificate in Cyber Security Information", issuer: "Cyber Security Program", date: "2025", badge: "Verified Certificate" }
+      ],
+      queries: [
+        {
+          question: "What engineering areas and services do I specialize in?",
+          answer: "I specialize in building secure full-stack web applications (React, Next.js, Node.js, Express, FastAPI), enterprise authentication & identity systems (OAuth 2.0, OIDC, WebAuthn FIDO2), cross-platform mobile apps (Flutter & Firebase), and end-to-end Python data quality and machine learning pipelines."
+        },
+        {
+          question: "What kind of opportunities am I looking for?",
+          answer: "I am actively open to Software Engineering, Full-Stack, Cybersecurity, and Data/ML Internship opportunities, as well as collaborative open-source and freelance product development projects."
+        },
+        {
+          question: "What technologies do I work with daily?",
+          answer: "My core stack includes Python (FastAPI, Pandas, NumPy, Scikit-learn), JavaScript/TypeScript (React, Next.js, Redux Toolkit, Node.js, Express, Tailwind CSS), Java, Dart/Flutter, PostgreSQL, Firebase, Docker, and Nginx."
+        },
+        {
+          question: "How does this portfolio stay up to date automatically?",
+          answer: "A scheduled GitHub Actions workflow runs daily and on every push. It queries the GitHub REST API for my public repositories, extracts README descriptions, calculates real-time language byte distributions, and updates the Projects, Skills, and Timeline sections automatically."
+        },
+        {
+          question: "How do I approach security and code quality?",
+          answer: "With formal certifications in Cyber Security & Networking and hands-on experience building OAuth 2.0 + PKCE and FIDO2 passkey systems, I integrate rate limiting, JWT rotation, input sanitization, and Docker/Nginx hardening right from the architecture stage."
+        },
+        {
+          question: "Can we collaborate on a project or hackathon?",
+          answer: "Absolutely! Feel free to reach out via the contact form below, email me at naveenmarioperera04@gmail.com, or connect with me on LinkedIn and GitHub."
+        }
+      ]
+    };
+
+    const FALLBACK_PROJECTS = {
+      generatedAt: "2026-11-10T08:45:00.000Z",
+      username: "naveenmariopereradev02",
+      totalRepos: 5,
+      ongoingCount: 1,
+      completedCount: 4,
+      languagesSummary: [
+        { name: "Python", bytes: 184500, percentage: 38.4, repoCount: 3, color: "#22c55e" },
+        { name: "JavaScript", bytes: 96200, percentage: 20.0, repoCount: 2, color: "#3b82f6" },
+        { name: "TypeScript", bytes: 78400, percentage: 16.3, repoCount: 2, color: "#f59e0b" },
+        { name: "Dart", bytes: 64800, percentage: 13.5, repoCount: 1, color: "#06b6d4" },
+        { name: "Java", bytes: 31200, percentage: 6.5, repoCount: 1, color: "#f97316" },
+        { name: "SQL", bytes: 14500, percentage: 3.0, repoCount: 2, color: "#a855f7" },
+        { name: "HTML/CSS", bytes: 11200, percentage: 2.3, repoCount: 2, color: "#ec4899" }
+      ],
+      projects: [
+        {
+          id: "identity-platform-sso",
+          title: "Identity Platform (OAuth 2.0 & OIDC SSO)",
+          role: "SLT Internship",
+          description: "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
+          highlights: [
+            "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs and JWKS discovery, and refresh token rotation.",
+            "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+            "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
+            "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards and light/dark theming.",
+            "Containerized the platform with Docker and Nginx, and applied security hardening including rate limiting and vulnerability scanning."
+          ],
+          createdAt: "2026-07-01T00:00:00Z",
+          pushedAt: "2026-11-08T14:30:00Z",
+          dateLabel: "Jul 2026 — Nov 2026",
+          isOngoing: true,
+          featured: true,
+          htmlUrl: "https://github.com/naveenmariopereradev02",
+          homepage: "",
+          techStack: ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
+          primaryLanguage: "JavaScript"
+        },
+        {
+          id: "zendata",
+          title: "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+          role: "Lead Architect & Developer",
+          description: "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates tabular datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+          highlights: [
+            "Engineered a 4-Pillar Data Health Audit Engine evaluating tabular datasets across Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
+            "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders (?, not given) and cluster categorical typos (Diary -> Dairy) without fabricating missing PII.",
+            "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
+            "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks."
+          ],
+          createdAt: "2026-08-01T00:00:00Z",
+          pushedAt: "2026-09-28T18:00:00Z",
+          dateLabel: "Aug 2026 — Sep 2026",
+          isOngoing: false,
+          featured: true,
+          htmlUrl: "https://github.com/naveenmariopereradev02",
+          homepage: "",
+          techStack: ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
+          primaryLanguage: "Python"
+        },
+        {
+          id: "loan-approval-prediction",
+          title: "Loan Approval Prediction System",
+          role: "Sole Developer — ML & Data Mining",
+          description: "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
+          highlights: [
+            "Built an end-to-end ML classification pipeline in Python (Pandas, NumPy, Scikit-learn, Plotly) to predict loan approvals on a 58,645-record financial dataset.",
+            "Performed EDA and cleaned the data — missing value imputation, outlier capping via IQR, feature encoding, and scaling.",
+            "Trained Logistic Regression, Gaussian Naive Bayes, and KNN classifiers with a stratified train-test split, achieving up to 99.97% accuracy and an AUC-ROC of 1.0.",
+            "Optimised model performance using GridSearchCV with 5-fold cross-validation across multiple hyperparameter combinations."
+          ],
+          createdAt: "2026-05-01T00:00:00Z",
+          pushedAt: "2026-05-30T12:00:00Z",
+          dateLabel: "May 2026",
+          isOngoing: false,
+          featured: true,
+          htmlUrl: "https://github.com/naveenmariopereradev02",
+          homepage: "",
+          techStack: ["Python", "Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV"],
+          primaryLanguage: "Python"
+        },
+        {
+          id: "suspicious-log-analyzer",
+          title: "Suspicious Log Analyzer — Security Mini-Project",
+          role: "Sole Developer",
+          description: "Real-time Python security incident response tool that monitors server access logs, tracks IP behavior, and flags brute-force attacks for firewall blocking.",
+          highlights: [
+            "Developed a Python-based incident response tool to monitor server access logs and detect unauthorized access attempts.",
+            "Utilized data mining techniques and dictionary structures to track IP behavior and authentication statuses in real time.",
+            "Implemented a threat-detection threshold to automatically flag potential brute-force attacks for firewall blocking."
+          ],
+          createdAt: "2026-05-05T00:00:00Z",
+          pushedAt: "2026-05-25T16:20:00Z",
+          dateLabel: "May 2026",
+          isOngoing: false,
+          featured: false,
+          htmlUrl: "https://github.com/naveenmariopereradev02",
+          homepage: "",
+          techStack: ["Python", "Data Mining", "Security Analytics", "Firewall Automation"],
+          primaryLanguage: "Python"
+        },
+        {
+          id: "spotit-lk",
+          title: "Civic Engagement and Feedback Platform — SpotIT LK",
+          role: "Backend & Multimedia Integration Lead",
+          description: "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
+          highlights: [
+            "Architected and implemented the multimedia storage infrastructure for a civic engagement mobile app, enabling citizens to upload and attach photo evidence to public issue reports.",
+            "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media for government dashboards.",
+            "Developed seamless image capture and upload workflows within the Flutter frontend with low-bandwidth compression.",
+            "Supported SDG Goal 11 by building robust digital infrastructure for transparent, community-driven governance solutions."
+          ],
+          createdAt: "2025-03-01T00:00:00Z",
+          pushedAt: "2025-06-30T15:00:00Z",
+          dateLabel: "Mar 2025 — Jun 2025",
+          isOngoing: false,
+          featured: true,
+          htmlUrl: "https://github.com/naveenmariopereradev02",
+          homepage: "",
+          techStack: ["Flutter", "Dart", "Firebase Firestore", "Firebase Cloud Storage", "SDG Goal 11"],
+          primaryLanguage: "Dart"
+        }
+      ]
+    };
+
+    let currentProfile = FALLBACK_PROFILE;
+    let currentProjectsData = FALLBACK_PROJECTS;
+    let activeProjectFilter = 'all';
+
+    async function loadJsonWithFallback(url, fallback) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function renderProfile(profile) {
+      document.getElementById('heroWatermark').textContent = profile.watermark || 'NMP';
+      document.getElementById('heroGreetingText').textContent = profile.greeting || 'Ayubowan';
+      document.getElementById('heroTagline').textContent = profile.tagline || '';
+      document.getElementById('heroSubtitle').textContent = profile.subtitle || '';
+
+      if (profile.quote) {
+        document.getElementById('quoteMain').textContent = `"${profile.quote.text}"`;
+        document.getElementById('quoteSub').textContent = `"${profile.quote.subtext}"`;
+        document.getElementById('quoteAuthor').textContent = profile.quote.author;
+        document.getElementById('quoteTag').textContent = profile.quote.tag;
+      }
+
+      if (profile.avatarUrl && profile.avatarUrl.trim() !== '') {
+        document.getElementById('heroPortraitContainer').innerHTML =
+          `<img src="${escapeHtml(profile.avatarUrl)}" alt="${escapeHtml(profile.name)}" class="hero-portrait-img" />`;
+      }
+
+      // Social Links
+      const c = profile.contact || {};
+      if (c.github) {
+        document.getElementById('heroGithubBtn').href = c.github;
+        document.getElementById('dockGithub').href = c.github;
+        document.getElementById('bentoHandleLink').href = c.github;
+        document.getElementById('ctaGithubBtn').href = c.github;
+        document.getElementById('footerHandle').href = c.github;
+      }
+      if (c.linkedin) document.getElementById('dockLinkedin').href = c.linkedin;
+      if (c.facebook && document.getElementById('dockFacebook')) document.getElementById('dockFacebook').href = c.facebook;
+      if (c.instagram) document.getElementById('dockInsta').href = c.instagram;
+      if (c.whatsapp) document.getElementById('dockWhatsapp').href = c.whatsapp;
+      if (c.email) {
+        document.getElementById('dockEmail').href = `mailto:${c.email}`;
+        document.getElementById('ctaEmailBtn').href = `mailto:${c.email}`;
+      }
+
+      // Highlights
+      const highlights = (profile.about && profile.about.highlights) || [];
+      document.getElementById('highlightsGrid').innerHTML = highlights.map((h) => `
+        <div class="highlight-card">
+          <div class="highlight-metric">${escapeHtml(h.metric)}</div>
+          <div class="highlight-label">${escapeHtml(h.label)}</div>
+          <div class="highlight-detail">${escapeHtml(h.detail)}</div>
+        </div>
+      `).join('');
+
+      // About Bio
+      const bios = (profile.about && profile.about.bio) || [];
+      document.getElementById('aboutBioContainer').innerHTML = bios
+        .map((p) => `<p class="about-paragraph">${escapeHtml(p)}</p>`)
+        .join('');
+
+      // Education
+      const edu = profile.education || [];
+      document.getElementById('educationContainer').innerHTML = edu.map((e) => `
+        <div class="edu-item">
+          <div class="edu-period">${escapeHtml(e.period)}</div>
+          <div class="edu-degree">${escapeHtml(e.degree)}</div>
+          <div class="edu-inst">${escapeHtml(e.institution)} · ${escapeHtml(e.location)}</div>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;">${escapeHtml(e.description)}</p>
+        </div>
+      `).join('');
+
+      // Bento Stats
+      const gs = profile.githubStats || {};
+      document.getElementById('bentoDomain').textContent = gs.domain || 'naveenperera.dev';
+      document.getElementById('bentoHandle').textContent = gs.handle || `@${profile.githubUsername || 'naveenmariopereradev02'}`;
+      document.getElementById('bentoCurrentStreak').textContent = gs.currentStreak || 48;
+      document.getElementById('bentoLongestStreak').textContent = gs.longestStreak || 107;
+      document.getElementById('bentoContributions').textContent = gs.contributions || '1.2K';
+      document.getElementById('bentoWorkspaceName').textContent = profile.name || 'Naveen Perera';
+      document.getElementById('bentoCommits').textContent = gs.commits || '850+';
+      document.getElementById('bentoForks').textContent = gs.forks || '09';
+
+      // Curated Skills
+      const skills = profile.skills || [];
+      document.getElementById('skillsCategoriesGrid').innerHTML = skills.map((cat) => `
+        <div class="skill-cat-card">
+          <div class="skill-cat-title">
+            <span style="color:var(--accent);">◆</span>
+            <span>${escapeHtml(cat.category)}</span>
+          </div>
+          <div class="skill-tags">
+            ${(cat.items || []).map((item) => `<span class="skill-pill">${escapeHtml(item)}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Certifications
+      const certs = profile.certifications || [];
+      document.getElementById('certsGrid').innerHTML = certs.map((cert) => `
+        <div class="cert-card">
+          <div class="cert-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.72rem; font-family:var(--font-mono); color:var(--accent); font-weight:600;">${escapeHtml(cert.issuer)} · ${escapeHtml(cert.date)}</div>
+            <div style="font-size:0.96rem; font-weight:700; margin:4px 0 6px;">${escapeHtml(cert.title)}</div>
+          </div>
+          <div style="font-size:0.74rem; color:var(--green); font-weight:600;">✓ ${escapeHtml(cert.badge || 'Verified')}</div>
+        </div>
+      `).join('');
+
+      // Queries (FAQ Accordion — Smooth Animated Dropdown)
+      const queries = profile.queries || [];
+      document.getElementById('queriesList').innerHTML = queries.map((q, idx) => `
+        <details class="query-accordion" ${idx === 0 ? 'open' : ''}>
+          <summary class="query-summary">
+            <div class="query-left">
+              <span class="query-icon-box">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                  <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+                </svg>
+              </span>
+              <span>${escapeHtml(q.question)}</span>
+            </div>
+            <svg class="query-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="query-content-wrapper">
+            <div class="query-answer">${escapeHtml(q.answer)}</div>
+          </div>
+        </details>
+      `).join('');
+
+      initSmoothAccordion();
+
+      // Footer
+      document.getElementById('footerName').textContent = profile.name || 'Naveen Perera';
+      document.getElementById('footerHandle').textContent = `@${profile.githubUsername || 'naveenmariopereradev02'}`;
+    }
+
+    function renderProjectsAndLanguages(data) {
+      const projects = data.projects || [];
+      const langs = data.languagesSummary || [];
+
+      // Update Bento Repo & Ongoing Counters
+      const totalRepos = data.totalRepos || projects.length;
+      const ongoingCount = projects.filter((p) => p.isOngoing).length;
+      document.getElementById('bentoTotalRepos').textContent = String(totalRepos).padStart(2, '0');
+      document.getElementById('bentoOngoingCount').textContent = String(ongoingCount).padStart(2, '0');
+
+      // Bento Languages Card (Top 3–4 glowing 3D pills matching Screenshot 3)
+      const pillGradients = [
+        'linear-gradient(180deg, #22c55e 0%, #15803d 100%)',
+        'linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%)',
+        'linear-gradient(180deg, #f59e0b 0%, #b45309 100%)',
+        'linear-gradient(180deg, #06b6d4 0%, #0e7490 100%)',
+        'linear-gradient(180deg, #a855f7 0%, #6b21a8 100%)'
+      ];
+      const topBentoLangs = langs.slice(0, 4);
+      document.getElementById('bentoLanguagesWrap').innerHTML = topBentoLangs.map((l, i) => `
+        <div class="bento-lang-item">
+          <span class="bento-lang-pill" style="background: ${pillGradients[i % pillGradients.length]};">
+            ${escapeHtml(l.name)}
+          </span>
+          <span class="bento-lang-sub">${String(l.repoCount || 1).padStart(2, '0')} repos · ${l.percentage}%</span>
+        </div>
+      `).join('');
+
+      // Multi-language bar & legend in Skills Section
+      document.getElementById('multiLangBar').innerHTML = langs.map((l) => `
+        <div class="multi-lang-segment" style="width:${Math.max(l.percentage, 3)}%; background:${escapeHtml(l.color)};" title="${escapeHtml(l.name)}: ${l.percentage}%"></div>
+      `).join('');
+
+      document.getElementById('langLegend').innerHTML = langs.map((l) => `
+        <div class="lang-legend-item">
+          <span class="lang-dot" style="background:${escapeHtml(l.color)};"></span>
+          <span>${escapeHtml(l.name)}</span>
+          <span style="color:var(--text-muted); font-weight:500;">${l.percentage}% (${l.repoCount} ${l.repoCount === 1 ? 'repo' : 'repos'})</span>
+        </div>
+      `).join('');
+
+      // Dynamic Language Filter Buttons
+      const filterContainer = document.getElementById('projectFilters');
+      const uniqueLangs = Array.from(new Set(projects.map((p) => p.primaryLanguage).filter(Boolean)));
+      const baseFiltersHtml = `
+        <button class="filter-btn ${activeProjectFilter === 'all' ? 'active' : ''}" data-filter="all">All (${projects.length})</button>
+        <button class="filter-btn ${activeProjectFilter === 'ongoing' ? 'active' : ''}" data-filter="ongoing">🟢 Ongoing (${ongoingCount})</button>
+        <button class="filter-btn ${activeProjectFilter === 'featured' ? 'active' : ''}" data-filter="featured">⭐ Featured</button>
+        <button class="filter-btn ${activeProjectFilter === 'completed' ? 'active' : ''}" data-filter="completed">Completed</button>
+        ${uniqueLangs.map((lang) => `
+          <button class="filter-btn ${activeProjectFilter === 'lang:' + lang ? 'active' : ''}" data-filter="lang:${escapeHtml(lang)}">${escapeHtml(lang)}</button>
+        `).join('')}
+      `;
+      filterContainer.innerHTML = baseFiltersHtml;
+
+      filterContainer.querySelectorAll('.filter-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeProjectFilter = btn.getAttribute('data-filter');
+          renderProjectsAndLanguages(currentProjectsData);
+        });
+      });
+
+      // Filter Projects
+      const filteredProjects = projects.filter((p) => {
+        if (activeProjectFilter === 'ongoing') return p.isOngoing;
+        if (activeProjectFilter === 'completed') return !p.isOngoing;
+        if (activeProjectFilter === 'featured') return p.featured;
+        if (activeProjectFilter.startsWith('lang:')) {
+          const targetLang = activeProjectFilter.slice(5);
+          return p.primaryLanguage === targetLang || (p.languages && p.languages[targetLang]);
+        }
+        return true;
+      });
+
+      document.getElementById('projectsGrid').innerHTML = filteredProjects.map((p) => `
+        <article class="project-card ${p.featured ? 'featured-project' : ''}">
+          <div>
+            <div class="project-top-meta">
+              <span class="project-date-badge">${escapeHtml(p.dateLabel)}</span>
+              <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
+                <span style="width:6px;height:6px;border-radius:50%;background:${p.isOngoing ? '#4ade80' : 'var(--text-muted)'};"></span>
+                ${p.isOngoing ? 'Ongoing' : 'Completed'}
+              </span>
+            </div>
+            <h3 class="project-title">${escapeHtml(p.title)}</h3>
+            <div class="project-role">${escapeHtml(p.role || '')}</div>
+            <p class="project-desc">${escapeHtml(p.description)}</p>
+            ${Array.isArray(p.highlights) && p.highlights.length > 0 ? `
+              <ul class="project-highlights">
+                ${p.highlights.slice(0, 4).map((b) => `<li>${escapeHtml(b)}</li>`).join('')}
+              </ul>
+            ` : ''}
+          </div>
+          <div>
+            <div class="project-tech-wrap">
+              ${(p.techStack || []).slice(0, 9).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}
+            </div>
+            <div class="project-footer">
+              <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">
+                ${escapeHtml(p.primaryLanguage || 'Full-Stack')}
+              </span>
+              <div class="project-links">
+                ${p.homepage ? `
+                  <a href="${escapeHtml(p.homepage)}" target="_blank" rel="noopener" class="proj-link">
+                    <span>Live Demo</span>
+                    <span>↗</span>
+                  </a>
+                ` : ''}
+                <a href="${escapeHtml(p.htmlUrl || 'https://github.com/naveenmariopereradev02')}" target="_blank" rel="noopener" class="proj-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+                  <span>Repository</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // Render Interactive Timeline (Ongoing projects keep continuing!)
+      document.getElementById('timelineContainer').innerHTML = projects.map((p) => `
+        <div class="timeline-item ${p.isOngoing ? 'is-ongoing' : ''}">
+          <span class="timeline-dot"></span>
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+            <span style="font-family:var(--font-mono); font-size:0.76rem; color:var(--accent); font-weight:600;">
+              ${escapeHtml(p.dateLabel)} ${p.isOngoing ? ' · Continuing on Timeline' : ''}
+            </span>
+            <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
+              ${p.isOngoing ? '🟢 Ongoing — Active Development' : '✓ Completed Milestone'}
+            </span>
+          </div>
+          <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">${escapeHtml(p.title)}</h3>
+          <p style="font-size:0.83rem; color:var(--text-secondary); margin-bottom:10px;">${escapeHtml(p.description)}</p>
+          <div class="project-tech-wrap" style="margin-bottom:8px;">
+            ${(p.techStack || []).slice(0, 6).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}
+          </div>
+          <div class="timeline-progress-track">
+            <div class="timeline-progress-bar" style="${p.isOngoing ? '' : 'width:100%; background:var(--accent); opacity:0.65;'}"></div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Build Interactive Contribution Heatmap in Bento Grid
+    function initHeatmap() {
+      const grid = document.getElementById('heatmapGrid');
+      const tooltip = document.getElementById('heatmapTooltip');
+      const months = ['Dec 2025', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026', 'Aug 2026', 'Sep 2026', 'Oct 2026', 'Nov 2026'];
+      let html = '';
+      for (let col = 0; col < 38; col++) {
+        html += '<div class="heatmap-col">';
+        for (let row = 0; row < 7; row++) {
+          const seed = (col * 7 + row * 13 + 5) % 17;
+          const level = seed > 13 ? 4 : seed > 10 ? 3 : seed > 6 ? 2 : seed > 3 ? 1 : 0;
+          const count = level === 0 ? 2 : level * 5 + (col % 4);
+          const monthLabel = months[Math.floor((col / 38) * months.length)];
+          const day = ((col * 3 + row) % 28) + 1;
+          html += `<div class="heatmap-cell" data-level="${level}" data-info="${count} Contributions · ${String(day).padStart(2, '0')} ${monthLabel}"></div>`;
+        }
+        html += '</div>';
+      }
+      grid.innerHTML = html;
+
+      grid.querySelectorAll('.heatmap-cell').forEach((cell) => {
+        cell.addEventListener('mouseenter', () => {
+          tooltip.textContent = cell.getAttribute('data-info');
+        });
+      });
+    }
+
+    // Theme Toggle (Dark / Light Mode)
+    function initTheme() {
+      const saved = localStorage.getItem('naveen-portfolio-theme') || 'dark';
+      setTheme(saved);
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('naveen-portfolio-theme', theme);
+      document.getElementById('themeIconDark').style.display = theme === 'dark' ? 'block' : 'none';
+      document.getElementById('themeIconLight').style.display = theme === 'light' ? 'block' : 'none';
+    }
+
+    // Scroll-Spy for Left Floating Navigation Rail
+    function initScrollSpy() {
+      const navLinks = document.querySelectorAll('.left-nav-link');
+      const sections = document.querySelectorAll('main section[id]');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach((link) => {
+                link.classList.toggle('active', link.getAttribute('data-section') === id);
+              });
+            }
+          });
+        },
+        { rootMargin: '-30% 0px -55% 0px' }
+      );
+      sections.forEach((sec) => observer.observe(sec));
+    }
+
+    // Contact Form Handler (Formspree or Mailto Fallback)
+    function initContactForm() {
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('senderName').value.trim();
+        const email = document.getElementById('senderEmail').value.trim();
+        const message = document.getElementById('senderMessage').value.trim();
+
+        if (currentProfile.formspreeEndpoint && currentProfile.formspreeEndpoint.startsWith('http')) {
+          try {
+            const res = await fetch(currentProfile.formspreeEndpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({ name, email, message })
+            });
+            if (res.ok) {
+              alert('Thank you! Your message has been sent.');
+              form.reset();
+              return;
+            }
+          } catch (err) {
+            // Fall through to mailto
+          }
+        }
+
+        const recipient = (currentProfile.contact && currentProfile.contact.email) || 'naveenmarioperera04@gmail.com';
+        const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+        window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      });
+    }
+
+    // Smooth Accordion Dropdown Animation Controller
+    function initSmoothAccordion() {
+      const items = document.querySelectorAll('.query-accordion');
+      items.forEach((el) => {
+        const summary = el.querySelector('.query-summary');
+        const content = el.querySelector('.query-content-wrapper');
+        if (!summary || !content) return;
+
+        let animation = null;
+        let isClosing = false;
+        let isExpanding = false;
+
+        summary.addEventListener('click', (e) => {
+          e.preventDefault();
+          el.style.overflow = 'hidden';
+
+          if (isClosing || !el.open) {
+            items.forEach((other) => {
+              if (other !== el && other.open && !other.dataset.animating) {
+                closeItem(other);
+              }
+            });
+            openItem(el);
+          } else if (isExpanding || el.open) {
+            closeItem(el);
+          }
+        });
+
+        function closeItem(item) {
+          const s = item.querySelector('.query-summary');
+          const c = item.querySelector('.query-content-wrapper');
+          if (!s || !c) return;
+
+          isClosing = true;
+          item.dataset.animating = 'true';
+          const startHeight = `${item.offsetHeight}px`;
+          const endHeight = `${s.offsetHeight}px`;
+
+          if (animation) animation.cancel();
+
+          c.style.transition = 'opacity 0.22s ease, transform 0.25s ease';
+          c.style.opacity = '0';
+          c.style.transform = 'translateY(-6px)';
+
+          animation = item.animate(
+            { height: [startHeight, endHeight] },
+            { duration: 320, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }
+          );
+
+          animation.onfinish = () => {
+            item.open = false;
+            animation = null;
+            isClosing = false;
+            delete item.dataset.animating;
+            item.style.height = '';
+            item.style.overflow = '';
+            c.style.opacity = '';
+            c.style.transform = '';
+            c.style.transition = '';
+          };
+          animation.oncancel = () => {
+            isClosing = false;
+            delete item.dataset.animating;
+          };
+        }
+
+        function openItem(item) {
+          const s = item.querySelector('.query-summary');
+          const c = item.querySelector('.query-content-wrapper');
+          if (!s || !c) return;
+
+          item.style.height = `${item.offsetHeight}px`;
+          item.open = true;
+          isExpanding = true;
+          item.dataset.animating = 'true';
+
+          c.style.opacity = '0';
+          c.style.transform = 'translateY(-8px)';
+
+          window.requestAnimationFrame(() => {
+            const startHeight = `${item.offsetHeight}px`;
+            const endHeight = `${s.offsetHeight + c.offsetHeight}px`;
+
+            if (animation) animation.cancel();
+
+            c.style.transition = 'opacity 0.32s cubic-bezier(0.25, 1, 0.5, 1), transform 0.32s cubic-bezier(0.25, 1, 0.5, 1)';
+            c.style.opacity = '1';
+            c.style.transform = 'translateY(0)';
+
+            animation = item.animate(
+              { height: [startHeight, endHeight] },
+              { duration: 340, easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }
+            );
+
+            animation.onfinish = () => {
+              animation = null;
+              isExpanding = false;
+              delete item.dataset.animating;
+              item.style.height = '';
+              item.style.overflow = '';
+              c.style.transition = '';
+            };
+            animation.oncancel = () => {
+              isExpanding = false;
+              delete item.dataset.animating;
+            };
+          });
+        }
+      });
+    }
+
+    async function bootstrap() {
+      initTheme();
+      initHeatmap();
+      initScrollSpy();
+      initContactForm();
+
+      currentProfile = await loadJsonWithFallback('./profile.json', FALLBACK_PROFILE);
+      currentProjectsData = await loadJsonWithFallback('./projects.json', FALLBACK_PROJECTS);
+
+      renderProfile(currentProfile);
+      renderProjectsAndLanguages(currentProjectsData);
+    }
+
+    bootstrap();
+  </script>
+</body>
+</html>
+

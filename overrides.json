@@ -1,0 +1,81 @@
+{
+  "_comment": "Use 'repos' to override specific GitHub repositories by their exact repo name. Set 'hide: true' to exclude a repo, 'featured: true' to highlight it, or 'ongoing: true/false' to override its timeline status.",
+  "repos": {
+    "identity-platform-sso": {
+      "title": "Identity Platform (OAuth 2.0 & OIDC SSO)",
+      "role": "SLT Internship",
+      "dateLabel": "Jul 2026 — Nov 2026",
+      "featured": true,
+      "ongoing": true,
+      "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
+      "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, and automated risk scoring.",
+      "highlights": [
+        "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
+        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+        "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
+        "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards, and light/dark theming.",
+        "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
+      ]
+    },
+    "zendata": {
+      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+      "role": "Lead Architect & Developer",
+      "dateLabel": "Aug 2026 — Sep 2026",
+      "featured": true,
+      "ongoing": false,
+      "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
+      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "highlights": [
+        "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
+        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
+        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
+        "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
+      ]
+    },
+    "loan-approval-prediction": {
+      "title": "Loan Approval Prediction System",
+      "role": "Sole Developer — ML & Data Mining",
+      "dateLabel": "May 2026",
+      "featured": true,
+      "ongoing": false,
+      "techStack": ["Python", "Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV"],
+      "description": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
+      "highlights": [
+        "Built an end-to-end ML classification pipeline in Python on a 58,645-record financial dataset.",
+        "Performed EDA and data cleaning: missing value imputation, IQR outlier capping, feature encoding, and scaling.",
+        "Trained Logistic Regression, Gaussian Naive Bayes, and KNN classifiers with stratified train-test split, achieving up to 99.97% accuracy and AUC-ROC of 1.0.",
+        "Optimised model performance using GridSearchCV with 5-fold cross-validation across multiple hyperparameter combinations."
+      ]
+    },
+    "suspicious-log-analyzer": {
+      "title": "Suspicious Log Analyzer — Security Mini-Project",
+      "role": "Sole Developer",
+      "dateLabel": "May 2026",
+      "featured": false,
+      "ongoing": false,
+      "techStack": ["Python", "Security Analytics", "Data Mining", "Incident Response"],
+      "description": "Real-time Python security incident response tool that monitors server access logs, tracks IP behavior, and flags brute-force attacks for firewall blocking.",
+      "highlights": [
+        "Developed a Python-based incident response tool to monitor server access logs and detect unauthorized access attempts.",
+        "Utilized data mining techniques and dictionary structures to track IP behavior and authentication statuses in real time.",
+        "Implemented a threat-detection threshold to automatically flag potential brute-force attacks for firewall blocking."
+      ]
+    },
+    "spotit-lk": {
+      "title": "Civic Engagement & Feedback Platform — SpotIT LK",
+      "role": "Backend & Multimedia Integration Lead",
+      "dateLabel": "Mar 2025 — Jun 2025",
+      "featured": true,
+      "ongoing": false,
+      "techStack": ["Flutter", "Dart", "Firebase Cloud Storage", "Firebase Firestore", "SDG Goal 11"],
+      "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
+      "highlights": [
+        "Architected and implemented the multimedia storage infrastructure enabling citizens to attach photo evidence to public issue reports.",
+        "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media for government dashboards.",
+        "Developed seamless image capture, compression, and upload workflows in Flutter optimized for low-bandwidth networks.",
+        "Collaborated on client-server synchronization across Flutter, Firebase Firestore, and cloud storage services supporting SDG Goal 11."
+      ]
+    }
+  }
+}
+

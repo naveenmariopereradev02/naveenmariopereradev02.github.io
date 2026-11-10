@@ -1,0 +1,215 @@
+{
+  "generatedAt": "2026-11-10T08:45:00.000Z",
+  "username": "naveenmariopereradev02",
+  "totalRepos": 5,
+  "ongoingCount": 1,
+  "completedCount": 4,
+  "languagesSummary": [
+    {
+      "name": "Python",
+      "bytes": 184500,
+      "percentage": 38.4,
+      "repoCount": 3,
+      "color": "#3572A5"
+    },
+    {
+      "name": "JavaScript",
+      "bytes": 96200,
+      "percentage": 20.0,
+      "repoCount": 2,
+      "color": "#f1e05a"
+    },
+    {
+      "name": "TypeScript",
+      "bytes": 78400,
+      "percentage": 16.3,
+      "repoCount": 2,
+      "color": "#3178c6"
+    },
+    {
+      "name": "Dart",
+      "bytes": 64800,
+      "percentage": 13.5,
+      "repoCount": 1,
+      "color": "#00B4AB"
+    },
+    {
+      "name": "Java",
+      "bytes": 31200,
+      "percentage": 6.5,
+      "repoCount": 1,
+      "color": "#b07219"
+    },
+    {
+      "name": "SQL",
+      "bytes": 14500,
+      "percentage": 3.0,
+      "repoCount": 2,
+      "color": "#e38c00"
+    },
+    {
+      "name": "HTML/CSS",
+      "bytes": 11200,
+      "percentage": 2.3,
+      "repoCount": 2,
+      "color": "#e34c26"
+    }
+  ],
+  "projects": [
+    {
+      "id": "identity-platform-sso",
+      "name": "identity-platform-sso",
+      "title": "Identity Platform (OAuth 2.0 & OIDC SSO)",
+      "role": "SLT Internship",
+      "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
+      "readmeExcerpt": "Enterprise-grade Identity Provider (IdP) supporting Authorization Code Flow + PKCE, FIDO2/WebAuthn hardware & platform passkeys, and real-time suspicious login risk scoring with a React + Redux Toolkit admin console.",
+      "highlights": [
+        "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs and JWKS discovery, and refresh token rotation.",
+        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+        "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts, aligned with data protection requirements.",
+        "Built a React, Redux Toolkit and Tailwind CSS admin console with role-based access control, analytics dashboards and light/dark theming.",
+        "Containerized the platform with Docker and Nginx, and applied security hardening including rate limiting and vulnerability scanning."
+      ],
+      "createdAt": "2026-07-01T00:00:00Z",
+      "pushedAt": "2026-11-08T14:30:00Z",
+      "dateLabel": "Jul 2026 — Nov 2026",
+      "isOngoing": true,
+      "featured": true,
+      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "homepage": "",
+      "topics": ["portfolio", "oauth2", "oidc", "webauthn", "fido2", "nodejs", "react", "docker", "security"],
+      "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
+      "stars": 14,
+      "forks": 2,
+      "primaryLanguage": "JavaScript",
+      "languages": {
+        "JavaScript": 78200,
+        "TypeScript": 28400,
+        "SQL": 9500,
+        "HTML/CSS": 6200
+      }
+    },
+    {
+      "id": "zendata",
+      "name": "zendata",
+      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+      "role": "Lead Architect & Developer",
+      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates tabular datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "readmeExcerpt": "Automated Data Quality & Semantic Hygiene Platform built with FastAPI, Pandas, NumPy, and Next.js. Evaluates Completeness, Uniqueness, Validity, and Statistical Consistency with 1.5x IQR outlier detection.",
+      "highlights": [
+        "Engineered a 4-Pillar Data Health Audit Engine evaluating tabular datasets across Completeness, Uniqueness, Validity, and Statistical Consistency (using 1.5x IQR outlier detection) to generate real-time 0–100% quality scores.",
+        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders (?, not given) and cluster categorical typos (Diary -> Dairy) without fabricating values for missing PII or transaction IDs.",
+        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals, outlier quantities, and inverted unit prices.",
+        "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks with full transformation changelogs."
+      ],
+      "createdAt": "2026-08-01T00:00:00Z",
+      "pushedAt": "2026-09-28T18:00:00Z",
+      "dateLabel": "Aug 2026 — Sep 2026",
+      "isOngoing": false,
+      "featured": true,
+      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "homepage": "https://github.com/naveenmariopereradev02",
+      "topics": ["portfolio", "python", "fastapi", "pandas", "nextjs", "typescript", "data-quality"],
+      "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
+      "stars": 19,
+      "forks": 3,
+      "primaryLanguage": "Python",
+      "languages": {
+        "Python": 94500,
+        "TypeScript": 50000,
+        "JavaScript": 18000,
+        "HTML/CSS": 5000
+      }
+    },
+    {
+      "id": "loan-approval-prediction",
+      "name": "loan-approval-prediction",
+      "title": "Loan Approval Prediction System",
+      "role": "Sole Developer — ML & Data Mining",
+      "description": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
+      "readmeExcerpt": "Machine learning classification system trained on a 58,645-record financial dataset using Logistic Regression, Gaussian Naive Bayes, and KNN with 5-fold GridSearchCV hyperparameter tuning.",
+      "highlights": [
+        "Built an end-to-end ML classification pipeline in Python (Pandas, NumPy, Scikit-learn, Plotly) to predict loan approvals on a 58,645-record financial dataset.",
+        "Performed EDA and cleaned the data — missing value imputation, outlier capping via IQR, feature encoding, and scaling — to engineer a model-ready dataset.",
+        "Trained Logistic Regression, Gaussian Naive Bayes, and KNN classifiers with a stratified train-test split, achieving up to 99.97% accuracy and an AUC-ROC of 1.0.",
+        "Optimised model performance using GridSearchCV with 5-fold cross-validation across multiple hyperparameter combinations."
+      ],
+      "createdAt": "2026-05-01T00:00:00Z",
+      "pushedAt": "2026-05-30T12:00:00Z",
+      "dateLabel": "May 2026",
+      "isOngoing": false,
+      "featured": true,
+      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "homepage": "",
+      "topics": ["portfolio", "machine-learning", "scikit-learn", "pandas", "python", "data-mining"],
+      "techStack": ["Python", "Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV"],
+      "stars": 11,
+      "forks": 1,
+      "primaryLanguage": "Python",
+      "languages": {
+        "Python": 62000
+      }
+    },
+    {
+      "id": "suspicious-log-analyzer",
+      "name": "suspicious-log-analyzer",
+      "title": "Suspicious Log Analyzer — Security Mini-Project",
+      "role": "Sole Developer",
+      "description": "Real-time Python security incident response tool that monitors server access logs, tracks IP behavior, and flags brute-force attacks for firewall blocking.",
+      "readmeExcerpt": "Lightweight cybersecurity log analysis engine designed to parse high-volume server access logs, track IP authentication patterns, and trigger automated brute-force alerts.",
+      "highlights": [
+        "Developed a Python-based incident response tool to monitor server access logs and detect unauthorized access attempts.",
+        "Utilized data mining techniques and dictionary structures to track IP behavior and authentication statuses in real time.",
+        "Implemented a threat-detection threshold to automatically flag potential brute-force attacks for firewall blocking."
+      ],
+      "createdAt": "2026-05-05T00:00:00Z",
+      "pushedAt": "2026-05-25T16:20:00Z",
+      "dateLabel": "May 2026",
+      "isOngoing": false,
+      "featured": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "homepage": "",
+      "topics": ["portfolio", "cybersecurity", "python", "log-analysis", "incident-response"],
+      "techStack": ["Python", "Data Mining", "Security Analytics", "Firewall Automation"],
+      "stars": 8,
+      "forks": 1,
+      "primaryLanguage": "Python",
+      "languages": {
+        "Python": 28000
+      }
+    },
+    {
+      "id": "spotit-lk",
+      "name": "spotit-lk",
+      "title": "Civic Engagement and Feedback Platform — SpotIT LK",
+      "role": "Backend & Multimedia Integration Lead",
+      "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
+      "readmeExcerpt": "Mobile civic engagement platform built with Flutter, Dart, Firebase Firestore, and Firebase Cloud Storage, supporting UN SDG Goal 11 for transparent, community-driven urban governance.",
+      "highlights": [
+        "Architected and implemented the multimedia storage infrastructure for a civic engagement mobile app, enabling citizens to upload and attach photo evidence to public issue reports.",
+        "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media, ensuring scalable and efficient data delivery to government dashboards.",
+        "Developed seamless image capture and upload workflows within the Flutter frontend.",
+        "Implemented image compression techniques to minimize data usage for users on low-bandwidth networks.",
+        "Collaborated on the overall client-server architecture, ensuring stable synchronization between the mobile app, Firebase Firestore, and cloud storage services."
+      ],
+      "createdAt": "2025-03-01T00:00:00Z",
+      "pushedAt": "2025-06-30T15:00:00Z",
+      "dateLabel": "Mar 2025 — Jun 2025",
+      "isOngoing": false,
+      "featured": true,
+      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "homepage": "",
+      "topics": ["portfolio", "flutter", "dart", "firebase", "sdg11", "mobile-app"],
+      "techStack": ["Flutter", "Dart", "Firebase Firestore", "Firebase Cloud Storage", "Java"],
+      "stars": 15,
+      "forks": 2,
+      "primaryLanguage": "Dart",
+      "languages": {
+        "Dart": 64800,
+        "Java": 31200,
+        "SQL": 5000
+      }
+    }
+  ]
+}
+
