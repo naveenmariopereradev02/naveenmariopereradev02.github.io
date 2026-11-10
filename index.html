@@ -3890,11 +3890,11 @@
             "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks."
           ],
           createdAt: "2026-08-01T00:00:00Z",
-          pushedAt: "2026-09-28T18:00:00Z",
-          dateLabel: "Aug 2026 — Sep 2026",
-          isOngoing: false,
+          pushedAt: "2026-11-10T13:15:00Z",
+          dateLabel: "Aug 2026 — Present",
+          isOngoing: true,
           featured: true,
-          htmlUrl: "https://github.com/naveenmariopereradev02",
+          htmlUrl: "https://github.com/naveenmariopereradev02/ZenData",
           homepage: "",
           techStack: ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
           primaryLanguage: "Python"
@@ -4505,7 +4505,7 @@
 
       const syncPill = document.getElementById('syncStatusPill');
       if (syncPill) {
-        syncPill.addEventListener('click', (e) => {
+        syncPill.addEventListener('click', async (e) => {
           e.preventDefault();
           const target = document.getElementById('github');
           if (target) {
@@ -4516,13 +4516,12 @@
             text.setAttribute('data-busy', 'true');
             const orig = text.textContent;
             text.textContent = 'Syncing...';
+            await initLiveCommitFeed(currentProfile.githubUsername, currentProjectsData, true);
+            text.textContent = 'Synced with GitHub ✓';
             setTimeout(() => {
-              text.textContent = 'Synced with GitHub ✓';
-              setTimeout(() => {
-                text.textContent = orig;
-                text.removeAttribute('data-busy');
-              }, 2000);
-            }, 600);
+              text.textContent = orig;
+              text.removeAttribute('data-busy');
+            }, 2200);
           }
         });
       }
@@ -4778,12 +4777,30 @@
       });
     }
 
-    function formatRelativeTime(isoDate) {
-      if (!isoDate) return 'Recently';
-      const diffMs = Date.now() - new Date(isoDate).getTime();
-      if (isNaN(diffMs) || diffMs < 0) return 'Recently';
+    function formatRelativeTime(isoDate, serverNowMs, altIsoDate) {
+      if (!isoDate && !altIsoDate) return 'Recently';
+      const candidates = [];
+      const localNow = Date.now();
+
+      if (isoDate) {
+        const t1 = new Date(isoDate).getTime();
+        if (!isNaN(t1)) {
+          if (localNow >= t1) candidates.push(localNow - t1);
+          if (serverNowMs && serverNowMs >= t1) candidates.push(serverNowMs - t1);
+        }
+      }
+      if (altIsoDate) {
+        const t2 = new Date(altIsoDate).getTime();
+        if (!isNaN(t2)) {
+          if (localNow >= t2) candidates.push(localNow - t2);
+          if (serverNowMs && serverNowMs >= t2) candidates.push(serverNowMs - t2);
+        }
+      }
+
+      if (candidates.length === 0) return 'Just now';
+      const diffMs = Math.min(...candidates);
       const mins = Math.floor(diffMs / 60000);
-      if (mins < 1) return 'Just now';
+      if (mins < 2) return 'Just now';
       if (mins < 60) return `${mins}m ago`;
       const hours = Math.floor(mins / 60);
       if (hours < 24) return `${hours}h ago`;
@@ -4793,7 +4810,7 @@
       return `${months}mo ago`;
     }
 
-    async function initLiveCommitFeed(username, projectsData) {
+    async function initLiveCommitFeed(username, projectsData, showToastOnSync = false) {
       const repoEl = document.getElementById('liveCommitRepo');
       const msgEl = document.getElementById('liveCommitMsg');
       const timeEl = document.getElementById('liveCommitTime');
@@ -4814,10 +4831,119 @@
         }
       }
 
-      // Then fetch live public push events from GitHub API
       const ghUser = username || 'naveenmariopereradev02';
+      let serverNowMs = null;
+
       try {
-        const res = await fetch(`https://api.github.com/users/${encodeURIComponent(ghUser)}/events/public?per_page=15`);
+        // 1. Fetch live repositories sorted by most recent push (with cache-busting)
+        const reposRes = await fetch(
+          `https://api.github.com/users/${encodeURIComponent(ghUser)}/repos?sort=pushed&per_page=30`,
+          { cache: 'no-store' }
+        );
+
+        if (reposRes.ok) {
+          const resetHeader = reposRes.headers.get('x-ratelimit-reset');
+          if (resetHeader && !isNaN(Number(resetHeader))) {
+            // GitHub rate-limit window is 1 hour (3600s) from first request in window
+            serverNowMs = Number(resetHeader) * 1000 - 3000 * 1000;
+          }
+
+          const liveRepos = await reposRes.json();
+          if (Array.isArray(liveRepos) && liveRepos.length > 0) {
+            // Live-sync project cards (pushedAt, htmlUrl, stars, forks, Ongoing status)
+            let updatedAnyProject = false;
+            liveRepos.forEach((r) => {
+              if (!r || !r.name) return;
+              const match = projects.find(
+                (p) =>
+                  String(p.id || '').toLowerCase() === r.name.toLowerCase() ||
+                  String(p.name || '').toLowerCase() === r.name.toLowerCase()
+              );
+              if (match) {
+                match.name = r.name;
+                if (r.pushed_at) match.pushedAt = r.pushed_at;
+                if (r.html_url && !match.isPrivate) match.htmlUrl = r.html_url;
+                if (typeof r.stargazers_count === 'number') match.stars = r.stargazers_count;
+                if (typeof r.forks_count === 'number') match.forks = r.forks_count;
+
+                const refNow = serverNowMs || Date.now();
+                const daysSince = Math.max(0, (refNow - new Date(r.pushed_at).getTime()) / (1000 * 60 * 60 * 24));
+                if (daysSince <= 90) {
+                  match.isOngoing = true;
+                  if (match.dateLabel && !match.dateLabel.includes('Present') && match.dateLabel.includes('—')) {
+                    match.dateLabel = `${match.dateLabel.split('—')[0].trim()} — Present`;
+                  }
+                }
+                updatedAnyProject = true;
+              }
+            });
+
+            if (updatedAnyProject && currentProjectsData) {
+              currentProjectsData.projects.sort((a, b) => {
+                if (a.isOngoing !== b.isOngoing) return a.isOngoing ? -1 : 1;
+                return new Date(b.pushedAt || 0).getTime() - new Date(a.pushedAt || 0).getTime();
+              });
+              renderProjectsAndLanguages(currentProjectsData);
+            }
+
+            // Pick the most recently pushed project repo (excluding the portfolio repo itself if other repos exist)
+            const selfRepoName = `${ghUser.toLowerCase()}.github.io`;
+            const latestRepo =
+              liveRepos.find((r) => !r.fork && r.name.toLowerCase() !== selfRepoName) || liveRepos[0];
+
+            if (latestRepo && latestRepo.name) {
+              repoEl.textContent = latestRepo.name;
+              barEl.href = `${latestRepo.html_url}/commits`;
+              timeEl.textContent = `· ${formatRelativeTime(latestRepo.pushed_at, serverNowMs)}`;
+
+              // 2. Fetch actual latest commits from that repository to display commit count & real message
+              const commitsRes = await fetch(
+                `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestRepo.name)}/commits?per_page=15`,
+                { cache: 'no-store' }
+              );
+              if (commitsRes.ok) {
+                const commits = await commitsRes.json();
+                if (Array.isArray(commits) && commits.length > 0) {
+                  const head = commits[0];
+                  const headMsg = String((head.commit && head.commit.message) || 'Updated repository')
+                    .split('\n')[0]
+                    .trim();
+                  const headDateStr =
+                    (head.commit && head.commit.committer && head.commit.committer.date) ||
+                    (head.commit && head.commit.author && head.commit.author.date) ||
+                    latestRepo.pushed_at;
+                  const headTime = new Date(headDateStr).getTime();
+
+                  // Count how many commits were made in this same push session / 24h window
+                  const recentBatchCount = commits.filter((c) => {
+                    const d =
+                      (c.commit && c.commit.committer && c.commit.committer.date) ||
+                      (c.commit && c.commit.author && c.commit.author.date);
+                    if (!d || isNaN(headTime)) return false;
+                    return Math.abs(headTime - new Date(d).getTime()) <= 24 * 3600 * 1000;
+                  }).length;
+
+                  msgEl.textContent =
+                    recentBatchCount > 1 ? `${recentBatchCount} commits — ${headMsg}` : headMsg;
+                  timeEl.textContent = `· ${formatRelativeTime(latestRepo.pushed_at, serverNowMs, headDateStr)}`;
+
+                  if (showToastOnSync) {
+                    showPortfolioToast(
+                      `Synced ${latestRepo.name}: ${recentBatchCount} commit${recentBatchCount > 1 ? 's' : ''} (${headMsg}) ✓`
+                    );
+                  }
+                  return;
+                }
+              }
+            }
+          }
+        }
+
+        // Fallback to public events endpoint if /repos was rate-limited
+        const res = await fetch(
+          `https://api.github.com/users/${encodeURIComponent(ghUser)}/events/public?per_page=15`,
+          { cache: 'no-store' }
+        );
         if (!res.ok) return;
         const events = await res.json();
         if (!Array.isArray(events)) return;
@@ -4826,13 +4952,14 @@
           const shortRepo = String(pushEvent.repo.name || '').replace(`${ghUser}/`, '');
           const commits = (pushEvent.payload && pushEvent.payload.commits) || [];
           const lastCommit = commits.length > 0 ? commits[commits.length - 1] : null;
-          const commitMsg = lastCommit && lastCommit.message
-            ? String(lastCommit.message).split('\n')[0]
-            : `Pushed to ${(pushEvent.payload && pushEvent.payload.ref || 'main').replace('refs/heads/', '')}`;
+          const commitMsg =
+            lastCommit && lastCommit.message
+              ? String(lastCommit.message).split('\n')[0]
+              : `Pushed to ${((pushEvent.payload && pushEvent.payload.ref) || 'main').replace('refs/heads/', '')}`;
           repoEl.textContent = shortRepo || pushEvent.repo.name;
-          msgEl.textContent = commitMsg;
-          timeEl.textContent = `· ${formatRelativeTime(pushEvent.created_at)}`;
-          barEl.href = `https://github.com/${pushEvent.repo.name}`;
+          msgEl.textContent = commits.length > 1 ? `${commits.length} commits — ${commitMsg}` : commitMsg;
+          timeEl.textContent = `· ${formatRelativeTime(pushEvent.created_at, serverNowMs)}`;
+          barEl.href = `https://github.com/${pushEvent.repo.name}/commits`;
         }
       } catch (err) {
         // Keep projects.json fallback silently
@@ -4888,7 +5015,9 @@
       const backdrop = document.getElementById('archModalBackdrop');
       if (!backdrop) return;
       const projects = (currentProjectsData && currentProjectsData.projects) || [];
-      const p = projects.find((item) => item.id === projectId) || projects[0];
+      const p =
+        projects.find((item) => String(item.id || '').toLowerCase() === String(projectId || '').toLowerCase()) ||
+        projects[0];
       if (!p) return;
 
       document.getElementById('archModalBadge').textContent = `${p.dateLabel || 'Project'} · ${p.isPrivate ? '🔒 Private Enterprise NDA' : '🌐 Public Repository'}`;
@@ -4896,7 +5025,7 @@
       document.getElementById('archModalRole').textContent = p.role || '';
       document.getElementById('archModalDesc').textContent = p.description || '';
 
-      const nodes = PROJECT_ARCHITECTURES[p.id] || [
+      const nodes = PROJECT_ARCHITECTURES[String(p.id || '').toLowerCase()] || [
         { title: 'Client Layer', sub: p.primaryLanguage || 'Frontend' },
         { title: 'Core Service', sub: 'Business Logic' },
         { title: 'Security & Validation', sub: 'Auth / Checks' },

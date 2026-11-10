@@ -59,10 +59,9 @@
     "zendata": {
       "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
       "role": "Lead Architect & Developer",
-      "dateLabel": "Aug 2026 — Sep 2026",
       "featured": true,
-      "ongoing": false,
       "isPrivate": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
       "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
       "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
       "highlights": [

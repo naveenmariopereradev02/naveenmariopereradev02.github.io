@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-10T12:30:00.000Z",
+  "generatedAt": "2026-11-10T13:18:00.000Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 6,
-  "ongoingCount": 2,
-  "completedCount": 4,
+  "ongoingCount": 3,
+  "completedCount": 3,
   "languagesSummary": [
     {
       "name": "Dart",
@@ -144,12 +144,12 @@
         "Automated Executive Reporting Pipelines leveraging ReportLab and OpenPyXL to generate landscape PDF quality audit scorecards and 3-sheet styled Excel workbooks with full transformation changelogs."
       ],
       "createdAt": "2026-08-01T00:00:00Z",
-      "pushedAt": "2026-09-28T18:00:00Z",
-      "dateLabel": "Aug 2026 — Sep 2026",
-      "isOngoing": false,
+      "pushedAt": "2026-11-10T13:15:00Z",
+      "dateLabel": "Aug 2026 — Present",
+      "isOngoing": true,
       "isPrivate": false,
       "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
       "homepage": "",
       "topics": ["portfolio", "fastapi", "pandas", "numpy", "nextjs", "data-quality", "python"],
       "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],

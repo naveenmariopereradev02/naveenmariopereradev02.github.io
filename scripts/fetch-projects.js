@@ -198,7 +198,17 @@ async function main() {
   const profile = readJsonSafe(PROFILE_PATH, {});
   const overridesData = readJsonSafe(OVERRIDES_PATH, { repos: {} });
   const existingData = readJsonSafe(PROJECTS_PATH, { projects: [] });
-  const repoOverrides = overridesData.repos || {};
+  const repoOverridesRaw = overridesData.repos || {};
+  const repoOverrides = {};
+  for (const [k, v] of Object.entries(repoOverridesRaw)) {
+    repoOverrides[k] = v;
+    repoOverrides[k.toLowerCase()] = v;
+  }
+
+  function getOverride(name) {
+    if (!name) return {};
+    return repoOverrides[name] || repoOverrides[String(name).toLowerCase()] || {};
+  }
 
   const username =
     process.env.GITHUB_REPOSITORY_OWNER ||
@@ -231,7 +241,7 @@ async function main() {
   ]);
 
   let candidateRepos = rawRepos.filter((r) => {
-    const override = repoOverrides[r.name] || {};
+    const override = getOverride(r.name);
     if (override.hide === true) return false;
     if (override.forceInclude === true) return true;
     if (r.fork || r.archived) return false;
@@ -242,7 +252,7 @@ async function main() {
   if (requireTopic) {
     const taggedRepos = candidateRepos.filter((r) => {
       const topics = (r.topics || []).map((t) => t.toLowerCase());
-      return topics.includes(portfolioTopic) || Boolean(repoOverrides[r.name]);
+      return topics.includes(portfolioTopic) || Boolean(repoOverrides[r.name.toLowerCase()]);
     });
     // Fallback to all candidateRepos if none are tagged yet so the site is never empty
     if (taggedRepos.length > 0) {
@@ -257,7 +267,7 @@ async function main() {
   const fetchedProjects = [];
 
   for (const repo of candidateRepos) {
-    const override = repoOverrides[repo.name] || {};
+    const override = getOverride(repo.name);
     console.log(`Processing repo: ${repo.name}...`);
 
     // 1. Fetch README
@@ -291,8 +301,10 @@ async function main() {
     }
 
     // 3. Determine Ongoing vs Completed
-    const daysSincePush =
-      (Date.now() - new Date(repo.pushed_at).getTime()) / (1000 * 60 * 60 * 24);
+    const daysSincePush = Math.max(
+      0,
+      (Date.now() - new Date(repo.pushed_at).getTime()) / (1000 * 60 * 60 * 24)
+    );
     const isOngoing =
       typeof override.ongoing === 'boolean'
         ? override.ongoing
@@ -344,12 +356,12 @@ async function main() {
   const fetchedIds = new Set(fetchedProjects.map((p) => p.id.toLowerCase()));
   const preservedCvProjects = (existingData.projects || [])
     .filter((p) => {
-      const override = repoOverrides[p.id] || {};
+      const override = getOverride(p.id);
       if (override.hide === true) return false;
       return !fetchedIds.has(p.id.toLowerCase());
     })
     .map((p) => {
-      const override = repoOverrides[p.id] || {};
+      const override = getOverride(p.id);
       return {
         ...p,
         title: override.title || p.title,
