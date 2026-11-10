@@ -583,11 +583,14 @@
 
     .hero-portrait-img {
       width: 100%;
-      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      object-position: bottom center;
       display: block;
-      filter: grayscale(100%) contrast(1.08);
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 78%, rgba(0,0,0,0) 100%);
+      filter: grayscale(100%) contrast(1.04);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 82%, rgba(0,0,0,0) 100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hero-bottom-divider {
@@ -2048,65 +2051,7 @@
 
         <div class="hero-right">
           <div class="hero-portrait-frame" id="heroPortraitContainer">
-            <!-- Monochrome High-Contrast Developer Portrait SVG (Can be replaced via avatarUrl in profile.json) -->
-            <svg class="hero-portrait-img" viewBox="0 0 480 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Naveen Perera Portrait">
-              <defs>
-                <linearGradient id="hoodieGrad" x1="240" y1="290" x2="240" y2="540" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#1c1c20"/>
-                  <stop offset="65%" stop-color="#0d0d10"/>
-                  <stop offset="100%" stop-color="#050507"/>
-                </linearGradient>
-                <linearGradient id="skinGrad" x1="240" y1="110" x2="240" y2="320" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#d4d4d8"/>
-                  <stop offset="55%" stop-color="#a1a1aa"/>
-                  <stop offset="100%" stop-color="#52525b"/>
-                </linearGradient>
-                <linearGradient id="hairGrad" x1="240" y1="45" x2="240" y2="210" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#27272a"/>
-                  <stop offset="100%" stop-color="#09090b"/>
-                </linearGradient>
-              </defs>
-              <!-- Hoodie Shoulders & Torso -->
-              <path d="M35 535C44 415 95 362 156 342L240 330L324 342C385 362 436 415 445 535H35Z" fill="url(#hoodieGrad)"/>
-              <!-- Hoodie Collar / Hood -->
-              <path d="M132 345C130 295 162 272 240 272C318 272 350 295 348 345C322 378 282 396 240 396C198 396 158 378 132 345Z" fill="#141418" stroke="#27272a" stroke-width="2"/>
-              <!-- Neck -->
-              <rect x="202" y="258" width="76" height="86" rx="28" fill="url(#skinGrad)"/>
-              <!-- Ears -->
-              <rect x="145" y="176" width="22" height="48" rx="11" fill="#a1a1aa"/>
-              <rect x="313" y="176" width="22" height="48" rx="11" fill="#a1a1aa"/>
-              <!-- Head / Face -->
-              <rect x="158" y="96" width="164" height="196" rx="76" fill="url(#skinGrad)"/>
-              <!-- Beard / Jaw Shading -->
-              <path d="M160 202C160 256 194 294 240 294C286 294 320 256 320 202C312 232 286 254 240 254C194 254 168 232 160 202Z" fill="#18181b" fill-opacity="0.88"/>
-              <!-- Smile -->
-              <path d="M210 234C220 247 260 247 270 234Z" fill="#f4f4f5"/>
-              <!-- Glasses (Clear Modern Frames like Sample UI) -->
-              <rect x="172" y="160" width="60" height="42" rx="12" stroke="#e4e4e7" stroke-width="4" fill="rgba(255,255,255,0.06)"/>
-              <rect x="248" y="160" width="60" height="42" rx="12" stroke="#e4e4e7" stroke-width="4" fill="rgba(255,255,255,0.06)"/>
-              <path d="M232 176H248" stroke="#e4e4e7" stroke-width="4"/>
-              <!-- Eyes -->
-              <circle cx="202" cy="181" r="6" fill="#18181b"/>
-              <circle cx="278" cy="181" r="6" fill="#18181b"/>
-              <circle cx="204" cy="179" r="2" fill="#ffffff"/>
-              <circle cx="280" cy="179" r="2" fill="#ffffff"/>
-              <!-- Eyebrows -->
-              <path d="M182 152C194 146 212 147 222 152" stroke="#18181b" stroke-width="5" stroke-linecap="round"/>
-              <path d="M258 152C268 147 286 146 298 152" stroke="#18181b" stroke-width="5" stroke-linecap="round"/>
-              <!-- Styled Hair -->
-              <path d="M152 172C142 112 174 60 240 60C308 60 338 110 328 172C320 132 300 112 240 112C180 112 160 132 152 172Z" fill="url(#hairGrad)"/>
-              <path d="M162 96C184 56 284 52 316 96C290 82 200 82 162 96Z" fill="#27272a"/>
-              <!-- Hoodie Drawstrings -->
-              <circle cx="208" cy="378" r="5" stroke="#71717a" stroke-width="2" fill="#09090b"/>
-              <circle cx="272" cy="378" r="5" stroke="#71717a" stroke-width="2" fill="#09090b"/>
-              <path d="M208 380V492" stroke="#27272a" stroke-width="5" stroke-linecap="round"/>
-              <path d="M272 380V486" stroke="#27272a" stroke-width="5" stroke-linecap="round"/>
-              <!-- Geometric Hoodie Monogram Badge (Matches V logo on hoodie in Sample UI) -->
-              <g transform="translate(325, 435)">
-                <path d="M0 0L22 38L44 0H33L22 20L11 0H0Z" fill="#ffffff"/>
-                <path d="M14 0L22 14L30 0H14Z" fill="#a1a1aa"/>
-              </g>
-            </svg>
+            <img src="avatar.png" alt="Naveen Perera" class="hero-portrait-img" id="heroPortraitImg" />
           </div>
         </div>
       </div>
@@ -2543,7 +2488,7 @@
       name: "Naveen Perera",
       tagline: "Computer Science Undergraduate & Full-Stack Developer",
       subtitle: "Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning systems. Passionate about clean architecture, cybersecurity, and impactful digital products.",
-      avatarUrl: "",
+      avatarUrl: "avatar.png",
       formspreeEndpoint: "",
       quote: {
         text: "Many of life's failures are people who did not realize how close they were to success when they gave up.",
