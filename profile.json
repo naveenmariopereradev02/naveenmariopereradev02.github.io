@@ -159,32 +159,32 @@
   ],
   "queries": [
     {
-      "icon": "layers",
+      "icon": "💻",
       "question": "What engineering areas and services do I specialize in?",
       "answer": "I specialize in building secure full-stack web applications (React, Next.js, Node.js, Express, FastAPI), enterprise authentication & identity systems (OAuth 2.0, OIDC, WebAuthn FIDO2), cross-platform mobile apps (Flutter & Firebase), and end-to-end Python data quality and machine learning pipelines."
     },
     {
-      "icon": "users",
+      "icon": "💼",
       "question": "What kind of opportunities am I looking for?",
       "answer": "I am actively open to Software Engineering, Full-Stack, Cybersecurity, and Data/ML Internship opportunities, as well as collaborative open-source and freelance product development projects."
     },
     {
-      "icon": "cpu",
+      "icon": "⚡",
       "question": "What technologies do I work with daily?",
       "answer": "My core stack includes Python (FastAPI, Pandas, NumPy, Scikit-learn), JavaScript/TypeScript (React, Next.js, Redux Toolkit, Node.js, Express, Tailwind CSS), Java, Dart/Flutter, PostgreSQL, Firebase, Docker, and Nginx."
     },
     {
-      "icon": "refresh",
+      "icon": "🔄",
       "question": "How does this portfolio stay up to date automatically?",
       "answer": "A scheduled GitHub Actions workflow runs daily and on every push. It queries the GitHub REST API for my public repositories, extracts README descriptions, calculates real-time language byte distributions, and updates the Projects, Skills, and Timeline sections automatically."
     },
     {
-      "icon": "shield",
+      "icon": "🛡️",
       "question": "How do I approach security and code quality?",
       "answer": "With formal certifications in Cyber Security & Networking and hands-on experience building OAuth 2.0 + PKCE and FIDO2 passkey systems, I integrate rate limiting, JWT rotation, input sanitization, and Docker/Nginx hardening right from the architecture stage."
     },
     {
-      "icon": "zap",
+      "icon": "🤝",
       "question": "Can we collaborate on a project or hackathon?",
       "answer": "Absolutely! Feel free to reach out via the contact form below, email me at naveenmarioperera04@gmail.com, or connect with me on LinkedIn and GitHub."
     }
