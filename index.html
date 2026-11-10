@@ -1420,12 +1420,50 @@
       border-radius: 8px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-subtle);
-      transition: border-color 0.2s ease, background 0.2s ease;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
     .proj-link:hover {
       border-color: var(--accent);
       color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .proj-link-private {
+      background: rgba(245, 158, 11, 0.08);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      cursor: pointer;
+    }
+
+    .proj-link-private:hover {
+      background: rgba(245, 158, 11, 0.18);
+      border-color: rgba(251, 191, 36, 0.5);
+      color: #fde68a;
+    }
+
+    .repo-visibility-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .repo-visibility-pill.private-pill {
+      background: rgba(245, 158, 11, 0.12);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.32);
+    }
+
+    .repo-visibility-pill.public-pill {
+      background: rgba(59, 130, 246, 0.1);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.25);
     }
 
     /* ==========================================================================
@@ -2431,14 +2469,14 @@
         <div class="cta-mockups" aria-hidden="true">
           <div class="cta-mockup-grid">
             <div class="mockup-tile">
-              <div class="mockup-tile-title">TrustPass — OAuth 2.0 / OIDC (SLT)</div>
+              <div class="mockup-tile-title">TrustLink — OAuth 2.0 / OIDC (SLT)</div>
               <svg viewBox="0 0 160 65" width="100%" height="60">
                 <path d="M5 50 Q 40 10, 80 35 T 155 18" fill="none" stroke="#60a5fa" stroke-width="2.5"/>
                 <circle cx="80" cy="35" r="3.5" fill="#f97316"/>
               </svg>
             </div>
             <div class="mockup-tile">
-              <div class="mockup-tile-title">Loan ML Classifier (99.97%)</div>
+              <div class="mockup-tile-title">TrustPass — Flight Booking &amp; Passes</div>
               <svg viewBox="0 0 160 65" width="100%" height="60">
                 <path d="M5 55 C 35 15, 70 12, 155 8" fill="none" stroke="#4ade80" stroke-width="2.5"/>
               </svg>
@@ -2591,42 +2629,67 @@
     };
 
     const FALLBACK_PROJECTS = {
-      generatedAt: "2026-11-10T08:45:00.000Z",
+      generatedAt: "2026-11-10T12:30:00.000Z",
       username: "naveenmariopereradev02",
-      totalRepos: 5,
-      ongoingCount: 1,
+      totalRepos: 6,
+      ongoingCount: 2,
       completedCount: 4,
       languagesSummary: [
-        { name: "Python", bytes: 184500, percentage: 38.4, repoCount: 3, color: "#22c55e" },
-        { name: "JavaScript", bytes: 96200, percentage: 20.0, repoCount: 2, color: "#3b82f6" },
-        { name: "TypeScript", bytes: 78400, percentage: 16.3, repoCount: 2, color: "#f59e0b" },
-        { name: "Dart", bytes: 64800, percentage: 13.5, repoCount: 1, color: "#06b6d4" },
-        { name: "Java", bytes: 31200, percentage: 6.5, repoCount: 1, color: "#f97316" },
-        { name: "SQL", bytes: 14500, percentage: 3.0, repoCount: 2, color: "#a855f7" },
-        { name: "HTML/CSS", bytes: 11200, percentage: 2.3, repoCount: 2, color: "#ec4899" }
+        { name: "Dart", bytes: 252800, percentage: 34.2, repoCount: 2, color: "#00B4AB" },
+        { name: "Python", bytes: 184500, percentage: 25.0, repoCount: 3, color: "#3572A5" },
+        { name: "JavaScript", bytes: 128400, percentage: 17.4, repoCount: 2, color: "#f1e05a" },
+        { name: "TypeScript", bytes: 78400, percentage: 10.6, repoCount: 2, color: "#3178c6" },
+        { name: "Java", bytes: 31200, percentage: 4.2, repoCount: 1, color: "#b07219" },
+        { name: "C++", bytes: 25176, percentage: 3.4, repoCount: 1, color: "#f34b7d" },
+        { name: "SQL", bytes: 24000, percentage: 3.2, repoCount: 3, color: "#e38c00" },
+        { name: "HTML/CSS", bytes: 14953, percentage: 2.0, repoCount: 2, color: "#e34c26" }
       ],
       projects: [
         {
-          id: "trust-pass",
-          title: "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
-          role: "SLT Internship",
+          id: "trustlink",
+          title: "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
+          role: "SLT Internship — Core Identity & Security Lead",
           description: "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
           highlights: [
-            "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs and JWKS discovery, and refresh token rotation.",
-            "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+            "Developed an enterprise OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
+            "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across enterprise telecom services.",
             "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
             "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards and light/dark theming.",
-            "Containerized the platform with Docker and Nginx, and applied security hardening including rate limiting and vulnerability scanning."
+            "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
           ],
           createdAt: "2026-07-01T00:00:00Z",
           pushedAt: "2026-11-08T14:30:00Z",
           dateLabel: "Jul 2026 — Nov 2026",
           isOngoing: true,
+          isPrivate: true,
+          privateMessage: "Private Enterprise Repository — Proprietary source code developed during SLT Internship (Access Restricted / NDA).",
           featured: true,
-          htmlUrl: "https://github.com/naveenmariopereradev02/trust-pass",
+          htmlUrl: "https://github.com/Nuwini2430/trustlink.git",
           homepage: "",
           techStack: ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
           primaryLanguage: "JavaScript"
+        },
+        {
+          id: "trust-pass",
+          title: "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
+          role: "Lead Mobile Architect & Developer",
+          description: "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
+          highlights: [
+            "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
+            "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
+            "Automated Cloud APK Build and Release pipelines using GitHub Actions CI/CD for continuous mobile delivery.",
+            "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
+          ],
+          createdAt: "2026-11-05T05:43:04Z",
+          pushedAt: "2026-11-05T05:49:03Z",
+          dateLabel: "Nov 2026",
+          isOngoing: true,
+          isPrivate: false,
+          featured: true,
+          htmlUrl: "https://github.com/naveenmariopereradev02/trust-pass",
+          homepage: "",
+          techStack: ["Flutter", "Dart", "OAuth 2.0 / OIDC", "PKCE", "Airbus A380 Seat Maps", "QR Boarding Pass", "GitHub Actions CI/CD"],
+          primaryLanguage: "Dart"
         },
         {
           id: "zendata",
@@ -3014,10 +3077,23 @@
           <div>
             <div class="project-top-meta">
               <span class="project-date-badge">${escapeHtml(p.dateLabel)}</span>
-              <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
-                <span style="width:6px;height:6px;border-radius:50%;background:${p.isOngoing ? '#4ade80' : 'var(--text-muted)'};"></span>
-                ${p.isOngoing ? 'Ongoing' : 'Completed'}
-              </span>
+              <div style="display:flex; align-items:center; gap:6px;">
+                ${p.isPrivate ? `
+                  <span class="repo-visibility-pill private-pill" title="${escapeHtml(p.privateMessage || 'Private Enterprise Repository')}">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    Private
+                  </span>
+                ` : `
+                  <span class="repo-visibility-pill public-pill" title="Public Open-Source Repository">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+                    Public
+                  </span>
+                `}
+                <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
+                  <span style="width:6px;height:6px;border-radius:50%;background:${p.isOngoing ? '#4ade80' : 'var(--text-muted)'};"></span>
+                  ${p.isOngoing ? 'Ongoing' : 'Completed'}
+                </span>
+              </div>
             </div>
             <h3 class="project-title">${escapeHtml(p.title)}</h3>
             <div class="project-role">${escapeHtml(p.role || '')}</div>
@@ -3043,10 +3119,17 @@
                     <span>↗</span>
                   </a>
                 ` : ''}
-                <a href="${escapeHtml(p.htmlUrl || 'https://github.com/naveenmariopereradev02')}" target="_blank" rel="noopener" class="proj-link">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
-                  <span>Repository</span>
-                </a>
+                ${p.isPrivate ? `
+                  <button type="button" class="proj-link proj-link-private" title="${escapeHtml(p.privateMessage || 'Private Enterprise Repository — Access restricted under organizational NDA')}" onclick="alert('${escapeHtml(p.privateMessage || 'This repository is private and proprietary under organizational access control (SLT / Enterprise NDA). Direct source code access is restricted.')}')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Private Repo 🔒</span>
+                  </button>
+                ` : `
+                  <a href="${escapeHtml(p.htmlUrl || 'https://github.com/naveenmariopereradev02')}" target="_blank" rel="noopener" class="proj-link">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.92.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.38-3.88-1.38-.52-1.33-1.28-1.68-1.28-1.68-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11.05 11.05 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+                    <span>Repository</span>
+                  </a>
+                `}
               </div>
             </div>
           </div>
@@ -3061,9 +3144,22 @@
             <span style="font-family:var(--font-mono); font-size:0.76rem; color:var(--accent); font-weight:600;">
               ${escapeHtml(p.dateLabel)} ${p.isOngoing ? ' · Continuing on Timeline' : ''}
             </span>
-            <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
-              ${p.isOngoing ? '🟢 Ongoing — Active Development' : '✓ Completed Milestone'}
-            </span>
+            <div style="display:flex; align-items:center; gap:6px;">
+              ${p.isPrivate ? `
+                <span class="repo-visibility-pill private-pill" title="${escapeHtml(p.privateMessage || 'Private Enterprise Repository')}">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  Private 🔒
+                </span>
+              ` : `
+                <span class="repo-visibility-pill public-pill">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+                  Public
+                </span>
+              `}
+              <span class="status-pill ${p.isOngoing ? 'ongoing' : 'completed'}">
+                ${p.isOngoing ? '🟢 Ongoing — Active Development' : '✓ Completed Milestone'}
+              </span>
+            </div>
           </div>
           <h3 style="font-size:1.05rem; font-weight:800; margin-bottom:4px;">${escapeHtml(p.title)}</h3>
           <p style="font-size:0.83rem; color:var(--text-secondary); margin-bottom:10px;">${escapeHtml(p.description)}</p>

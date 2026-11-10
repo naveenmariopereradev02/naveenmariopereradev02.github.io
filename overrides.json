@@ -1,37 +1,59 @@
 {
-  "_comment": "Use 'repos' to override specific GitHub repositories by their exact repo name. Set 'hide: true' to exclude a repo, 'featured: true' to highlight it, or 'ongoing: true/false' to override its timeline status.",
+  "_comment": "Use 'repos' to override specific GitHub repositories by their exact repo name. Set 'hide: true' to exclude a repo, 'featured: true' to highlight it, 'isPrivate: true' to flag private source repos, or 'ongoing: true/false' to override its timeline status.",
   "repos": {
-    "trust-pass": {
-      "title": "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
-      "role": "SLT Internship",
+    "trustlink": {
+      "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
+      "role": "SLT Internship — Core Identity & Security Lead",
       "dateLabel": "Jul 2026 — Nov 2026",
       "featured": true,
       "ongoing": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
+      "isPrivate": true,
+      "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
+      "repoUrl": "https://github.com/Nuwini2430/trustlink.git",
       "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "highlights": [
         "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
-        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across enterprise telecom services.",
         "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
         "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards, and light/dark theming.",
         "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
       ]
     },
     "identity-platform-sso": {
-      "title": "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
-      "role": "SLT Internship",
+      "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
+      "role": "SLT Internship — Core Identity & Security Lead",
       "dateLabel": "Jul 2026 — Nov 2026",
       "featured": true,
       "ongoing": true,
+      "isPrivate": true,
+      "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
+      "repoUrl": "https://github.com/Nuwini2430/trustlink.git",
       "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "highlights": [
         "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
-        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
+        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across enterprise telecom services.",
         "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
         "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards, and light/dark theming.",
         "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
+      ]
+    },
+    "trust-pass": {
+      "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
+      "role": "Lead Mobile Architect & Developer",
+      "dateLabel": "Nov 2026",
+      "featured": true,
+      "ongoing": true,
+      "isPrivate": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
+      "techStack": ["Flutter", "Dart", "OAuth 2.0 / OIDC", "PKCE", "Airbus A380 Seat Maps", "QR Boarding Pass", "GitHub Actions CI/CD"],
+      "description": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
+      "highlights": [
+        "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
+        "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
+        "Automated Cloud APK Build and Release pipelines using GitHub Actions CI/CD for continuous mobile delivery.",
+        "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
       ]
     },
     "zendata": {
@@ -40,6 +62,7 @@
       "dateLabel": "Aug 2026 — Sep 2026",
       "featured": true,
       "ongoing": false,
+      "isPrivate": false,
       "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
       "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
       "highlights": [
@@ -55,6 +78,7 @@
       "dateLabel": "May 2026",
       "featured": true,
       "ongoing": false,
+      "isPrivate": false,
       "techStack": ["Python", "Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV"],
       "description": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
       "highlights": [
@@ -70,6 +94,7 @@
       "dateLabel": "May 2026",
       "featured": false,
       "ongoing": false,
+      "isPrivate": false,
       "techStack": ["Python", "Security Analytics", "Data Mining", "Incident Response"],
       "description": "Real-time Python security incident response tool that monitors server access logs, tracks IP behavior, and flags brute-force attacks for firewall blocking.",
       "highlights": [
@@ -84,6 +109,7 @@
       "dateLabel": "Mar 2025 — Jun 2025",
       "featured": true,
       "ongoing": false,
+      "isPrivate": false,
       "techStack": ["Flutter", "Dart", "Firebase Cloud Storage", "Firebase Firestore", "SDG Goal 11"],
       "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
       "highlights": [
@@ -95,4 +121,3 @@
     }
   }
 }
-

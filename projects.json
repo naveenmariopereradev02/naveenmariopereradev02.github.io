@@ -1,72 +1,79 @@
 {
-  "generatedAt": "2026-11-10T08:45:00.000Z",
+  "generatedAt": "2026-11-10T12:30:00.000Z",
   "username": "naveenmariopereradev02",
-  "totalRepos": 5,
-  "ongoingCount": 1,
+  "totalRepos": 6,
+  "ongoingCount": 2,
   "completedCount": 4,
   "languagesSummary": [
     {
+      "name": "Dart",
+      "bytes": 252800,
+      "percentage": 34.2,
+      "repoCount": 2,
+      "color": "#00B4AB"
+    },
+    {
       "name": "Python",
       "bytes": 184500,
-      "percentage": 38.4,
+      "percentage": 25.0,
       "repoCount": 3,
       "color": "#3572A5"
     },
     {
       "name": "JavaScript",
-      "bytes": 96200,
-      "percentage": 20.0,
+      "bytes": 128400,
+      "percentage": 17.4,
       "repoCount": 2,
       "color": "#f1e05a"
     },
     {
       "name": "TypeScript",
       "bytes": 78400,
-      "percentage": 16.3,
+      "percentage": 10.6,
       "repoCount": 2,
       "color": "#3178c6"
     },
     {
-      "name": "Dart",
-      "bytes": 64800,
-      "percentage": 13.5,
-      "repoCount": 1,
-      "color": "#00B4AB"
-    },
-    {
       "name": "Java",
       "bytes": 31200,
-      "percentage": 6.5,
+      "percentage": 4.2,
       "repoCount": 1,
       "color": "#b07219"
     },
     {
+      "name": "C++",
+      "bytes": 25176,
+      "percentage": 3.4,
+      "repoCount": 1,
+      "color": "#f34b7d"
+    },
+    {
       "name": "SQL",
-      "bytes": 14500,
-      "percentage": 3.0,
-      "repoCount": 2,
+      "bytes": 24000,
+      "percentage": 3.2,
+      "repoCount": 3,
       "color": "#e38c00"
     },
     {
       "name": "HTML/CSS",
-      "bytes": 11200,
-      "percentage": 2.3,
+      "bytes": 14953,
+      "percentage": 2.0,
       "repoCount": 2,
       "color": "#e34c26"
     }
   ],
   "projects": [
     {
-      "id": "trust-pass",
-      "name": "trust-pass",
-      "title": "TrustPass — Identity & SSO Platform (OAuth 2.0 & OIDC)",
-      "role": "SLT Internship",
+      "id": "trustlink",
+      "name": "trustlink",
+      "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
+      "role": "SLT Internship — Core Identity & Security Lead",
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "readmeExcerpt": "Enterprise-grade Identity Provider (IdP) supporting Authorization Code Flow + PKCE, FIDO2/WebAuthn hardware & platform passkeys, and real-time suspicious login risk scoring with a React + Redux Toolkit admin console.",
       "highlights": [
         "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs and JWKS discovery, and refresh token rotation.",
-        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across multiple applications.",
-        "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts, aligned with data protection requirements.",
+        "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across enterprise telecom services.",
+        "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
         "Built a React, Redux Toolkit and Tailwind CSS admin console with role-based access control, analytics dashboards and light/dark theming.",
         "Containerized the platform with Docker and Nginx, and applied security hardening including rate limiting and vulnerability scanning."
       ],
@@ -74,19 +81,53 @@
       "pushedAt": "2026-11-08T14:30:00Z",
       "dateLabel": "Jul 2026 — Nov 2026",
       "isOngoing": true,
+      "isPrivate": true,
+      "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship (Access Restricted / NDA).",
       "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
+      "htmlUrl": "https://github.com/Nuwini2430/trustlink.git",
       "homepage": "",
       "topics": ["portfolio", "oauth2", "oidc", "webauthn", "fido2", "nodejs", "react", "docker", "security"],
       "techStack": ["Node.js", "Express", "React", "Redux Toolkit", "Tailwind CSS", "PostgreSQL", "WebAuthn (FIDO2)", "Docker", "Nginx"],
-      "stars": 14,
-      "forks": 2,
+      "stars": 16,
+      "forks": 3,
       "primaryLanguage": "JavaScript",
       "languages": {
         "JavaScript": 78200,
         "TypeScript": 28400,
         "SQL": 9500,
         "HTML/CSS": 6200
+      }
+    },
+    {
+      "id": "trust-pass",
+      "name": "trust-pass",
+      "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
+      "role": "Lead Mobile Architect & Developer",
+      "description": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
+      "readmeExcerpt": "Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation & QR Boarding Pass App built with Flutter, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and GitHub Actions Cloud APK CI/CD.",
+      "highlights": [
+        "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
+        "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
+        "Automated Cloud APK Build and Release pipelines using GitHub Actions CI/CD for continuous mobile delivery.",
+        "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
+      ],
+      "createdAt": "2026-11-05T05:43:04Z",
+      "pushedAt": "2026-11-05T05:49:03Z",
+      "dateLabel": "Nov 2026",
+      "isOngoing": true,
+      "isPrivate": false,
+      "featured": true,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
+      "homepage": "",
+      "topics": ["portfolio", "flutter", "dart", "oauth2", "oidc", "pkce", "mobile-app", "ci-cd"],
+      "techStack": ["Flutter", "Dart", "OAuth 2.0 / OIDC", "PKCE", "Airbus A380 Seat Maps", "QR Boarding Pass", "GitHub Actions CI/CD"],
+      "stars": 12,
+      "forks": 1,
+      "primaryLanguage": "Dart",
+      "languages": {
+        "Dart": 188058,
+        "C++": 25176,
+        "HTML/CSS": 3753
       }
     },
     {
@@ -106,18 +147,18 @@
       "pushedAt": "2026-09-28T18:00:00Z",
       "dateLabel": "Aug 2026 — Sep 2026",
       "isOngoing": false,
+      "isPrivate": false,
       "featured": true,
       "htmlUrl": "https://github.com/naveenmariopereradev02",
-      "homepage": "https://github.com/naveenmariopereradev02",
-      "topics": ["portfolio", "python", "fastapi", "pandas", "nextjs", "typescript", "data-quality"],
+      "homepage": "",
+      "topics": ["portfolio", "fastapi", "pandas", "numpy", "nextjs", "data-quality", "python"],
       "techStack": ["Python", "FastAPI", "Pandas", "NumPy", "Next.js", "TypeScript", "ReportLab", "OpenPyXL"],
-      "stars": 19,
+      "stars": 18,
       "forks": 3,
       "primaryLanguage": "Python",
       "languages": {
         "Python": 94500,
         "TypeScript": 50000,
-        "JavaScript": 18000,
         "HTML/CSS": 5000
       }
     },
@@ -127,7 +168,7 @@
       "title": "Loan Approval Prediction System",
       "role": "Sole Developer — ML & Data Mining",
       "description": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
-      "readmeExcerpt": "Machine learning classification system trained on a 58,645-record financial dataset using Logistic Regression, Gaussian Naive Bayes, and KNN with 5-fold GridSearchCV hyperparameter tuning.",
+      "readmeExcerpt": "Financial machine learning classification pipeline trained on 58,645 records, benchmarking Logistic Regression, Gaussian Naive Bayes, and KNN with 5-fold GridSearchCV hyperparameter tuning.",
       "highlights": [
         "Built an end-to-end ML classification pipeline in Python (Pandas, NumPy, Scikit-learn, Plotly) to predict loan approvals on a 58,645-record financial dataset.",
         "Performed EDA and cleaned the data — missing value imputation, outlier capping via IQR, feature encoding, and scaling — to engineer a model-ready dataset.",
@@ -138,6 +179,7 @@
       "pushedAt": "2026-05-30T12:00:00Z",
       "dateLabel": "May 2026",
       "isOngoing": false,
+      "isPrivate": false,
       "featured": true,
       "htmlUrl": "https://github.com/naveenmariopereradev02",
       "homepage": "",
@@ -166,6 +208,7 @@
       "pushedAt": "2026-05-25T16:20:00Z",
       "dateLabel": "May 2026",
       "isOngoing": false,
+      "isPrivate": false,
       "featured": false,
       "htmlUrl": "https://github.com/naveenmariopereradev02",
       "homepage": "",
@@ -188,14 +231,14 @@
       "highlights": [
         "Architected and implemented the multimedia storage infrastructure for a civic engagement mobile app, enabling citizens to upload and attach photo evidence to public issue reports.",
         "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media, ensuring scalable and efficient data delivery to government dashboards.",
-        "Developed seamless image capture and upload workflows within the Flutter frontend.",
-        "Implemented image compression techniques to minimize data usage for users on low-bandwidth networks.",
-        "Collaborated on the overall client-server architecture, ensuring stable synchronization between the mobile app, Firebase Firestore, and cloud storage services."
+        "Developed seamless image capture and upload workflows within the Flutter frontend with low-bandwidth compression.",
+        "Supported SDG Goal 11 by building robust digital infrastructure for transparent, community-driven governance solutions."
       ],
       "createdAt": "2025-03-01T00:00:00Z",
       "pushedAt": "2025-06-30T15:00:00Z",
       "dateLabel": "Mar 2025 — Jun 2025",
       "isOngoing": false,
+      "isPrivate": false,
       "featured": true,
       "htmlUrl": "https://github.com/naveenmariopereradev02",
       "homepage": "",
@@ -212,4 +255,3 @@
     }
   ]
 }
-

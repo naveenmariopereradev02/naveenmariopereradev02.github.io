@@ -327,7 +327,9 @@ async function main() {
       dateLabel: override.dateLabel || buildDateLabel(repo.created_at, repo.pushed_at, isOngoing),
       isOngoing,
       featured: typeof override.featured === 'boolean' ? override.featured : repo.stargazers_count > 0,
-      htmlUrl: override.htmlUrl || repo.html_url || `https://github.com/${username}/${repo.name}`,
+      isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(repo.private),
+      privateMessage: override.privateMessage || '',
+      htmlUrl: override.isPrivate ? '' : (override.htmlUrl || repo.html_url || `https://github.com/${username}/${repo.name}`),
       homepage: override.demoUrl || repo.homepage || '',
       topics: repo.topics || [],
       techStack,
@@ -340,11 +342,21 @@ async function main() {
 
   // Merge with existing CV projects in projects.json if those CV projects aren't on GitHub yet
   const fetchedIds = new Set(fetchedProjects.map((p) => p.id.toLowerCase()));
-  const preservedCvProjects = (existingData.projects || []).filter((p) => {
-    const override = repoOverrides[p.id] || {};
-    if (override.hide === true) return false;
-    return !fetchedIds.has(p.id.toLowerCase());
-  });
+  const preservedCvProjects = (existingData.projects || [])
+    .filter((p) => {
+      const override = repoOverrides[p.id] || {};
+      if (override.hide === true) return false;
+      return !fetchedIds.has(p.id.toLowerCase());
+    })
+    .map((p) => {
+      const override = repoOverrides[p.id] || {};
+      return {
+        ...p,
+        title: override.title || p.title,
+        isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(p.isPrivate),
+        privateMessage: override.privateMessage || p.privateMessage || ''
+      };
+    });
 
   const allProjects = [...fetchedProjects, ...preservedCvProjects].sort((a, b) => {
     if (a.isOngoing !== b.isOngoing) return a.isOngoing ? -1 : 1;
