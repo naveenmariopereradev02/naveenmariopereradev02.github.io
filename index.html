@@ -3712,6 +3712,7 @@
       tagline: "Computer Science Undergraduate & Full-Stack Developer",
       subtitle: "Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning systems. Passionate about clean architecture, cybersecurity, and impactful digital products.",
       avatarUrl: "avatar.png",
+      cvFile: "./cv/Naveen%20Perera%20cv.pdf",
       formspreeEndpoint: "",
       quote: {
         text: "Many of life's failures are people who did not realize how close they were to success when they gave up.",
@@ -5231,7 +5232,7 @@
 
     // Step 3: Interactive CV Preview & One-Click Download Modal Controller
     function getCvUrl() {
-      const raw = (currentProfile && currentProfile.cvFile) || './cv/Naveen_Perera_CV.pdf';
+      const raw = (currentProfile && currentProfile.cvFile) || './cv/Naveen%20Perera%20cv.pdf';
       if (raw.startsWith('http') || raw.startsWith('./') || raw.startsWith('/')) return raw;
       return `./cv/${raw}`;
     }
