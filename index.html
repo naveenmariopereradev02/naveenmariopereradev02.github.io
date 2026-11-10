@@ -232,6 +232,60 @@
       transform: translateY(0) scale(0.97);
     }
 
+    /* Secret Admin Visitor Badge (Visible ONLY to Naveen) */
+    .admin-visitor-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 13px;
+      height: 38px;
+      border-radius: 10px;
+      font-size: 0.74rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.08), 0 2px 8px rgba(0, 0, 0, 0.16);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .admin-visitor-badge:hover {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: rgba(56, 189, 248, 0.65);
+      color: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
+    }
+
+    .admin-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+      animation: pulseDot 2s infinite;
+    }
+
+    html[data-theme="light"] .admin-visitor-badge {
+      background: rgba(2, 132, 199, 0.08);
+      border-color: rgba(2, 132, 199, 0.3);
+      color: #0284c7;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    html[data-theme="light"] .admin-visitor-badge:hover {
+      background: rgba(2, 132, 199, 0.16);
+      border-color: rgba(2, 132, 199, 0.55);
+    }
+
     .theme-toggle {
       width: 38px;
       height: 38px;
@@ -2918,6 +2972,13 @@
 
   <!-- TOP RIGHT CONTROLS (Auto-Sync Status + Cmd+K Launcher + Dark/Light Mode Toggle) -->
   <div class="top-controls">
+    <!-- Hidden Admin Visitor Badge (Visible ONLY to Naveen via ?admin=true or ?admin=naveen) -->
+    <div id="adminVisitorBadge" class="admin-visitor-badge" style="display:none;" title="Admin Mode Active • Total Profile Visits (Visible only to you)">
+      <span class="admin-badge-dot"></span>
+      <span style="font-size: 0.85rem; line-height: 1;">👁️</span>
+      <span id="adminVisitorCount">...</span>
+      <span style="opacity: 0.75; font-size: 0.68rem; font-weight: 500;">visits</span>
+    </div>
     <a href="#github" class="sync-pill" id="syncStatusPill"
       title="Synced with GitHub Repositories • Click to view GitHub Stats" aria-label="Synced with GitHub Repositories">
       <span class="sync-dot"></span>
@@ -4759,6 +4820,75 @@
       }, 3200);
     }
 
+    // Secret Admin Profile Visitor Counter (Option 1: ?admin=naveen or ?admin=true)
+    let totalPortfolioVisits = null;
+
+    async function initVisitorCounter() {
+      const badge = document.getElementById('adminVisitorBadge');
+      const countEl = document.getElementById('adminVisitorCount');
+      if (!badge || !countEl) return;
+
+      // 1. Check URL parameters for Admin toggle (?admin=naveen, ?admin=true, ?admin=off)
+      const urlParams = new URLSearchParams(window.location.search);
+      const adminParam = (urlParams.get('admin') || urlParams.get('key') || '').toLowerCase().trim();
+
+      if (adminParam === 'naveen' || adminParam === 'true' || adminParam === '1' || adminParam === 'on') {
+        localStorage.setItem('naveen_admin_mode', 'true');
+        try {
+          const cleanUrl = window.location.pathname + window.location.hash;
+          window.history.replaceState({}, document.title, cleanUrl);
+        } catch (e) {}
+        setTimeout(() => {
+          showPortfolioToast('👑 Admin Mode Unlocked: Profile visitor counter is now visible to you.');
+        }, 700);
+      } else if (adminParam === 'false' || adminParam === 'off' || adminParam === '0' || adminParam === 'clear') {
+        localStorage.removeItem('naveen_admin_mode');
+        try {
+          const cleanUrl = window.location.pathname + window.location.hash;
+          window.history.replaceState({}, document.title, cleanUrl);
+        } catch (e) {}
+        setTimeout(() => {
+          showPortfolioToast('Admin Mode Deactivated: Visitor counter hidden.');
+        }, 700);
+      }
+
+      // Check current admin status in localStorage
+      const isAdmin = localStorage.getItem('naveen_admin_mode') === 'true';
+      if (isAdmin) {
+        badge.style.display = 'inline-flex';
+      } else {
+        badge.style.display = 'none';
+      }
+
+      badge.addEventListener('click', () => {
+        const count = window.currentPortfolioVisits || countEl.textContent || 'Live';
+        showPortfolioToast(`👑 Admin Telemetry: ${count} Total Profile Visits recorded. (Visible only on this device)`);
+      });
+
+      // 2. Fetch live hits from hits.sh (increments on every visit across the globe)
+      try {
+        const res = await fetch('https://hits.sh/naveenmariopereradev02.github.io.svg', { cache: 'no-store' });
+        if (res.ok) {
+          const svgText = await res.text();
+          const matches = [...svgText.matchAll(/<text[^>]*>([0-9,]+)<\/text>/gi)];
+          if (matches.length > 0) {
+            const rawCount = matches[matches.length - 1][1];
+            totalPortfolioVisits = rawCount;
+            window.currentPortfolioVisits = rawCount;
+            countEl.textContent = rawCount;
+            badge.setAttribute('title', `Admin Mode Active • ${rawCount} Total Profile Visits (Visible only to you)`);
+            return;
+          }
+        }
+      } catch (err) {
+        // Fallback silently if offline or blocked
+      }
+
+      if (!totalPortfolioVisits) {
+        countEl.textContent = 'Active';
+      }
+    }
+
     // Copy-Email Toast & Live GitHub Commit Feed (Feature #7)
     function initEmailCopyToast() {
       const emailLinks = [
@@ -5085,6 +5215,17 @@
         }));
 
         const actions = [
+          ...(localStorage.getItem('naveen_admin_mode') === 'true' ? [{
+            group: 'Admin Telemetry',
+            label: `Total Profile Views: ${window.currentPortfolioVisits || 'Live'} (Click to hide badge)`,
+            badge: '👑 Admin',
+            action: () => {
+              localStorage.removeItem('naveen_admin_mode');
+              const badge = document.getElementById('adminVisitorBadge');
+              if (badge) badge.style.display = 'none';
+              showPortfolioToast('Admin Mode Deactivated: Visitor counter hidden.');
+            }
+          }] : []),
           {
             group: 'Quick Actions',
             label: 'Preview / Download CV (Naveen Perera Resume PDF)',
@@ -5247,7 +5388,29 @@
           • <code>certs</code> — Cybersecurity &amp; networking certifications<br/>
           • <code>availability</code> — Internship &amp; software engineering availability<br/>
           • <code>contact</code> — Email, GitHub &amp; LinkedIn links<br/>
+          • <code>views</code> / <code>admin</code> — Secret profile visitor counter &amp; telemetry<br/>
           • <code>clear</code> — Clear terminal output`;
+        }
+        if (q === 'views' || q === 'visits' || q === 'visitors' || q === 'admin' || q === 'stats') {
+          const count = window.currentPortfolioVisits || 'Live Tracking...';
+          const isAdmin = localStorage.getItem('naveen_admin_mode') === 'true';
+          return `<strong>👁️ Total Profile Visits:</strong> ${count} views recorded.<br/>
+          <strong>Admin Status:</strong> ${isAdmin ? '<span style="color:#38bdf8; font-weight:700;">Active (Visitor Badge visible)</span>' : '<span style="color:var(--text-muted);">Deactivated (Hidden)</span>'}<br/>
+          <em>Commands: Type <code>admin on</code> to reveal the counter badge, or <code>admin off</code> to hide it.</em>`;
+        }
+        if (q === 'admin on' || q === 'admin enable') {
+          localStorage.setItem('naveen_admin_mode', 'true');
+          const badge = document.getElementById('adminVisitorBadge');
+          if (badge) badge.style.display = 'inline-flex';
+          showPortfolioToast('👑 Admin Mode Activated: Visitor Badge is now visible.');
+          return `<strong>👑 Admin Mode:</strong> <span style="color:#4ade80; font-weight:700;">ACTIVATED</span>. The Visitor Counter badge is now visible in your top-right control bar!`;
+        }
+        if (q === 'admin off' || q === 'admin disable') {
+          localStorage.removeItem('naveen_admin_mode');
+          const badge = document.getElementById('adminVisitorBadge');
+          if (badge) badge.style.display = 'none';
+          showPortfolioToast('Admin Mode Deactivated: Visitor Badge hidden.');
+          return `<strong>Admin Mode:</strong> <span style="color:var(--accent); font-weight:700;">DEACTIVATED</span>. The Visitor Counter badge is now hidden from the UI.`;
         }
         if (q === 'whoami' || q.includes('who is') || q.includes('about') || q.includes('university') || q.includes('education')) {
           return `<strong>Naveen Perera</strong> — Second-Year BSc (Hons) Computer Science Undergraduate at the <strong>University of Westminster (IIT Sri Lanka)</strong>.<br/>
@@ -5426,6 +5589,7 @@
       initCommandPalette();
       initAiCliTerminal();
       initCvModal();
+      initVisitorCounter();
 
       currentProfile = await loadJsonWithFallback('./profile.json', FALLBACK_PROFILE);
       currentProjectsData = await loadJsonWithFallback('./projects.json', FALLBACK_PROJECTS);
