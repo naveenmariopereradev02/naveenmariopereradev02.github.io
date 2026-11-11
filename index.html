@@ -5046,8 +5046,13 @@
         }, 700);
       }
 
-      // Check current admin status in localStorage
+      // Check current admin status in localStorage & local development environment
       const isAdmin = localStorage.getItem('naveen_admin_mode') === 'true';
+      const isLocal = window.location.hostname === 'localhost' || 
+                      window.location.hostname === '127.0.0.1' || 
+                      window.location.protocol === 'file:';
+      const isSelf = isAdmin || isLocal;
+
       if (isAdmin) {
         badge.style.display = 'inline-flex';
       } else {
@@ -5059,9 +5064,13 @@
         showPortfolioToast(`Admin Telemetry: ${count} Total Profile Visits recorded. (Visible only on this device)`);
       });
 
-      // 2. Fetch live hits from visitorbadge.io (CORS enabled: Access-Control-Allow-Origin: *)
+      // 2. Fetch live hits from visitorbadge.io (query_only=true skips incrementing for Admin & Local Dev)
+      const badgeUrl = isSelf
+        ? 'https://api.visitorbadge.io/api/visitors?path=naveenmariopereradev02.github.io&query_only=true'
+        : 'https://api.visitorbadge.io/api/visitors?path=naveenmariopereradev02.github.io';
+
       try {
-        const res = await fetch('https://api.visitorbadge.io/api/visitors?path=naveenmariopereradev02.github.io', { cache: 'no-store' });
+        const res = await fetch(badgeUrl, { cache: 'no-store' });
         if (res.ok) {
           const svgText = await res.text();
           const match = svgText.match(/VISITORS:\s*([0-9,]+)/i);
@@ -5078,11 +5087,13 @@
         // Fallback to hits.sh
       }
 
-      // Silent background ping to hits.sh as redundant counter
-      try {
-        const img = new Image();
-        img.src = 'https://hits.sh/naveenmariopereradev02.github.io.svg';
-      } catch (e) {}
+      // Silent background ping to hits.sh as redundant counter (Skipped for Admin & Local Dev)
+      if (!isSelf) {
+        try {
+          const img = new Image();
+          img.src = 'https://hits.sh/naveenmariopereradev02.github.io.svg';
+        } catch (e) {}
+      }
 
       if (!totalPortfolioVisits) {
         countEl.textContent = 'Active';
