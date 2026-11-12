@@ -2113,13 +2113,16 @@
       flex-direction: column;
       align-items: center;
       gap: 6px;
+      cursor: pointer;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-lang-item:hover {
+      transform: translateY(-2px);
     }
 
     .bento-lang-pill {
-      padding: 8px 18px;
       border-radius: 999px;
-      font-size: 0.84rem;
-      font-weight: 700;
       color: #ffffff;
       box-shadow:
         inset 0 2px 3px rgba(255, 255, 255, 0.45),
@@ -2128,12 +2131,70 @@
       border: 1px solid rgba(255, 255, 255, 0.25);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
       white-space: nowrap;
+      transition: box-shadow 0.22s ease, transform 0.22s ease;
+    }
+
+    .bento-lang-item:hover .bento-lang-pill {
+      box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.4),
+        0 10px 22px rgba(0, 0, 0, 0.55);
     }
 
     .bento-lang-sub {
-      font-size: 0.74rem;
       color: #a1a1aa;
       font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .bento-lang-item:hover .bento-lang-sub {
+      color: #ffffff;
+    }
+
+    /* Percentage-Weighted Dynamic Pill Sizing (Auto-Adjusts by Rank) */
+    .bento-lang-item.rank-0 .bento-lang-pill {
+      padding: 10px 22px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .bento-lang-item.rank-0 .bento-lang-sub {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #e4e4e7;
+    }
+
+    .bento-lang-item.rank-1 .bento-lang-pill {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .bento-lang-item.rank-1 .bento-lang-sub {
+      font-size: 0.73rem;
+      font-weight: 500;
+      color: #a1a1aa;
+    }
+
+    .bento-lang-item.rank-2 .bento-lang-pill {
+      padding: 7px 16px;
+      font-size: 0.81rem;
+      font-weight: 650;
+    }
+    .bento-lang-item.rank-2 .bento-lang-sub {
+      font-size: 0.71rem;
+      font-weight: 500;
+      color: #71717a;
+    }
+
+    .bento-lang-item.rank-3 .bento-lang-pill {
+      padding: 6px 14px;
+      font-size: 0.77rem;
+      font-weight: 600;
+    }
+    .bento-lang-item.rank-3 .bento-lang-sub {
+      font-size: 0.70rem;
+      font-weight: 500;
+      color: #71717a;
     }
 
     .bento-lang-vertical-label {
@@ -4764,14 +4825,30 @@
         'linear-gradient(180deg, #a855f7 0%, #6b21a8 100%)'
       ];
       const topBentoLangs = langs.slice(0, 4);
-      document.getElementById('bentoLanguagesWrap').innerHTML = topBentoLangs.map((l, i) => `
-        <div class="bento-lang-item">
-          <span class="bento-lang-pill" style="background: ${pillGradients[i % pillGradients.length]};">
-            ${escapeHtml(l.name)}
-          </span>
-          <span class="bento-lang-sub">${String(l.repoCount || 1).padStart(2, '0')} repos · ${l.percentage}%</span>
-        </div>
-      `).join('');
+      const bentoLanguagesWrap = document.getElementById('bentoLanguagesWrap');
+      if (bentoLanguagesWrap) {
+        bentoLanguagesWrap.innerHTML = topBentoLangs.map((l, i) => `
+          <div class="bento-lang-item rank-${i}" data-lang="${escapeHtml(l.name)}" title="${escapeHtml(l.name)}: ${l.percentage}% (${l.repoCount || 1} repos)">
+            <span class="bento-lang-pill" style="background: ${pillGradients[i % pillGradients.length]};">
+              ${escapeHtml(l.name)}
+            </span>
+            <span class="bento-lang-sub">${String(l.repoCount || 1).padStart(2, '0')} repos · ${l.percentage}%</span>
+          </div>
+        `).join('');
+
+        bentoLanguagesWrap.querySelectorAll('.bento-lang-item').forEach((item) => {
+          item.addEventListener('click', () => {
+            const langName = item.getAttribute('data-lang');
+            const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+            const matchBtn = filterBtns.find((b) => b.getAttribute('data-filter') === 'lang:' + langName);
+            if (matchBtn) {
+              matchBtn.click();
+              const projSec = document.getElementById('projects');
+              if (projSec) projSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      }
 
       // Multi-language bar & legend in Skills Section
       const multiLangBar = document.getElementById('multiLangBar');
