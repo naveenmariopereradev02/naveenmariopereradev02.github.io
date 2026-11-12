@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-12T05:57:01.452Z",
+  "generatedAt": "2026-11-12T10:55:46.876Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 10,
   "ongoingCount": 4,
@@ -127,50 +127,6 @@
   ],
   "projects": [
     {
-      "id": "ZenData",
-      "name": "ZenData",
-      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
-      "role": "Lead Architect & Developer",
-      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
-      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
-      "highlights": [
-        "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
-        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
-        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
-        "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
-      ],
-      "createdAt": "2026-10-28T10:17:05Z",
-      "pushedAt": "2026-11-10T13:11:15Z",
-      "dateLabel": "Oct 2026 — Present",
-      "isOngoing": true,
-      "featured": true,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
-      "homepage": "https://zendata-frontend.onrender.com",
-      "topics": [],
-      "techStack": [
-        "Python",
-        "FastAPI",
-        "Pandas",
-        "NumPy",
-        "Next.js",
-        "TypeScript",
-        "ReportLab",
-        "OpenPyXL"
-      ],
-      "stars": 1,
-      "forks": 0,
-      "primaryLanguage": "TypeScript",
-      "languages": {
-        "TypeScript": 114419,
-        "Python": 102637,
-        "CSS": 7420,
-        "JavaScript": 465,
-        "Procfile": 63
-      }
-    },
-    {
       "id": "trustlink",
       "name": "trustlink",
       "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
@@ -224,6 +180,50 @@
         "TypeScript": 28400,
         "SQL": 9500,
         "HTML/CSS": 6200
+      }
+    },
+    {
+      "id": "ZenData",
+      "name": "ZenData",
+      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+      "role": "Lead Architect & Developer",
+      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
+      "highlights": [
+        "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
+        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
+        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
+        "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
+      ],
+      "createdAt": "2026-10-28T10:17:05Z",
+      "pushedAt": "2026-11-10T13:11:15Z",
+      "dateLabel": "Oct 2026 — Present",
+      "isOngoing": true,
+      "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
+      "homepage": "https://zendata-frontend.onrender.com",
+      "topics": [],
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "Pandas",
+        "NumPy",
+        "Next.js",
+        "TypeScript",
+        "ReportLab",
+        "OpenPyXL"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "TypeScript",
+      "languages": {
+        "TypeScript": 114419,
+        "Python": 102637,
+        "CSS": 7420,
+        "JavaScript": 465,
+        "Procfile": 63
       }
     },
     {
@@ -505,7 +505,8 @@
       "languages": {
         "Python": 62000
       },
-      "privateMessage": ""
+      "privateMessage": "",
+      "latestCommitMessage": ""
     },
     {
       "id": "suspicious-log-analyzer",
@@ -546,7 +547,8 @@
       "languages": {
         "Python": 28000
       },
-      "privateMessage": ""
+      "privateMessage": "",
+      "latestCommitMessage": ""
     }
   ]
 }
