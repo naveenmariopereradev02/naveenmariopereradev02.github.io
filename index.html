@@ -2171,26 +2171,165 @@
       border-radius: 999px;
     }
 
+    .multi-lang-bar-wrap {
+      position: relative;
+      margin-top: 26px;
+      margin-bottom: 22px;
+    }
+
     .multi-lang-bar {
-      height: 12px;
+      height: 14px;
       width: 100%;
       border-radius: 999px;
-      overflow: hidden;
+      overflow: visible;
       display: flex;
-      gap: 2px;
-      background: var(--bg-secondary);
-      margin-bottom: 16px;
+      gap: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      cursor: pointer;
+      position: relative;
+      user-select: none;
     }
 
     .multi-lang-segment {
       height: 100%;
-      transition: width 0.5s ease;
+      border-radius: 3px;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, box-shadow 0.22s ease, filter 0.22s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .multi-lang-segment:first-child {
+      border-top-left-radius: 999px;
+      border-bottom-left-radius: 999px;
+    }
+
+    .multi-lang-segment:last-child {
+      border-top-right-radius: 999px;
+      border-bottom-right-radius: 999px;
+    }
+
+    /* When the bar is hovered, dim unhovered segments */
+    .multi-lang-bar.has-hover .multi-lang-segment {
+      opacity: 0.35;
+      filter: saturate(60%);
+    }
+
+    .multi-lang-bar .multi-lang-segment.active,
+    .multi-lang-bar .multi-lang-segment:hover {
+      opacity: 1 !important;
+      filter: saturate(120%) !important;
+      transform: scaleY(1.45) scaleX(1.02);
+      z-index: 5;
+      box-shadow: 0 0 14px var(--seg-glow, rgba(255, 255, 255, 0.5));
+    }
+
+    /* Interactive Floating Tooltip */
+    .lang-bar-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 9px;
+      background: rgba(14, 14, 18, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ffffff;
+      pointer-events: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.18s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), left 0.15s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.18s ease;
+      z-index: 20;
+      white-space: nowrap;
+    }
+
+    .lang-bar-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: calc(50% + var(--arrow-offset, 0px));
+      transform: translateX(-50%) rotate(45deg);
+      width: 8px;
+      height: 8px;
+      background: rgba(14, 14, 18, 0.96);
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      transition: left 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lang-bar-tooltip.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .lang-tooltip-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .lang-tooltip-name {
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .lang-tooltip-pct {
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lang-tooltip-repos {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 500;
+    }
+
+    html[data-theme="light"] .multi-lang-bar {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    html[data-theme="light"] .lang-bar-tooltip {
+      background: rgba(255, 255, 255, 0.96);
+      border-color: rgba(0, 0, 0, 0.14);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+      color: var(--text-primary);
+    }
+
+    html[data-theme="light"] .lang-bar-tooltip::after {
+      background: rgba(255, 255, 255, 0.96);
+      border-right-color: rgba(0, 0, 0, 0.14);
+      border-bottom-color: rgba(0, 0, 0, 0.14);
+    }
+
+    html[data-theme="light"] .lang-tooltip-name {
+      color: var(--text-primary);
+    }
+
+    html[data-theme="light"] .lang-tooltip-pct {
+      background: rgba(0, 0, 0, 0.06);
     }
 
     .lang-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
 
     .lang-legend-item {
@@ -2199,6 +2338,24 @@
       gap: 7px;
       font-size: 0.82rem;
       font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .lang-legend-item:hover,
+    .lang-legend-item.active {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+
+    html[data-theme="light"] .lang-legend-item:hover,
+    html[data-theme="light"] .lang-legend-item.active {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.12);
     }
 
     .lang-dot {
@@ -3757,7 +3914,15 @@
           </div>
           <span class="auto-badge">⚡ Live from projects.json</span>
         </div>
-        <div class="multi-lang-bar" id="multiLangBar"></div>
+        <div class="multi-lang-bar-wrap" id="multiLangBarWrap">
+          <div class="lang-bar-tooltip" id="langBarTooltip" role="tooltip" aria-hidden="true">
+            <span class="lang-tooltip-dot" id="langTooltipDot"></span>
+            <span class="lang-tooltip-name" id="langTooltipName">Language</span>
+            <span class="lang-tooltip-pct" id="langTooltipPct">0%</span>
+            <span class="lang-tooltip-repos" id="langTooltipRepos"></span>
+          </div>
+          <div class="multi-lang-bar" id="multiLangBar"></div>
+        </div>
         <div class="lang-legend" id="langLegend"></div>
       </div>
 
@@ -4468,17 +4633,149 @@
       `).join('');
 
       // Multi-language bar & legend in Skills Section
-      document.getElementById('multiLangBar').innerHTML = langs.map((l) => `
-        <div class="multi-lang-segment" style="width:${Math.max(l.percentage, 3)}%; background:${escapeHtml(l.color)};" title="${escapeHtml(l.name)}: ${l.percentage}%"></div>
-      `).join('');
+      const multiLangBar = document.getElementById('multiLangBar');
+      const langLegend = document.getElementById('langLegend');
+      const langTooltip = document.getElementById('langBarTooltip');
+      const langTooltipDot = document.getElementById('langTooltipDot');
+      const langTooltipName = document.getElementById('langTooltipName');
+      const langTooltipPct = document.getElementById('langTooltipPct');
+      const langTooltipRepos = document.getElementById('langTooltipRepos');
+      const multiLangBarWrap = document.getElementById('multiLangBarWrap');
 
-      document.getElementById('langLegend').innerHTML = langs.map((l) => `
-        <div class="lang-legend-item">
-          <span class="lang-dot" style="background:${escapeHtml(l.color)};"></span>
-          <span>${escapeHtml(l.name)}</span>
-          <span style="color:var(--text-muted); font-weight:500;">${l.percentage}% (${l.repoCount} ${l.repoCount === 1 ? 'repo' : 'repos'})</span>
-        </div>
-      `).join('');
+      const updateLangTooltipPosition = (segment, lang) => {
+        if (!langTooltip || !multiLangBarWrap || !segment || !lang) return;
+        const wrapRect = multiLangBarWrap.getBoundingClientRect();
+        const segRect = segment.getBoundingClientRect();
+        const segCenterX = (segRect.left + segRect.right) / 2 - wrapRect.left;
+
+        if (langTooltipDot) {
+          langTooltipDot.style.background = lang.color;
+          langTooltipDot.style.boxShadow = `0 0 10px ${lang.color}`;
+        }
+        if (langTooltipName) langTooltipName.textContent = lang.name;
+        if (langTooltipPct) {
+          langTooltipPct.textContent = `${lang.percentage}%`;
+          langTooltipPct.style.color = lang.color;
+          langTooltipPct.style.background = `${lang.color}1f`;
+          langTooltipPct.style.border = `1px solid ${lang.color}44`;
+        }
+        if (langTooltipRepos) {
+          langTooltipRepos.textContent = `• ${lang.repoCount} ${lang.repoCount === 1 ? 'repo' : 'repos'}`;
+        }
+
+        langTooltip.classList.add('show');
+        const tipWidth = langTooltip.offsetWidth || 160;
+        const halfTip = tipWidth / 2;
+        const clampedX = Math.max(halfTip + 4, Math.min(wrapRect.width - halfTip - 4, segCenterX));
+        langTooltip.style.left = `${clampedX}px`;
+        const arrowOffset = segCenterX - clampedX;
+        langTooltip.style.setProperty('--arrow-offset', `${arrowOffset}px`);
+      };
+
+      const hideLangTooltip = () => {
+        if (langTooltip) langTooltip.classList.remove('show');
+        if (multiLangBar) {
+          multiLangBar.classList.remove('has-hover');
+          multiLangBar.querySelectorAll('.multi-lang-segment.active').forEach((s) => s.classList.remove('active'));
+        }
+        if (langLegend) {
+          langLegend.querySelectorAll('.lang-legend-item.active').forEach((it) => it.classList.remove('active'));
+        }
+      };
+
+      if (multiLangBar) {
+        multiLangBar.innerHTML = langs.map((l, idx) => `
+          <div class="multi-lang-segment"
+               data-index="${idx}"
+               data-name="${escapeHtml(l.name)}"
+               data-pct="${l.percentage}%"
+               data-repos="${l.repoCount} ${l.repoCount === 1 ? 'repo' : 'repos'}"
+               data-color="${escapeHtml(l.color)}"
+               style="width:${Math.max(l.percentage, 2.5)}%; background:${escapeHtml(l.color)}; --seg-glow:${escapeHtml(l.color)};"
+               aria-label="${escapeHtml(l.name)}: ${l.percentage}%"></div>
+        `).join('');
+
+        const segments = multiLangBar.querySelectorAll('.multi-lang-segment');
+        segments.forEach((seg) => {
+          const idx = parseInt(seg.getAttribute('data-index'), 10);
+          const lang = langs[idx];
+          if (!lang) return;
+
+          seg.addEventListener('mouseenter', () => {
+            multiLangBar.classList.add('has-hover');
+            segments.forEach((s) => s.classList.remove('active'));
+            seg.classList.add('active');
+
+            if (langLegend) {
+              langLegend.querySelectorAll('.lang-legend-item').forEach((it) => {
+                if (parseInt(it.getAttribute('data-index'), 10) === idx) {
+                  it.classList.add('active');
+                } else {
+                  it.classList.remove('active');
+                }
+              });
+            }
+
+            updateLangTooltipPosition(seg, lang);
+          });
+
+          seg.addEventListener('click', () => {
+            const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+            const matchBtn = filterBtns.find((b) => b.getAttribute('data-filter') === 'lang:' + lang.name);
+            if (matchBtn) {
+              matchBtn.click();
+              const projSec = document.getElementById('projects');
+              if (projSec) projSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+
+        multiLangBar.addEventListener('mouseleave', hideLangTooltip);
+      }
+
+      if (langLegend) {
+        langLegend.innerHTML = langs.map((l, idx) => `
+          <div class="lang-legend-item" data-index="${idx}">
+            <span class="lang-dot" style="background:${escapeHtml(l.color)}; box-shadow:0 0 6px ${escapeHtml(l.color)}66;"></span>
+            <span>${escapeHtml(l.name)}</span>
+            <span style="color:var(--text-muted); font-weight:500;">${l.percentage}% (${l.repoCount} ${l.repoCount === 1 ? 'repo' : 'repos'})</span>
+          </div>
+        `).join('');
+
+        const legendItems = langLegend.querySelectorAll('.lang-legend-item');
+        legendItems.forEach((item) => {
+          const idx = parseInt(item.getAttribute('data-index'), 10);
+          const lang = langs[idx];
+          if (!lang) return;
+
+          item.addEventListener('mouseenter', () => {
+            legendItems.forEach((it) => it.classList.remove('active'));
+            item.classList.add('active');
+
+            if (multiLangBar) {
+              multiLangBar.classList.add('has-hover');
+              const seg = multiLangBar.querySelector(`.multi-lang-segment[data-index="${idx}"]`);
+              if (seg) {
+                multiLangBar.querySelectorAll('.multi-lang-segment').forEach((s) => s.classList.remove('active'));
+                seg.classList.add('active');
+                updateLangTooltipPosition(seg, lang);
+              }
+            }
+          });
+
+          item.addEventListener('mouseleave', hideLangTooltip);
+
+          item.addEventListener('click', () => {
+            const filterBtns = Array.from(document.querySelectorAll('.filter-btn'));
+            const matchBtn = filterBtns.find((b) => b.getAttribute('data-filter') === 'lang:' + lang.name);
+            if (matchBtn) {
+              matchBtn.click();
+              const projSec = document.getElementById('projects');
+              if (projSec) projSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      }
 
       // Dynamic Language Filter Buttons
       const filterContainer = document.getElementById('projectFilters');
