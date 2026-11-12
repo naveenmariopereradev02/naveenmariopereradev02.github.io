@@ -677,6 +677,38 @@
       padding: 2px 8px;
       border-radius: 6px;
       font-size: 0.71rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .live-commit-repo.is-private {
+      color: #c084fc;
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.36);
+    }
+
+    html[data-theme="light"] .live-commit-repo.is-private {
+      color: #7e22ce;
+      background: rgba(147, 51, 234, 0.1);
+      border-color: rgba(147, 51, 234, 0.28);
+    }
+
+    .live-commit-repo .private-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.61rem;
+      letter-spacing: 0.03em;
+      font-weight: 700;
+      padding: 1px 4px;
+      margin-left: 3px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      color: inherit;
+    }
+
+    html[data-theme="light"] .live-commit-repo .private-chip {
+      background: rgba(0, 0, 0, 0.08);
     }
 
     .live-commit-msg {
@@ -3803,12 +3835,12 @@
       </p>
 
       <!-- Live GitHub Commit Ticker Pill -->
-      <a id="liveCommitBar" href="https://github.com/naveenmariopereradev02" target="_blank" rel="noopener" class="live-commit-bar" title="View latest repository activity on GitHub">
+      <a id="liveCommitBar" href="#projects" class="live-commit-bar" title="Private Enterprise Repository — Click to view System Architecture & Case Study" data-private-id="trustlink">
         <span class="sync-dot"></span>
         <span style="font-weight: 600;">Latest Push:</span>
-        <span class="live-commit-repo" id="liveCommitRepo">trust-pass</span>
-        <span class="live-commit-msg" id="liveCommitMsg">Synced latest repository commits &amp; architecture updates</span>
-        <span class="live-commit-time" id="liveCommitTime">· Active</span>
+        <span class="live-commit-repo is-private" id="liveCommitRepo">TrustLink <span class="private-chip">🔒 NDA</span></span>
+        <span class="live-commit-msg" id="liveCommitMsg">Pushed OAuth 2.0 PKCE &amp; WebAuthn security updates</span>
+        <span class="live-commit-time" id="liveCommitTime">· Just now</span>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
       </a>
 
@@ -5675,25 +5707,71 @@
       const barEl = document.getElementById('liveCommitBar');
       if (!repoEl || !msgEl || !timeEl || !barEl) return;
 
-      // First populate from local projects.json most recent public repo as instant fallback
+      // Attach single click listener for private repository architecture modal preview
+      if (!barEl.dataset.listenerAttached) {
+        barEl.dataset.listenerAttached = 'true';
+        barEl.addEventListener('click', (e) => {
+          const privateId = barEl.getAttribute('data-private-id');
+          if (privateId) {
+            e.preventDefault();
+            showPortfolioToast('🔒 Private Enterprise Project — Opening System Architecture & Case Study');
+            openArchitectureModal(privateId);
+          }
+        });
+      }
+
+      function showPrivateCommitInTicker(p, serverNowMs) {
+        const displayName = p.id === 'trustlink' ? 'TrustLink' : (p.name || p.id);
+        repoEl.innerHTML = `${escapeHtml(displayName)} <span class="private-chip">🔒 NDA</span>`;
+        repoEl.classList.add('is-private');
+        msgEl.textContent = p.latestCommitMessage || p.description || 'Pushed security & identity provider updates';
+        timeEl.textContent = `· ${formatRelativeTime(p.pushedAt, serverNowMs)}`;
+        barEl.setAttribute('data-private-id', p.id);
+        barEl.removeAttribute('target');
+        barEl.href = '#projects';
+        barEl.title = 'Private Enterprise Repository — Click to view System Architecture & Case Study';
+      }
+
+      function showPublicCommitInTicker(repoName, commitMsg, pushedTimeStr, serverNowMs, commitCount, htmlUrl, headDateStr) {
+        repoEl.classList.remove('is-private');
+        repoEl.textContent = repoName;
+        msgEl.textContent = commitCount > 1 ? `${commitCount} commits — ${commitMsg}` : commitMsg;
+        timeEl.textContent = `· ${formatRelativeTime(pushedTimeStr, serverNowMs, headDateStr)}`;
+        barEl.removeAttribute('data-private-id');
+        barEl.target = '_blank';
+        barEl.href = htmlUrl || `https://github.com/${encodeURIComponent(username || 'naveenmariopereradev02')}/${encodeURIComponent(repoName)}/commits`;
+        barEl.title = 'View latest repository activity on GitHub';
+      }
+
+      // 1. Instant fallback from local projects.json comparing both public and private repositories
       const projects = (projectsData && projectsData.projects) || [];
-      const publicProjects = projects.filter((p) => !p.isPrivate);
-      if (publicProjects.length > 0) {
-        const sorted = [...publicProjects].sort((a, b) => new Date(b.pushedAt || 0) - new Date(a.pushedAt || 0));
-        const latest = sorted[0];
-        if (latest) {
-          repoEl.textContent = latest.name || latest.id;
-          msgEl.textContent = latest.description || 'Updated repository';
-          timeEl.textContent = `· ${formatRelativeTime(latest.pushedAt)}`;
-          if (latest.htmlUrl) barEl.href = latest.htmlUrl;
-        }
+      const privateProjects = projects.filter((p) => p.isPrivate && p.pushedAt);
+      const latestPrivate = [...privateProjects].sort((a, b) => new Date(b.pushedAt || 0) - new Date(a.pushedAt || 0))[0];
+
+      const publicProjects = projects.filter((p) => !p.isPrivate && p.pushedAt);
+      const latestPublic = [...publicProjects].sort((a, b) => new Date(b.pushedAt || 0) - new Date(a.pushedAt || 0))[0];
+
+      const privateTime = latestPrivate ? new Date(latestPrivate.pushedAt).getTime() : 0;
+      const publicTime = latestPublic ? new Date(latestPublic.pushedAt).getTime() : 0;
+
+      if (latestPrivate && privateTime > publicTime) {
+        showPrivateCommitInTicker(latestPrivate, null);
+      } else if (latestPublic) {
+        showPublicCommitInTicker(
+          latestPublic.name || latestPublic.id,
+          latestPublic.latestCommitMessage || latestPublic.description || 'Updated repository',
+          latestPublic.pushedAt,
+          null,
+          1,
+          latestPublic.htmlUrl
+        );
       }
 
       const ghUser = username || 'naveenmariopereradev02';
       let serverNowMs = null;
 
       try {
-        // 1. Fetch live repositories sorted by most recent push (with cache-busting)
+        // 2. Fetch live repositories sorted by most recent push (with cache-busting)
         const reposRes = await fetch(
           `https://api.github.com/users/${encodeURIComponent(ghUser)}/repos?sort=pushed&per_page=30`,
           { cache: 'no-store' }
@@ -5744,19 +5822,30 @@
               renderProjectsAndLanguages(currentProjectsData);
             }
 
-            // Pick the most recently pushed project repo (excluding the portfolio / profile README repo itself)
+            // Pick the most recently pushed public repo (excluding the portfolio / profile README repo itself)
             const selfRepoNames = new Set([ghUser.toLowerCase(), `${ghUser.toLowerCase()}.github.io`]);
-            const latestRepo =
+            const latestPublicRepo =
               liveRepos.find((r) => !r.fork && !selfRepoNames.has(r.name.toLowerCase())) || liveRepos[0];
 
-            if (latestRepo && latestRepo.name) {
-              repoEl.textContent = latestRepo.name;
-              barEl.href = `${latestRepo.html_url}/commits`;
-              timeEl.textContent = `· ${formatRelativeTime(latestRepo.pushed_at, serverNowMs)}`;
+            const livePublicTime = latestPublicRepo ? new Date(latestPublicRepo.pushed_at).getTime() : 0;
 
-              // 2. Fetch actual latest commits from that repository to display commit count & real message
+            // Check if our latest private project push is newer than the public GitHub push
+            if (latestPrivate && privateTime > livePublicTime) {
+              showPrivateCommitInTicker(latestPrivate, serverNowMs);
+              if (showToastOnSync) {
+                showPortfolioToast(
+                  `Synced ${latestPrivate.name || latestPrivate.id}: ${latestPrivate.latestCommitMessage || 'Security updates'} (NDA) ✓`
+                );
+              }
+              return;
+            }
+
+            if (latestPublicRepo && latestPublicRepo.name) {
+              const liveRepoHtmlUrl = `${latestPublicRepo.html_url}/commits`;
+
+              // 3. Fetch actual latest commits from that public repository
               const commitsRes = await fetch(
-                `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestRepo.name)}/commits?per_page=15`,
+                `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestPublicRepo.name)}/commits?per_page=15`,
                 { cache: 'no-store' }
               );
               if (commitsRes.ok) {
@@ -5769,7 +5858,7 @@
                   const headDateStr =
                     (head.commit && head.commit.committer && head.commit.committer.date) ||
                     (head.commit && head.commit.author && head.commit.author.date) ||
-                    latestRepo.pushed_at;
+                    latestPublicRepo.pushed_at;
                   const headTime = new Date(headDateStr).getTime();
 
                   // Count how many commits were made in this same push session / 24h window
@@ -5781,23 +5870,39 @@
                     return Math.abs(headTime - new Date(d).getTime()) <= 24 * 3600 * 1000;
                   }).length;
 
-                  msgEl.textContent =
-                    recentBatchCount > 1 ? `${recentBatchCount} commits — ${headMsg}` : headMsg;
-                  timeEl.textContent = `· ${formatRelativeTime(latestRepo.pushed_at, serverNowMs, headDateStr)}`;
+                  showPublicCommitInTicker(
+                    latestPublicRepo.name,
+                    headMsg,
+                    latestPublicRepo.pushed_at,
+                    serverNowMs,
+                    recentBatchCount,
+                    liveRepoHtmlUrl,
+                    headDateStr
+                  );
 
                   if (showToastOnSync) {
                     showPortfolioToast(
-                      `Synced ${latestRepo.name}: ${recentBatchCount} commit${recentBatchCount > 1 ? 's' : ''} (${headMsg}) ✓`
+                      `Synced ${latestPublicRepo.name}: ${recentBatchCount} commit${recentBatchCount > 1 ? 's' : ''} (${headMsg}) ✓`
                     );
                   }
                   return;
                 }
               }
+
+              showPublicCommitInTicker(
+                latestPublicRepo.name,
+                latestPublicRepo.description || 'Updated repository',
+                latestPublicRepo.pushed_at,
+                serverNowMs,
+                1,
+                liveRepoHtmlUrl
+              );
+              return;
             }
           }
         }
 
-        // Fallback to public events endpoint if /repos was rate-limited
+        // 4. Fallback to public events endpoint if /repos was rate-limited
         const res = await fetch(
           `https://api.github.com/users/${encodeURIComponent(ghUser)}/events/public?per_page=15`,
           { cache: 'no-store' }
@@ -5806,6 +5911,13 @@
         const events = await res.json();
         if (!Array.isArray(events)) return;
         const pushEvent = events.find((ev) => ev.type === 'PushEvent' && ev.repo);
+        const eventTime = pushEvent ? new Date(pushEvent.created_at).getTime() : 0;
+
+        if (latestPrivate && privateTime > eventTime) {
+          showPrivateCommitInTicker(latestPrivate, serverNowMs);
+          return;
+        }
+
         if (pushEvent) {
           const shortRepo = String(pushEvent.repo.name || '').replace(`${ghUser}/`, '');
           const commits = (pushEvent.payload && pushEvent.payload.commits) || [];
@@ -5814,10 +5926,15 @@
             lastCommit && lastCommit.message
               ? String(lastCommit.message).split('\n')[0]
               : `Pushed to ${((pushEvent.payload && pushEvent.payload.ref) || 'main').replace('refs/heads/', '')}`;
-          repoEl.textContent = shortRepo || pushEvent.repo.name;
-          msgEl.textContent = commits.length > 1 ? `${commits.length} commits — ${commitMsg}` : commitMsg;
-          timeEl.textContent = `· ${formatRelativeTime(pushEvent.created_at, serverNowMs)}`;
-          barEl.href = `https://github.com/${pushEvent.repo.name}/commits`;
+
+          showPublicCommitInTicker(
+            shortRepo || pushEvent.repo.name,
+            commitMsg,
+            pushEvent.created_at,
+            serverNowMs,
+            commits.length,
+            `https://github.com/${pushEvent.repo.name}/commits`
+          );
         }
       } catch (err) {
         // Keep projects.json fallback silently

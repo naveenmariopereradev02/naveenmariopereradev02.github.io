@@ -366,6 +366,9 @@ async function main() {
       return {
         ...p,
         title: override.title || p.title,
+        pushedAt: override.pushedAt || p.pushedAt,
+        latestCommitMessage: override.latestCommitMessage || p.latestCommitMessage || '',
+        dateLabel: override.dateLabel || p.dateLabel,
         isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(p.isPrivate),
         privateMessage: override.privateMessage || p.privateMessage || ''
       };
