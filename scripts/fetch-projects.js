@@ -214,20 +214,22 @@ async function main() {
     process.env.GITHUB_REPOSITORY_OWNER ||
     profile.githubUsername ||
     'naveenmariopereradev02';
-  const token = process.env.GITHUB_TOKEN || '';
+  const patToken = process.env.PORTFOLIO_PAT || process.env.GH_PAT || '';
+  const token = patToken || process.env.GITHUB_TOKEN || '';
   const ongoingThresholdDays = Number(profile.ongoingThresholdDays) || 90;
   const portfolioTopic = (profile.portfolioTopic || 'portfolio').toLowerCase();
   const requireTopic = Boolean(profile.requirePortfolioTopic);
 
-  console.log(`Fetching public repositories for @${username}...`);
+  console.log(`Fetching repositories for @${username}...${patToken ? ' (Authenticated via PAT — Auto-detecting private repos)' : ''}`);
 
   let rawRepos = [];
   try {
-    rawRepos =
-      (await githubFetch(
-        `https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&sort=pushed`,
-        token
-      )) || [];
+    // If a Personal Access Token (PAT) is supplied, query /user/repos to automatically discover both public & private repos
+    const apiEndpoint = patToken
+      ? `https://api.github.com/user/repos?per_page=100&sort=pushed&affiliation=owner,collaborator`
+      : `https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&sort=pushed`;
+
+    rawRepos = (await githubFetch(apiEndpoint, token)) || [];
   } catch (err) {
     console.warn(`Could not reach GitHub API (${err.message}). Keeping existing projects.json.`);
     return;
@@ -247,6 +249,16 @@ async function main() {
     if (override.forceInclude === true) return true;
     if (r.fork || r.archived) return false;
     if (selfRepoNames.has(r.name.toLowerCase())) return false;
+
+    // Safety rule for private repos: auto-sync if tagged with portfolio topic OR listed in overrides
+    if (r.private) {
+      const topics = (r.topics || []).map((t) => t.toLowerCase());
+      const isTagged = topics.includes(portfolioTopic);
+      const isOverridden = Boolean(repoOverrides[r.name.toLowerCase()]);
+      if (!isTagged && !isOverridden && !profile.includeAllPrivate) {
+        return false;
+      }
+    }
     return true;
   });
 
@@ -269,13 +281,15 @@ async function main() {
 
   for (const repo of candidateRepos) {
     const override = getOverride(repo.name);
-    console.log(`Processing repo: ${repo.name}...`);
+    const repoOwner = (repo.owner && repo.owner.login) || username;
+    const isPrivate = typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(repo.private);
+    console.log(`Processing repo: ${repo.name} (${isPrivate ? 'Private' : 'Public'})...`);
 
     // 1. Fetch README
     let readmeRaw = null;
     try {
       readmeRaw = await githubFetch(
-        `https://api.github.com/repos/${encodeURIComponent(username)}/${encodeURIComponent(repo.name)}/readme`,
+        `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/readme`,
         token,
         'application/vnd.github.raw'
       );
@@ -290,7 +304,7 @@ async function main() {
     try {
       languages =
         (await githubFetch(
-          `https://api.github.com/repos/${encodeURIComponent(username)}/${encodeURIComponent(repo.name)}/languages`,
+          `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/languages`,
           token
         )) || {};
     } catch (e) {
@@ -301,7 +315,23 @@ async function main() {
       languages = { [repo.language]: 10000 };
     }
 
-    // 3. Determine Ongoing vs Completed
+    // 3. Fetch latest commit message
+    let latestCommitMessage = override.latestCommitMessage || '';
+    if (!latestCommitMessage && token) {
+      try {
+        const commits = await githubFetch(
+          `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/commits?per_page=1`,
+          token
+        );
+        if (Array.isArray(commits) && commits.length > 0 && commits[0].commit) {
+          latestCommitMessage = String(commits[0].commit.message || '').split('\n')[0].trim();
+        }
+      } catch (e) {
+        // Fallback silently if commits endpoint is restricted
+      }
+    }
+
+    // 4. Determine Ongoing vs Completed
     const daysSincePush = Math.max(
       0,
       (Date.now() - new Date(repo.pushed_at).getTime()) / (1000 * 60 * 60 * 24)
@@ -327,6 +357,8 @@ async function main() {
         ? override.techStack
         : Array.from(new Set([...Object.keys(languages), ...(repo.topics || [])]));
 
+    const defaultPrivateMsg = 'Private Enterprise Repository — Proprietary source code developed under organization access control (NDA). Direct source code access is restricted.';
+
     fetchedProjects.push({
       id: repo.name,
       name: repo.name,
@@ -336,13 +368,14 @@ async function main() {
       readmeExcerpt: excerpt || repo.description || description,
       highlights,
       createdAt: repo.created_at,
-      pushedAt: repo.pushed_at,
-      dateLabel: override.dateLabel || buildDateLabel(repo.created_at, repo.pushed_at, isOngoing),
+      pushedAt: override.pushedAt || repo.pushed_at,
+      latestCommitMessage,
+      dateLabel: override.dateLabel || buildDateLabel(repo.created_at, override.pushedAt || repo.pushed_at, isOngoing),
       isOngoing,
       featured: typeof override.featured === 'boolean' ? override.featured : repo.stargazers_count > 0,
-      isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(repo.private),
-      privateMessage: override.privateMessage || '',
-      htmlUrl: override.isPrivate ? '' : (override.htmlUrl || repo.html_url || `https://github.com/${username}/${repo.name}`),
+      isPrivate,
+      privateMessage: override.privateMessage || (isPrivate ? defaultPrivateMsg : ''),
+      htmlUrl: isPrivate ? '' : (override.htmlUrl || repo.html_url || `https://github.com/${repoOwner}/${repo.name}`),
       homepage: override.demoUrl || repo.homepage || '',
       topics: repo.topics || [],
       techStack,

@@ -29,6 +29,7 @@ jobs:
       - name: Fetch GitHub repositories, READMEs, and languages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PORTFOLIO_PAT: ${{ secrets.PORTFOLIO_PAT }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
         run: node scripts/fetch-projects.js
 
