@@ -2085,7 +2085,7 @@
         radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
         linear-gradient(135deg, #141418 0%, #0c0c0f 100%);
       background-size: 8px 8px, 100% 100%;
-      padding: 20px 44px 20px 22px;
+      padding: 20px 58px 20px 22px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2095,7 +2095,7 @@
     .bento-lang-pills-wrap {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 12px;
       justify-content: center;
       align-items: center;
       width: 100%;
@@ -2109,9 +2109,9 @@
     }
 
     .bento-lang-pill {
-      padding: 9px 20px;
+      padding: 8px 18px;
       border-radius: 999px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
       color: #ffffff;
       box-shadow:
@@ -2131,13 +2131,16 @@
 
     .bento-lang-vertical-label {
       position: absolute;
-      right: 14px;
+      right: 6px;
       top: 50%;
       transform: translateY(-50%) rotate(-90deg);
-      font-size: 0.88rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: #71717a;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      pointer-events: none;
+      user-select: none;
+      z-index: 2;
     }
 
     /* Card 11, 12, 13: Bottom Row Stats (Commits, Forks, Ongoing) */
