@@ -3721,7 +3721,7 @@
         </div>
       </div>
       <div class="cv-iframe-wrap">
-        <iframe id="cvPreviewIframe" src="./cv/Naveen_Perera_CV.pdf" title="Naveen Perera CV PDF Preview"></iframe>
+        <iframe id="cvPreviewIframe" src="about:blank" title="Naveen Perera CV PDF Preview"></iframe>
       </div>
     </div>
   </div>
@@ -4380,7 +4380,7 @@
       tagline: "Computer Science Undergraduate & Full-Stack Developer",
       subtitle: "Building secure full-stack platforms, automated data quality engines, and high-accuracy machine learning systems. Passionate about clean architecture, cybersecurity, and impactful digital products.",
       avatarUrl: "avatar.png",
-      cvFile: "./cv/Naveen%20Perera%20cv.pdf",
+      cvFile: "./cv/Naveen_Perera_CV.pdf",
       formspreeEndpoint: "",
       quote: {
         text: "Many of life's failures are people who did not realize how close they were to success when they gave up.",
@@ -6317,7 +6317,7 @@
         }
         if (q === 'cv' || q === 'resume' || q.includes('download cv')) {
           return `<strong style="color:#38bdf8;">[Resume] Naveen Perera — Curriculum Vitae (PDF):</strong><br/>
-          You can <a href="./cv/Naveen_Perera_CV.pdf" download="Naveen_Perera_CV.pdf" style="color:var(--accent); font-weight:700;">Download the CV (PDF) directly here ↓</a> or click the <strong>Preview / Download CV</strong> button in the Hero section!`;
+          You can <a href="${escapeHtml(getCvUrl(true))}" download="Naveen_Perera_CV.pdf" style="color:var(--accent); font-weight:700;">Download the CV (PDF) directly here ↓</a> or click the <strong>Preview / Download CV</strong> button in the Hero section!`;
         }
         if (q === 'contact' || q.includes('email') || q.includes('reach')) {
           return `<strong style="color:var(--accent);">[Contact Channels] Reach Naveen Perera:</strong><br/>
@@ -6384,22 +6384,31 @@
     }
 
     // Step 3: Interactive CV Preview & One-Click Download Modal Controller
-    function getCvUrl() {
-      const raw = (currentProfile && currentProfile.cvFile) || './cv/Naveen%20Perera%20cv.pdf';
-      if (raw.startsWith('http') || raw.startsWith('./') || raw.startsWith('/')) return raw;
-      return `./cv/${raw}`;
+    const CV_CACHE_BUSTER = Date.now();
+    function getCvUrl(bustCache = true) {
+      const raw = (currentProfile && currentProfile.cvFile) || './cv/Naveen_Perera_CV.pdf';
+      const base = (raw.startsWith('http') || raw.startsWith('./') || raw.startsWith('/')) ? raw : `./cv/${raw}`;
+      if (!bustCache) return base;
+      return `${base}${base.includes('?') ? '&' : '?'}v=${CV_CACHE_BUSTER}`;
+    }
+
+    function syncCvLinks() {
+      const cvUrl = getCvUrl(true);
+      const dockBtn = document.getElementById('dockCv');
+      const dlBtn = document.getElementById('cvDownloadDirectBtn');
+      const tabBtn = document.getElementById('cvOpenNewTabBtn');
+      if (dockBtn) dockBtn.setAttribute('href', cvUrl);
+      if (dlBtn) dlBtn.setAttribute('href', cvUrl);
+      if (tabBtn) tabBtn.setAttribute('href', cvUrl);
+      return cvUrl;
     }
 
     function openCvModal() {
       const backdrop = document.getElementById('cvModalBackdrop');
       if (!backdrop) return;
-      const cvUrl = getCvUrl();
+      const cvUrl = syncCvLinks();
       const iframe = document.getElementById('cvPreviewIframe');
-      const dlBtn = document.getElementById('cvDownloadDirectBtn');
-      const tabBtn = document.getElementById('cvOpenNewTabBtn');
       if (iframe && iframe.getAttribute('src') !== cvUrl) iframe.setAttribute('src', cvUrl);
-      if (dlBtn) dlBtn.setAttribute('href', cvUrl);
-      if (tabBtn) tabBtn.setAttribute('href', cvUrl);
       backdrop.classList.add('open');
       backdrop.setAttribute('aria-hidden', 'false');
     }
@@ -6456,6 +6465,7 @@
       currentProjectsData = await loadJsonWithFallback('./projects.json', FALLBACK_PROJECTS);
 
       renderProfile(currentProfile);
+      syncCvLinks();
       renderProjectsAndLanguages(currentProjectsData);
       initLiveCommitFeed(currentProfile.githubUsername, currentProjectsData);
     }
