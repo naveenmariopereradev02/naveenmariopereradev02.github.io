@@ -2620,7 +2620,7 @@
 
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
     }
 
@@ -2632,6 +2632,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      min-width: 0;
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       position: relative;
       overflow: hidden;
@@ -2745,28 +2746,53 @@
 
     .project-footer {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      gap: 10px 14px;
       padding-top: 14px;
       border-top: 1px solid var(--border-subtle);
     }
 
+    .project-lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-lang-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
     .project-links {
       display: flex;
-      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      max-width: 100%;
     }
 
     .proj-link {
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 600;
       color: var(--text-primary);
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 8px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-subtle);
+      white-space: nowrap;
+      flex-shrink: 0;
       transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
@@ -3279,6 +3305,12 @@
       }
     }
 
+    @media (max-width: 960px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       .top-left-controls {
         top: 14px;
@@ -3410,6 +3442,10 @@
       /* 6. Mobile Cards & Section Watermarks Polish */
       .project-card, .glass-card {
         padding: 18px;
+      }
+      .proj-link {
+        font-size: 0.72rem;
+        padding: 5px 9px;
       }
       .section-watermark {
         font-size: 3.5rem;
@@ -5075,7 +5111,26 @@
         return true;
       });
 
-      document.getElementById('projectsGrid').innerHTML = filteredProjects.map((p) => `
+      const langColorMap = {
+        TypeScript: '#3178c6',
+        JavaScript: '#f1e05a',
+        Python: '#3572A5',
+        Dart: '#00B4AB',
+        CSS: '#563d7c',
+        HTML: '#e34c26',
+        Java: '#b07219',
+        'C++': '#f34b7d',
+        Go: '#00ADD8',
+        Rust: '#dea584'
+      };
+      (langs || []).forEach((l) => {
+        if (l && l.name && l.color) langColorMap[l.name] = l.color;
+      });
+
+      document.getElementById('projectsGrid').innerHTML = filteredProjects.map((p) => {
+        const primaryLang = p.primaryLanguage || 'Full-Stack';
+        const langColor = langColorMap[primaryLang] || 'var(--accent)';
+        return `
         <article class="project-card ${p.featured ? 'featured-project' : ''}">
           <div>
             <div class="project-top-meta">
@@ -5112,8 +5167,9 @@
               ${(p.techStack || []).slice(0, 9).map((t) => `<span class="tech-chip">${escapeHtml(t)}</span>`).join('')}
             </div>
             <div class="project-footer">
-              <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">
-                ${escapeHtml(p.primaryLanguage || 'Full-Stack')}
+              <span class="project-lang-badge">
+                <span class="project-lang-dot" style="background:${escapeHtml(langColor)};"></span>
+                <span>${escapeHtml(primaryLang)}</span>
               </span>
               <div class="project-links">
                 <button type="button" class="proj-link" onclick="openArchitectureModal('${escapeHtml(p.id)}')" title="View System Architecture & Engineering Case Study">
@@ -5141,7 +5197,8 @@
             </div>
           </div>
         </article>
-      `).join('');
+      `;
+      }).join('');
 
       // Render Interactive Timeline (Ongoing projects keep continuing!)
       document.getElementById('timelineContainer').innerHTML = projects.map((p) => `
