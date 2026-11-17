@@ -194,6 +194,128 @@ async function githubFetch(url, token, accept = 'application/vnd.github+json') {
   return await res.json();
 }
 
+async function githubFetchWithHeaders(url, token, accept = 'application/vnd.github+json') {
+  const headers = {
+    Accept: accept,
+    'User-Agent': 'naveen-portfolio-updater',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  const res = await fetch(url, { headers });
+  if (res.status === 404) return { data: null, headers: res.headers };
+  if (!res.ok) {
+    throw new Error(`GitHub API ${res.status} on ${url}: ${await res.text()}`);
+  }
+  const data = accept === 'application/vnd.github.raw' ? await res.text() : await res.json();
+  return { data, headers: res.headers };
+}
+
+function parseLastPageFromLink(linkHeader) {
+  if (!linkHeader) return null;
+  const match = String(linkHeader).match(/[?&]page=(\d+)>;\s*rel="last"/i);
+  return match ? Number(match[1]) : null;
+}
+
+function parseStatNumber(val) {
+  if (typeof val === 'number') return val;
+  if (!val) return 0;
+  const str = String(val).trim().toUpperCase();
+  const num = parseFloat(str.replace(/[^0-9.]/g, ''));
+  if (isNaN(num)) return 0;
+  if (str.includes('K')) return Math.round(num * 1000);
+  if (str.includes('M')) return Math.round(num * 1000000);
+  return Math.round(num);
+}
+
+async function fetchUserContributionTelemetry(username, token) {
+  if (!token || !username) return null;
+  const query = `
+    query($login: String!) {
+      user(login: $login) {
+        contributionsCollection {
+          totalCommitContributions
+          restrictedContributionsCount
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                date
+                contributionCount
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const res = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'User-Agent': 'naveen-portfolio-updater'
+      },
+      body: JSON.stringify({ query, variables: { login: username } })
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const collection = json && json.data && json.data.user && json.data.user.contributionsCollection;
+    if (!collection || !collection.contributionCalendar) return null;
+
+    const weeks = collection.contributionCalendar.weeks || [];
+    const days = weeks
+      .flatMap((w) => w.contributionDays || [])
+      .filter((d) => d && d.date)
+      .sort((a, b) => a.date.localeCompare(b.date));
+
+    let longestStreak = 0;
+    let running = 0;
+    for (const d of days) {
+      if ((d.contributionCount || 0) > 0) {
+        running += 1;
+        if (running > longestStreak) longestStreak = running;
+      } else {
+        running = 0;
+      }
+    }
+
+    let currentStreak = 0;
+    if (days.length > 0) {
+      let idx = days.length - 1;
+      if ((days[idx].contributionCount || 0) === 0 && idx > 0) {
+        idx -= 1;
+      }
+      while (idx >= 0 && (days[idx].contributionCount || 0) > 0) {
+        currentStreak += 1;
+        idx -= 1;
+      }
+    }
+
+    const recentWeeks = weeks.slice(-38).map((w) =>
+      (w.contributionDays || []).map((d) => ({
+        date: d.date,
+        count: Number(d.contributionCount) || 0
+      }))
+    );
+
+    return {
+      totalContributions: Number(collection.contributionCalendar.totalContributions) || 0,
+      totalCommitContributions:
+        (Number(collection.totalCommitContributions) || 0) +
+        (Number(collection.restrictedContributionsCount) || 0),
+      currentStreak,
+      longestStreak,
+      heatmap: recentWeeks
+    };
+  } catch (err) {
+    return null;
+  }
+}
+
 async function main() {
   const profile = readJsonSafe(PROFILE_PATH, {});
   const overridesData = readJsonSafe(OVERRIDES_PATH, { repos: {} });
@@ -342,31 +464,36 @@ async function main() {
       languages = { [repo.language]: 10000 };
     }
 
-    // 3. Fetch latest commit message (prefer live GitHub commit if newer/available, fallback to override)
+    // 3. Fetch latest commit message & commit count (prefer live GitHub commit if newer/available, fallback to override)
     let latestCommitMessage = override.latestCommitMessage || '';
     let latestCommitDate = null;
-    if (token) {
-      try {
-        const commits = await githubFetch(
-          `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/commits?per_page=1`,
-          token
-        );
-        if (Array.isArray(commits) && commits.length > 0 && commits[0].commit) {
-          const liveMsg = String(commits[0].commit.message || '').split('\n')[0].trim();
-          const liveDate =
-            (commits[0].commit.committer && commits[0].commit.committer.date) ||
-            (commits[0].commit.author && commits[0].commit.author.date) ||
-            repo.pushed_at;
-          const overrideTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
-          const liveTime = liveDate ? new Date(liveDate).getTime() : 0;
-          if (liveMsg && (!override.latestCommitMessage || liveTime >= overrideTime)) {
-            latestCommitMessage = liveMsg;
-            latestCommitDate = liveDate;
-          }
-        }
-      } catch (e) {
-        // Fallback silently if commits endpoint is restricted
+    let repoCommitCount = Number(override.commitCount) || 0;
+    try {
+      const { data: commits, headers } = await githubFetchWithHeaders(
+        `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/commits?per_page=1`,
+        token
+      );
+      const lastPageCount = parseLastPageFromLink(headers.get('link'));
+      if (lastPageCount && lastPageCount > 0) {
+        repoCommitCount = Math.max(repoCommitCount, lastPageCount);
+      } else if (Array.isArray(commits) && commits.length > 0) {
+        repoCommitCount = Math.max(repoCommitCount, commits.length);
       }
+      if (Array.isArray(commits) && commits.length > 0 && commits[0].commit) {
+        const liveMsg = String(commits[0].commit.message || '').split('\n')[0].trim();
+        const liveDate =
+          (commits[0].commit.committer && commits[0].commit.committer.date) ||
+          (commits[0].commit.author && commits[0].commit.author.date) ||
+          repo.pushed_at;
+        const overrideTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
+        const liveTime = liveDate ? new Date(liveDate).getTime() : 0;
+        if (liveMsg && (!override.latestCommitMessage || liveTime >= overrideTime)) {
+          latestCommitMessage = liveMsg;
+          latestCommitDate = liveDate;
+        }
+      }
+    } catch (e) {
+      // Fallback silently if commits endpoint is restricted
     }
 
     // 4. Determine Ongoing vs Completed
@@ -426,6 +553,7 @@ async function main() {
       techStack,
       stars: repo.stargazers_count || 0,
       forks: repo.forks_count || 0,
+      commitCount: repoCommitCount,
       primaryLanguage: repo.language || Object.keys(languages)[0] || 'Code',
       languages
     });
@@ -458,6 +586,9 @@ async function main() {
         pushedAt: override.pushedAt || p.pushedAt,
         latestCommitMessage: override.latestCommitMessage || p.latestCommitMessage || '',
         dateLabel: override.dateLabel || p.dateLabel,
+        stars: typeof override.stars === 'number' ? override.stars : (p.stars || 0),
+        forks: typeof override.forks === 'number' ? override.forks : (p.forks || 0),
+        commitCount: typeof override.commitCount === 'number' ? override.commitCount : (p.commitCount || 0),
         isOngoing: typeof override.ongoing === 'boolean' ? override.ongoing : Boolean(p.isOngoing),
         featured: typeof override.featured === 'boolean' ? override.featured : Boolean(p.featured),
         isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(p.isPrivate),
@@ -499,12 +630,68 @@ async function main() {
   const ongoingCount = allProjects.filter((p) => p.isOngoing).length;
   const completedCount = allProjects.length - ongoingCount;
 
+  const gqlTelemetry = token ? await fetchUserContributionTelemetry(username, token) : null;
+  const baseStats = profile.githubStats || {};
+  const prevStats = existingData.githubStats || {};
+  const baseCommits = parseStatNumber(baseStats.commits) || 0;
+  const baseContribs = parseStatNumber(baseStats.contributions) || 0;
+  const baseCurrentStreak = Number(baseStats.currentStreak) || 0;
+  const baseLongestStreak = Number(baseStats.longestStreak) || 0;
+
+  const totalForksNum = allProjects.reduce((sum, p) => sum + (Number(p.forks) || 0), 0);
+  const totalStarsNum = allProjects.reduce((sum, p) => sum + (Number(p.stars) || 0), 0);
+  const totalRepoCommits = allProjects.reduce((sum, p) => sum + (Number(p.commitCount) || 0), 0);
+
+  const bestCommits = Math.max(
+    totalRepoCommits,
+    gqlTelemetry ? gqlTelemetry.totalCommitContributions : 0,
+    baseCommits
+  );
+  const bestContribs = Math.max(
+    gqlTelemetry ? gqlTelemetry.totalContributions : 0,
+    totalRepoCommits + allProjects.length * 12,
+    baseContribs
+  );
+
+  const formatCompact = (num) => {
+    if (num >= 1000) {
+      return `${(num / 1000).toFixed(1).replace(/\.0$/, '')}K+`;
+    }
+    return `${num}+`;
+  };
+
+  const currentStreakVal =
+    gqlTelemetry && gqlTelemetry.currentStreak > 0
+      ? gqlTelemetry.currentStreak
+      : baseCurrentStreak;
+  const longestStreakVal =
+    gqlTelemetry && gqlTelemetry.longestStreak > 0
+      ? Math.max(gqlTelemetry.longestStreak, baseLongestStreak)
+      : Math.max(baseLongestStreak, currentStreakVal);
+
+  const githubStats = {
+    totalForks: String(totalForksNum).padStart(2, '0'),
+    totalStars: totalStarsNum,
+    totalRepoCommits,
+    commits: bestCommits > 0 ? `${bestCommits}+` : (baseStats.commits || '850+'),
+    contributions: bestContribs > 0 ? formatCompact(bestContribs) : (baseStats.contributions || '1.2K+'),
+    currentStreak: currentStreakVal,
+    longestStreak: longestStreakVal
+  };
+
+  if (gqlTelemetry && Array.isArray(gqlTelemetry.heatmap) && gqlTelemetry.heatmap.length > 0) {
+    githubStats.heatmap = gqlTelemetry.heatmap;
+  } else if (Array.isArray(prevStats.heatmap) && prevStats.heatmap.length > 0) {
+    githubStats.heatmap = prevStats.heatmap;
+  }
+
   const output = {
     generatedAt: new Date().toISOString(),
     username,
     totalRepos: allProjects.length,
     ongoingCount,
     completedCount,
+    githubStats,
     languagesSummary,
     projects: allProjects
   };

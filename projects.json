@@ -4,6 +4,14 @@
   "totalRepos": 11,
   "ongoingCount": 5,
   "completedCount": 6,
+  "githubStats": {
+    "totalForks": "05",
+    "totalStars": 38,
+    "commits": "865+",
+    "contributions": "1.2K+",
+    "currentStreak": 49,
+    "longestStreak": 107
+  },
   "languagesSummary": [
     {
       "name": "Dart",

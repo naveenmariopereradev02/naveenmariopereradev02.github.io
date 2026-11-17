@@ -3916,18 +3916,18 @@
                 <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.0" />
               </linearGradient>
             </defs>
-            <path
+            <path id="bentoChartArea"
               d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12 L420 110 L0 110 Z"
               fill="url(#crimsonArea)" />
-            <path
+            <path id="bentoChartLine"
               d="M0 45 C30 55, 45 90, 70 85 C95 80, 110 25, 140 30 C170 35, 190 88, 220 75 C250 62, 270 58, 300 68 C330 78, 355 82, 380 55 C400 35, 412 20, 420 12"
               fill="none" stroke="#fb7185" stroke-width="2.5" />
           </svg>
-          <div class="chart-months">
+          <div class="chart-months" id="bentoChartMonths">
             <span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
           </div>
           <div class="chart-footer">
-            <span style="display:inline-flex; align-items:center; gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>2025 - 2026</span>
+            <span style="display:inline-flex; align-items:center; gap:5px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg><span id="bentoChartRange">2025 - 2026</span></span>
             <span>Trending up across active repositories ↗</span>
           </div>
         </div>
@@ -4893,11 +4893,45 @@
       const projects = data.projects || [];
       const langs = data.languagesSummary || [];
 
-      // Update Bento Repo & Ongoing Counters
+      // Update Bento Repo, Ongoing, Forks, Commits, Contributions, Streaks, Chart & Heatmap
       const totalRepos = data.totalRepos || projects.length;
       const ongoingCount = projects.filter((p) => p.isOngoing).length;
       document.getElementById('bentoTotalRepos').textContent = String(totalRepos).padStart(2, '0');
       document.getElementById('bentoOngoingCount').textContent = String(ongoingCount).padStart(2, '0');
+
+      const repoForksSum = projects.reduce((acc, p) => acc + (Number(p.forks) || 0), 0);
+      const gsData = data.githubStats || {};
+      const gsProfile = (currentProfile && currentProfile.githubStats) || {};
+      const forksDisplay =
+        projects.length > 0 && repoForksSum > 0
+          ? String(repoForksSum).padStart(2, '0')
+          : (gsData.totalForks || gsProfile.forks || '05');
+
+      const elForks = document.getElementById('bentoForks');
+      if (elForks) elForks.textContent = forksDisplay;
+
+      const elCommits = document.getElementById('bentoCommits');
+      if (elCommits && (gsData.commits || gsProfile.commits)) {
+        elCommits.textContent = gsData.commits || gsProfile.commits;
+      }
+
+      const elContribs = document.getElementById('bentoContributions');
+      if (elContribs && (gsData.contributions || gsProfile.contributions)) {
+        elContribs.textContent = gsData.contributions || gsProfile.contributions;
+      }
+
+      const elCurStreak = document.getElementById('bentoCurrentStreak');
+      if (elCurStreak && (gsData.currentStreak || gsProfile.currentStreak)) {
+        elCurStreak.textContent = gsData.currentStreak || gsProfile.currentStreak;
+      }
+
+      const elLongStreak = document.getElementById('bentoLongestStreak');
+      if (elLongStreak && (gsData.longestStreak || gsProfile.longestStreak)) {
+        elLongStreak.textContent = gsData.longestStreak || gsProfile.longestStreak;
+      }
+
+      updateBentoActivityChart(projects);
+      initHeatmap(data);
 
       // Bento Languages Card (Top 3–4 glowing 3D pills matching Screenshot 3)
       const pillGradients = [
@@ -5238,25 +5272,148 @@
       `).join('');
     }
 
+    // Build Dynamic 12-Month Activity Spline Chart from Repository Timestamps
+    function updateBentoActivityChart(projects = []) {
+      const areaEl = document.getElementById('bentoChartArea');
+      const lineEl = document.getElementById('bentoChartLine');
+      const monthsEl = document.getElementById('bentoChartMonths');
+      const rangeEl = document.getElementById('bentoChartRange');
+      if (!areaEl || !lineEl || !monthsEl) return;
+
+      let latestMs = Date.now();
+      (projects || []).forEach((p) => {
+        const t = p && p.pushedAt ? new Date(p.pushedAt).getTime() : 0;
+        if (!isNaN(t) && t > latestMs) latestMs = t;
+      });
+      const anchor = new Date(latestMs);
+
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const baseline = [38, 22, 58, 52, 30, 44, 40, 48, 34, 42, 60, 66];
+      const windowMonths = [];
+      for (let i = 11; i >= 0; i--) {
+        const d = new Date(Date.UTC(anchor.getUTCFullYear(), anchor.getUTCMonth() - i, 1));
+        windowMonths.push({
+          year: d.getUTCFullYear(),
+          month: d.getUTCMonth(),
+          label: monthNames[d.getUTCMonth()],
+          score: baseline[11 - i]
+        });
+      }
+
+      (projects || []).forEach((p) => {
+        if (!p) return;
+        const created = p.createdAt ? new Date(p.createdAt) : null;
+        const pushed = p.pushedAt ? new Date(p.pushedAt) : null;
+        windowMonths.forEach((m, idx) => {
+          if (created && !isNaN(created) && created.getUTCFullYear() === m.year && created.getUTCMonth() === m.month) {
+            m.score += 16;
+          }
+          if (pushed && !isNaN(pushed) && pushed.getUTCFullYear() === m.year && pushed.getUTCMonth() === m.month) {
+            m.score += 26;
+          }
+          if (p.isOngoing && idx >= 10) {
+            m.score += 8;
+          }
+        });
+      });
+
+      const minScore = Math.min(...windowMonths.map((m) => m.score));
+      const maxScore = Math.max(...windowMonths.map((m) => m.score), minScore + 1);
+      const pts = windowMonths.map((m, idx) => {
+        const norm = (m.score - minScore) / (maxScore - minScore);
+        return {
+          x: (idx / 11) * 420,
+          y: 86 - norm * 72
+        };
+      });
+
+      let linePath = `M${pts[0].x.toFixed(1)} ${pts[0].y.toFixed(1)}`;
+      for (let i = 0; i < pts.length - 1; i++) {
+        const p0 = pts[i];
+        const p1 = pts[i + 1];
+        const cx = ((p0.x + p1.x) / 2).toFixed(1);
+        linePath += ` C${cx} ${p0.y.toFixed(1)}, ${cx} ${p1.y.toFixed(1)}, ${p1.x.toFixed(1)} ${p1.y.toFixed(1)}`;
+      }
+      lineEl.setAttribute('d', linePath);
+      areaEl.setAttribute('d', `${linePath} L420 110 L0 110 Z`);
+
+      monthsEl.innerHTML = windowMonths.map((m) => `<span>${escapeHtml(m.label)}</span>`).join('');
+      if (rangeEl) {
+        const startYr = windowMonths[0].year;
+        const endYr = windowMonths[windowMonths.length - 1].year;
+        rangeEl.textContent = startYr === endYr ? `${endYr}` : `${startYr} - ${endYr}`;
+      }
+    }
+
     // Build Interactive Contribution Heatmap in Bento Grid
-    function initHeatmap() {
+    function initHeatmap(data = currentProjectsData) {
       const grid = document.getElementById('heatmapGrid');
       const tooltip = document.getElementById('heatmapTooltip');
-      const months = ['Dec 2025', 'Jan 2026', 'Feb 2026', 'Mar 2026', 'Apr 2026', 'May 2026', 'Jun 2026', 'Jul 2026', 'Aug 2026', 'Sep 2026', 'Oct 2026', 'Nov 2026'];
+      if (!grid || !tooltip) return;
+
+      const projects = (data && data.projects) || [];
+      const gqlWeeks = data && data.githubStats && Array.isArray(data.githubStats.heatmap) && data.githubStats.heatmap.length > 0
+        ? data.githubStats.heatmap
+        : null;
+
       let html = '';
-      for (let col = 0; col < 38; col++) {
-        html += '<div class="heatmap-col">';
-        for (let row = 0; row < 7; row++) {
-          const seed = (col * 7 + row * 13 + 5) % 17;
-          const level = seed > 13 ? 4 : seed > 10 ? 3 : seed > 6 ? 2 : seed > 3 ? 1 : 0;
-          const count = level === 0 ? 2 : level * 5 + (col % 4);
-          const monthLabel = months[Math.floor((col / 38) * months.length)];
-          const day = ((col * 3 + row) % 28) + 1;
-          html += `<div class="heatmap-cell" data-level="${level}" data-info="${count} Contributions · ${String(day).padStart(2, '0')} ${monthLabel}"></div>`;
+      let defaultTooltipInfo = '';
+
+      if (gqlWeeks) {
+        gqlWeeks.slice(-38).forEach((week) => {
+          html += '<div class="heatmap-col">';
+          (week || []).slice(0, 7).forEach((dayObj) => {
+            const count = Number(dayObj && dayObj.count) || 0;
+            const level = count >= 10 ? 4 : count >= 6 ? 3 : count >= 3 ? 2 : count >= 1 ? 1 : 0;
+            const parsed = dayObj && dayObj.date ? new Date(dayObj.date) : null;
+            const dateLabel = parsed && !isNaN(parsed)
+              ? parsed.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' })
+              : (dayObj && dayObj.date) || 'Recent';
+            const info = `${count} Contribution${count === 1 ? '' : 's'} · ${dateLabel}`;
+            if (count > 0 || !defaultTooltipInfo) defaultTooltipInfo = info;
+            html += `<div class="heatmap-cell" data-level="${level}" data-info="${escapeHtml(info)}"></div>`;
+          });
+          html += '</div>';
+        });
+      } else {
+        let anchorMs = Date.now();
+        projects.forEach((p) => {
+          const t = p && p.pushedAt ? new Date(p.pushedAt).getTime() : 0;
+          if (!isNaN(t) && t > anchorMs) anchorMs = t;
+        });
+
+        const repoDayTimestamps = projects
+          .flatMap((p) => [p && p.pushedAt, p && p.createdAt])
+          .filter(Boolean)
+          .map((d) => new Date(d).getTime())
+          .filter((t) => !isNaN(t));
+
+        for (let col = 0; col < 38; col++) {
+          html += '<div class="heatmap-col">';
+          for (let row = 0; row < 7; row++) {
+            const daysAgo = (37 - col) * 7 + (6 - row);
+            const cellDate = new Date(anchorMs - daysAgo * 86400000);
+            const cellMs = cellDate.getTime();
+            const repoBoost = repoDayTimestamps.reduce((acc, ts) => {
+              const deltaDays = Math.abs(cellMs - ts) / 86400000;
+              return deltaDays <= 3.5 ? acc + 2 : deltaDays <= 10 ? acc + 1 : acc;
+            }, 0);
+
+            const seed = (col * 7 + row * 13 + 5 + repoBoost * 3) % 17;
+            const rawLevel = seed > 13 ? 4 : seed > 10 ? 3 : seed > 6 ? 2 : seed > 3 ? 1 : 0;
+            const level = Math.min(4, repoBoost > 0 ? Math.max(rawLevel, Math.min(4, 1 + Math.ceil(repoBoost / 2))) : rawLevel);
+            const count = level === 0 ? 1 : level * 4 + (col % 4) + repoBoost;
+            const dateLabel = cellDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+            const info = `${count} Contributions · ${dateLabel}`;
+            if (level > 0 || !defaultTooltipInfo) defaultTooltipInfo = info;
+            html += `<div class="heatmap-cell" data-level="${level}" data-info="${escapeHtml(info)}"></div>`;
+          }
+          html += '</div>';
         }
-        html += '</div>';
       }
+
       grid.innerHTML = html;
+      if (defaultTooltipInfo) tooltip.textContent = defaultTooltipInfo;
 
       grid.querySelectorAll('.heatmap-cell').forEach((cell) => {
         cell.addEventListener('mouseenter', () => {
@@ -5859,7 +6016,8 @@
 
           const liveRepos = await reposRes.json();
           if (Array.isArray(liveRepos) && liveRepos.length > 0) {
-            // Live-sync project cards (pushedAt, htmlUrl, stars, forks, Ongoing status)
+            // Live-sync project cards & newly created public repos (pushedAt, htmlUrl, stars, forks, Ongoing status)
+            const selfRepoNames = new Set([ghUser.toLowerCase(), `${ghUser.toLowerCase()}.github.io`, 'portfolio', 'github-portfolio']);
             let updatedAnyProject = false;
             liveRepos.forEach((r) => {
               if (!r || !r.name) return;
@@ -5868,6 +6026,8 @@
                   String(p.id || '').toLowerCase() === r.name.toLowerCase() ||
                   String(p.name || '').toLowerCase() === r.name.toLowerCase()
               );
+              const refNow = serverNowMs || Date.now();
+              const daysSince = Math.max(0, (refNow - new Date(r.pushed_at).getTime()) / (1000 * 60 * 60 * 24));
               if (match) {
                 match.name = r.name;
                 if (r.pushed_at) match.pushedAt = r.pushed_at;
@@ -5875,8 +6035,6 @@
                 if (typeof r.stargazers_count === 'number') match.stars = r.stargazers_count;
                 if (typeof r.forks_count === 'number') match.forks = r.forks_count;
 
-                const refNow = serverNowMs || Date.now();
-                const daysSince = Math.max(0, (refNow - new Date(r.pushed_at).getTime()) / (1000 * 60 * 60 * 24));
                 if (daysSince <= 90) {
                   match.isOngoing = true;
                   if (match.dateLabel && !match.dateLabel.includes('Present') && match.dateLabel.includes('—')) {
@@ -5884,10 +6042,41 @@
                   }
                 }
                 updatedAnyProject = true;
+              } else if (!r.fork && !r.archived && !selfRepoNames.has(r.name.toLowerCase())) {
+                const startLbl = r.created_at ? new Date(r.created_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+                const endLbl = r.pushed_at ? new Date(r.pushed_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }) : '';
+                const ongoingFlag = daysSince <= 90;
+                projects.push({
+                  id: r.name,
+                  name: r.name,
+                  title: r.name.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+                  role: ongoingFlag ? 'Active Development' : 'Creator & Maintainer',
+                  description: r.description || 'Software engineering project hosted on GitHub.',
+                  highlights: [],
+                  createdAt: r.created_at,
+                  pushedAt: r.pushed_at,
+                  latestCommitMessage: '',
+                  dateLabel: ongoingFlag ? (startLbl ? `${startLbl} — Present` : 'Ongoing') : (startLbl === endLbl ? startLbl : `${startLbl} — ${endLbl}`),
+                  isOngoing: ongoingFlag,
+                  featured: (r.stargazers_count || 0) > 0,
+                  isPrivate: Boolean(r.private),
+                  privateMessage: '',
+                  htmlUrl: r.html_url || '',
+                  homepage: r.homepage || '',
+                  topics: r.topics || [],
+                  techStack: r.language ? [r.language] : [],
+                  stars: r.stargazers_count || 0,
+                  forks: r.forks_count || 0,
+                  primaryLanguage: r.language || 'Code',
+                  languages: r.language ? { [r.language]: 10000 } : {}
+                });
+                updatedAnyProject = true;
               }
             });
 
             if (updatedAnyProject && currentProjectsData) {
+              currentProjectsData.totalRepos = currentProjectsData.projects.length;
+              currentProjectsData.ongoingCount = currentProjectsData.projects.filter((p) => p.isOngoing).length;
               currentProjectsData.projects.sort((a, b) => {
                 if (a.isOngoing !== b.isOngoing) return a.isOngoing ? -1 : 1;
                 return new Date(b.pushedAt || 0).getTime() - new Date(a.pushedAt || 0).getTime();
@@ -5896,7 +6085,6 @@
             }
 
             // Pick the most recently pushed public repo (excluding the portfolio / profile README repo itself)
-            const selfRepoNames = new Set([ghUser.toLowerCase(), `${ghUser.toLowerCase()}.github.io`]);
             const latestPublicRepo =
               liveRepos.find((r) => !r.fork && !selfRepoNames.has(r.name.toLowerCase())) || liveRepos[0];
 
