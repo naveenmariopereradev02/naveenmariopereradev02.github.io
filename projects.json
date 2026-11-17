@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T04:59:55.600Z",
+  "generatedAt": "2026-11-17T05:19:23.939Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 11,
   "ongoingCount": 5,
@@ -1134,7 +1134,7 @@
         },
         {
           "date": "2026-11-17",
-          "count": 17
+          "count": 20
         }
       ]
     ]
@@ -1326,8 +1326,8 @@
         "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
       ],
       "createdAt": "2026-11-05T05:43:04Z",
-      "pushedAt": "2026-11-05T05:45:53Z",
-      "latestCommitMessage": "docs(readme): add architecture guide, SLT OIDC setup, and run instructions",
+      "pushedAt": "2026-11-17T04:41:13Z",
+      "latestCommitMessage": "Update README with license and copyright details",
       "dateLabel": "Nov 2026",
       "isOngoing": true,
       "featured": true,
@@ -1347,7 +1347,7 @@
       ],
       "stars": 0,
       "forks": 0,
-      "commitCount": 100,
+      "commitCount": 102,
       "primaryLanguage": "Dart",
       "languages": {
         "Dart": 188058,
@@ -1375,8 +1375,8 @@
         "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
       ],
       "createdAt": "2026-10-28T10:17:05Z",
-      "pushedAt": "2026-11-10T13:07:54Z",
-      "latestCommitMessage": "docs(readme): update README with CI status badge, architecture links, smart search toolbar, and testing guide",
+      "pushedAt": "2026-11-17T04:40:42Z",
+      "latestCommitMessage": "Update README with license and copyright details",
       "dateLabel": "Oct 2026 — Present",
       "isOngoing": true,
       "featured": true,
@@ -1397,7 +1397,7 @@
       ],
       "stars": 1,
       "forks": 0,
-      "commitCount": 130,
+      "commitCount": 132,
       "primaryLanguage": "TypeScript",
       "languages": {
         "TypeScript": 114419,
@@ -1423,8 +1423,8 @@
         "Data Manipulation: Pandas, NumPy"
       ],
       "createdAt": "2026-09-14T07:03:16Z",
-      "pushedAt": "2026-09-13T13:59:25Z",
-      "latestCommitMessage": "Fixed scaling issue with features",
+      "pushedAt": "2026-11-17T04:41:52Z",
+      "latestCommitMessage": "Add License & Copyright section to README",
       "dateLabel": "Sep 2026 — Present",
       "isOngoing": true,
       "featured": false,
@@ -1438,7 +1438,7 @@
       ],
       "stars": 0,
       "forks": 0,
-      "commitCount": 101,
+      "commitCount": 103,
       "primaryLanguage": "Jupyter Notebook",
       "languages": {
         "Jupyter Notebook": 232298
@@ -1499,11 +1499,13 @@
         "SQL": 9500,
         "HTML/CSS": 6200
       },
-      "commitCount": 0
+      "commitCount": 0,
+      "branch": "main"
     },
     {
       "id": "Easy-Apply-Digital-Onboarding",
       "name": "Easy-Apply-Digital-Onboarding",
+      "branch": "main",
       "title": "Easy Apply Digital Onboarding",
       "role": "Creator & Maintainer",
       "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
@@ -1544,6 +1546,7 @@
     {
       "id": "Slt-shopping-cart-application--E-commerce",
       "name": "Slt-shopping-cart-application--E-commerce",
+      "branch": "main",
       "title": "Slt Shopping Cart Application  E Commerce",
       "role": "Creator & Maintainer",
       "description": "Software engineering project hosted on GitHub.",
@@ -1663,7 +1666,8 @@
       },
       "privateMessage": "",
       "latestCommitMessage": "",
-      "commitCount": 0
+      "commitCount": 0,
+      "branch": "main"
     },
     {
       "id": "loan-approval-prediction",
@@ -1716,6 +1720,7 @@
     {
       "id": "SpotIT-LK",
       "name": "SpotIT-LK",
+      "branch": "main",
       "title": "Civic Engagement & Feedback Platform — SpotIT LK",
       "role": "Backend & Multimedia Integration Lead",
       "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
@@ -1727,8 +1732,8 @@
         "Collaborated on client-server synchronization across Flutter, Firebase Firestore, and cloud storage services supporting SDG Goal 11."
       ],
       "createdAt": "2025-03-01T00:00:00Z",
-      "pushedAt": "2026-09-30T06:32:41Z",
-      "latestCommitMessage": "Update README with comprehensive project description",
+      "pushedAt": "2026-11-17T04:43:11Z",
+      "latestCommitMessage": "Add license and copyright section to README",
       "dateLabel": "Mar 2025 — Jun 2025",
       "isOngoing": false,
       "featured": true,
@@ -1746,7 +1751,7 @@
       ],
       "stars": 1,
       "forks": 0,
-      "commitCount": 202,
+      "commitCount": 203,
       "primaryLanguage": "Dart",
       "languages": {
         "Dart": 562046,
