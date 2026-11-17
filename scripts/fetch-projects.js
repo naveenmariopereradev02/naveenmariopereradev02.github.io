@@ -235,6 +235,33 @@ async function main() {
     return;
   }
 
+  if (patToken) {
+    const existingNames = new Set(rawRepos.map((r) => String(r.name || '').toLowerCase()));
+    const seenUrls = new Set();
+    for (const ov of Object.values(repoOverridesRaw)) {
+      if (!ov || !ov.repoUrl || seenUrls.has(ov.repoUrl)) continue;
+      seenUrls.add(ov.repoUrl);
+      const match = String(ov.repoUrl).match(/github\.com\/([^/]+)\/([^/.]+)(?:\.git)?$/i);
+      if (match) {
+        const [, owner, repoName] = match;
+        if (!existingNames.has(repoName.toLowerCase())) {
+          try {
+            const extraRepo = await githubFetch(
+              `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repoName)}`,
+              token
+            );
+            if (extraRepo && extraRepo.name) {
+              rawRepos.push(extraRepo);
+              existingNames.add(extraRepo.name.toLowerCase());
+            }
+          } catch (e) {
+            // Ignore if token lacks access to this repo
+          }
+        }
+      }
+    }
+  }
+
   // Filter out forks, archived repos, hidden repos, and the portfolio / profile README repo itself
   const selfRepoNames = new Set([
     username.toLowerCase(),
@@ -315,16 +342,27 @@ async function main() {
       languages = { [repo.language]: 10000 };
     }
 
-    // 3. Fetch latest commit message
+    // 3. Fetch latest commit message (prefer live GitHub commit if newer/available, fallback to override)
     let latestCommitMessage = override.latestCommitMessage || '';
-    if (!latestCommitMessage && token) {
+    let latestCommitDate = null;
+    if (token) {
       try {
         const commits = await githubFetch(
           `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/commits?per_page=1`,
           token
         );
         if (Array.isArray(commits) && commits.length > 0 && commits[0].commit) {
-          latestCommitMessage = String(commits[0].commit.message || '').split('\n')[0].trim();
+          const liveMsg = String(commits[0].commit.message || '').split('\n')[0].trim();
+          const liveDate =
+            (commits[0].commit.committer && commits[0].commit.committer.date) ||
+            (commits[0].commit.author && commits[0].commit.author.date) ||
+            repo.pushed_at;
+          const overrideTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
+          const liveTime = liveDate ? new Date(liveDate).getTime() : 0;
+          if (liveMsg && (!override.latestCommitMessage || liveTime >= overrideTime)) {
+            latestCommitMessage = liveMsg;
+            latestCommitDate = liveDate;
+          }
         }
       } catch (e) {
         // Fallback silently if commits endpoint is restricted
@@ -359,6 +397,13 @@ async function main() {
 
     const defaultPrivateMsg = 'Private Enterprise Repository — Proprietary source code developed under organization access control (NDA). Direct source code access is restricted.';
 
+    const repoPushTime = new Date(latestCommitDate || repo.pushed_at || 0).getTime();
+    const overridePushTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
+    const effectivePushedAt =
+      repoPushTime >= overridePushTime
+        ? (latestCommitDate || repo.pushed_at || override.pushedAt)
+        : override.pushedAt;
+
     fetchedProjects.push({
       id: repo.name,
       name: repo.name,
@@ -368,9 +413,9 @@ async function main() {
       readmeExcerpt: override.description || excerpt || repo.description || description,
       highlights,
       createdAt: repo.created_at,
-      pushedAt: override.pushedAt || repo.pushed_at,
+      pushedAt: effectivePushedAt,
       latestCommitMessage,
-      dateLabel: override.dateLabel || buildDateLabel(repo.created_at, override.pushedAt || repo.pushed_at, isOngoing),
+      dateLabel: override.dateLabel || buildDateLabel(repo.created_at, effectivePushedAt, isOngoing),
       isOngoing,
       featured: typeof override.featured === 'boolean' ? override.featured : repo.stargazers_count > 0,
       isPrivate,
