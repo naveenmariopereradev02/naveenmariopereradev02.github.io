@@ -115,6 +115,7 @@
       "featured": true,
       "ongoing": false,
       "isPrivate": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
       "techStack": ["Python", "Pandas", "NumPy", "Scikit-learn", "Plotly Express", "GridSearchCV"],
       "description": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
       "highlights": [
@@ -122,6 +123,58 @@
         "Performed EDA and data cleaning: missing value imputation, IQR outlier capping, feature encoding, and scaling.",
         "Trained Logistic Regression, Gaussian Naive Bayes, and KNN classifiers with stratified train-test split, achieving up to 99.97% accuracy and AUC-ROC of 1.0.",
         "Optimised model performance using GridSearchCV with 5-fold cross-validation across multiple hyperparameter combinations."
+      ]
+    },
+    "ML-Predictive-Modeling-Project": {
+      "title": "ML Predictive Modeling & Classification Pipeline",
+      "role": "Sole Developer — Machine Learning & Data Science",
+      "dateLabel": "Sep 2026 — Present",
+      "featured": true,
+      "ongoing": true,
+      "isPrivate": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
+      "techStack": ["Python", "Jupyter Notebook", "Scikit-learn", "Pandas", "NumPy", "GridSearchCV", "KNN & Logistic Regression"],
+      "description": "End-to-end machine learning classification pipeline engineered across modular Jupyter notebooks for exploratory data analysis (EDA), IQR outlier preprocessing, and 5-fold GridSearchCV hyperparameter tuning.",
+      "highlights": [
+        "Engineered a 3-stage Jupyter Notebook pipeline covering 01 Data Exploration & Preprocessing, 02 Model Training & Selection, and 03 Model Evaluation & Pipelines.",
+        "Implemented automated missing-value imputation, IQR outlier capping, and feature scaling/encoding using Pandas, NumPy, and Scikit-learn.",
+        "Trained and benchmarked K-Nearest Neighbors (KNN), Gaussian Naive Bayes, and Logistic Regression classifiers with stratified train-test splits.",
+        "Built deployment-ready Scikit-learn Pipelines optimized via 5-fold GridSearchCV hyperparameter tuning and ROC-AUC evaluation."
+      ]
+    },
+    "Easy-Apply-Digital-Onboarding": {
+      "title": "EasyApply — Telecom Fiber Installation & Digital Onboarding System",
+      "role": "Full-Stack MERN Developer",
+      "dateLabel": "Jul 2026",
+      "featured": false,
+      "ongoing": false,
+      "isPrivate": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/Easy-Apply-Digital-Onboarding",
+      "techStack": ["MongoDB", "Express.js", "React", "Node.js", "JavaScript", "REST API", "Capacity Scheduling"],
+      "description": "Full-stack MERN customer onboarding and appointment booking platform for telecom fiber installations, featuring real-time slot capacity tracking, 48-hour lead-time validation, and an admin management dashboard.",
+      "highlights": [
+        "Engineered a full-stack MERN customer onboarding portal for scheduling telecom installation appointments across Morning, Afternoon, and Evening slots.",
+        "Implemented real-time slot capacity enforcement (max 10 bookings per slot), 48-hour minimum lead-time validation, and automated Sunday blackout rules.",
+        "Built an interactive Admin Dashboard with live data tables to monitor and manage customer installation bookings."
+      ]
+    },
+    "EzAppldigi-Onboarding": {
+      "hide": true
+    },
+    "Slt-shopping-cart-application--E-commerce": {
+      "title": "SLT Digital E-Commerce & Shopping Cart Platform",
+      "role": "Full-Stack Developer",
+      "dateLabel": "Jul 2026",
+      "featured": false,
+      "ongoing": false,
+      "isPrivate": false,
+      "htmlUrl": "https://github.com/naveenmariopereradev02/Slt-shopping-cart-application--E-commerce",
+      "techStack": ["JavaScript", "Python", "HTML5", "CSS3", "Shell", "Cart State Engine"],
+      "description": "Full-stack e-commerce web application built for browsing telecom & digital products, managing real-time shopping cart state, dynamic pricing calculations, and streamlined checkout workflows.",
+      "highlights": [
+        "Built a responsive e-commerce storefront with interactive product catalog filtering, item detail views, and dynamic cart state management.",
+        "Implemented real-time shopping cart synchronization with quantity validation, subtotal/discount calculation, and order summary generation.",
+        "Developed Python backend services and automated Shell setup scripts for rapid local environment provisioning."
       ]
     },
     "suspicious-log-analyzer": {

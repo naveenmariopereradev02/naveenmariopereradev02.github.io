@@ -706,6 +706,7 @@ async function main() {
         isOngoing: typeof override.ongoing === 'boolean' ? override.ongoing : Boolean(p.isOngoing),
         featured: typeof override.featured === 'boolean' ? override.featured : Boolean(p.featured),
         isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(p.isPrivate),
+        htmlUrl: override.htmlUrl || p.htmlUrl || '',
         privateMessage: override.privateMessage || p.privateMessage || ''
       };
     });

@@ -6027,7 +6027,7 @@
           const liveRepos = await reposRes.json();
           if (Array.isArray(liveRepos) && liveRepos.length > 0) {
             // Live-sync project cards & newly created public repos (pushedAt, htmlUrl, stars, forks, Ongoing status)
-            const selfRepoNames = new Set([ghUser.toLowerCase(), `${ghUser.toLowerCase()}.github.io`, 'portfolio', 'github-portfolio']);
+            const selfRepoNames = new Set([ghUser.toLowerCase(), `${ghUser.toLowerCase()}.github.io`, 'portfolio', 'github-portfolio', 'ezappldigi-onboarding']);
             let updatedAnyProject = false;
             liveRepos.forEach((r) => {
               if (!r || !r.name) return;
@@ -6267,16 +6267,46 @@
         { title: 'TrustLink IDP Core', sub: 'App & Dev Registry' }
       ],
       'trust-pass': [
-        { title: 'React + Vite UI', sub: 'Seat & Cabin Picker' },
-        { title: 'Booking Engine', sub: 'Multi-Flight State' },
-        { title: 'Pass Generator', sub: 'Barcode Boarding Pass' },
-        { title: 'Cloud Persistence', sub: 'Real-Time Sync' }
+        { title: 'Flutter Mobile UI', sub: 'A380 Seat & Cabin Map' },
+        { title: 'SLT TrustLink OIDC', sub: 'OAuth 2.0 + S256 PKCE' },
+        { title: 'Booking & QR Pass', sub: 'Offline Boarding Pass' },
+        { title: 'Cloud APK CI/CD', sub: 'GitHub Actions Release' }
       ],
       'zendata': [
         { title: 'Raw Ingestion', sub: 'CSV / JSON / SQL' },
         { title: '4-Pillar Profiler', sub: 'Schema & Outliers' },
         { title: 'Auto-Remediation', sub: 'Imputation & Dedup' },
         { title: 'Clean Export', sub: 'Audit Report + Data' }
+      ],
+      'ml-predictive-modeling-project': [
+        { title: '01 EDA & Imputation', sub: 'Pandas + IQR Outliers' },
+        { title: '02 Feature Scaling', sub: 'Scikit-learn Pipelines' },
+        { title: '03 Multi-Model Train', sub: 'KNN / NB / LogReg' },
+        { title: '04 GridSearchCV', sub: '5-Fold ROC-AUC Eval' }
+      ],
+      'loan-approval-prediction': [
+        { title: '58.6K Record Ingest', sub: 'Financial Dataset EDA' },
+        { title: 'IQR & Feature Scale', sub: 'Imputation & Encoding' },
+        { title: 'Classifier Benchmark', sub: 'LogReg / KNN / GNB' },
+        { title: '99.97% Accuracy', sub: '5-Fold GridSearchCV' }
+      ],
+      'easy-apply-digital-onboarding': [
+        { title: 'React Booking UI', sub: 'Slot & Calendar Picker' },
+        { title: '48h Lead & Blackout', sub: 'Rule Validation Engine' },
+        { title: 'Node + Express API', sub: 'Max 10/Slot Capacity' },
+        { title: 'MongoDB + Admin UI', sub: 'Live Booking Table' }
+      ],
+      'slt-shopping-cart-application--e-commerce': [
+        { title: 'Storefront UI', sub: 'Catalog & Filtering' },
+        { title: 'Cart State Engine', sub: 'Real-Time Sync & Calc' },
+        { title: 'Python Backend', sub: 'Order & Pricing API' },
+        { title: 'Checkout Workflow', sub: 'Summary & Validation' }
+      ],
+      'suspicious-log-analyzer': [
+        { title: 'Server Access Logs', sub: 'Real-Time Stream Ingest' },
+        { title: 'IP Behavior Parser', sub: 'Dict Pattern Mining' },
+        { title: 'Threshold Detector', sub: 'Brute-Force Scoring' },
+        { title: 'Firewall Action', sub: 'Automated IP Blocklist' }
       ],
       'heart-disease-ml': [
         { title: 'Clinical Dataset', sub: 'Feature Engineering' },

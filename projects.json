@@ -1,9 +1,9 @@
 {
   "generatedAt": "2026-11-17T05:19:23.939Z",
   "username": "naveenmariopereradev02",
-  "totalRepos": 11,
+  "totalRepos": 10,
   "ongoingCount": 5,
-  "completedCount": 6,
+  "completedCount": 5,
   "githubStats": {
     "totalForks": "05",
     "totalStars": 38,
@@ -1411,30 +1411,35 @@
       "id": "ML-Predictive-Modeling-Project",
       "name": "ML-Predictive-Modeling-Project",
       "branch": "main",
-      "title": "ML Predictive Modeling Project",
-      "role": "Active Development",
-      "description": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
-      "readmeExcerpt": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
+      "title": "ML Predictive Modeling & Classification Pipeline",
+      "role": "Sole Developer — Machine Learning & Data Science",
+      "description": "End-to-end machine learning classification pipeline engineered across modular Jupyter notebooks for exploratory data analysis (EDA), IQR outlier preprocessing, and 5-fold GridSearchCV hyperparameter tuning.",
+      "readmeExcerpt": "End-to-end machine learning classification pipeline engineered across modular Jupyter notebooks for exploratory data analysis (EDA), IQR outlier preprocessing, and 5-fold GridSearchCV hyperparameter tuning.",
       "highlights": [
-        "01DataExplorationandPreprocessing.ipynb: Contains initial data loading, exploratory data analysis (EDA), handling of missing values, and feature scaling/encoding using pandas and scikit-learn.",
-        "02ModelTrainingandSelection.ipynb: Covers the training of baseline models including K-Nearest Neighbors (KNN), Naive Bayes, and Logistic Regression.",
-        "03ModelEvaluationandPipelines.ipynb: Focuses on robust model evaluation, hyperparameter tuning using GridSearchCV, building deployment-ready scikit-learn Pipelines, and final metric analysis.",
-        "ProjectReport.pdf: A detailed academic report documenting the methodology, statistical analysis, and conclusions of the models.",
-        "Data Manipulation: Pandas, NumPy"
+        "Engineered a 3-stage Jupyter Notebook pipeline covering 01 Data Exploration & Preprocessing, 02 Model Training & Selection, and 03 Model Evaluation & Pipelines.",
+        "Implemented automated missing-value imputation, IQR outlier capping, and feature scaling/encoding using Pandas, NumPy, and Scikit-learn.",
+        "Trained and benchmarked K-Nearest Neighbors (KNN), Gaussian Naive Bayes, and Logistic Regression classifiers with stratified train-test splits.",
+        "Built deployment-ready Scikit-learn Pipelines optimized via 5-fold GridSearchCV hyperparameter tuning and ROC-AUC evaluation."
       ],
       "createdAt": "2026-09-14T07:03:16Z",
       "pushedAt": "2026-11-17T04:41:52Z",
       "latestCommitMessage": "Add License & Copyright section to README",
       "dateLabel": "Sep 2026 — Present",
       "isOngoing": true,
-      "featured": false,
+      "featured": true,
       "isPrivate": false,
       "privateMessage": "",
       "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
       "homepage": "",
       "topics": [],
       "techStack": [
-        "Jupyter Notebook"
+        "Python",
+        "Jupyter Notebook",
+        "Scikit-learn",
+        "Pandas",
+        "NumPy",
+        "GridSearchCV",
+        "KNN & Logistic Regression"
       ],
       "stars": 0,
       "forks": 0,
@@ -1466,7 +1471,7 @@
       "isPrivate": true,
       "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
       "featured": true,
-      "htmlUrl": "https://github.com/Nuwini2430/trustlink.git",
+      "htmlUrl": "",
       "homepage": "",
       "topics": [
         "portfolio",
@@ -1506,16 +1511,14 @@
       "id": "Easy-Apply-Digital-Onboarding",
       "name": "Easy-Apply-Digital-Onboarding",
       "branch": "main",
-      "title": "Easy Apply Digital Onboarding",
-      "role": "Creator & Maintainer",
-      "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
-      "readmeExcerpt": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "title": "EasyApply — Telecom Fiber Installation & Digital Onboarding System",
+      "role": "Full-Stack MERN Developer",
+      "description": "Full-stack MERN customer onboarding and appointment booking platform for telecom fiber installations, featuring real-time slot capacity tracking, 48-hour lead-time validation, and an admin management dashboard.",
+      "readmeExcerpt": "Full-stack MERN customer onboarding and appointment booking platform for telecom fiber installations, featuring real-time slot capacity tracking, 48-hour lead-time validation, and an admin management dashboard.",
       "highlights": [
-        "Appointment Booking — Select a date and time slot (Morning / Afternoon / Evening)",
-        "Live Slot Availability — Real-time capacity tracking (max 10 per slot)",
-        "48-Hour Lead Time — Earliest bookable date is 48 hours from now",
-        "Sunday Blackout — Sundays are disabled on the calendar",
-        "Admin Dashboard — View all booked appointments in a data table"
+        "Engineered a full-stack MERN customer onboarding portal for scheduling telecom installation appointments across Morning, Afternoon, and Evening slots.",
+        "Implemented real-time slot capacity enforcement (max 10 bookings per slot), 48-hour minimum lead-time validation, and automated Sunday blackout rules.",
+        "Built an interactive Admin Dashboard with live data tables to monitor and manage customer installation bookings."
       ],
       "createdAt": "2026-07-25T08:50:06Z",
       "pushedAt": "2025-07-07T03:30:00Z",
@@ -1529,9 +1532,13 @@
       "homepage": "",
       "topics": [],
       "techStack": [
+        "MongoDB",
+        "Express.js",
+        "React",
+        "Node.js",
         "JavaScript",
-        "CSS",
-        "HTML"
+        "REST API",
+        "Capacity Scheduling"
       ],
       "stars": 0,
       "forks": 0,
@@ -1547,11 +1554,15 @@
       "id": "Slt-shopping-cart-application--E-commerce",
       "name": "Slt-shopping-cart-application--E-commerce",
       "branch": "main",
-      "title": "Slt Shopping Cart Application  E Commerce",
-      "role": "Creator & Maintainer",
-      "description": "Software engineering project hosted on GitHub.",
-      "readmeExcerpt": "Software engineering project hosted on GitHub.",
-      "highlights": [],
+      "title": "SLT Digital E-Commerce & Shopping Cart Platform",
+      "role": "Full-Stack Developer",
+      "description": "Full-stack e-commerce web application built for browsing telecom & digital products, managing real-time shopping cart state, dynamic pricing calculations, and streamlined checkout workflows.",
+      "readmeExcerpt": "Full-stack e-commerce web application built for browsing telecom & digital products, managing real-time shopping cart state, dynamic pricing calculations, and streamlined checkout workflows.",
+      "highlights": [
+        "Built a responsive e-commerce storefront with interactive product catalog filtering, item detail views, and dynamic cart state management.",
+        "Implemented real-time shopping cart synchronization with quantity validation, subtotal/discount calculation, and order summary generation.",
+        "Developed Python backend services and automated Shell setup scripts for rapid local environment provisioning."
+      ],
       "createdAt": "2026-07-25T08:43:24Z",
       "pushedAt": "2026-06-20T07:45:35Z",
       "latestCommitMessage": "Final polish and add assets",
@@ -1565,10 +1576,11 @@
       "topics": [],
       "techStack": [
         "JavaScript",
-        "CSS",
-        "HTML",
         "Python",
-        "Shell"
+        "HTML5",
+        "CSS3",
+        "Shell",
+        "Cart State Engine"
       ],
       "stars": 0,
       "forks": 0,
@@ -1580,49 +1592,6 @@
         "HTML": 33351,
         "Python": 19577,
         "Shell": 14952
-      }
-    },
-    {
-      "id": "EzAppldigi-Onboarding",
-      "name": "EzAppldigi-Onboarding",
-      "branch": "main",
-      "title": "EzAppldigi Onboarding",
-      "role": "Creator & Maintainer",
-      "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
-      "readmeExcerpt": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
-      "highlights": [
-        "Appointment Booking — Select a date and time slot (Morning / Afternoon / Evening)",
-        "Live Slot Availability — Real-time capacity tracking (max 10 per slot)",
-        "48-Hour Lead Time — Earliest bookable date is 48 hours from now",
-        "Sunday Blackout — Sundays are disabled on the calendar",
-        "Admin Dashboard — View all booked appointments in a data table"
-      ],
-      "createdAt": "2026-07-23T02:54:40Z",
-      "pushedAt": "2026-07-17T05:30:00Z",
-      "latestCommitMessage": "docs: add comprehensive README with setup instructions and API documentation",
-      "dateLabel": "Jul 2026",
-      "isOngoing": false,
-      "featured": false,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/EzAppldigi-Onboarding",
-      "homepage": "",
-      "topics": [],
-      "techStack": [
-        "Shell",
-        "JavaScript",
-        "CSS",
-        "HTML"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "commitCount": 34,
-      "primaryLanguage": "Shell",
-      "languages": {
-        "Shell": 45036,
-        "JavaScript": 27070,
-        "CSS": 16714,
-        "HTML": 520
       }
     },
     {
@@ -1688,7 +1657,7 @@
       "isOngoing": false,
       "isPrivate": false,
       "featured": true,
-      "htmlUrl": "https://github.com/naveenmariopereradev02",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
       "homepage": "",
       "topics": [
         "portfolio",
