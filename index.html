@@ -5133,6 +5133,13 @@
         });
       });
 
+      // Sort Projects & Timeline strictly by repository creation timeline (newest created on top)
+      projects.sort((a, b) => {
+        const createdDiff = new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+        if (createdDiff !== 0) return createdDiff;
+        return new Date(b.pushedAt || 0).getTime() - new Date(a.pushedAt || 0).getTime();
+      });
+
       // Filter Projects
       const filteredProjects = projects.filter((p) => {
         if (activeProjectFilter === 'ongoing') return p.isOngoing;
@@ -6035,7 +6042,7 @@
                 if (typeof r.stargazers_count === 'number') match.stars = r.stargazers_count;
                 if (typeof r.forks_count === 'number') match.forks = r.forks_count;
 
-                if (daysSince <= 90) {
+                if (daysSince <= 90 && match.isOngoing !== false) {
                   match.isOngoing = true;
                   if (match.dateLabel && !match.dateLabel.includes('Present') && match.dateLabel.includes('—')) {
                     match.dateLabel = `${match.dateLabel.split('—')[0].trim()} — Present`;
@@ -6078,7 +6085,8 @@
               currentProjectsData.totalRepos = currentProjectsData.projects.length;
               currentProjectsData.ongoingCount = currentProjectsData.projects.filter((p) => p.isOngoing).length;
               currentProjectsData.projects.sort((a, b) => {
-                if (a.isOngoing !== b.isOngoing) return a.isOngoing ? -1 : 1;
+                const createdDiff = new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+                if (createdDiff !== 0) return createdDiff;
                 return new Date(b.pushedAt || 0).getTime() - new Date(a.pushedAt || 0).getTime();
               });
               renderProjectsAndLanguages(currentProjectsData);

@@ -80,6 +80,7 @@ function buildDateLabel(createdAt, pushedAt, isOngoing) {
   }
   if (!start) return end || '';
   if (!end || start === end) return start;
+  if (new Date(pushedAt).getTime() < new Date(createdAt).getTime()) return start;
   return `${start} — ${end}`;
 }
 
@@ -633,6 +634,7 @@ async function main() {
 
     const defaultPrivateMsg = 'Private Enterprise Repository — Proprietary source code developed under organization access control (NDA). Direct source code access is restricted.';
 
+    const effectiveCreatedAt = override.createdAt || repo.created_at;
     const repoPushTime = new Date(latestCommitDate || repo.pushed_at || 0).getTime();
     const overridePushTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
     const effectivePushedAt =
@@ -649,10 +651,10 @@ async function main() {
       description,
       readmeExcerpt: override.description || excerpt || repo.description || description,
       highlights,
-      createdAt: repo.created_at,
+      createdAt: effectiveCreatedAt,
       pushedAt: effectivePushedAt,
       latestCommitMessage,
-      dateLabel: override.dateLabel || buildDateLabel(repo.created_at, effectivePushedAt, isOngoing),
+      dateLabel: override.dateLabel || buildDateLabel(effectiveCreatedAt, effectivePushedAt, isOngoing),
       isOngoing,
       featured: typeof override.featured === 'boolean' ? override.featured : repo.stargazers_count > 0,
       isPrivate,
@@ -695,6 +697,7 @@ async function main() {
             ? override.techStack
             : p.techStack,
         pushedAt: override.pushedAt || p.pushedAt,
+        createdAt: override.createdAt || p.createdAt,
         latestCommitMessage: override.latestCommitMessage || p.latestCommitMessage || '',
         dateLabel: override.dateLabel || p.dateLabel,
         stars: typeof override.stars === 'number' ? override.stars : (p.stars || 0),
@@ -708,8 +711,9 @@ async function main() {
     });
 
   const allProjects = [...fetchedProjects, ...preservedCvProjects].sort((a, b) => {
-    if (a.isOngoing !== b.isOngoing) return a.isOngoing ? -1 : 1;
-    return new Date(b.pushedAt).getTime() - new Date(a.pushedAt).getTime();
+    const createdDiff = new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+    if (createdDiff !== 0) return createdDiff;
+    return new Date(b.pushedAt || 0).getTime() - new Date(a.pushedAt || 0).getTime();
   });
 
   // Aggregate language byte statistics across all projects

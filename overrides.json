@@ -4,6 +4,7 @@
     "trustlink": {
       "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
       "role": "SLT Internship — Core Identity & Security Lead",
+      "createdAt": "2026-07-28T00:00:00Z",
       "dateLabel": "Jul 2026 — Present",
       "featured": true,
       "ongoing": true,
@@ -25,6 +26,7 @@
     "identity-platform-sso": {
       "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
       "role": "SLT Internship — Core Identity & Security Lead",
+      "createdAt": "2026-07-28T00:00:00Z",
       "dateLabel": "Jul 2026 — Present",
       "featured": true,
       "ongoing": true,
@@ -46,6 +48,7 @@
     "SLT-IDP-Mobile": {
       "title": "SLT-IDP Client Portal — Mobile Developer & OAuth Management App",
       "role": "SLT Internship — Mobile Identity & Client Portal Developer",
+      "createdAt": "2026-11-10T00:00:00Z",
       "dateLabel": "Nov 2026 — Present",
       "featured": true,
       "ongoing": true,
@@ -139,6 +142,7 @@
     "spotit-lk": {
       "title": "Civic Engagement & Feedback Platform — SpotIT LK",
       "role": "Backend & Multimedia Integration Lead",
+      "createdAt": "2025-03-01T00:00:00Z",
       "dateLabel": "Mar 2025 — Jun 2025",
       "featured": true,
       "ongoing": false,
