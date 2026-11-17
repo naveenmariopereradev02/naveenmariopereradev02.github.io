@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T04:59:40.483Z",
+  "generatedAt": "2026-11-17T03:26:19.247Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 11,
   "ongoingCount": 5,
@@ -7,71 +7,71 @@
   "languagesSummary": [
     {
       "name": "Dart",
-      "bytes": 750104,
-      "percentage": 40,
+      "bytes": 895104,
+      "percentage": 44.3,
       "repoCount": 3,
       "color": "#00B4AB"
     },
     {
       "name": "JavaScript",
       "bytes": 296550,
-      "percentage": 15.8,
+      "percentage": 14.7,
       "repoCount": 6,
       "color": "#f1e05a"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 232298,
-      "percentage": 12.4,
+      "percentage": 11.5,
       "repoCount": 1,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
       "bytes": 212214,
-      "percentage": 11.3,
+      "percentage": 10.5,
       "repoCount": 4,
       "color": "#3572A5"
     },
     {
       "name": "TypeScript",
       "bytes": 142819,
-      "percentage": 7.6,
+      "percentage": 7.1,
       "repoCount": 2,
       "color": "#3178c6"
     },
     {
       "name": "CSS",
       "bytes": 76736,
-      "percentage": 4.1,
+      "percentage": 3.8,
       "repoCount": 4,
       "color": "#563d7c"
     },
     {
       "name": "Shell",
       "bytes": 59988,
-      "percentage": 3.2,
+      "percentage": 3,
       "repoCount": 2,
       "color": "#89e051"
     },
     {
       "name": "HTML",
       "bytes": 39661,
-      "percentage": 2.1,
+      "percentage": 2,
       "repoCount": 5,
       "color": "#e34c26"
     },
     {
       "name": "C++",
       "bytes": 25176,
-      "percentage": 1.3,
+      "percentage": 1.2,
       "repoCount": 1,
       "color": "#f34b7d"
     },
     {
       "name": "CMake",
       "bytes": 19745,
-      "percentage": 1.1,
+      "percentage": 1,
       "repoCount": 1,
       "color": "hsl(329, 75%, 55%)"
     },
@@ -180,13 +180,13 @@
       "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
       "role": "SLT Internship — Core Identity & Security Lead",
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
-      "readmeExcerpt": "Enterprise-grade Identity Provider (IdP) supporting Authorization Code Flow + PKCE, FIDO2/WebAuthn hardware & platform passkeys, and real-time suspicious login risk scoring with a React + Redux Toolkit admin console.",
+      "readmeExcerpt": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
       "highlights": [
-        "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs and JWKS discovery, and refresh token rotation.",
+        "Developed a full-stack OAuth 2.0 / OpenID Connect identity provider with Authorization Code Flow + PKCE, signed JWTs, JWKS discovery, and refresh token rotation.",
         "Integrated passwordless FIDO2/WebAuthn passkeys and Email/SMS OTP verification to enable single sign-on across enterprise telecom services.",
         "Designed a sign-in activity and security logging pipeline with automated risk scoring and suspicious-login email alerts.",
-        "Built a React, Redux Toolkit and Tailwind CSS admin console with role-based access control, analytics dashboards and light/dark theming.",
-        "Containerized the platform with Docker and Nginx, and applied security hardening including rate limiting and vulnerability scanning."
+        "Built a React, Redux Toolkit and Tailwind CSS admin console with RBAC, analytics dashboards, and light/dark theming.",
+        "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
       ],
       "createdAt": "2026-07-01T00:00:00Z",
       "pushedAt": "2026-11-12T09:45:00Z",
@@ -236,7 +236,7 @@
       "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
       "role": "Lead Architect & Developer",
       "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
-      "readmeExcerpt": "ZenData brings peace, clarity, and mathematical rigor to chaotic tabular data. A modern, web-based SaaS platform engineered for analysts and businesses to drag & drop raw messy spreadsheets, run automated multi-pillar health audits, preview interactive data corrections, and ex...",
+      "readmeExcerpt": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
       "highlights": [
         "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
         "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
@@ -281,7 +281,7 @@
       "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
       "role": "Lead Mobile Architect & Developer",
       "description": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
-      "readmeExcerpt": "A modern, cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE).",
+      "readmeExcerpt": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
       "highlights": [
         "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
         "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
@@ -363,7 +363,7 @@
       "title": "Civic Engagement & Feedback Platform — SpotIT LK",
       "role": "Backend & Multimedia Integration Lead",
       "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
-      "readmeExcerpt": "Report, Track, Solve SpotIT LK is a comprehensive civic reporting platform designed to empower citizens to report local issues, track their progress, and facilitate quick resolutions by relevant authorities.",
+      "readmeExcerpt": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
       "highlights": [
         "Architected and implemented the multimedia storage infrastructure enabling citizens to attach photo evidence to public issue reports.",
         "Integrated Firebase Cloud Storage to securely host, manage, and retrieve user-generated media for government dashboards.",
@@ -523,11 +523,11 @@
       "title": "Loan Approval Prediction System",
       "role": "Sole Developer — ML & Data Mining",
       "description": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
-      "readmeExcerpt": "Financial machine learning classification pipeline trained on 58,645 records, benchmarking Logistic Regression, Gaussian Naive Bayes, and KNN with 5-fold GridSearchCV hyperparameter tuning.",
+      "readmeExcerpt": "End-to-end machine learning classification pipeline predicting loan approvals across 58,645 financial records with 99.97% accuracy and 1.0 AUC-ROC.",
       "highlights": [
-        "Built an end-to-end ML classification pipeline in Python (Pandas, NumPy, Scikit-learn, Plotly) to predict loan approvals on a 58,645-record financial dataset.",
-        "Performed EDA and cleaned the data — missing value imputation, outlier capping via IQR, feature encoding, and scaling — to engineer a model-ready dataset.",
-        "Trained Logistic Regression, Gaussian Naive Bayes, and KNN classifiers with a stratified train-test split, achieving up to 99.97% accuracy and an AUC-ROC of 1.0.",
+        "Built an end-to-end ML classification pipeline in Python on a 58,645-record financial dataset.",
+        "Performed EDA and data cleaning: missing value imputation, IQR outlier capping, feature encoding, and scaling.",
+        "Trained Logistic Regression, Gaussian Naive Bayes, and KNN classifiers with stratified train-test split, achieving up to 99.97% accuracy and AUC-ROC of 1.0.",
         "Optimised model performance using GridSearchCV with 5-fold cross-validation across multiple hyperparameter combinations."
       ],
       "createdAt": "2026-05-01T00:00:00Z",
@@ -569,7 +569,7 @@
       "title": "Suspicious Log Analyzer — Security Mini-Project",
       "role": "Sole Developer",
       "description": "Real-time Python security incident response tool that monitors server access logs, tracks IP behavior, and flags brute-force attacks for firewall blocking.",
-      "readmeExcerpt": "Lightweight cybersecurity log analysis engine designed to parse high-volume server access logs, track IP authentication patterns, and trigger automated brute-force alerts.",
+      "readmeExcerpt": "Real-time Python security incident response tool that monitors server access logs, tracks IP behavior, and flags brute-force attacks for firewall blocking.",
       "highlights": [
         "Developed a Python-based incident response tool to monitor server access logs and detect unauthorized access attempts.",
         "Utilized data mining techniques and dictionary structures to track IP behavior and authentication statuses in real time.",
@@ -592,9 +592,9 @@
       ],
       "techStack": [
         "Python",
-        "Data Mining",
         "Security Analytics",
-        "Firewall Automation"
+        "Data Mining",
+        "Incident Response"
       ],
       "stars": 8,
       "forks": 1,
