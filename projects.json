@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T03:26:19.247Z",
+  "generatedAt": "2026-11-17T03:35:43.991Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 11,
   "ongoingCount": 5,
@@ -244,7 +244,7 @@
         "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
       ],
       "createdAt": "2026-10-28T10:17:05Z",
-      "pushedAt": "2026-11-10T13:11:15Z",
+      "pushedAt": "2026-11-10T13:07:54Z",
       "latestCommitMessage": "docs(readme): update README with CI status badge, architecture links, smart search toolbar, and testing guide",
       "dateLabel": "Oct 2026 — Present",
       "isOngoing": true,
@@ -289,7 +289,7 @@
         "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
       ],
       "createdAt": "2026-11-05T05:43:04Z",
-      "pushedAt": "2026-11-05T05:49:03Z",
+      "pushedAt": "2026-11-05T05:45:53Z",
       "latestCommitMessage": "docs(readme): add architecture guide, SLT OIDC setup, and run instructions",
       "dateLabel": "Nov 2026",
       "isOngoing": true,
@@ -337,7 +337,7 @@
         "Data Manipulation: Pandas, NumPy"
       ],
       "createdAt": "2026-09-14T07:03:16Z",
-      "pushedAt": "2026-09-14T07:03:39Z",
+      "pushedAt": "2026-09-13T13:59:25Z",
       "latestCommitMessage": "Fixed scaling issue with features",
       "dateLabel": "Sep 2026 — Present",
       "isOngoing": true,
@@ -371,7 +371,7 @@
         "Collaborated on client-server synchronization across Flutter, Firebase Firestore, and cloud storage services supporting SDG Goal 11."
       ],
       "createdAt": "2026-09-30T06:13:57Z",
-      "pushedAt": "2026-09-30T06:32:43Z",
+      "pushedAt": "2026-09-30T06:32:41Z",
       "latestCommitMessage": "Update README with comprehensive project description",
       "dateLabel": "Mar 2025 — Jun 2025",
       "isOngoing": false,
@@ -401,82 +401,6 @@
       }
     },
     {
-      "id": "Easy-Apply-Digital-Onboarding",
-      "name": "Easy-Apply-Digital-Onboarding",
-      "title": "Easy Apply Digital Onboarding",
-      "role": "Creator & Maintainer",
-      "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
-      "readmeExcerpt": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
-      "highlights": [
-        "Appointment Booking — Select a date and time slot (Morning / Afternoon / Evening)",
-        "Live Slot Availability — Real-time capacity tracking (max 10 per slot)",
-        "48-Hour Lead Time — Earliest bookable date is 48 hours from now",
-        "Sunday Blackout — Sundays are disabled on the calendar",
-        "Admin Dashboard — View all booked appointments in a data table"
-      ],
-      "createdAt": "2026-07-25T08:50:06Z",
-      "pushedAt": "2026-07-25T08:56:40Z",
-      "latestCommitMessage": "docs: add technical task specification document",
-      "dateLabel": "Jul 2026",
-      "isOngoing": false,
-      "featured": false,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/Easy-Apply-Digital-Onboarding",
-      "homepage": "",
-      "topics": [],
-      "techStack": [
-        "JavaScript",
-        "CSS",
-        "HTML"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "primaryLanguage": "JavaScript",
-      "languages": {
-        "JavaScript": 27070,
-        "CSS": 16714,
-        "HTML": 520
-      }
-    },
-    {
-      "id": "Slt-shopping-cart-application--E-commerce",
-      "name": "Slt-shopping-cart-application--E-commerce",
-      "title": "Slt Shopping Cart Application  E Commerce",
-      "role": "Creator & Maintainer",
-      "description": "Software engineering project hosted on GitHub.",
-      "readmeExcerpt": "Software engineering project hosted on GitHub.",
-      "highlights": [],
-      "createdAt": "2026-07-25T08:43:24Z",
-      "pushedAt": "2026-07-25T08:47:48Z",
-      "latestCommitMessage": "Final polish and add assets",
-      "dateLabel": "Jul 2026",
-      "isOngoing": false,
-      "featured": false,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/Slt-shopping-cart-application--E-commerce",
-      "homepage": "",
-      "topics": [],
-      "techStack": [
-        "JavaScript",
-        "CSS",
-        "HTML",
-        "Python",
-        "Shell"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "primaryLanguage": "JavaScript",
-      "languages": {
-        "JavaScript": 145853,
-        "CSS": 35888,
-        "HTML": 33351,
-        "Python": 19577,
-        "Shell": 14952
-      }
-    },
-    {
       "id": "EzAppldigi-Onboarding",
       "name": "EzAppldigi-Onboarding",
       "title": "EzAppldigi Onboarding",
@@ -491,7 +415,7 @@
         "Admin Dashboard — View all booked appointments in a data table"
       ],
       "createdAt": "2026-07-23T02:54:40Z",
-      "pushedAt": "2026-07-23T03:14:17Z",
+      "pushedAt": "2026-07-17T05:30:00Z",
       "latestCommitMessage": "docs: add comprehensive README with setup instructions and API documentation",
       "dateLabel": "Jul 2026",
       "isOngoing": false,
@@ -515,6 +439,43 @@
         "JavaScript": 27070,
         "CSS": 16714,
         "HTML": 520
+      }
+    },
+    {
+      "id": "Slt-shopping-cart-application--E-commerce",
+      "name": "Slt-shopping-cart-application--E-commerce",
+      "title": "Slt Shopping Cart Application  E Commerce",
+      "role": "Creator & Maintainer",
+      "description": "Software engineering project hosted on GitHub.",
+      "readmeExcerpt": "Software engineering project hosted on GitHub.",
+      "highlights": [],
+      "createdAt": "2026-07-25T08:43:24Z",
+      "pushedAt": "2026-06-20T07:45:35Z",
+      "latestCommitMessage": "Final polish and add assets",
+      "dateLabel": "Jul 2026 — Jun 2026",
+      "isOngoing": false,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/Slt-shopping-cart-application--E-commerce",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "JavaScript",
+        "CSS",
+        "HTML",
+        "Python",
+        "Shell"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "JavaScript",
+      "languages": {
+        "JavaScript": 145853,
+        "CSS": 35888,
+        "HTML": 33351,
+        "Python": 19577,
+        "Shell": 14952
       }
     },
     {
@@ -604,6 +565,45 @@
       },
       "privateMessage": "",
       "latestCommitMessage": ""
+    },
+    {
+      "id": "Easy-Apply-Digital-Onboarding",
+      "name": "Easy-Apply-Digital-Onboarding",
+      "title": "Easy Apply Digital Onboarding",
+      "role": "Creator & Maintainer",
+      "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "readmeExcerpt": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
+      "highlights": [
+        "Appointment Booking — Select a date and time slot (Morning / Afternoon / Evening)",
+        "Live Slot Availability — Real-time capacity tracking (max 10 per slot)",
+        "48-Hour Lead Time — Earliest bookable date is 48 hours from now",
+        "Sunday Blackout — Sundays are disabled on the calendar",
+        "Admin Dashboard — View all booked appointments in a data table"
+      ],
+      "createdAt": "2026-07-25T08:50:06Z",
+      "pushedAt": "2025-07-07T03:30:00Z",
+      "latestCommitMessage": "docs: add technical task specification document",
+      "dateLabel": "Jul 2026 — Jul 2025",
+      "isOngoing": false,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/Easy-Apply-Digital-Onboarding",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "JavaScript",
+        "CSS",
+        "HTML"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "primaryLanguage": "JavaScript",
+      "languages": {
+        "JavaScript": 27070,
+        "CSS": 16714,
+        "HTML": 520
+      }
     }
   ]
 }
