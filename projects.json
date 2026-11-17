@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T04:13:47.854Z",
+  "generatedAt": "2026-11-17T04:59:55.600Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 11,
   "ongoingCount": 5,
@@ -7,7 +7,7 @@
   "githubStats": {
     "totalForks": "05",
     "totalStars": 38,
-    "totalRepoCommits": 686,
+    "totalRepoCommits": 693,
     "commits": "850+",
     "contributions": "1.2K+",
     "currentStreak": 1,
@@ -1134,7 +1134,7 @@
         },
         {
           "date": "2026-11-17",
-          "count": 8
+          "count": 17
         }
       ]
     ]
@@ -1262,6 +1262,139 @@
   ],
   "projects": [
     {
+      "id": "ML-Predictive-Modeling-Project",
+      "name": "ML-Predictive-Modeling-Project",
+      "branch": "main",
+      "title": "ML Predictive Modeling Project",
+      "role": "Active Development",
+      "description": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
+      "readmeExcerpt": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
+      "highlights": [
+        "01DataExplorationandPreprocessing.ipynb: Contains initial data loading, exploratory data analysis (EDA), handling of missing values, and feature scaling/encoding using pandas and scikit-learn.",
+        "02ModelTrainingandSelection.ipynb: Covers the training of baseline models including K-Nearest Neighbors (KNN), Naive Bayes, and Logistic Regression.",
+        "03ModelEvaluationandPipelines.ipynb: Focuses on robust model evaluation, hyperparameter tuning using GridSearchCV, building deployment-ready scikit-learn Pipelines, and final metric analysis.",
+        "ProjectReport.pdf: A detailed academic report documenting the methodology, statistical analysis, and conclusions of the models.",
+        "Data Manipulation: Pandas, NumPy"
+      ],
+      "createdAt": "2026-09-14T07:03:16Z",
+      "pushedAt": "2026-11-17T04:41:52Z",
+      "latestCommitMessage": "Add License & Copyright section to README",
+      "dateLabel": "Sep 2026 — Present",
+      "isOngoing": true,
+      "featured": false,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "Jupyter Notebook"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "commitCount": 103,
+      "primaryLanguage": "Jupyter Notebook",
+      "languages": {
+        "Jupyter Notebook": 232298
+      }
+    },
+    {
+      "id": "trust-pass",
+      "name": "trust-pass",
+      "branch": "main",
+      "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
+      "role": "Lead Mobile Architect & Developer",
+      "description": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
+      "readmeExcerpt": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
+      "highlights": [
+        "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
+        "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
+        "Automated Cloud APK Build and Release pipelines using GitHub Actions CI/CD for continuous mobile delivery.",
+        "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
+      ],
+      "createdAt": "2026-11-05T05:43:04Z",
+      "pushedAt": "2026-11-17T04:41:13Z",
+      "latestCommitMessage": "Update README with license and copyright details",
+      "dateLabel": "Nov 2026",
+      "isOngoing": true,
+      "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
+      "homepage": "",
+      "topics": [],
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "OAuth 2.0 / OIDC",
+        "PKCE",
+        "Airbus A380 Seat Maps",
+        "QR Boarding Pass",
+        "GitHub Actions CI/CD"
+      ],
+      "stars": 0,
+      "forks": 0,
+      "commitCount": 102,
+      "primaryLanguage": "Dart",
+      "languages": {
+        "Dart": 188058,
+        "C++": 25176,
+        "CMake": 19745,
+        "HTML": 3753,
+        "Swift": 2298,
+        "C": 1488,
+        "Kotlin": 130,
+        "Objective-C": 38
+      }
+    },
+    {
+      "id": "ZenData",
+      "name": "ZenData",
+      "branch": "main",
+      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
+      "role": "Lead Architect & Developer",
+      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "readmeExcerpt": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
+      "highlights": [
+        "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
+        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
+        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
+        "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
+      ],
+      "createdAt": "2026-10-28T10:17:05Z",
+      "pushedAt": "2026-11-17T04:40:42Z",
+      "latestCommitMessage": "Update README with license and copyright details",
+      "dateLabel": "Oct 2026 — Present",
+      "isOngoing": true,
+      "featured": true,
+      "isPrivate": false,
+      "privateMessage": "",
+      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
+      "homepage": "https://zendata-frontend.onrender.com",
+      "topics": [],
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "Pandas",
+        "NumPy",
+        "Next.js",
+        "TypeScript",
+        "ReportLab",
+        "OpenPyXL"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "commitCount": 132,
+      "primaryLanguage": "TypeScript",
+      "languages": {
+        "TypeScript": 114419,
+        "Python": 102637,
+        "CSS": 7420,
+        "JavaScript": 465,
+        "Procfile": 63
+      }
+    },
+    {
       "id": "SLT-IDP-Mobile",
       "name": "SLT-IDP-Mobile",
       "branch": "team",
@@ -1366,141 +1499,13 @@
         "SQL": 9500,
         "HTML/CSS": 6200
       },
-      "commitCount": 0
-    },
-    {
-      "id": "ZenData",
-      "name": "ZenData",
-      "title": "ZenData — Automated Data Quality & Semantic Hygiene Platform",
-      "role": "Lead Architect & Developer",
-      "description": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
-      "readmeExcerpt": "4-Pillar Data Health Audit Engine & semantic hygiene pipeline that evaluates datasets, reconciles financial formulas, and generates executive PDF/Excel audit scorecards.",
-      "highlights": [
-        "Engineered a 4-Pillar Data Health Audit Engine evaluating Completeness, Uniqueness, Validity, and Statistical Consistency (1.5x IQR outlier detection) for 0–100% quality scores.",
-        "Implemented Semantic Hygiene & Anti-Poisoning Rules in Pandas to purge sentinel placeholders and cluster categorical typos without fabricating missing PII.",
-        "Designed Mathematical Reconciliation Logic cross-validating financial formulas (Total = Qty x Price x (1 - Discount)) to reverse-engineer corrupted totals.",
-        "Automated Executive Reporting Pipelines with ReportLab and OpenPyXL to generate landscape PDF scorecards and 3-sheet styled Excel workbooks."
-      ],
-      "createdAt": "2026-10-28T10:17:05Z",
-      "pushedAt": "2026-11-10T13:07:54Z",
-      "latestCommitMessage": "docs(readme): update README with CI status badge, architecture links, smart search toolbar, and testing guide",
-      "dateLabel": "Oct 2026 — Present",
-      "isOngoing": true,
-      "featured": true,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/ZenData",
-      "homepage": "https://zendata-frontend.onrender.com",
-      "topics": [],
-      "techStack": [
-        "Python",
-        "FastAPI",
-        "Pandas",
-        "NumPy",
-        "Next.js",
-        "TypeScript",
-        "ReportLab",
-        "OpenPyXL"
-      ],
-      "stars": 1,
-      "forks": 0,
-      "commitCount": 130,
-      "primaryLanguage": "TypeScript",
-      "languages": {
-        "TypeScript": 114419,
-        "Python": 102637,
-        "CSS": 7420,
-        "JavaScript": 465,
-        "Procfile": 63
-      }
-    },
-    {
-      "id": "trust-pass",
-      "name": "trust-pass",
-      "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
-      "role": "Lead Mobile Architect & Developer",
-      "description": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
-      "readmeExcerpt": "Cross-platform Flutter application for Flight Ticket Booking, Airbus A380 Fuselage Seat Reservation, and QR Boarding Passes, integrated with Sign in with SLT (TrustLink OAuth 2.0 / OpenID Connect PKCE) and automated Cloud APK CI/CD.",
-      "highlights": [
-        "Engineered a cross-platform Flutter application for multi-leg flight ticket booking, dynamic Airbus A380 fuselage seat selection, and QR boarding passes.",
-        "Integrated Sign in with SLT powered by TrustLink OAuth 2.0 & OpenID Connect with RFC 7636 S256 PKCE authorization code flow.",
-        "Automated Cloud APK Build and Release pipelines using GitHub Actions CI/CD for continuous mobile delivery.",
-        "Implemented instant demo login, verified passenger claim synchronization, and offline-first QR pass rendering."
-      ],
-      "createdAt": "2026-11-05T05:43:04Z",
-      "pushedAt": "2026-11-05T05:45:53Z",
-      "latestCommitMessage": "docs(readme): add architecture guide, SLT OIDC setup, and run instructions",
-      "dateLabel": "Nov 2026",
-      "isOngoing": true,
-      "featured": true,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/trust-pass",
-      "homepage": "",
-      "topics": [],
-      "techStack": [
-        "Flutter",
-        "Dart",
-        "OAuth 2.0 / OIDC",
-        "PKCE",
-        "Airbus A380 Seat Maps",
-        "QR Boarding Pass",
-        "GitHub Actions CI/CD"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "commitCount": 100,
-      "primaryLanguage": "Dart",
-      "languages": {
-        "Dart": 188058,
-        "C++": 25176,
-        "CMake": 19745,
-        "HTML": 3753,
-        "Swift": 2298,
-        "C": 1488,
-        "Kotlin": 130,
-        "Objective-C": 38
-      }
-    },
-    {
-      "id": "ML-Predictive-Modeling-Project",
-      "name": "ML-Predictive-Modeling-Project",
-      "title": "ML Predictive Modeling Project",
-      "role": "Active Development",
-      "description": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
-      "readmeExcerpt": "This repository contains a comprehensive Machine Learning pipeline developed to predict [Insert Target Variable / Goal Here] using the [Insert Dataset Name Here] dataset. The project demonstrates the end-to-end data science lifecycle, including exploratory data analysis, data...",
-      "highlights": [
-        "01DataExplorationandPreprocessing.ipynb: Contains initial data loading, exploratory data analysis (EDA), handling of missing values, and feature scaling/encoding using pandas and scikit-learn.",
-        "02ModelTrainingandSelection.ipynb: Covers the training of baseline models including K-Nearest Neighbors (KNN), Naive Bayes, and Logistic Regression.",
-        "03ModelEvaluationandPipelines.ipynb: Focuses on robust model evaluation, hyperparameter tuning using GridSearchCV, building deployment-ready scikit-learn Pipelines, and final metric analysis.",
-        "ProjectReport.pdf: A detailed academic report documenting the methodology, statistical analysis, and conclusions of the models.",
-        "Data Manipulation: Pandas, NumPy"
-      ],
-      "createdAt": "2026-09-14T07:03:16Z",
-      "pushedAt": "2026-09-13T13:59:25Z",
-      "latestCommitMessage": "Fixed scaling issue with features",
-      "dateLabel": "Sep 2026 — Present",
-      "isOngoing": true,
-      "featured": false,
-      "isPrivate": false,
-      "privateMessage": "",
-      "htmlUrl": "https://github.com/naveenmariopereradev02/ML-Predictive-Modeling-Project",
-      "homepage": "",
-      "topics": [],
-      "techStack": [
-        "Jupyter Notebook"
-      ],
-      "stars": 0,
-      "forks": 0,
-      "commitCount": 101,
-      "primaryLanguage": "Jupyter Notebook",
-      "languages": {
-        "Jupyter Notebook": 232298
-      }
+      "commitCount": 0,
+      "branch": "main"
     },
     {
       "id": "SpotIT-LK",
       "name": "SpotIT-LK",
+      "branch": "main",
       "title": "Civic Engagement & Feedback Platform — SpotIT LK",
       "role": "Backend & Multimedia Integration Lead",
       "description": "SDG 11-aligned civic engagement mobile platform enabling citizens to report public issues with compressed multimedia evidence synced in real time to government dashboards.",
@@ -1512,8 +1517,8 @@
         "Collaborated on client-server synchronization across Flutter, Firebase Firestore, and cloud storage services supporting SDG Goal 11."
       ],
       "createdAt": "2026-09-30T06:13:57Z",
-      "pushedAt": "2026-09-30T06:32:41Z",
-      "latestCommitMessage": "Update README with comprehensive project description",
+      "pushedAt": "2026-11-17T04:43:11Z",
+      "latestCommitMessage": "Add license and copyright section to README",
       "dateLabel": "Mar 2025 — Jun 2025",
       "isOngoing": false,
       "featured": true,
@@ -1531,7 +1536,7 @@
       ],
       "stars": 1,
       "forks": 0,
-      "commitCount": 202,
+      "commitCount": 203,
       "primaryLanguage": "Dart",
       "languages": {
         "Dart": 562046,
@@ -1545,6 +1550,7 @@
     {
       "id": "EzAppldigi-Onboarding",
       "name": "EzAppldigi-Onboarding",
+      "branch": "main",
       "title": "EzAppldigi Onboarding",
       "role": "Creator & Maintainer",
       "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
@@ -1587,6 +1593,7 @@
     {
       "id": "Slt-shopping-cart-application--E-commerce",
       "name": "Slt-shopping-cart-application--E-commerce",
+      "branch": "main",
       "title": "Slt Shopping Cart Application  E Commerce",
       "role": "Creator & Maintainer",
       "description": "Software engineering project hosted on GitHub.",
@@ -1667,7 +1674,8 @@
       },
       "privateMessage": "",
       "latestCommitMessage": "",
-      "commitCount": 0
+      "commitCount": 0,
+      "branch": "main"
     },
     {
       "id": "suspicious-log-analyzer",
@@ -1710,11 +1718,13 @@
       },
       "privateMessage": "",
       "latestCommitMessage": "",
-      "commitCount": 0
+      "commitCount": 0,
+      "branch": "main"
     },
     {
       "id": "Easy-Apply-Digital-Onboarding",
       "name": "Easy-Apply-Digital-Onboarding",
+      "branch": "main",
       "title": "Easy Apply Digital Onboarding",
       "role": "Creator & Maintainer",
       "description": "A standalone MERN stack application for booking internet installation appointments. Built as a technical assessment for the EasyApply Digital Onboarding project.",
