@@ -54,6 +54,7 @@
       "pushedAt": "2026-11-14T10:30:00Z",
       "privateMessage": "Private Enterprise Repository — Proprietary mobile client portal developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
       "repoUrl": "https://github.com/Nuwini2430/SLT-IDP-Mobile.git",
+      "branch": "team",
       "techStack": [
         "Flutter",
         "Dart",

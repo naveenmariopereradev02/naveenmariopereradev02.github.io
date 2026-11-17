@@ -316,6 +316,99 @@ async function fetchUserContributionTelemetry(username, token) {
   }
 }
 
+async function resolveActiveBranchAndHead(repoOwner, repoName, defaultBranch, preferredBranch, token) {
+  const baseDefault = defaultBranch || 'main';
+  const candidates = new Set();
+  if (preferredBranch) candidates.add(preferredBranch);
+
+  let pushEventBranch = '';
+  try {
+    const events = await githubFetch(
+      `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/events?per_page=15`,
+      token
+    );
+    if (Array.isArray(events)) {
+      const pushEv = events.find((ev) => ev && ev.type === 'PushEvent' && ev.payload && ev.payload.ref);
+      if (pushEv) {
+        pushEventBranch = String(pushEv.payload.ref).replace(/^refs\/heads\//, '').trim();
+        if (pushEventBranch) candidates.add(pushEventBranch);
+      }
+    }
+  } catch (e) {
+    // Ignore if events endpoint is unavailable
+  }
+
+  candidates.add(baseDefault);
+
+  try {
+    const branches = await githubFetch(
+      `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/branches?per_page=15`,
+      token
+    );
+    if (Array.isArray(branches)) {
+      let addedExtra = 0;
+      for (const b of branches) {
+        if (!b || !b.name) continue;
+        if (candidates.has(b.name)) continue;
+        candidates.add(b.name);
+        addedExtra += 1;
+        if (addedExtra >= 8) break;
+      }
+    }
+  } catch (e) {
+    // Ignore if branches endpoint is unavailable
+  }
+
+  let activeBranch = preferredBranch || pushEventBranch || baseDefault;
+  let bestTime = -1;
+  let latestCommitMessage = '';
+  let latestCommitDate = null;
+  let maxCommitCount = 0;
+
+  for (const branch of candidates) {
+    try {
+      const { data: commits, headers } = await githubFetchWithHeaders(
+        `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/commits?sha=${encodeURIComponent(branch)}&per_page=1`,
+        token
+      );
+      const lastPageCount = parseLastPageFromLink(headers.get('link'));
+      if (lastPageCount && lastPageCount > maxCommitCount) {
+        maxCommitCount = lastPageCount;
+      } else if (Array.isArray(commits) && commits.length > maxCommitCount) {
+        maxCommitCount = commits.length;
+      }
+
+      if (Array.isArray(commits) && commits.length > 0 && commits[0].commit) {
+        const msg = String(commits[0].commit.message || '').split('\n')[0].trim();
+        const dateStr =
+          (commits[0].commit.committer && commits[0].commit.committer.date) ||
+          (commits[0].commit.author && commits[0].commit.author.date) ||
+          '';
+        const ts = dateStr ? new Date(dateStr).getTime() : 0;
+        const isPreferredTie =
+          ts === bestTime &&
+          ((pushEventBranch && branch === pushEventBranch) ||
+            (preferredBranch && branch === preferredBranch));
+        if (ts > bestTime || isPreferredTie) {
+          bestTime = ts;
+          activeBranch = branch;
+          latestCommitMessage = msg;
+          latestCommitDate = dateStr || null;
+        }
+      }
+    } catch (e) {
+      // Branch might be deleted or restricted; skip silently
+    }
+  }
+
+  return {
+    activeBranch,
+    latestCommitMessage,
+    latestCommitDate,
+    commitCount: maxCommitCount
+  };
+}
+
 async function main() {
   const profile = readJsonSafe(PROFILE_PATH, {});
   const overridesData = readJsonSafe(OVERRIDES_PATH, { repos: {} });
@@ -432,18 +525,49 @@ async function main() {
     const override = getOverride(repo.name);
     const repoOwner = (repo.owner && repo.owner.login) || username;
     const isPrivate = typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(repo.private);
-    console.log(`Processing repo: ${repo.name} (${isPrivate ? 'Private' : 'Public'})...`);
+    const defaultBranch = repo.default_branch || 'main';
 
-    // 1. Fetch README
+    // Resolve most active branch (checks override.branch, PushEvent ref, default branch, and all repo branches)
+    const branchMeta = await resolveActiveBranchAndHead(
+      repoOwner,
+      repo.name,
+      defaultBranch,
+      override.branch || '',
+      token
+    );
+    const activeBranch = branchMeta.activeBranch || override.branch || defaultBranch;
+
+    console.log(`Processing repo: ${repo.name} [${activeBranch}] (${isPrivate ? 'Private' : 'Public'})...`);
+
+    // 1. Fetch README from active branch first, fallback to default branch
     let readmeRaw = null;
     try {
       readmeRaw = await githubFetch(
-        `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/readme`,
+        `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/readme?ref=${encodeURIComponent(activeBranch)}`,
         token,
         'application/vnd.github.raw'
       );
+      if (!readmeRaw && activeBranch !== defaultBranch) {
+        readmeRaw = await githubFetch(
+          `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/readme`,
+          token,
+          'application/vnd.github.raw'
+        );
+      }
     } catch (e) {
-      console.warn(`  Warning: Failed to read README for ${repo.name}`);
+      if (activeBranch !== defaultBranch) {
+        try {
+          readmeRaw = await githubFetch(
+            `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/readme`,
+            token,
+            'application/vnd.github.raw'
+          );
+        } catch (fallbackErr) {
+          console.warn(`  Warning: Failed to read README for ${repo.name}`);
+        }
+      } else {
+        console.warn(`  Warning: Failed to read README for ${repo.name}`);
+      }
     }
 
     const { excerpt, highlights: readmeHighlights } = parseReadme(readmeRaw);
@@ -464,42 +588,27 @@ async function main() {
       languages = { [repo.language]: 10000 };
     }
 
-    // 3. Fetch latest commit message & commit count (prefer live GitHub commit if newer/available, fallback to override)
+    // 3. Apply latest commit message & commit count from active branch (fallback to override)
     let latestCommitMessage = override.latestCommitMessage || '';
     let latestCommitDate = null;
-    let repoCommitCount = Number(override.commitCount) || 0;
-    try {
-      const { data: commits, headers } = await githubFetchWithHeaders(
-        `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repo.name)}/commits?per_page=1`,
-        token
-      );
-      const lastPageCount = parseLastPageFromLink(headers.get('link'));
-      if (lastPageCount && lastPageCount > 0) {
-        repoCommitCount = Math.max(repoCommitCount, lastPageCount);
-      } else if (Array.isArray(commits) && commits.length > 0) {
-        repoCommitCount = Math.max(repoCommitCount, commits.length);
+    const repoCommitCount = Math.max(Number(override.commitCount) || 0, Number(branchMeta.commitCount) || 0);
+    if (branchMeta.latestCommitMessage) {
+      const overrideTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
+      const liveTime = branchMeta.latestCommitDate ? new Date(branchMeta.latestCommitDate).getTime() : 0;
+      if (!override.latestCommitMessage || liveTime >= overrideTime) {
+        latestCommitMessage = branchMeta.latestCommitMessage;
+        latestCommitDate = branchMeta.latestCommitDate;
       }
-      if (Array.isArray(commits) && commits.length > 0 && commits[0].commit) {
-        const liveMsg = String(commits[0].commit.message || '').split('\n')[0].trim();
-        const liveDate =
-          (commits[0].commit.committer && commits[0].commit.committer.date) ||
-          (commits[0].commit.author && commits[0].commit.author.date) ||
-          repo.pushed_at;
-        const overrideTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
-        const liveTime = liveDate ? new Date(liveDate).getTime() : 0;
-        if (liveMsg && (!override.latestCommitMessage || liveTime >= overrideTime)) {
-          latestCommitMessage = liveMsg;
-          latestCommitDate = liveDate;
-        }
-      }
-    } catch (e) {
-      // Fallback silently if commits endpoint is restricted
     }
 
     // 4. Determine Ongoing vs Completed
+    const latestPushMs = Math.max(
+      new Date(repo.pushed_at || 0).getTime(),
+      new Date(latestCommitDate || 0).getTime()
+    );
     const daysSincePush = Math.max(
       0,
-      (Date.now() - new Date(repo.pushed_at).getTime()) / (1000 * 60 * 60 * 24)
+      (Date.now() - latestPushMs) / (1000 * 60 * 60 * 24)
     );
     const isOngoing =
       typeof override.ongoing === 'boolean'
@@ -534,6 +643,7 @@ async function main() {
     fetchedProjects.push({
       id: repo.name,
       name: repo.name,
+      branch: activeBranch,
       title: override.title || repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
       role: override.role || (isOngoing ? 'Active Development' : 'Creator & Maintainer'),
       description,
@@ -571,6 +681,7 @@ async function main() {
       const override = getOverride(p.id);
       return {
         ...p,
+        branch: override.branch || p.branch || 'main',
         title: override.title || p.title,
         role: override.role || p.role,
         description: override.description || p.description,

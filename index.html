@@ -6102,13 +6102,41 @@
             }
 
             if (latestPublicRepo && latestPublicRepo.name) {
-              const liveRepoHtmlUrl = `${latestPublicRepo.html_url}/commits`;
-
-              // 3. Fetch actual latest commits from that public repository
-              const commitsRes = await fetch(
-                `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestPublicRepo.name)}/commits?per_page=15`,
-                { cache: 'no-store' }
+              const matchedProj = projects.find(
+                (p) =>
+                  String(p.id || '').toLowerCase() === latestPublicRepo.name.toLowerCase() ||
+                  String(p.name || '').toLowerCase() === latestPublicRepo.name.toLowerCase()
               );
+              let activeBranch = (matchedProj && matchedProj.branch) || latestPublicRepo.default_branch || '';
+              try {
+                const evRes = await fetch(
+                  `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestPublicRepo.name)}/events?per_page=10`,
+                  { cache: 'no-store' }
+                );
+                if (evRes.ok) {
+                  const repoEvents = await evRes.json();
+                  if (Array.isArray(repoEvents)) {
+                    const pushEv = repoEvents.find((ev) => ev && ev.type === 'PushEvent' && ev.payload && ev.payload.ref);
+                    if (pushEv) {
+                      const pushedBranch = String(pushEv.payload.ref).replace(/^refs\/heads\//, '').trim();
+                      if (pushedBranch) activeBranch = pushedBranch;
+                    }
+                  }
+                }
+              } catch (e) {
+                // Keep default or project branch on event lookup failure
+              }
+
+              if (matchedProj && activeBranch) matchedProj.branch = activeBranch;
+              const liveRepoHtmlUrl = activeBranch
+                ? `${latestPublicRepo.html_url}/commits/${encodeURIComponent(activeBranch)}`
+                : `${latestPublicRepo.html_url}/commits`;
+              const commitsUrl = activeBranch
+                ? `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestPublicRepo.name)}/commits?sha=${encodeURIComponent(activeBranch)}&per_page=15`
+                : `https://api.github.com/repos/${encodeURIComponent(ghUser)}/${encodeURIComponent(latestPublicRepo.name)}/commits?per_page=15`;
+
+              // 3. Fetch actual latest commits from the active branch of that public repository
+              const commitsRes = await fetch(commitsUrl, { cache: 'no-store' });
               if (commitsRes.ok) {
                 const commits = await commitsRes.json();
                 if (Array.isArray(commits) && commits.length > 0) {
