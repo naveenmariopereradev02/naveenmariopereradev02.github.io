@@ -365,7 +365,7 @@ async function main() {
       title: override.title || repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
       role: override.role || (isOngoing ? 'Active Development' : 'Creator & Maintainer'),
       description,
-      readmeExcerpt: excerpt || repo.description || description,
+      readmeExcerpt: override.description || excerpt || repo.description || description,
       highlights,
       createdAt: repo.created_at,
       pushedAt: override.pushedAt || repo.pushed_at,
@@ -399,9 +399,22 @@ async function main() {
       return {
         ...p,
         title: override.title || p.title,
+        role: override.role || p.role,
+        description: override.description || p.description,
+        readmeExcerpt: override.description || p.readmeExcerpt || p.description,
+        highlights:
+          Array.isArray(override.highlights) && override.highlights.length > 0
+            ? override.highlights
+            : p.highlights,
+        techStack:
+          Array.isArray(override.techStack) && override.techStack.length > 0
+            ? override.techStack
+            : p.techStack,
         pushedAt: override.pushedAt || p.pushedAt,
         latestCommitMessage: override.latestCommitMessage || p.latestCommitMessage || '',
         dateLabel: override.dateLabel || p.dateLabel,
+        isOngoing: typeof override.ongoing === 'boolean' ? override.ongoing : Boolean(p.isOngoing),
+        featured: typeof override.featured === 'boolean' ? override.featured : Boolean(p.featured),
         isPrivate: typeof override.isPrivate === 'boolean' ? override.isPrivate : Boolean(p.isPrivate),
         privateMessage: override.privateMessage || p.privateMessage || ''
       };

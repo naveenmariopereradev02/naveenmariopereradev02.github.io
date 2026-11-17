@@ -1,15 +1,15 @@
 {
   "generatedAt": "2026-11-13T05:20:37.768Z",
   "username": "naveenmariopereradev02",
-  "totalRepos": 10,
-  "ongoingCount": 4,
+  "totalRepos": 11,
+  "ongoingCount": 5,
   "completedCount": 6,
   "languagesSummary": [
     {
       "name": "Dart",
       "bytes": 750104,
       "percentage": 40,
-      "repoCount": 2,
+      "repoCount": 3,
       "color": "#00B4AB"
     },
     {
@@ -126,6 +126,54 @@
     }
   ],
   "projects": [
+    {
+      "id": "SLT-IDP-Mobile",
+      "name": "SLT-IDP-Mobile",
+      "title": "SLT-IDP Client Portal — Mobile Developer & OAuth Management App",
+      "role": "SLT Internship — Mobile Identity & Client Portal Developer",
+      "description": "Flutter-based mobile application designed to extend the Sri Lanka Telecom Identity Platform, enabling Developers and Application Owners to manage OAuth clients, view analytics, hire developers, and request app registrations on the go.",
+      "readmeExcerpt": "Flutter-based mobile application designed to extend the Sri Lanka Telecom Identity Platform, enabling Developers and Application Owners to manage OAuth clients, view analytics, hire developers, and request app registrations on the go.",
+      "highlights": [
+        "Developed a Flutter-based mobile client portal extending the Sri Lanka Telecom Identity Platform (SLT-IDP / TrustLink) for on-the-go identity and application governance.",
+        "Enabled Developers and Application Owners to manage OAuth 2.0 / OIDC clients, credentials, and redirect configurations directly from mobile devices.",
+        "Built real-time analytics views to monitor client authentication traffic, token usage, and application health metrics.",
+        "Implemented in-app workflows to request new application registrations and hire verified developers within the SLT ecosystem."
+      ],
+      "createdAt": "2026-11-01T00:00:00Z",
+      "pushedAt": "2026-11-14T10:30:00Z",
+      "latestCommitMessage": "feat(portal): Flutter OAuth client management, app registration & analytics portal",
+      "dateLabel": "Nov 2026 — Present",
+      "isOngoing": true,
+      "featured": true,
+      "isPrivate": true,
+      "privateMessage": "Private Enterprise Repository — Proprietary mobile client portal developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
+      "htmlUrl": "",
+      "homepage": "",
+      "topics": [
+        "portfolio",
+        "flutter",
+        "dart",
+        "oauth2",
+        "oidc",
+        "identity-platform",
+        "mobile"
+      ],
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "OAuth 2.0 / OIDC",
+        "SLT TrustLink IDP",
+        "REST APIs",
+        "Developer Analytics",
+        "App Registration Portal"
+      ],
+      "stars": 1,
+      "forks": 0,
+      "primaryLanguage": "Dart",
+      "languages": {
+        "Dart": 145000
+      }
+    },
     {
       "id": "trustlink",
       "name": "trustlink",

@@ -43,6 +43,34 @@
         "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
       ]
     },
+    "SLT-IDP-Mobile": {
+      "title": "SLT-IDP Client Portal — Mobile Developer & OAuth Management App",
+      "role": "SLT Internship — Mobile Identity & Client Portal Developer",
+      "dateLabel": "Nov 2026 — Present",
+      "featured": true,
+      "ongoing": true,
+      "isPrivate": true,
+      "latestCommitMessage": "feat(portal): Flutter OAuth client management, app registration & analytics portal",
+      "pushedAt": "2026-11-14T10:30:00Z",
+      "privateMessage": "Private Enterprise Repository — Proprietary mobile client portal developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
+      "repoUrl": "https://github.com/Nuwini2430/SLT-IDP-Mobile.git",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "OAuth 2.0 / OIDC",
+        "SLT TrustLink IDP",
+        "REST APIs",
+        "Developer Analytics",
+        "App Registration Portal"
+      ],
+      "description": "Flutter-based mobile application designed to extend the Sri Lanka Telecom Identity Platform, enabling Developers and Application Owners to manage OAuth clients, view analytics, hire developers, and request app registrations on the go.",
+      "highlights": [
+        "Developed a Flutter-based mobile client portal extending the Sri Lanka Telecom Identity Platform (SLT-IDP / TrustLink) for on-the-go identity and application governance.",
+        "Enabled Developers and Application Owners to manage OAuth 2.0 / OIDC clients, credentials, and redirect configurations directly from mobile devices.",
+        "Built real-time analytics views to monitor client authentication traffic, token usage, and application health metrics.",
+        "Implemented in-app workflows to request new application registrations and hire verified developers within the SLT ecosystem."
+      ]
+    },
     "trust-pass": {
       "title": "TrustPass — Flight Booking & Seat Reservation App (SLT TrustLink OIDC)",
       "role": "Lead Mobile Architect & Developer",
