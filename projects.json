@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-11-22T05:22:29.252Z",
+  "generatedAt": "2026-11-22T14:37:40.437Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 10,
   "ongoingCount": 5,
   "completedCount": 5,
   "githubStats": {
-    "totalForks": "05",
-    "totalStars": 38,
-    "totalRepoCommits": 873,
-    "commits": "873+",
+    "totalForks": "02",
+    "totalStars": 21,
+    "totalRepoCommits": 1096,
+    "commits": "1096+",
     "contributions": "1.2K+",
     "currentStreak": 50,
     "longestStreak": 107,
@@ -246,7 +246,7 @@
         },
         {
           "date": "2026-05-01",
-          "count": 0
+          "count": 4
         },
         {
           "date": "2026-05-02",
@@ -264,7 +264,7 @@
         },
         {
           "date": "2026-05-05",
-          "count": 0
+          "count": 4
         },
         {
           "date": "2026-05-06",
@@ -350,7 +350,7 @@
         },
         {
           "date": "2026-05-25",
-          "count": 0
+          "count": 4
         },
         {
           "date": "2026-05-26",
@@ -370,7 +370,7 @@
         },
         {
           "date": "2026-05-30",
-          "count": 0
+          "count": 4
         }
       ],
       [
@@ -460,7 +460,7 @@
         },
         {
           "date": "2026-06-20",
-          "count": 0
+          "count": 4
         }
       ],
       [
@@ -610,7 +610,7 @@
         },
         {
           "date": "2026-07-25",
-          "count": 2
+          "count": 8
         }
       ],
       [
@@ -624,7 +624,7 @@
         },
         {
           "date": "2026-07-28",
-          "count": 2
+          "count": 6
         },
         {
           "date": "2026-07-29",
@@ -830,7 +830,7 @@
         },
         {
           "date": "2026-09-14",
-          "count": 2
+          "count": 4
         },
         {
           "date": "2026-09-15",
@@ -1120,13 +1120,13 @@
         },
         {
           "date": "2026-11-21",
-          "count": 7
+          "count": 6
         }
       ],
       [
         {
           "date": "2026-11-22",
-          "count": 9
+          "count": 6
         }
       ]
     ]
@@ -1134,114 +1134,100 @@
   "languagesSummary": [
     {
       "name": "Dart",
-      "bytes": 895104,
-      "percentage": 46.3,
+      "bytes": 1569280,
+      "percentage": 58.3,
       "repoCount": 3,
       "color": "#00B4AB"
     },
     {
       "name": "JavaScript",
-      "bytes": 269480,
-      "percentage": 13.9,
+      "bytes": 344642,
+      "percentage": 12.8,
       "repoCount": 5,
       "color": "#f1e05a"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 232298,
-      "percentage": 12,
+      "percentage": 8.6,
       "repoCount": 1,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
       "bytes": 212214,
-      "percentage": 11,
+      "percentage": 7.9,
       "repoCount": 4,
       "color": "#3572A5"
     },
     {
       "name": "TypeScript",
-      "bytes": 142819,
-      "percentage": 7.4,
-      "repoCount": 2,
+      "bytes": 114419,
+      "percentage": 4.2,
+      "repoCount": 1,
       "color": "#3178c6"
     },
     {
       "name": "CSS",
-      "bytes": 60022,
-      "percentage": 3.1,
-      "repoCount": 3,
+      "bytes": 60908,
+      "percentage": 2.3,
+      "repoCount": 4,
       "color": "#563d7c"
     },
     {
-      "name": "HTML",
-      "bytes": 39141,
-      "percentage": 2,
-      "repoCount": 4,
-      "color": "#e34c26"
-    },
-    {
       "name": "C++",
-      "bytes": 25176,
-      "percentage": 1.3,
-      "repoCount": 1,
+      "bytes": 53073,
+      "percentage": 2,
+      "repoCount": 2,
       "color": "#f34b7d"
     },
     {
+      "name": "HTML",
+      "bytes": 41743,
+      "percentage": 1.5,
+      "repoCount": 6,
+      "color": "#e34c26"
+    },
+    {
       "name": "CMake",
-      "bytes": 19745,
-      "percentage": 1,
-      "repoCount": 1,
+      "bytes": 40203,
+      "percentage": 1.5,
+      "repoCount": 2,
       "color": "hsl(329, 75%, 55%)"
     },
     {
       "name": "Shell",
       "bytes": 14952,
-      "percentage": 0.8,
+      "percentage": 0.6,
       "repoCount": 1,
       "color": "#89e051"
     },
     {
-      "name": "SQL",
-      "bytes": 9500,
-      "percentage": 0.5,
-      "repoCount": 1,
-      "color": "#e38c00"
-    },
-    {
-      "name": "HTML/CSS",
-      "bytes": 6200,
-      "percentage": 0.3,
-      "repoCount": 1,
-      "color": "#e34c26"
-    },
-    {
       "name": "Swift",
-      "bytes": 3353,
+      "bytes": 6445,
       "percentage": 0.2,
-      "repoCount": 2,
+      "repoCount": 3,
       "color": "#F05138"
     },
     {
       "name": "C",
-      "bytes": 1488,
+      "bytes": 3013,
       "percentage": 0.1,
-      "repoCount": 1,
+      "repoCount": 2,
       "color": "#555555"
     },
     {
       "name": "Kotlin",
-      "bytes": 250,
+      "bytes": 401,
       "percentage": 0,
-      "repoCount": 2,
+      "repoCount": 3,
       "color": "#A97BFF"
     },
     {
       "name": "Objective-C",
-      "bytes": 76,
+      "bytes": 115,
       "percentage": 0,
-      "repoCount": 2,
+      "repoCount": 3,
       "color": "hsl(287, 75%, 55%)"
     },
     {
@@ -1277,15 +1263,7 @@
       "privateMessage": "Private Enterprise Repository — Proprietary mobile client portal developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
       "htmlUrl": "",
       "homepage": "",
-      "topics": [
-        "portfolio",
-        "flutter",
-        "dart",
-        "oauth2",
-        "oidc",
-        "identity-platform",
-        "mobile"
-      ],
+      "topics": [],
       "techStack": [
         "Flutter",
         "Dart",
@@ -1295,13 +1273,20 @@
         "Developer Analytics",
         "App Registration Portal"
       ],
-      "stars": 1,
+      "stars": 0,
       "forks": 0,
+      "commitCount": 121,
       "primaryLanguage": "Dart",
       "languages": {
-        "Dart": 145000
-      },
-      "commitCount": 46
+        "Dart": 819176,
+        "C++": 27897,
+        "CMake": 20458,
+        "Swift": 3092,
+        "HTML": 2216,
+        "C": 1525,
+        "Kotlin": 151,
+        "Objective-C": 39
+      }
     },
     {
       "id": "trust-pass",
@@ -1444,6 +1429,7 @@
     {
       "id": "trustlink",
       "name": "trustlink",
+      "branch": "rebuild",
       "title": "TrustLink — Enterprise Identity & SSO Platform (OAuth 2.0 & OIDC)",
       "role": "SLT Internship — Core Identity & Security Lead",
       "description": "Full-stack OAuth 2.0 & OpenID Connect Single Sign-On identity provider with passwordless FIDO2/WebAuthn passkeys, PKCE, signed JWTs, and automated risk scoring.",
@@ -1460,22 +1446,12 @@
       "latestCommitMessage": "feat(idp): sync OAuth 2.0 / OIDC client portal & WebAuthn security updates",
       "dateLabel": "Jul 2026 — Present",
       "isOngoing": true,
+      "featured": true,
       "isPrivate": true,
       "privateMessage": "Private Enterprise Repository — Proprietary source code developed during SLT Internship under organization access control (NDA). Direct source code access is restricted.",
-      "featured": true,
       "htmlUrl": "",
       "homepage": "",
-      "topics": [
-        "portfolio",
-        "oauth2",
-        "oidc",
-        "webauthn",
-        "fido2",
-        "nodejs",
-        "react",
-        "docker",
-        "security"
-      ],
+      "topics": [],
       "techStack": [
         "Node.js",
         "Express",
@@ -1487,17 +1463,15 @@
         "Docker",
         "Nginx"
       ],
-      "stars": 16,
-      "forks": 3,
+      "stars": 0,
+      "forks": 0,
+      "commitCount": 316,
       "primaryLanguage": "JavaScript",
       "languages": {
-        "JavaScript": 78200,
-        "TypeScript": 28400,
-        "SQL": 9500,
-        "HTML/CSS": 6200
-      },
-      "commitCount": 168,
-      "branch": "main"
+        "JavaScript": 153362,
+        "CSS": 886,
+        "HTML": 386
+      }
     },
     {
       "id": "Easy-Apply-Digital-Onboarding",
