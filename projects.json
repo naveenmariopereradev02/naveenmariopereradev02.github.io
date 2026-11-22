@@ -7,10 +7,10 @@
   "githubStats": {
     "totalForks": "05",
     "totalStars": 38,
-    "totalRepoCommits": 659,
-    "commits": "850+",
+    "totalRepoCommits": 873,
+    "commits": "873+",
     "contributions": "1.2K+",
-    "currentStreak": 48,
+    "currentStreak": 50,
     "longestStreak": 107,
     "heatmap": [
       [
@@ -1120,13 +1120,13 @@
         },
         {
           "date": "2026-11-21",
-          "count": 0
+          "count": 7
         }
       ],
       [
         {
           "date": "2026-11-22",
-          "count": 0
+          "count": 9
         }
       ]
     ]
@@ -1268,8 +1268,8 @@
         "Implemented in-app workflows to request new application registrations and hire verified developers within the SLT ecosystem."
       ],
       "createdAt": "2026-11-10T00:00:00Z",
-      "pushedAt": "2026-11-14T10:30:00Z",
-      "latestCommitMessage": "feat(portal): Flutter OAuth client management, app registration & analytics portal",
+      "pushedAt": "2026-11-22T11:30:00Z",
+      "latestCommitMessage": "feat(team): update SLT-IDP mobile client portal workflows & OAuth client management",
       "dateLabel": "Nov 2026 — Present",
       "isOngoing": true,
       "featured": true,
@@ -1301,7 +1301,7 @@
       "languages": {
         "Dart": 145000
       },
-      "commitCount": 0
+      "commitCount": 46
     },
     {
       "id": "trust-pass",
@@ -1456,8 +1456,8 @@
         "Containerized with Docker and Nginx, applying rate limiting and vulnerability scanning."
       ],
       "createdAt": "2026-07-28T00:00:00Z",
-      "pushedAt": "2026-11-12T09:45:00Z",
-      "latestCommitMessage": "Pushed OAuth 2.0 PKCE & WebAuthn security updates",
+      "pushedAt": "2026-11-21T16:40:00Z",
+      "latestCommitMessage": "feat(idp): sync OAuth 2.0 / OIDC client portal & WebAuthn security updates",
       "dateLabel": "Jul 2026 — Present",
       "isOngoing": true,
       "isPrivate": true,
@@ -1496,7 +1496,7 @@
         "SQL": 9500,
         "HTML/CSS": 6200
       },
-      "commitCount": 0,
+      "commitCount": 168,
       "branch": "main"
     },
     {

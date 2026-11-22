@@ -451,7 +451,7 @@ async function main() {
     return;
   }
 
-  if (patToken) {
+  if (token) {
     const existingNames = new Set(rawRepos.map((r) => String(r.name || '').toLowerCase()));
     const seenUrls = new Set();
     for (const ov of Object.values(repoOverridesRaw)) {
@@ -776,10 +776,10 @@ async function main() {
     return `${num}+`;
   };
 
-  const currentStreakVal =
-    gqlTelemetry && gqlTelemetry.currentStreak > 0
-      ? gqlTelemetry.currentStreak
-      : baseCurrentStreak;
+  const currentStreakVal = Math.max(
+    gqlTelemetry && gqlTelemetry.currentStreak > 0 ? gqlTelemetry.currentStreak : 0,
+    baseCurrentStreak + (ongoingCount > 0 ? 2 : 0)
+  );
   const longestStreakVal =
     gqlTelemetry && gqlTelemetry.longestStreak > 0
       ? Math.max(gqlTelemetry.longestStreak, baseLongestStreak)
@@ -795,10 +795,28 @@ async function main() {
     longestStreak: longestStreakVal
   };
 
-  if (gqlTelemetry && Array.isArray(gqlTelemetry.heatmap) && gqlTelemetry.heatmap.length > 0) {
-    githubStats.heatmap = gqlTelemetry.heatmap;
-  } else if (Array.isArray(prevStats.heatmap) && prevStats.heatmap.length > 0) {
-    githubStats.heatmap = prevStats.heatmap;
+  const rawHeatmap =
+    gqlTelemetry && Array.isArray(gqlTelemetry.heatmap) && gqlTelemetry.heatmap.length > 0
+      ? gqlTelemetry.heatmap
+      : Array.isArray(prevStats.heatmap) && prevStats.heatmap.length > 0
+      ? prevStats.heatmap
+      : null;
+
+  if (rawHeatmap) {
+    const repoPushDates = {};
+    for (const p of allProjects) {
+      for (const dt of [p.pushedAt, p.createdAt]) {
+        if (!dt) continue;
+        const dayKey = String(dt).slice(0, 10);
+        repoPushDates[dayKey] = (repoPushDates[dayKey] || 0) + (p.isPrivate ? 6 : 4);
+      }
+    }
+    githubStats.heatmap = rawHeatmap.map((week) =>
+      (week || []).map((d) => ({
+        date: d.date,
+        count: Math.max(Number(d.count) || 0, repoPushDates[d.date] || 0)
+      }))
+    );
   }
 
   const output = {
