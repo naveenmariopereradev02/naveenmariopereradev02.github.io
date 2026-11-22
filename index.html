@@ -3249,9 +3249,9 @@
 
     /* Footer Pill Bar (Screenshot 5) */
     .footer-pill {
-      max-width: 900px;
+      max-width: 820px;
       margin: 0 auto 42px;
-      padding: 14px 24px;
+      padding: 16px 24px;
       border-radius: 14px;
       background: var(--bg-secondary);
       border: 1px solid var(--border-subtle);
@@ -3259,7 +3259,7 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px 16px;
+      gap: 12px;
       font-size: 0.76rem;
       color: var(--text-secondary);
     }
@@ -3267,63 +3267,6 @@
     .footer-pill a {
       color: var(--accent);
       font-weight: 600;
-    }
-
-    .footer-right-meta {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .footer-visitor-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 12px;
-      height: 30px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
-      cursor: pointer;
-      user-select: none;
-      white-space: nowrap;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .footer-visitor-badge:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
-    }
-
-    .footer-visitor-badge:hover .admin-badge-eye {
-      opacity: 1;
-      transform: scale(1.12);
-      color: var(--accent);
-    }
-
-    .footer-visitor-label {
-      opacity: 0.75;
-      font-size: 0.69rem;
-      font-weight: 500;
-    }
-
-    html[data-theme="light"] .footer-visitor-badge {
-      background: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.12);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8);
-    }
-
-    html[data-theme="light"] .footer-visitor-badge:hover {
-      background: rgba(0, 0, 0, 0.07);
-      border-color: var(--accent);
     }
 
     /* ==========================================================================
@@ -4449,20 +4392,9 @@
           © <span id="footerYear">2026</span> <strong id="footerName">Naveen Perera</strong> &nbsp;|&nbsp; All rights
           reserved
         </div>
-        <div class="footer-right-meta">
-          <div id="footerVisitorBadge" class="footer-visitor-badge" title="Total Portfolio Visits (Live Telemetry)">
-            <span class="admin-badge-dot"></span>
-            <svg class="admin-badge-eye" width="13.5" height="13.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            <span id="footerVisitorCount">...</span>
-            <span class="footer-visitor-label">visits</span>
-          </div>
-          <div>
-            Building in public at <a id="footerHandle" href="https://github.com/naveenmariopereradev02" target="_blank"
-              rel="noopener">@naveenmariopereradev02</a>
-          </div>
+        <div>
+          Building in public at <a id="footerHandle" href="https://github.com/naveenmariopereradev02" target="_blank"
+            rel="noopener">@naveenmariopereradev02</a>
         </div>
       </footer>
     </section>
@@ -5912,9 +5844,7 @@
     async function initVisitorCounter() {
       const badge = document.getElementById('adminVisitorBadge');
       const countEl = document.getElementById('adminVisitorCount');
-      const footerBadge = document.getElementById('footerVisitorBadge');
-      const footerCountEl = document.getElementById('footerVisitorCount');
-      if ((!badge || !countEl) && (!footerBadge || !footerCountEl)) return;
+      if (!badge || !countEl) return;
 
       // 1. Check URL parameters for Admin toggle (?admin=naveen, ?admin=true, ?admin=off)
       const urlParams = new URLSearchParams(window.location.search);
@@ -5948,51 +5878,69 @@
       const sessionCounted = sessionStorage.getItem('naveen_visit_counted') === 'true';
       const isSelf = isAdmin || isLocal;
 
-      if (badge) {
-        badge.style.display = isAdmin ? 'inline-flex' : 'none';
-        badge.addEventListener('click', () => {
-          const count = window.currentPortfolioVisits || (countEl && countEl.textContent) || 'Live';
-          showPortfolioToast(`Admin Telemetry: ${count} Total Profile Visits recorded. (Visible only on this device)`);
-        });
-      }
+      badge.style.display = isAdmin ? 'inline-flex' : 'none';
+      badge.addEventListener('click', () => {
+        const count = window.currentPortfolioVisits || countEl.textContent || '0';
+        showPortfolioToast(`Admin Telemetry: ${count} Total Profile Visits recorded. (Visible only on this device)`);
+      });
 
-      if (footerBadge) {
-        footerBadge.addEventListener('click', () => {
-          const count = window.currentPortfolioVisits || (footerCountEl && footerCountEl.textContent) || 'Live';
-          showPortfolioToast(`Live Portfolio Telemetry: ${count} Total Visits recorded ✓`);
-        });
-      }
-
-      // 2. Multi-Provider Redundant Telemetry Engine:
-      // - First-time Session Visitors: increments visitor count by +1
-      // - Repeat Session Reloads / Admin / Local Dev: strictly READS the current count with 0% increment
       const shouldIncrement = !isSelf && !sessionCounted;
-      const BASELINE_VISITS = 142;
-      const daysSinceLaunch = Math.max(0, Math.floor((Date.now() - new Date('2026-11-01T00:00:00Z').getTime()) / 86400000));
-      let cachedCount = parseInt(localStorage.getItem('naveen_portfolio_visits_cache') || '0', 10) || 0;
-      const minFloorCount = BASELINE_VISITS + daysSinceLaunch;
+      const savedRealCount = parseInt(localStorage.getItem('naveen_real_visits_cache') || '0', 10) || 0;
+      if (savedRealCount > 0) {
+        countEl.textContent = String(savedRealCount);
+        window.currentPortfolioVisits = String(savedRealCount);
+      }
 
-      function applyVisitCount(numVal) {
-        const finalNum = Math.max(Number(numVal) || 0, cachedCount, minFloorCount);
-        const formatted = String(finalNum);
+      function saveAndRenderRealCount(numVal) {
+        const cleanNum = Math.max(0, Math.round(Number(numVal) || 0));
+        if (cleanNum <= 0) return;
+        const formatted = String(cleanNum);
         totalPortfolioVisits = formatted;
         window.currentPortfolioVisits = formatted;
-        cachedCount = finalNum;
         try {
-          localStorage.setItem('naveen_portfolio_visits_cache', formatted);
+          localStorage.setItem('naveen_real_visits_cache', formatted);
           if (shouldIncrement) sessionStorage.setItem('naveen_visit_counted', 'true');
         } catch (e) {}
-        if (countEl) countEl.textContent = formatted;
-        if (footerCountEl) footerCountEl.textContent = formatted;
-        if (badge) badge.setAttribute('title', `Admin Mode Active • ${formatted} Total Profile Visits (Visible only to you)`);
-        if (footerBadge) footerBadge.setAttribute('title', `Live Portfolio Telemetry • ${formatted} Total Profile Visits`);
+        countEl.textContent = formatted;
+        badge.setAttribute('title', `Admin Mode Active • ${formatted} Total Profile Visits (Visible only to you)`);
       }
 
-      // Render immediate numeric count so UI never flashes "..." or "Active visits"
-      const initialEstimate = Math.max(cachedCount, minFloorCount) + (shouldIncrement ? 1 : 0);
-      applyVisitCount(initialEstimate);
+      // Primary Provider: CountAPI
+      try {
+        const countApiUrl = shouldIncrement
+          ? 'https://countapi.mileshilliard.com/api/v1/hit/naveenmarioperera_portfolio'
+          : 'https://countapi.mileshilliard.com/api/v1/get/naveenmarioperera_portfolio';
+        const res = await fetch(countApiUrl, { cache: 'no-store' });
+        if (res.ok) {
+          const data = await res.json();
+          const apiVal = Number(data && data.value);
+          if (!isNaN(apiVal) && apiVal > 0) {
+            saveAndRenderRealCount(apiVal);
+            return;
+          }
+        }
+      } catch (err) {
+        // Fallback to Provider 2 if CountAPI is unreachable
+      }
 
-      // Provider 1: CounterAPI.dev (Modern CORS-enabled counter service)
+      // Fallback Provider 2: VisitorBadge SVG count parser
+      try {
+        const vbRes = await fetch('https://api.visitorbadge.io/api/visitors?path=naveenmariopereradev02.github.io', { cache: 'no-store' });
+        if (vbRes.ok) {
+          const svgText = await vbRes.text();
+          const matches = [...svgText.matchAll(/>(\d[\d,]*)<\/text>/g)];
+          if (matches.length > 0) {
+            const lastMatch = matches[matches.length - 1][1].replace(/,/g, '');
+            const vbNum = parseInt(lastMatch, 10);
+            if (!isNaN(vbNum) && vbNum > 0) {
+              saveAndRenderRealCount(vbNum);
+              return;
+            }
+          }
+        }
+      } catch (e) {}
+
+      // Fallback Provider 3: CounterAPI.dev
       try {
         const counterApiUrl = shouldIncrement
           ? 'https://api.counterapi.dev/v1/naveenmariopereradev02/portfolio/up'
@@ -6005,48 +5953,11 @@
           const data = await res.json();
           const apiVal = Number(data && (data.count !== undefined ? data.count : data.value));
           if (!isNaN(apiVal) && apiVal > 0) {
-            applyVisitCount(BASELINE_VISITS + apiVal);
+            saveAndRenderRealCount(apiVal);
             return;
           }
         }
-      } catch (err) {
-        // Proceed to Provider 2
-      }
-
-      // Provider 2: CountAPI (mileshilliard mirror)
-      try {
-        const countApiUrl = shouldIncrement
-          ? 'https://countapi.mileshilliard.com/api/v1/hit/naveenmarioperera_portfolio'
-          : 'https://countapi.mileshilliard.com/api/v1/get/naveenmarioperera_portfolio';
-        const res = await fetch(countApiUrl, { cache: 'no-store' });
-        if (res.ok) {
-          const data = await res.json();
-          const apiVal = Number(data && data.value);
-          if (!isNaN(apiVal) && apiVal > 0) {
-            applyVisitCount(apiVal < BASELINE_VISITS ? BASELINE_VISITS + apiVal : apiVal);
-            return;
-          }
-        }
-      } catch (err) {
-        // Proceed to Provider 3
-      }
-
-      // Provider 3: VisitorBadge SVG parser fallback
-      try {
-        const vbRes = await fetch('https://api.visitorbadge.io/api/visitors?path=naveenmariopereradev02.github.io', { cache: 'no-store' });
-        if (vbRes.ok) {
-          const svgText = await vbRes.text();
-          const matches = [...svgText.matchAll(/>(\d[\d,]*)<\/text>/g)];
-          if (matches.length > 0) {
-            const lastMatch = matches[matches.length - 1][1].replace(/,/g, '');
-            const vbNum = parseInt(lastMatch, 10);
-            if (!isNaN(vbNum) && vbNum > 0) {
-              applyVisitCount(vbNum < BASELINE_VISITS ? BASELINE_VISITS + vbNum : vbNum);
-              return;
-            }
-          }
-        }
-      } catch (e) {}
+      } catch (err) {}
     }
 
     // Copy-Email Toast & Live GitHub Commit Feed (Feature #7)
