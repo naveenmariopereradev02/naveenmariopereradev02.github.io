@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T06:04:33.655Z",
+  "generatedAt": "2026-11-24T18:03:44.340Z",
   "username": "naveenmariopereradev02",
   "totalRepos": 10,
   "ongoingCount": 5,
@@ -1142,29 +1142,29 @@
   "languagesSummary": [
     {
       "name": "Dart",
-      "bytes": 1572113,
-      "percentage": 58.3,
+      "bytes": 1623255,
+      "percentage": 59.1,
       "repoCount": 3,
       "color": "#00B4AB"
     },
     {
       "name": "JavaScript",
       "bytes": 344642,
-      "percentage": 12.8,
+      "percentage": 12.5,
       "repoCount": 5,
       "color": "#f1e05a"
     },
     {
       "name": "Jupyter Notebook",
       "bytes": 232298,
-      "percentage": 8.6,
+      "percentage": 8.5,
       "repoCount": 1,
       "color": "#DA5B0B"
     },
     {
       "name": "Python",
       "bytes": 212214,
-      "percentage": 7.9,
+      "percentage": 7.7,
       "repoCount": 4,
       "color": "#3572A5"
     },
@@ -1178,14 +1178,14 @@
     {
       "name": "CSS",
       "bytes": 60908,
-      "percentage": 2.3,
+      "percentage": 2.2,
       "repoCount": 4,
       "color": "#563d7c"
     },
     {
       "name": "C++",
       "bytes": 53073,
-      "percentage": 2,
+      "percentage": 1.9,
       "repoCount": 2,
       "color": "#f34b7d"
     },
@@ -1206,7 +1206,7 @@
     {
       "name": "Shell",
       "bytes": 14952,
-      "percentage": 0.6,
+      "percentage": 0.5,
       "repoCount": 1,
       "color": "#89e051"
     },
@@ -1286,7 +1286,7 @@
       "commitCount": 132,
       "primaryLanguage": "Dart",
       "languages": {
-        "Dart": 822009,
+        "Dart": 873151,
         "C++": 27897,
         "CMake": 20458,
         "Swift": 3092,
