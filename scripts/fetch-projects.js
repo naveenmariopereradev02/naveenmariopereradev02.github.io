@@ -325,7 +325,7 @@ async function resolveActiveBranchAndHead(repoOwner, repoName, defaultBranch, pr
   let pushEventBranch = '';
   try {
     const events = await githubFetch(
-      `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/events?per_page=15`,
+      `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/events?per_page=30`,
       token
     );
     if (Array.isArray(events)) {
@@ -343,17 +343,13 @@ async function resolveActiveBranchAndHead(repoOwner, repoName, defaultBranch, pr
 
   try {
     const branches = await githubFetch(
-      `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/branches?per_page=15`,
+      `https://api.github.com/repos/${encodeURIComponent(repoOwner)}/${encodeURIComponent(repoName)}/branches?per_page=100`,
       token
     );
     if (Array.isArray(branches)) {
-      let addedExtra = 0;
       for (const b of branches) {
         if (!b || !b.name) continue;
-        if (candidates.has(b.name)) continue;
         candidates.add(b.name);
-        addedExtra += 1;
-        if (addedExtra >= 8) break;
       }
     }
   } catch (e) {
@@ -589,18 +585,10 @@ async function main() {
       languages = { [repo.language]: 10000 };
     }
 
-    // 3. Apply latest commit message & commit count from active branch (fallback to override)
-    let latestCommitMessage = override.latestCommitMessage || '';
-    let latestCommitDate = null;
+    // 3. Apply latest commit message & commit count from active branch (always prefer live GitHub commit over override fallback)
+    let latestCommitMessage = branchMeta.latestCommitMessage || override.latestCommitMessage || '';
+    let latestCommitDate = branchMeta.latestCommitDate || null;
     const repoCommitCount = Math.max(Number(override.commitCount) || 0, Number(branchMeta.commitCount) || 0);
-    if (branchMeta.latestCommitMessage) {
-      const overrideTime = override.pushedAt ? new Date(override.pushedAt).getTime() : 0;
-      const liveTime = branchMeta.latestCommitDate ? new Date(branchMeta.latestCommitDate).getTime() : 0;
-      if (!override.latestCommitMessage || liveTime >= overrideTime) {
-        latestCommitMessage = branchMeta.latestCommitMessage;
-        latestCommitDate = branchMeta.latestCommitDate;
-      }
-    }
 
     // 4. Determine Ongoing vs Completed
     const latestPushMs = Math.max(

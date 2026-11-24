@@ -2,8 +2,8 @@ name: Auto-Update Portfolio Projects & Languages
 
 on:
   schedule:
-    # Runs automatically every day at 00:00 UTC
-    - cron: '0 0 * * *'
+    # Runs automatically every 30 minutes to sync private & public repo commits
+    - cron: '*/30 * * * *'
   push:
     branches:
       - main

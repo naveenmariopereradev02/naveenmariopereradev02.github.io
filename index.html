@@ -5587,9 +5587,9 @@
                 currentProjectsData.projects.forEach((p) => {
                   const ov = ovMap[String(p.id || p.name || '').toLowerCase()];
                   if (!ov) return;
-                  if (ov.pushedAt && (!p.pushedAt || new Date(ov.pushedAt) > new Date(p.pushedAt))) p.pushedAt = ov.pushedAt;
-                  if (ov.latestCommitMessage) p.latestCommitMessage = ov.latestCommitMessage;
-                  if (ov.branch) p.branch = ov.branch;
+                  if (ov.pushedAt && !p.pushedAt) p.pushedAt = ov.pushedAt;
+                  if (ov.latestCommitMessage && !p.latestCommitMessage) p.latestCommitMessage = ov.latestCommitMessage;
+                  if (ov.branch && !p.branch) p.branch = ov.branch;
                   if (typeof ov.commitCount === 'number' && ov.commitCount > (p.commitCount || 0)) p.commitCount = ov.commitCount;
                 });
               }
@@ -5885,15 +5885,22 @@
       });
 
       const shouldIncrement = !isSelf && !sessionCounted;
-      const savedRealCount = parseInt(localStorage.getItem('naveen_real_visits_cache') || '0', 10) || 0;
-      if (savedRealCount > 0) {
-        countEl.textContent = String(savedRealCount);
-        window.currentPortfolioVisits = String(savedRealCount);
-      }
+      const MIN_RECORDED_VISITS = 55;
+      let currentMaxCount = Math.max(
+        MIN_RECORDED_VISITS,
+        parseInt(localStorage.getItem('naveen_real_visits_cache') || '0', 10) || 0
+      );
+      countEl.textContent = String(currentMaxCount);
+      window.currentPortfolioVisits = String(currentMaxCount);
 
-      function saveAndRenderRealCount(numVal) {
-        const cleanNum = Math.max(0, Math.round(Number(numVal) || 0));
-        if (cleanNum <= 0) return;
+      function saveAndRenderRealCount(numVal, isFallbackProvider = false) {
+        let rawNum = Math.max(0, Math.round(Number(numVal) || 0));
+        if (rawNum <= 0) return;
+        if (isFallbackProvider && rawNum < currentMaxCount) {
+          rawNum = currentMaxCount + (shouldIncrement ? 1 : 0);
+        }
+        const cleanNum = Math.max(currentMaxCount, rawNum);
+        currentMaxCount = cleanNum;
         const formatted = String(cleanNum);
         totalPortfolioVisits = formatted;
         window.currentPortfolioVisits = formatted;
@@ -5915,7 +5922,7 @@
           const data = await res.json();
           const apiVal = Number(data && data.value);
           if (!isNaN(apiVal) && apiVal > 0) {
-            saveAndRenderRealCount(apiVal);
+            saveAndRenderRealCount(apiVal, false);
             return;
           }
         }
@@ -5933,7 +5940,7 @@
             const lastMatch = matches[matches.length - 1][1].replace(/,/g, '');
             const vbNum = parseInt(lastMatch, 10);
             if (!isNaN(vbNum) && vbNum > 0) {
-              saveAndRenderRealCount(vbNum);
+              saveAndRenderRealCount(vbNum, true);
               return;
             }
           }
@@ -5953,7 +5960,7 @@
           const data = await res.json();
           const apiVal = Number(data && (data.count !== undefined ? data.count : data.value));
           if (!isNaN(apiVal) && apiVal > 0) {
-            saveAndRenderRealCount(apiVal);
+            saveAndRenderRealCount(apiVal, true);
             return;
           }
         }
@@ -6888,9 +6895,9 @@
         currentProjectsData.projects.forEach((p) => {
           const ov = ovMap[String(p.id || p.name || '').toLowerCase()];
           if (!ov) return;
-          if (ov.pushedAt && (!p.pushedAt || new Date(ov.pushedAt) > new Date(p.pushedAt))) p.pushedAt = ov.pushedAt;
-          if (ov.latestCommitMessage) p.latestCommitMessage = ov.latestCommitMessage;
-          if (ov.branch) p.branch = ov.branch;
+          if (ov.pushedAt && !p.pushedAt) p.pushedAt = ov.pushedAt;
+          if (ov.latestCommitMessage && !p.latestCommitMessage) p.latestCommitMessage = ov.latestCommitMessage;
+          if (ov.branch && !p.branch) p.branch = ov.branch;
           if (typeof ov.commitCount === 'number' && ov.commitCount > (p.commitCount || 0)) p.commitCount = ov.commitCount;
         });
       }
